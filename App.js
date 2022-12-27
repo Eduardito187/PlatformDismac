@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 /** Import tamplates in modules */
 import Loading from './App/Modules/Loader/Views/Loading';
 import Home from './App/Modules/Home/Views/Home';
+import Login from './App/Modules/Login/Views/Login';
 /** */
 
 const Stack = createStackNavigator();
@@ -16,6 +17,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Loading" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );

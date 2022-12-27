@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TextInput, StyleSheet} from 'react-native';
+import { Text, View} from 'react-native';
+import { PageLoading } from '../../../Themes/Dismac/ThemeDismac';
 
 /** Components */
 import ProgressDismac from '../../../Components/ProgressDismac';
@@ -14,29 +15,28 @@ const Loading = ({route, navigation }) => {
   }, []);
   function loadInterval(res) {
     if (res) {
-      navigation.navigate('Home')
+      if (route.params != null) {
+        if (route.params.action != null) {
+          navigation.navigate('Home')
+          console.log(2);
+          console.log(route.params.action);
+        }
+      }else{
+        navigation.navigate('Login');
+      }
     }
   }
     return (
-        <View style={styles.container}>
-          <ImgDis style={{width: 100,height: 100,marginBottom: 5}} animation={{border: 10, time: 2000}} />
+        <View style={PageLoading.container}>
+          <ImgDis style={PageLoading.img} animation={PageLoading.animation} />
           <ProgressDismac End={(res) => loadInterval(res)} />
-          <View style={{position: 'absolute', bottom: 30}}>
-            <LogoDismac style={{width: 150,height: 40}} />
+          <View style={PageLoading.posLogo}>
+            <LogoDismac style={PageLoading.logo} />
           </View>
-          <Text style={{position: 'absolute', bottom: 10, fontWeight: 'bold'}}>V 1.0</Text>
+          <Text style={PageLoading.version}>V 1.0</Text>
           <StatusBar style="auto" />
         </View>
     );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative'
-  },
-});
 
 export default Loading;
