@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, StyleSheet} from 'react-native';
-import { TextInput, Button, HelperText } from 'react-native-paper';
+import { Text, View } from 'react-native';
+import { TextInput, Button, HelperText, Snackbar } from 'react-native-paper';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
+import { style } from '../Style/style';
+import axios from 'axios';
+import { URL_API,METHOD_POST,GET_TOKEN } from '../../../Helpers/API';
 
 /** Components */
 import Circle from '../../../Components/Circle';
 import Title from '../../../Components/Title';
+import CircleRedirect from '../../../Components/CircleRedirect';
 /** */
 
 const Login = ({route, navigation }) => {
@@ -18,6 +22,9 @@ const Login = ({route, navigation }) => {
     const [disable, setDisable] = React.useState(false);
     const [helperUser, sethelperUser] = React.useState(false);
     const [iconPWD, setIconPWD] = React.useState("eye");
+    const [login, setLogin] = React.useState(false);
+    const [response, SetRes] = React.useState("");
+    const [visible, setVisible] = React.useState(false);
     React.useEffect(() => {
         //
     }, []);
@@ -31,61 +38,112 @@ const Login = ({route, navigation }) => {
             }, 5000)
         }
     }
+    function pressOK() {
+        console.log("OK");
+    }
+    function toHome() {
+        setLogin(false);
+    }
+    function rerificateLogin() {
+        if (username.length > 0 && password.length > 0) {
+            setLoading(true);
+            setDisable(true);
+            axios.post(URL_API("login"),{
+                "username" : username,
+                "password" : password
+            },{
+                headers: {
+                    "Authorization": `Bearer ${GET_TOKEN()}`,
+                    "Content-Type": "text/json"
+                }
+            }).then(res => {
+                if (res.data != null) {
+                    if (res.data.status == true) {
+                        setLogin(true);
+                    }
+                    SetRes(res.data.text);
+                    openSnack();
+                }
+                setLoading(false);
+                setDisable(false);
+            }).catch(err => {
+                setLoading(false);
+                setDisable(false);
+                SetRes(err);
+                openSnack();
+            });
+        }else{
+
+        }
+    }
+    function openSnack() {
+        setVisible(true);
+    }
+    function dismissSnack() {
+        setVisible(false);
+    }
+
     return (
-        <View style={[styles.container,{backgroundColor: 'white'}]}>
-            <View style={{position:'absolute', top: -(windowWidth / 4), backgroundColor:'transparent',left: -(windowWidth / 4)}}>
+        <View style={style.container}>
+            <View style={style.circleOne}>
                 <Circle size={(windowWidth * 0.8)} />
             </View>
-            <View style={{position:'absolute', top: -50, backgroundColor:'transparent',right: -50}}>
+            <View style={style.circleTwo}>
                 <Circle size={150} />
             </View>
-            <View style={{position:'absolute', bottom: -50, backgroundColor:'transparent',right: -50}}>
+            <View style={style.circleTree}>
                 <Circle size={200} />
             </View>
-            <View style={{position:'absolute', zIndex: 100, top: 0, bottom: 0, padding: 10}}>
-                <View style={styles.container}>
-                    <View style={{padding: 5, alignItems: 'center'}}>
-                        <Title text={"Iniciar Sesión"} size={35} style={{fontWeight: '800', color: "#EC2427",backgroundColor: "white", padding: 5, borderRadius: 10}} />
+            <View style={style.FloatLogin}>
+                <View style={style.containerTransparent}>
+                    <View style={style.TitleContainer}>
+                        <Title text={"Iniciar Sesión"} size={35} style={style.Title} />
                     </View>
-                    <View style={{padding: 5}}>
+                    <View style={style.padding5}>
                         <TextInput mode='outlined' left={<TextInput.Icon icon="account" onPress={() => InfoClickUsername()} />} style={{width: (windowWidth - 30), paddingTop: userP}} placeholder="Ingrese su usuario" selectionColor="rgba(0, 0, 0, 0.5)" 
-                        underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={<Text style={{fontWeight: '900', borderRadius: 5, backgroundColor: 'white'}}>Usuario</Text>} 
+                        underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={<Text style={style.LabelButton}>Usuario</Text>} 
                         value={username} onChangeText={text => setUserName(text)} onFocus={() => setuserP(2)} onBlur={() => setuserP(0)} />
                         {
-                            helperUser && (<HelperText type="info" visible={helperUser} style={{backgroundColor: "white", borderRadius: 5, fontWeight: '700',marginTop: 3}}>Prefijo de la empresa por delante del usuario, ejemplo: 'EMPRESA\Usuario'.</HelperText>)
+                            helperUser && (<HelperText type="info" visible={helperUser} style={style.helperText}>Prefijo de la empresa por delante del usuario, ejemplo: 'EMPRESA@Usuario'.</HelperText>)
                         }
                     </View>
-                    <View style={{padding: 5}}>
+                    <View style={style.padding5}>
                         <TextInput secureTextEntry={iconPWD == "eye" ? true : false} right={<TextInput.Icon icon={iconPWD} onPress={ iconPWD == "eye" ? () => setIconPWD("eye-off") : () => setIconPWD("eye")} />} mode='outlined' style={{width: (windowWidth - 30), paddingTop: pwdP}} placeholder="Ingrese su contraseña" selectionColor="rgba(0, 0, 0, 0.5)" 
-                        underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={<Text style={{fontWeight: '900', borderRadius: 5, backgroundColor: 'white'}}>Contraseña</Text>} 
+                        underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={<Text style={style.LabelButton}>Contraseña</Text>} 
                         value={password} onChangeText={text => setPassword(text)} onFocus={() => setpwdP(2)} onBlur={() => setpwdP(0)} />
                     </View>
-                    <View style={{padding: 5, alignItems: 'flex-end',width: (windowWidth - 30)}}>
-                        <Text style={{fontWeight: '700', color: '#808080'}}>Olvide mi contraseña</Text>
+                    <View style={style.TextPwd}>
+                        <Text style={style.labelPwd}>Olvide mi contraseña</Text>
                     </View>
-                    <View style={{padding: 5, alignItems: 'center'}}>
-                        <Button icon="account" loading={loading} disabled={disable} style={{backgroundColor: "#EC2427"}} mode="contained" onPress={() => console.log('Pressed')}>
-                            <Text style={{color: "white", fontWeight: "900"}}>Entrar a mi cuenta</Text>
+                    <View style={style.containButton}>
+                        <Button icon="account" loading={loading} disabled={disable} style={style.fondoRojo} mode="contained" onPress={() => rerificateLogin()}>
+                            <Text style={style.FontButton}>Entrar a mi cuenta</Text>
                         </Button>
                     </View>
-                    <View style={{padding: 5, alignItems: 'center'}}>
-                        <Button icon="account-plus" style={{backgroundColor: "#808080"}} mode="contained" onPress={() => console.log('Pressed')}>
-                            <Text style={{color: "white", fontWeight: "900"}}>Crear mi cuenta</Text>
+                    <View style={style.containButton}>
+                        <Button icon="account-plus" style={style.fondoPlomo} mode="contained" onPress={() => console.log('Pressed')}>
+                            <Text style={style.FontButton}>Crear mi cuenta</Text>
                         </Button>
                     </View>
                 </View>
+            </View>
+            {
+                login && (
+                    <View style={style.ViewFixed}>
+                        <View style={style.containerTransparent}>
+                            <CircleRedirect size={windowHeight * 2} toHome={() => toHome()} />
+                        </View>
+                    </View>
+                )
+            }
+            <View style={style.FloatSnack}>    
+                <Snackbar visible={visible} onDismiss={() => dismissSnack()} action={{label: "Cerrar", onPress: () => pressOK()}}>
+                    {response}
+                </Snackbar>
             </View>
             <StatusBar style="auto" />
         </View>
     );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative'
-  },
-});
 
 export default Login;

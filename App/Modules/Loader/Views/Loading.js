@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View} from 'react-native';
 import { PageLoading } from '../../../Themes/Dismac/ThemeDismac';
+import Constants from "expo-constants";
 
 /** Components */
 import ProgressDismac from '../../../Components/ProgressDismac';
@@ -33,7 +34,7 @@ const Loading = ({route, navigation }) => {
           <View style={PageLoading.posLogo}>
             <LogoDismac style={PageLoading.logo} />
           </View>
-          <Text style={PageLoading.version}>V 1.0</Text>
+          <Text style={PageLoading.version}>V {Constants.manifest.version}</Text>
           <StatusBar style="auto" />
         </View>
     );
