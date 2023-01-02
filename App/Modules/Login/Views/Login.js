@@ -5,7 +5,8 @@ import { TextInput, Button, HelperText, Snackbar } from 'react-native-paper';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { style } from '../Style/style';
 import axios from 'axios';
-import { URL_API,METHOD_POST,GET_TOKEN } from '../../../Helpers/API';
+import { URL_API,GET_HEADERS,SET_TOKEN_SESSION,CREATE_BODY_LOGIN } from '../../../Helpers/API';
+import { ResetNavigation } from '../../../Helpers/Nav';
 
 /** Components */
 import Circle from '../../../Components/Circle';
@@ -43,40 +44,35 @@ const Login = ({route, navigation }) => {
     }
     function toHome() {
         setLogin(false);
+        ResetNavigation("Loading",{},navigation);
+    }
+    function clickButton(bool){
+        setLoading(bool);
+        setDisable(bool);
     }
     function rerificateLogin() {
         if (username.length > 0 && password.length > 0) {
-            setLoading(true);
-            setDisable(true);
-            axios.post(URL_API("login"),{
-                "username" : username,
-                "password" : password
-            },{
-                headers: {
-                    "Authorization": `Bearer ${GET_TOKEN()}`,
-                    "Content-Type": "text/json"
-                }
-            }).then(res => {
+            clickButton(true);
+            axios.post(URL_API("login"),CREATE_BODY_LOGIN(username, password),GET_HEADERS()).then(res => {
                 if (res.data != null) {
                     if (res.data.status == true) {
-                        setLogin(true);
+                        if (SET_TOKEN_SESSION(res.data.token)) {
+                            setLogin(true);
+                        }
                     }
-                    SetRes(res.data.text);
-                    openSnack();
+                    openSnack(res.data.text);
                 }
-                setLoading(false);
-                setDisable(false);
+                clickButton(false);
             }).catch(err => {
-                setLoading(false);
-                setDisable(false);
-                SetRes(err);
-                openSnack();
+                clickButton(false);
+                openSnack(err);
             });
         }else{
 
         }
     }
-    function openSnack() {
+    function openSnack(text) {
+        SetRes(text);
         setVisible(true);
     }
     function dismissSnack() {
