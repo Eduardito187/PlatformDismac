@@ -13,3 +13,9 @@ export function ResetNavigation(URL, PARAMS, navigation) {
         })
     );
 }
+export function Navigation(URL, PARAMS, navigation){
+    navigation.navigate(URL,PARAMS);
+}
+export function NavigationBack(navigation){
+    navigation.goBack();
+}

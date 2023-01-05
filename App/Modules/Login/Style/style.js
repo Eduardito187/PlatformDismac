@@ -102,3 +102,53 @@ export const style = {
         right: 0
     }
 }
+export const STYLE = {
+    RegisterContainer : {
+        backgroundColor: "#EC2427",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative"
+    },
+    SECCTION_FORM : {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        top: (windowHeight * 0.30),
+        backgroundColor: "#FFFFFF",
+        borderTopLeftRadius: (windowWidth * 0.10),
+        borderTopRightRadius: (windowWidth * 0.10)
+    },
+    SECCTION_TITLE : {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: (windowHeight * 0.30),
+        backgroundColor: "transparend"
+    },
+    SECTION_TOP_LEFT: {
+        position: "absolute",
+        top: (windowWidth * 0.12),
+        left: (windowWidth * 0.02)
+    },
+    SECTION_TOP_RIGHT: {
+        position: "absolute",
+        top: (windowWidth * 0.12),
+        right: (windowWidth * 0.02)
+    },
+    FONT_PROGRESS: {
+        fontWeight: "900",
+        color: "#FFFFFF",
+        fontSize: 18
+    },
+    PROGRESS_CIRCLE: {
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative"
+    },
+    ABSOLUTE: {
+        position: "absolute"
+    }
+};

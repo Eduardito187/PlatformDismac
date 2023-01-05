@@ -6,7 +6,7 @@ import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { style } from '../Style/style';
 import axios from 'axios';
 import { URL_API,GET_HEADERS,SET_TOKEN_SESSION,CREATE_BODY_LOGIN } from '../../../Helpers/API';
-import { ResetNavigation } from '../../../Helpers/Nav';
+import { ResetNavigation,Navigation } from '../../../Helpers/Nav';
 
 /** Components */
 import Circle from '../../../Components/Circle';
@@ -78,6 +78,9 @@ const Login = ({route, navigation }) => {
     function dismissSnack() {
         setVisible(false);
     }
+    function registerAccount() {
+        Navigation("Register",{},navigation);
+    }
 
     return (
         <View style={style.container}>
@@ -117,7 +120,7 @@ const Login = ({route, navigation }) => {
                         </Button>
                     </View>
                     <View style={style.containButton}>
-                        <Button icon="account-plus" style={style.fondoPlomo} mode="contained" onPress={() => console.log('Pressed')}>
+                        <Button icon="account-plus" style={style.fondoPlomo} mode="contained" onPress={() => registerAccount()}>
                             <Text style={style.FontButton}>Crear mi cuenta</Text>
                         </Button>
                     </View>
