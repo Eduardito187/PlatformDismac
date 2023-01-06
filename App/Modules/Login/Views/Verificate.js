@@ -12,10 +12,9 @@ import { NavigationBack } from '../../../Helpers/Nav';
 /** Components */
 import ProgressCircle from '../../../Components/ProgressCircle';
 import Subtitle from '../../../Components/Subtitle';
-import SecondaryIcon from '../../../Components/Button/SecondaryIcon';
 /** */
 
-const Register = ({route, navigation }) => {
+const Verificate = ({route, navigation }) => {
     const [Steps, SetSteps] = React.useState(6);
     const [Step, SetStep] = React.useState(1);
     const [Email, SetEmail] = React.useState("");
@@ -70,7 +69,9 @@ const Register = ({route, navigation }) => {
                         {
                             isEmail() && (
                                 <View style={{padding: 5}}>
-                                    <SecondaryIcon style={{backgroundColor: "#808080", fontWeight: "900"}} textStyle={{fontWeight: "900",color: "#FFFFFF",fontSize: 20}} icon={"check"} text={"Verificar"} Action={generateCode()} />
+                                    <Button icon="check" mode="contained" style={{backgroundColor: "#808080", fontWeight: "900"}} onPress={() => generateCode()}>
+                                        <Text style={{fontWeight: "900",color: "#FFFFFF",fontSize: 20}}>Verificar</Text>
+                                    </Button>
                                 </View>
                             )
                         }
@@ -86,4 +87,4 @@ const Register = ({route, navigation }) => {
     );
 };
 
-export default Register;
+export default Verificate;

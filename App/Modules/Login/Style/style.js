@@ -115,7 +115,7 @@ export const STYLE = {
         bottom: 0,
         left: 0,
         right: 0,
-        top: (windowHeight * 0.30),
+        top: 150,
         backgroundColor: "#FFFFFF",
         borderTopLeftRadius: (windowWidth * 0.10),
         borderTopRightRadius: (windowWidth * 0.10)

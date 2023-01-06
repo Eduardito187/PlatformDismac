@@ -8,6 +8,7 @@ import Loading from './App/Modules/Loader/Views/Loading';
 import Home from './App/Modules/Home/Views/Home';
 import Login from './App/Modules/Login/Views/Login';
 import Register from './App/Modules/Login/Views/Register';
+import Verificate from './App/Modules/Login/Views/Verificate';
 /** */
 
 const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Verificate" component={Verificate} />
       </Stack.Navigator>
     </NavigationContainer>
   );
