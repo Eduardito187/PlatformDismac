@@ -17,7 +17,7 @@ class CircleRedirect extends React.Component {
     componentDidMount(){
         Animated.timing(this.state.width, {
             toValue: this.state.size,
-            duration: 1000,
+            duration: 2000,
             easing: Easing.linear,
             useNativeDriver: false
         }).start(({ finished }) => {

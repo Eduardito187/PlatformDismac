@@ -8,11 +8,15 @@ import axios from 'axios';
 import * as Progress from 'react-native-progress';
 import { URL_API,GET_HEADERS,SET_TOKEN_SESSION,CREATE_BODY_LOGIN } from '../../../Helpers/API';
 import { NavigationBack } from '../../../Helpers/Nav';
+import { GenerateCode } from '../../../Helpers/Code';
 
 /** Components */
-import ProgressCircle from '../../../Components/ProgressCircle';
 import Subtitle from '../../../Components/Subtitle';
 import SecondaryIcon from '../../../Components/Button/SecondaryIcon';
+import Top from './Component/Top';
+import Next from './Component/Next';
+import { Route } from '../Interfaces/Route';
+import Verify from './Component/Verifiy';
 /** */
 
 const Register = ({route, navigation }) => {
@@ -20,6 +24,7 @@ const Register = ({route, navigation }) => {
     const [Step, SetStep] = React.useState(1);
     const [Email, SetEmail] = React.useState("");
     const [Disable, SetDisable] = React.useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     React.useEffect(() => {
         //
     }, []);
@@ -27,31 +32,21 @@ const Register = ({route, navigation }) => {
         return Email.includes('@');
     };
     function generateCode() {
-        
+        if (GenerateCode(Email)) {
+            setIsModalOpen(true);
+        }else{
+            setIsModalOpen(false);
+        }
     }
     function StepNext() {
         
-    }
-    function goBack() {
-        NavigationBack(navigation);
     }
 
     return (
         <View style={STYLE.RegisterContainer}>
             <StatusBar style="light" />
             <View style={STYLE.SECCTION_TITLE}>
-                <View style={STYLE.SECTION_TOP_LEFT}>
-                    <IconButton icon="arrow-left" iconColor={"#FFFFFF"} size={28} onPress={() => goBack()} />
-                </View>
-                <View style={STYLE.SECTION_TOP_RIGHT}>
-                    <ProgressCircle thickness={2} color={"#FFFFFF"} style={STYLE} Step={Step} Steps={Steps} size={50} />
-                </View>
-                <View style={{position: "absolute", left: (windowWidth * 0.02),right: (windowWidth * 0.02),top: (windowWidth * 0.30)}}>
-                            <Subtitle style={{fontWeight: "700",color: "#FFFFFF",fontSize: 16}} text={"Correo electronico"} />
-                </View>
-                <View style={{position: "absolute", left: (windowWidth * 0.5) - 50,top: 50}}>
-                    <Image source={require('./../../../../pub/Dismac/dismac_.png')} style={{width: 100,height: 28,borderRadius: 3}} />
-                </View>
+                <Top Step={Step} Steps={Steps} Title={Route[Step-1]["title"]} navigation={navigation} />
             </View>
             <View style={STYLE.SECCTION_FORM}>
                 <View style={{position: "absolute",top: 10,left: 10, right: 10,bottom: 55}}>
@@ -70,18 +65,17 @@ const Register = ({route, navigation }) => {
                         {
                             isEmail() && (
                                 <View style={{padding: 5}}>
-                                    <SecondaryIcon style={{backgroundColor: "#808080", fontWeight: "900"}} textStyle={{fontWeight: "900",color: "#FFFFFF",fontSize: 20}} icon={"check"} text={"Verificar"} Action={generateCode()} />
+                                    <SecondaryIcon style={{backgroundColor: "#808080", fontWeight: "900"}} textStyle={{fontWeight: "900",color: "#FFFFFF",fontSize: 20}} icon={"check"} text={"Verificar"} Action={() => generateCode()} />
                                 </View>
                             )
                         }
                     </View>
                 </View>
                 <View style={{position: "absolute",bottom: 10,left: 10, right: 10}}>
-                    <Button disabled={Disable} style={{backgroundColor: "#EC2427", fontWeight: "900"}} mode="contained" onPress={() => StepNext()}>
-                        <Text style={{fontWeight: "900",color: "#FFFFFF",fontSize: 20}}>Siguente</Text>
-                    </Button>
+                    <Next Disable={Disable} StepNext={() => StepNext()} />
                 </View>
             </View>
+            <Verify isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
         </View>
     );
 };

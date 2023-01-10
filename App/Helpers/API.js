@@ -20,11 +20,28 @@ export function CREATE_BODY_LOGIN(username, password) {
         "password" : password
     };
 }
+export function CREATE_BODY_VERIFICATE(email, code) {
+    return {
+        "email" : email,
+        "code" : code
+    };
+}
 export async function SET_TOKEN_SESSION(TOKEN) {
     try {
         await AsyncStorage.setItem(
           '@TOKEN_SESSION:key',
           TOKEN
+        );
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GENERATE_CODE(CODE) {
+    try {
+        await AsyncStorage.setItem(
+          '@CODE',
+          CODE.toString()
         );
         return true;
     } catch (error) {
