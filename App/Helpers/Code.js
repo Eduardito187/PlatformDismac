@@ -10,7 +10,7 @@ export function GenerateCode(email) {
     return GENERATE_CODE(rand);
 }
 export function setCodeEmail(email, code) {
-    axios.post(URL_API("verificate"),CREATE_BODY_VERIFICATE(email, code),GET_HEADERS()).then(res => {
+    axios.post(URL_API("sendcode"),CREATE_BODY_VERIFICATE(email, code),GET_HEADERS()).then(res => {
         if (res.data != null) {
             //
         }
