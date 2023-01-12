@@ -48,6 +48,18 @@ export async function GENERATE_CODE(CODE) {
         return false;
     }
 }
+export async function GET_CODE_GENERATE() {
+    try {
+        const value = await AsyncStorage.getItem('@CODE');
+        if (value !== null) {
+            return value;
+        }else{
+            return null;
+        }
+    } catch (error) {
+        return null;
+    }
+}
 export async function GET_TOKEN_SESSION() {
     try {
         const value = await AsyncStorage.getItem('@TOKEN_SESSION:key');

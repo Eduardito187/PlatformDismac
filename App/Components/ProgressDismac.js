@@ -1,5 +1,4 @@
-import React from 'react';  
-import { View } from 'react-native';
+import React from 'react';
 import { ProgressBar } from 'react-native-paper';
 import { dimLoad } from './../Helpers/GetMobil';
 

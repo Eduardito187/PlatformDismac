@@ -152,3 +152,68 @@ export const STYLE = {
         position: "absolute"
     }
 };
+export const SUBTITLE = {
+    position: "absolute",
+    left: (windowWidth * 0.02),
+    right: (windowWidth * 0.02),
+    top: (windowWidth * 0.30)
+};
+export const LOGO = {
+    position: "absolute",
+    left: (windowWidth * 0.5) - 50,
+    top: 50
+};
+export const IMGLogo = {
+    width: 100,
+    height: 28,
+    borderRadius: 3
+};
+export const SubTitle = {
+    fontWeight: "700",
+    color: "#FFFFFF",
+    fontSize: 16
+};
+export const ContentFORM = {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    right: 10,
+    bottom: 55
+};
+export const BottomNEXT = {
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    right: 10
+};
+export const RowForm = {
+    padding: 5,
+    width: (windowWidth - 30)
+};
+export const AlingForm = {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
+};
+export const TitleSub = {
+    fontWeight: "900",
+    color: "#EC2427",
+    fontSize: 15
+};
+export const Label = {
+    fontWeight: "500",
+    color: "#808080",
+    fontSize: 13
+};
+export const P5 = {
+    padding: 5
+};
+export const SecondaryStyle = {
+    backgroundColor: "#808080",
+    fontWeight: "900"
+};
+export const SecondaryText = {
+    fontWeight: "900",
+    color: "#FFFFFF",
+    fontSize: 20
+};

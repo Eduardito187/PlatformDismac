@@ -2,6 +2,10 @@ export const NavBars = {
     "focus" : "#EC2427",
     "nofocus" : "#808080"
 };
+export const ColorApp = {
+    White : "#FFFFFF",
+    Dis : "#EC2427"
+};
 export const Page = {
     "background" : "white",
     "fontSecondary" : "#808080",
