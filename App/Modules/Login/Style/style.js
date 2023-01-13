@@ -195,6 +195,10 @@ export const AlingForm = {
     alignItems: "center",
     flex: 1
 };
+export const AlingFormItem = {
+    justifyContent: "center",
+    alignItems: "center"
+};
 export const TitleSub = {
     fontWeight: "900",
     color: "#EC2427",

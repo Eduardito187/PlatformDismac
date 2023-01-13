@@ -13,7 +13,11 @@ export function setCodeEmail(email, code) {
     console.log(email, code);
     axios.post(URL_API("sendcode"),CREATE_BODY_VERIFICATE(email, code),GET_HEADERS()).then(res => {
         if (res.data.status != null) {
-            console.log(res.data.status);
+            if (res.data.status == false) {
+                alert("Error en el envio del codigo.");
+            }
+        }else{
+            alert("Este correo ya se encuentra en uso.");
         }
     }).catch(err => {
         console.log(err);

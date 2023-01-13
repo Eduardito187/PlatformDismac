@@ -18,15 +18,13 @@ const Register = ({route, navigation }) => {
     const [Steps, SetSteps] = React.useState(6);
     const [Step, SetStep] = React.useState(1);
     const [Email, SetEmail] = React.useState("");
+    const [ShowValidate, SetShowValidate] = React.useState(false);
     const [Disable, SetDisable] = React.useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [percent, SetPercent] = React.useState(false);
     React.useEffect(() => {
         //
     }, []);
-    const isEmail = () => {
-        return Email.includes('@');
-    };
     function generateCode() {
         if (GenerateCode(Email)) {
             SetPercent(true);
@@ -37,7 +35,7 @@ const Register = ({route, navigation }) => {
         }
     }
     function StepNext() {
-        
+        navigation.push(Route[Step-1]["Next"]);
     }
 
     return (
@@ -55,13 +53,16 @@ const Register = ({route, navigation }) => {
                         <View style={RowForm}>
                             <TextInput keyboardType={"email-address"} mode='outlined' placeholder="Correo electronico" selectionColor="rgba(0, 0, 0, 0.5)" 
                             underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={"Correo electronico"} 
-                            value={Email} onChangeText={text => SetEmail(text)} />
+                            value={Email} onChangeText={text => {
+                                SetShowValidate(text.includes("@"));
+                                SetEmail(text);
+                            }} />
                         </View>
                         <View style={RowForm}>
                             <Subtitle style={Label} text={"Se enviara un codigo de verificacion para que pueda pasar al siguiente paso del registro."} />
                         </View>
                         {
-                            isEmail() && (
+                            ShowValidate && (
                                 <View style={P5}>
                                     <SecondaryIcon style={SecondaryStyle} textStyle={SecondaryText} icon={"check"} text={"Verificar"} Action={() => generateCode()} />
                                 </View>
@@ -73,7 +74,10 @@ const Register = ({route, navigation }) => {
                     <Next Disable={Disable} StepNext={() => StepNext()} />
                 </View>
             </View>
-            <Verify isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} Error={() => SetDisable(true)} Success={() => SetDisable(false)} percent={percent} />
+            <Verify isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} Error={() => SetDisable(true)} Success={() => {
+                SetDisable(false);
+                SetShowValidate(false);
+                }} percent={percent} />
         </View>
     );
 };

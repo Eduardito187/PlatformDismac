@@ -5,12 +5,12 @@ export const Route = [
         Next : "RegisterContact"
     },
     {
-        title : "Informacion de contacto",
+        title : "Información de contacto",
         Current : "RegisterContact",
         Next : "RegisterLegal"
     },
     {
-        title : "Informacion legal",
+        title : "Información legal",
         Current : "RegisterLegal",
         Next : "RegisterLegal"
     }
