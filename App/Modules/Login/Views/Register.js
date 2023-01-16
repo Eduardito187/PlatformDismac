@@ -15,10 +15,9 @@ import Verify from './Component/Verifiy';
 /** */
 
 const Register = ({route, navigation }) => {
-    const [Steps, SetSteps] = React.useState(6);
+    const [Steps, SetSteps] = React.useState(Route.length);
     const [Step, SetStep] = React.useState(1);
     const [Email, SetEmail] = React.useState("");
-    const [ShowValidate, SetShowValidate] = React.useState(false);
     const [Disable, SetDisable] = React.useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [percent, SetPercent] = React.useState(false);
@@ -54,29 +53,22 @@ const Register = ({route, navigation }) => {
                             <TextInput keyboardType={"email-address"} mode='outlined' placeholder="Correo electronico" selectionColor="rgba(0, 0, 0, 0.5)" 
                             underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={"Correo electronico"} 
                             value={Email} onChangeText={text => {
-                                SetShowValidate(text.includes("@"));
+                                SetDisable(!text.includes("@"));
                                 SetEmail(text);
                             }} />
                         </View>
                         <View style={RowForm}>
                             <Subtitle style={Label} text={"Se enviara un codigo de verificacion para que pueda pasar al siguiente paso del registro."} />
                         </View>
-                        {
-                            ShowValidate && (
-                                <View style={P5}>
-                                    <SecondaryIcon style={SecondaryStyle} textStyle={SecondaryText} icon={"check"} text={"Verificar"} Action={() => generateCode()} />
-                                </View>
-                            )
-                        }
                     </View>
                 </View>
                 <View style={BottomNEXT}>
-                    <Next Disable={Disable} StepNext={() => StepNext()} />
+                    <Next Step={Step} Disable={Disable} StepFUNCTION={() => generateCode()} StepNext={() => StepNext()} />
                 </View>
             </View>
             <Verify isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} Error={() => SetDisable(true)} Success={() => {
                 SetDisable(false);
-                SetShowValidate(false);
+                StepNext();
                 }} percent={percent} />
         </View>
     );

@@ -11,11 +11,11 @@ import Next from './Component/Next';
 import { Route } from '../Interfaces/Route';
 /** */
 
-const Personal = ({route, navigation }) => {
+const AddressExtra = ({route, navigation }) => {
     const [Steps, SetSteps] = React.useState(Route.length);
-    const [Step, SetStep] = React.useState(2);
-    const [Name, SetName] = React.useState("");
-    const [Preffix, SetPreffix] = React.useState("");
+    const [Step, SetStep] = React.useState(5);
+    const [ADRESS, SetADRESS] = React.useState("");
+    const [ADRESSE, SetADRESSE] = React.useState("");
     React.useEffect(() => {
         //
     }, []);
@@ -34,32 +34,32 @@ const Personal = ({route, navigation }) => {
                     <View style={AlingForm}>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
-                                <Subtitle style={TitleSub} text={"Nombre del Partner."} />
+                                <Subtitle style={TitleSub} text={"Direccion."} />
                             </View>
                             <View style={RowForm}>
-                                <TextInput mode='outlined' placeholder="Nombre del Partner" selectionColor="rgba(0, 0, 0, 0.5)" 
+                                <TextInput mode='outlined' placeholder="Direccion" selectionColor="rgba(0, 0, 0, 0.5)" 
                                 underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427"
-                                value={Name} onChangeText={text => SetName(text)} maxLength={30} />
+                                value={ADRESS} onChangeText={text => SetADRESS(text)} maxLength={30} />
                             </View>
                         </View>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
-                                <Subtitle style={TitleSub} text={"Prefijo del partner."} />
+                                <Subtitle style={TitleSub} text={"Direccion extra."} />
                             </View>
                             <View style={RowForm}>
-                                <TextInput mode='outlined' placeholder="Prefijo del partner" selectionColor="rgba(0, 0, 0, 0.5)" 
+                                <TextInput mode='outlined' placeholder="Direccion extra" selectionColor="rgba(0, 0, 0, 0.5)" 
                                 underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427"
-                                value={Preffix} onChangeText={text => SetPreffix(text)} maxLength={20} />
+                                value={ADRESSE} onChangeText={text => SetADRESSE(text)} maxLength={20} />
                             </View>
                         </View>
                     </View>
                 </View>
                 <View style={BottomNEXT}>
-                    <Next Step={Step} Disable={Name.length > 0 && Preffix.length > 0 ? false : true} StepNext={() => StepNext()} />
+                    <Next Step={Step} Disable={ADRESS.length > 0 && ADRESSE.length > 0 ? false : true} StepNext={() => StepNext()} />
                 </View>
             </View>
         </View>
     );
 };
 
-export default Personal;
+export default AddressExtra;

@@ -17,6 +17,10 @@ export const SButton = {
     backgroundColor: "#EC2427",
     fontWeight: "900"
 };
+export const DisButton = {
+    backgroundColor: "#808080",
+    fontWeight: "900"
+};
 export const SText = {
     fontWeight: "900",
     color: "#FFFFFF",

@@ -12,6 +12,16 @@ export const Route = [
     {
         title : "Información legal",
         Current : "RegisterLegal",
+        Next : "Address"
+    },
+    {
+        title : "Ubicación",
+        Current : "Address",
+        Next : "AddressExtra"
+    },
+    {
+        title : "Dirección",
+        Current : "AddressExtra",
         Next : "RegisterLegal"
     }
 ];

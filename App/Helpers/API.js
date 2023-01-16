@@ -20,6 +20,12 @@ export function CREATE_BODY_LOGIN(username, password) {
         "password" : password
     };
 }
+export const NULLABLE = {};
+export function CREATE_BODY_CITY(city) {
+    return {
+        "id_city" : city
+    };
+}
 export function CREATE_BODY_VERIFICATE(email, code) {
     return {
         "email" : email,

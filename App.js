@@ -10,6 +10,8 @@ import Login from './App/Modules/Login/Views/Login';
 import Register from './App/Modules/Login/Views/Register';
 import Legal from './App/Modules/Login/Views/Legal';
 import Personal from './App/Modules/Login/Views/Personal';
+import Address from './App/Modules/Login/Views/Address';
+import AddressExtra from './App/Modules/Login/Views/AddressExtra';
 /** */
 
 const Stack = createStackNavigator();
@@ -24,6 +26,8 @@ export default function App() {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="RegisterLegal" component={Legal} />
         <Stack.Screen name="RegisterContact" component={Personal} />
+        <Stack.Screen name="Address" component={Address} />
+        <Stack.Screen name="AddressExtra" component={AddressExtra} />
       </Stack.Navigator>
     </NavigationContainer>
   );

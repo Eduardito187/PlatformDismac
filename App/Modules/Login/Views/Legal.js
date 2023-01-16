@@ -12,7 +12,7 @@ import { Route } from '../Interfaces/Route';
 /** */
 
 const Legal = ({route, navigation }) => {
-    const [Steps, SetSteps] = React.useState(6);
+    const [Steps, SetSteps] = React.useState(Route.length);
     const [Step, SetStep] = React.useState(3);
     const [Nit, SetNit] = React.useState("");
     const [Razon, SetRazon] = React.useState("");
@@ -66,7 +66,7 @@ const Legal = ({route, navigation }) => {
                     </View>
                 </View>
                 <View style={BottomNEXT}>
-                    <Next Disable={Nit.length > 0 && Razon.length > 0 && Representante.length > 0 ? false : true} StepNext={() => StepNext()} />
+                    <Next Step={Step} Disable={Nit.length > 0 && Razon.length > 0 && Representante.length > 0 ? false : true} StepNext={() => StepNext()} />
                 </View>
             </View>
         </View>

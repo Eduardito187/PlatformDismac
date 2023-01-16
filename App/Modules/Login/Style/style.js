@@ -154,8 +154,8 @@ export const STYLE = {
 };
 export const SUBTITLE = {
     position: "absolute",
-    left: (windowWidth * 0.02),
-    right: (windowWidth * 0.02),
+    left: (windowWidth * 0.10),
+    right: (windowWidth * 0.10),
     top: (windowWidth * 0.30)
 };
 export const LOGO = {
