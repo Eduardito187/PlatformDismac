@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { STYLE,ContentFORM,BottomNEXT,RowForm,AlingFormItem,AlingForm,TitleSub } from '../Style/style';
-
+import { settingRegister } from '../../../Helpers/SettingRegister';
 /** Components */
 import Subtitle from '../../../Components/Subtitle';
 import Top from './Component/Top';
@@ -19,7 +19,8 @@ const Personal = ({route, navigation }) => {
     React.useEffect(() => {
         //
     }, []);
-    function StepNext() {
+    async function StepNext() {
+        await settingRegister([Name,Preffix], Step);
         navigation.push(Route[Step-1]["Next"]);
     }
 
@@ -39,7 +40,7 @@ const Personal = ({route, navigation }) => {
                             <View style={RowForm}>
                                 <TextInput mode='outlined' placeholder="Nombre del Partner" selectionColor="rgba(0, 0, 0, 0.5)" 
                                 underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427"
-                                value={Name} onChangeText={text => SetName(text)} maxLength={30} />
+                                value={Name} onChangeText={text => SetName(text)} label={Name.length+"/30"} maxLength={30} />
                             </View>
                         </View>
                         <View style={AlingFormItem}>
@@ -49,7 +50,7 @@ const Personal = ({route, navigation }) => {
                             <View style={RowForm}>
                                 <TextInput mode='outlined' placeholder="Prefijo del partner" selectionColor="rgba(0, 0, 0, 0.5)" 
                                 underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427"
-                                value={Preffix} onChangeText={text => SetPreffix(text)} maxLength={20} />
+                                value={Preffix} onChangeText={text => SetPreffix(text)} label={Preffix.length+"/10"} maxLength={10} />
                             </View>
                         </View>
                     </View>

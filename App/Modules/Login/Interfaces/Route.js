@@ -22,6 +22,16 @@ export const Route = [
     {
         title : "Dirección",
         Current : "AddressExtra",
-        Next : "RegisterLegal"
+        Next : "UserRegister"
+    },
+    {
+        title : "Cuenta SuperAdmin",
+        Current : "UserRegister",
+        Next : "PasswordRegister"
+    },
+    {
+        title : "Cuenta SuperAdmin",
+        Current : "PasswordRegister",
+        Next : "SuccessRegister"
     }
 ];

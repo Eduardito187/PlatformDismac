@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { STYLE,ContentFORM,BottomNEXT,RowForm,AlingFormItem,AlingForm,TitleSub } from '../Style/style';
-
+import { settingRegister } from '../../../Helpers/SettingRegister';
 /** Components */
 import Subtitle from '../../../Components/Subtitle';
 import Top from './Component/Top';
@@ -19,7 +19,8 @@ const AddressExtra = ({route, navigation }) => {
     React.useEffect(() => {
         //
     }, []);
-    function StepNext() {
+    async function StepNext() {
+        await settingRegister([ADRESS,ADRESSE], Step);
         navigation.push(Route[Step-1]["Next"]);
     }
 
@@ -39,7 +40,7 @@ const AddressExtra = ({route, navigation }) => {
                             <View style={RowForm}>
                                 <TextInput mode='outlined' placeholder="Direccion" selectionColor="rgba(0, 0, 0, 0.5)" 
                                 underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427"
-                                value={ADRESS} onChangeText={text => SetADRESS(text)} maxLength={30} />
+                                value={ADRESS} onChangeText={text => SetADRESS(text)} maxLength={255} label={ADRESS.length+"/255"} />
                             </View>
                         </View>
                         <View style={AlingFormItem}>
@@ -49,7 +50,7 @@ const AddressExtra = ({route, navigation }) => {
                             <View style={RowForm}>
                                 <TextInput mode='outlined' placeholder="Direccion extra" selectionColor="rgba(0, 0, 0, 0.5)" 
                                 underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427"
-                                value={ADRESSE} onChangeText={text => SetADRESSE(text)} maxLength={20} />
+                                value={ADRESSE} onChangeText={text => SetADRESSE(text)} maxLength={255} label={ADRESSE.length+"/255"} />
                             </View>
                         </View>
                     </View>

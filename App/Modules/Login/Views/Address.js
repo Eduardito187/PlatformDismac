@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { STYLE,ContentFORM,BottomNEXT,RowForm,AlingFormItem,AlingForm,TitleSub } from '../Style/style';
-
+import { settingRegister } from '../../../Helpers/SettingRegister';
 /** Components */
 import Subtitle from '../../../Components/Subtitle';
 import Top from './Component/Top';
@@ -24,7 +24,8 @@ const Address = ({route, navigation }) => {
     React.useEffect(() => {
         //
     }, []);
-    function StepNext() {
+    async function StepNext() {
+        await settingRegister([Pais,Departamento,Provincia], Step);
         navigation.push(Route[Step-1]["Next"]);
     }
 

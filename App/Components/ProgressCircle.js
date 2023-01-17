@@ -23,7 +23,7 @@ class ProgressCircle extends React.Component {
 
     render() {
         return(
-            <Progress.Circle color={this.state.color} size={this.state.size} style={this.state.STYLE.PROGRESS_CIRCLE} progress={((1 / 6) * this.state.Step)} thickness={this.state.thickness} showsText={false} >
+            <Progress.Circle color={this.state.color} size={this.state.size} style={this.state.STYLE.PROGRESS_CIRCLE} progress={((1 / this.state.Steps) * this.state.Step)} thickness={this.state.thickness} showsText={false} >
                 <View style={this.state.STYLE.ABSOLUTE}>
                     <Text style={this.state.STYLE.FONT_PROGRESS}>{this.state.Step}/{this.state.Steps}</Text>
                 </View>

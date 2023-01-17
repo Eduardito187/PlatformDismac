@@ -12,6 +12,9 @@ import Legal from './App/Modules/Login/Views/Legal';
 import Personal from './App/Modules/Login/Views/Personal';
 import Address from './App/Modules/Login/Views/Address';
 import AddressExtra from './App/Modules/Login/Views/AddressExtra';
+import UserRegister from './App/Modules/Login/Views/Account/UserRegister';
+import PasswordRegister from './App/Modules/Login/Views/Account/PasswordRegister';
+import SuccessRegister from './App/Modules/Login/Views/SuccessRegister';
 /** */
 
 const Stack = createStackNavigator();
@@ -28,6 +31,9 @@ export default function App() {
         <Stack.Screen name="RegisterContact" component={Personal} />
         <Stack.Screen name="Address" component={Address} />
         <Stack.Screen name="AddressExtra" component={AddressExtra} />
+        <Stack.Screen name="UserRegister" component={UserRegister} />
+        <Stack.Screen name="PasswordRegister" component={PasswordRegister} />
+        <Stack.Screen name="SuccessRegister" component={SuccessRegister} />
       </Stack.Navigator>
     </NavigationContainer>
   );

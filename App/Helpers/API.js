@@ -26,10 +26,11 @@ export function CREATE_BODY_CITY(city) {
         "id_city" : city
     };
 }
-export function CREATE_BODY_VERIFICATE(email, code) {
+export function CREATE_BODY_VERIFICATE(email, code, type) {
     return {
         "email" : email,
-        "code" : code
+        "code" : code,
+        "type" : type
     };
 }
 export async function SET_TOKEN_SESSION(TOKEN) {

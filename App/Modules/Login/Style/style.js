@@ -102,6 +102,15 @@ export const style = {
         right: 0
     }
 }
+export const SUCCESS = {
+    Container : {
+        backgroundColor: "#FFFFFF",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative"
+    }
+}
 export const STYLE = {
     RegisterContainer : {
         backgroundColor: "#EC2427",

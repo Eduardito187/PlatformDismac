@@ -4,14 +4,14 @@ import { Text, View, Image } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { STYLE,ContentFORM,BottomNEXT,RowForm,AlingForm,TitleSub,Label,P5,SecondaryStyle,SecondaryText } from '../Style/style';
 import { GenerateCode } from '../../../Helpers/Code';
-
+import { settingRegister } from '../../../Helpers/SettingRegister';
 /** Components */
 import Subtitle from '../../../Components/Subtitle';
-import SecondaryIcon from '../../../Components/Button/SecondaryIcon';
 import Top from './Component/Top';
 import Next from './Component/Next';
 import { Route } from '../Interfaces/Route';
 import Verify from './Component/Verifiy';
+import MessageBox from '../../../Components/MessageBox';
 /** */
 
 const Register = ({route, navigation }) => {
@@ -21,11 +21,13 @@ const Register = ({route, navigation }) => {
     const [Disable, SetDisable] = React.useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [percent, SetPercent] = React.useState(false);
+    const [ShowMessage, SetShowMessage] = React.useState(false);
+    const [Message, SetSetMessage] = React.useState("");
     React.useEffect(() => {
         //
     }, []);
     function generateCode() {
-        if (GenerateCode(Email)) {
+        if (GenerateCode(Email, "partner", ShowAlertMessage)) {
             SetPercent(true);
             setIsModalOpen(true);
         }else{
@@ -33,10 +35,24 @@ const Register = ({route, navigation }) => {
             setIsModalOpen(false);
         }
     }
-    function StepNext() {
+    async function StepNext() {
+        await settingRegister(Email, Step);
         navigation.push(Route[Step-1]["Next"]);
     }
-
+    function successVerify() {
+        SetDisable(false);
+        StepNext();
+    }
+    function changeEmailInput(text) {
+        SetDisable(!text.includes("@"));
+        SetEmail(text);
+    }
+    function ShowAlertMessage(text) {
+        SetSetMessage(text);
+        SetShowMessage(true);
+        SetPercent(false);
+        setIsModalOpen(false);
+    }
     return (
         <View style={STYLE.RegisterContainer}>
             <StatusBar style="light" />
@@ -51,11 +67,8 @@ const Register = ({route, navigation }) => {
                         </View>
                         <View style={RowForm}>
                             <TextInput keyboardType={"email-address"} mode='outlined' placeholder="Correo electronico" selectionColor="rgba(0, 0, 0, 0.5)" 
-                            underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={"Correo electronico"} 
-                            value={Email} onChangeText={text => {
-                                SetDisable(!text.includes("@"));
-                                SetEmail(text);
-                            }} />
+                            underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427"
+                            value={Email} onChangeText={text => changeEmailInput(text)} maxLength={50} label={Email.length+"/50"} />
                         </View>
                         <View style={RowForm}>
                             <Subtitle style={Label} text={"Se enviara un codigo de verificacion para que pueda pasar al siguiente paso del registro."} />
@@ -66,10 +79,8 @@ const Register = ({route, navigation }) => {
                     <Next Step={Step} Disable={Disable} StepFUNCTION={() => generateCode()} StepNext={() => StepNext()} />
                 </View>
             </View>
-            <Verify isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} Error={() => SetDisable(true)} Success={() => {
-                SetDisable(false);
-                StepNext();
-                }} percent={percent} />
+            <MessageBox ShowMessage={ShowMessage} CloseMessage={() => SetShowMessage(false)} Title={"Dismac"} Text={Message} />
+            <Verify isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} Error={() => SetDisable(true)} Success={() => successVerify()} percent={percent} />
         </View>
     );
 };
