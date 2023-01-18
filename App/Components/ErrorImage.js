@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const SuccessImage = (props) => {
+const ErrorImage = (props) => {
     const glowAnimation = useAnimatedStyle(() => ({
         transform: [
             {
@@ -36,11 +36,11 @@ const SuccessImage = (props) => {
     return (
         <>
             <Animated.View style={[styles.glowContainer, glowAnimation]}>
-                <Text style={{fontWeight: "900",color: "#1bdc1b",fontSize: 23,letterSpacing: 0.5,lineHeight: 24,fontFamily: "Roboto"}}>FELICIDADES</Text>
-                <Image source={require('./../../pub/Dismac/success.png')} style={{ height: 150, aspectRatio: 1, resizeMode: 'contain' }} />
+                <Text style={{fontWeight: "900",color: "red",fontSize: 23,letterSpacing: 0.5,lineHeight: 24,fontFamily: "Roboto"}}>ERROR</Text>
+                <Image source={require('./../../pub/Dismac/error.png')} style={{ height: 150, aspectRatio: 1, resizeMode: 'contain' }} />
                 <Text style={{fontWeight: "900",color: "#1bdc1b",fontSize: 19,letterSpacing: 0.5,lineHeight: 20,fontFamily: "Roboto"}}>{props.Text}</Text>
             </Animated.View>
         </>
     );
 };
-export default SuccessImage;
+export default ErrorImage;

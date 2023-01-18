@@ -98,3 +98,11 @@ async function MergeRegister(Data) {
         return false;
     }
 }
+export async function DELETE_REGISTER() {
+    try {
+        await AsyncStorage.removeItem('@REGISTER');
+        return true;
+    } catch (error) {
+        return false;
+    }
+}

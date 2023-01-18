@@ -1,27 +1,49 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View,Text } from 'react-native';
+import { View,ActivityIndicator } from 'react-native';
 import { SUCCESS } from '../Style/style';
 import { GetRegister } from '../../../Helpers/SettingRegister';
-import { windowWidth } from '../../../Helpers/GetMobil';
+import { RegisterPartner } from '../../../Helpers/Partner';
+import { ResetNavigation } from '../../../Helpers/Nav';
+import { DELETE_REGISTER } from '../../../Helpers/SettingRegister';
 /** Components */
-import SuccessImage from '../../../Components/SuccessImage';
+import Error from './Component/Error';
+import Success from './Component/Success';
 /** */
 
 const SuccessRegister = ({route, navigation }) => {
+    const [Created, SetCreated] = React.useState(null);
+    const [Response, SetResponse] = React.useState("");
     React.useEffect(() => {
-        getRegisterData();
+        setRegisterData();
     }, []);
-    async function getRegisterData() {
-        console.log(await GetRegister());
+    async function setRegisterData() {
+        let account_register = JSON.parse(await GetRegister());
+        RegisterPartner(account_register, registerAccount);
     }
-
+    function registerAccount(status, response) {
+        SetResponse(response);
+        SetCreated(status);
+    }
+    async function setDeleteRegister() {
+        await DELETE_REGISTER();
+    }
+    function InsiarSession() {
+        setDeleteRegister();
+        ResetNavigation("Loading", {}, navigation);
+    }
     return (
         <View style={SUCCESS.Container}>
             <StatusBar style="light" />
-            <View style={{width: windowWidth, height: 200}}>
-                <SuccessImage />
-            </View>
+            {
+                Created == null && (<ActivityIndicator size="large" color="#EC2427" />)
+            }
+            {
+                Created == true && (<Success Mostrar={() => console.log('Pressed')} Text={Response} Session={() => InsiarSession()} />)
+            }
+            {
+                Created == false && (<Error goBack={() => navigation.goBack()} Text={Response} />)
+            }
         </View>
     );
 };
