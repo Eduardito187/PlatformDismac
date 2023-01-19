@@ -19,7 +19,7 @@ const CustomDrawer = (props) => {
     }
     return (
         <DrawerContentScrollView {...props} showsVerticalScrollIndicator={false}>
-            <ImageBackground source={require("./../../assets/lg.png")} style={{justifyContent:"space-between",alignItems:"center",padding:20,marginBottom:10,backgroundColor:"rgb(0,0,0)",borderBottomWidth:2,borderColor: "red"}} imageStyle=
+            <ImageBackground source={{uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"}} style={{justifyContent:"space-between",alignItems:"center",padding:20,marginBottom:10,backgroundColor:"rgb(0,0,0)",borderBottomWidth:2,borderColor: "red"}} imageStyle=
                 {{opacity:0.4}}>
                 <Image source={require("../../assets/dismac.png")} style={{width:70,height:70,borderRadius:35,borderWidth:2,borderColor: "white"}}/>
                 <Text style={{fontSize:20,fontWeight:"bold",color: "white"}}>LG</Text>
