@@ -18,16 +18,14 @@
       "**/*"
     ],
     "ios": {
-      "jsEngine": "jsc",
       "supportsTablet": true
     },
-    "jsEngine": "hermes",
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.eduardito187.PlatformDismac"
+      "package": "com.eduardito.PlatformDismac"
     },
     "web": {
       "favicon": "./assets/favicon.png"

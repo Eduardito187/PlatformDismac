@@ -20,9 +20,9 @@ class DrawerHome extends React.Component {
     render() {
         return(
             <DrawerContentScrollView {...this.state.props} showsVerticalScrollIndicator={false}>
-                <ImageBackground source={require("./../../pub/Dismac/lg.png")} style={{justifyContent:"space-between",alignItems:"center",padding:20,marginBottom:10,backgroundColor:"rgb(0,0,0)",borderBottomWidth:2,borderColor: "red"}} imageStyle=
+                <ImageBackground source={require("./../../assets/lg.png")} style={{justifyContent:"space-between",alignItems:"center",padding:20,marginBottom:10,backgroundColor:"rgb(0,0,0)",borderBottomWidth:2,borderColor: "red"}} imageStyle=
                     {{opacity:0.4}}>
-                    <Image source={require("./../../pub/Dismac/dismac.png")} style={{width:70,height:70,borderRadius:35,borderWidth:2,borderColor: "white"}}/>
+                    <Image source={require("../../assets/dismac.png")} style={{width:70,height:70,borderRadius:35,borderWidth:2,borderColor: "white"}}/>
                     <Text style={{fontSize:20,fontWeight:"bold",color: "white"}}>{"Not Available"}</Text>
                     <Text style={{color: "#808080"}}>{"Not Available"}</Text>
                 </ImageBackground>

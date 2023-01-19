@@ -37,7 +37,7 @@ const ErrorImage = (props) => {
         <>
             <Animated.View style={[styles.glowContainer, glowAnimation]}>
                 <Text style={{fontWeight: "900",color: "red",fontSize: 23,letterSpacing: 0.5,lineHeight: 24,fontFamily: "Roboto"}}>ERROR</Text>
-                <Image source={require('./../../pub/Dismac/error.png')} style={{ height: 150, aspectRatio: 1, resizeMode: 'contain' }} />
+                <Image source={require('./../../assets/error.png')} style={{ height: 150, aspectRatio: 1, resizeMode: 'contain' }} />
                 <Text style={{fontWeight: "900",color: "#1bdc1b",fontSize: 19,letterSpacing: 0.5,lineHeight: 20,fontFamily: "Roboto"}}>{props.Text}</Text>
             </Animated.View>
         </>

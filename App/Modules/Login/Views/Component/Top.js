@@ -30,7 +30,7 @@ const Top = (props) => {
                 <Subtitle style={SubTitle} text={props.Title} />
             </View>
             <View style={LOGO}>
-                <Image source={require('./../../../../../pub/Dismac/dismac_.png')} style={IMGLogo} />
+                <Image source={require('./../../../../../assets/dismac_.png')} style={IMGLogo} />
             </View>
         </>
     );

@@ -21,7 +21,7 @@ class LogoDismac extends React.Component {
 
     render() {
         return(
-            <Animated.Image style={[this.state.style,{borderRadius: this.state.border}]} source={require('./../../pub/Dismac/dismac_.png')} />
+            <Animated.Image style={[this.state.style,{borderRadius: this.state.border}]} source={require('./../../assets/dismac_.png')} />
         );
     }
 }

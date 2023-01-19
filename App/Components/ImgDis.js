@@ -22,7 +22,7 @@ class ImgDis extends React.Component {
 
     render() {
         return(
-            <Animated.Image style={[this.state.style,{borderRadius: this.state.border}]} source={require('./../../pub/Dismac/dismac.png')} />
+            <Animated.Image style={[this.state.style,{borderRadius: this.state.border}]} source={require('./../../assets/dismac.png')} />
         );
     }
 }
