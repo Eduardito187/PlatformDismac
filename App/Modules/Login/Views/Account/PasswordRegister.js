@@ -14,9 +14,6 @@ import { Route } from '../../Interfaces/Route';
 const PasswordRegister = ({route, navigation }) => {
     const [Steps, SetSteps] = React.useState(Route.length);
     const [Step, SetStep] = React.useState(7);
-    const [Nit, SetNit] = React.useState("");
-    const [Razon, SetRazon] = React.useState("");
-    const [Representante, SetRepresentante] = React.useState("");
 
     const [password, setPassword] = React.useState("");
     const [pwdP, setpwdP] = React.useState(0);

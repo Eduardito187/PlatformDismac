@@ -4,9 +4,10 @@ import { Text, View, TextInput, StyleSheet} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AntDesign } from '@expo/vector-icons'; 
+import { IconButton } from 'react-native-paper';
+import { Navigation } from '../../../Helpers/Nav';
 const Drawer = createDrawerNavigator();
 /** Components */
-import DrawerHome from '../../../Components/DrawerHome';
 import LandingHome from './LandingHome';
 import ImgDis from '../../../Components/ImgDis';
 import Catalog from '../../Catalog/Views/Catalog';
@@ -19,6 +20,9 @@ import IconSupport from '../../SupportTechnical/Helper/IconSupport';
 import IconManagement from '../../Management/Helper/IconManagement';
 import IconCatalog from '../../Catalog/Helper/IconCatalog';
 import IconHome from '../Helper/IconHome';
+import ListAccount from '../../Account/Views/ListAccount';
+import IconAccount from '../../Account/Helper/IconAccount';
+import AddAccount from '../../Account/Views/AddAccount';
 /** */
 
 const Home = ({route, navigation }) => {
@@ -28,6 +32,8 @@ const Home = ({route, navigation }) => {
     const MANAGEMENT = () => <Management style={{}} data={{}} />;
     const SUPPORTTECHNICAL = () => <SupportTechnical style={{}} data={{}} />;
     const LogoDismac = () => <ImgDis style={{width: 30,height: 30}} animation={{border: 5, time: 1000}} />;
+    const LISTACCOUNT = () => <ListAccount style={{}} data={{}} />;
+    const ADDACCOUNT = () => <AddAccount style={{}} data={{}} />;
     React.useEffect(() => {
         //
     }, []);
@@ -46,28 +52,36 @@ const Home = ({route, navigation }) => {
                 drawerIcon: ({focused, size}) => (<IconCatalog focus={focused} size={size} />),
                 drawerActiveTintColor : "#EC2427",
                 drawerInactiveTintColor : "#808080" 
-            })} component={CATALOG } />
-          <Drawer.Screen name="Management" options={({navigation}) => ({
-                headerTitle: () => (<LogoDismac />),
-                drawerLabel: "Administrador de cuentas",
-                drawerIcon: ({focused, size}) => (<IconManagement focus={focused} size={size} />),
-                drawerActiveTintColor : "#EC2427",
-                drawerInactiveTintColor : "#808080" 
-            })} component={MANAGEMENT } />
+            })} component={CATALOG} />
           <Drawer.Screen name="SupportTechnical" options={({navigation}) => ({
                 headerTitle: () => (<LogoDismac />),
                 drawerLabel: "Soport tecnico",
                 drawerIcon: ({focused, size}) => (<IconSupport focus={focused} size={size} />),
                 drawerActiveTintColor : "#EC2427",
                 drawerInactiveTintColor : "#808080" 
-            })} component={SUPPORTTECHNICAL } />
+            })} component={SUPPORTTECHNICAL} />
           <Drawer.Screen name="Improvements" options={({navigation}) => ({
                 headerTitle: () => (<LogoDismac />),
                 drawerLabel: "Buzón de mejoras",
                 drawerIcon: ({focused, size}) => (<IconImprovements focus={focused} size={size} />),
                 drawerActiveTintColor : "#EC2427",
                 drawerInactiveTintColor : "#808080" 
-            })} component={IMPROVEMENTS } />
+            })} component={IMPROVEMENTS} />
+          <Drawer.Screen name="Management" options={({navigation}) => ({
+                headerTitle: () => (<LogoDismac />),
+                drawerLabel: "Mi Partner",
+                drawerIcon: ({focused, size}) => (<IconManagement focus={focused} size={size} />),
+                drawerActiveTintColor : "#EC2427",
+                drawerInactiveTintColor : "#808080" 
+            })} component={MANAGEMENT} />
+          <Drawer.Screen name="Cuentas" options={({navigation}) => ({
+                headerTitle: () => (<LogoDismac />),
+                headerRight: () => (<IconButton icon="account-plus" iconColor={"#EC2427"} size={30} onPress={() => Navigation("AddAccount", {}, navigation)} />),
+                drawerLabel: "Cuentas",
+                drawerIcon: ({focused, size}) => (<IconAccount focus={focused} size={size} />),
+                drawerActiveTintColor : "#EC2427",
+                drawerInactiveTintColor : "#808080" 
+            })} component={LISTACCOUNT} />
         </Drawer.Navigator>
     );
 };

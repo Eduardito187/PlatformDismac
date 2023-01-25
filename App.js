@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -15,6 +15,7 @@ import AddressExtra from './App/Modules/Login/Views/AddressExtra';
 import UserRegister from './App/Modules/Login/Views/Account/UserRegister';
 import PasswordRegister from './App/Modules/Login/Views/Account/PasswordRegister';
 import SuccessRegister from './App/Modules/Login/Views/SuccessRegister';
+import AddAccount from './App/Modules/Account/Views/AddAccount';
 /** */
 
 const Stack = createStackNavigator();
@@ -22,6 +23,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar barStyle='dark-content' />
       <Stack.Navigator initialRouteName="Loading" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="Home" component={Home} />
@@ -34,6 +36,7 @@ export default function App() {
         <Stack.Screen name="UserRegister" component={UserRegister} />
         <Stack.Screen name="PasswordRegister" component={PasswordRegister} />
         <Stack.Screen name="SuccessRegister" component={SuccessRegister} />
+        <Stack.Screen name="AddAccount" component={AddAccount} options={{headerShown: true,title: "Registro de cuenta"}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

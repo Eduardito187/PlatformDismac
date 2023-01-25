@@ -14,6 +14,23 @@ export function GET_HEADERS() {
         }
     };
 }
+export async function GET_HEADER_ACCOUNT() {
+    console.log(GET_TOKEN_SESSION());
+    return {
+        headers: {
+            "Authorization": `Bearer ${await GET_TOKEN_SESSION()}`,
+            "Content-Type": "text/json"
+        }
+    };
+}
+export function CREATE_BODY_NEW_ACCOUNT(name, email, username, password) {
+    return {
+        "name" : name,
+        "email" : email,
+        "username" : username,
+        "password" : password
+    };
+}
 export function CREATE_BODY_LOGIN(username, password) {
     return {
         "username" : username,
