@@ -33,7 +33,7 @@ const Verify = ({isModalOpen, setIsModalOpen, Error, Success, percent}) => {
               percent && (<TimePercent End={(res) => loadInterval(res)} />)
             }
             <Text style={titleStyle}>Verificacion</Text>
-            <Text style={textLine}>Se envio un codigo de confirmacion a su correo electronico, digitarlo para proceder con el registro.</Text>
+            <Text style={textLine}>Se envio un codigo de confirmacion a su correo electronico, digitarlo para proceder con el siguiente paso.</Text>
             <View style={h70}>
               <InputVerification errorHelper={() => ErrorOK()} successHelper={() => SuccessOK()} />
             </View>

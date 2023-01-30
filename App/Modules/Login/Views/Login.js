@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { TextInput, Button, HelperText, Snackbar } from 'react-native-paper';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { style } from '../Style/style';
@@ -40,7 +40,7 @@ const Login = ({route, navigation }) => {
         }
     }
     function pressOK() {
-        console.log("OK");
+        //
     }
     function toHome() {
         setLogin(false);
@@ -111,9 +111,9 @@ const Login = ({route, navigation }) => {
                         underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={<Text style={style.LabelButton}>Contraseña</Text>} 
                         value={password} onChangeText={text => setPassword(text)} onFocus={() => setpwdP(2)} onBlur={() => setpwdP(0)} />
                     </View>
-                    <View style={style.TextPwd}>
+                    <TouchableOpacity style={style.TextPwd} onPress={() => Navigation("RestorePassword",{},navigation)}>
                         <Text style={style.labelPwd}>Olvide mi contraseña</Text>
-                    </View>
+                    </TouchableOpacity>
                     <View style={style.containButton}>
                         <Button icon="account" loading={loading} disabled={disable} style={style.fondoRojo} mode="contained" onPress={() => rerificateLogin()}>
                             <Text style={style.FontButton}>Entrar a mi cuenta</Text>

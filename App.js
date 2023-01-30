@@ -16,6 +16,9 @@ import UserRegister from './App/Modules/Login/Views/Account/UserRegister';
 import PasswordRegister from './App/Modules/Login/Views/Account/PasswordRegister';
 import SuccessRegister from './App/Modules/Login/Views/SuccessRegister';
 import AddAccount from './App/Modules/Account/Views/AddAccount';
+import AddCatalog from './App/Modules/Catalog/Views/AddCatalog';
+import RestorePassword from './App/Modules/Login/Views/RestorePassword';
+import RestorePwd from './App/Modules/Login/Views/Account/RestorePwd';
 /** */
 
 const Stack = createStackNavigator();
@@ -26,7 +29,7 @@ export default function App() {
       <StatusBar barStyle='dark-content' />
       <Stack.Navigator initialRouteName="Loading" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Loading" component={Loading} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Inicio" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="RegisterLegal" component={Legal} />
@@ -37,6 +40,9 @@ export default function App() {
         <Stack.Screen name="PasswordRegister" component={PasswordRegister} />
         <Stack.Screen name="SuccessRegister" component={SuccessRegister} />
         <Stack.Screen name="AddAccount" component={AddAccount} options={{headerShown: true,title: "Registro de cuenta"}} />
+        <Stack.Screen name="AddCatalog" component={AddCatalog} options={{headerShown: true,title: "Registro de catalogos"}} />
+        <Stack.Screen name="RestorePassword" component={RestorePassword} />
+        <Stack.Screen name="RestorePWD" component={RestorePwd} />
       </Stack.Navigator>
     </NavigationContainer>
   );

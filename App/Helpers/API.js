@@ -14,13 +14,26 @@ export function GET_HEADERS() {
         }
     };
 }
+export function GET_HEADER_TOKEN(token) {
+    return {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "text/json"
+        }
+    };
+}
 export async function GET_HEADER_ACCOUNT() {
-    console.log(GET_TOKEN_SESSION());
     return {
         headers: {
             "Authorization": `Bearer ${await GET_TOKEN_SESSION()}`,
             "Content-Type": "text/json"
         }
+    };
+}
+export function CREATE_BODY_SET_CATALOG(name, code) {
+    return {
+        "name" : name,
+        "code" : code
     };
 }
 export function CREATE_BODY_NEW_ACCOUNT(name, email, username, password) {
@@ -29,6 +42,17 @@ export function CREATE_BODY_NEW_ACCOUNT(name, email, username, password) {
         "email" : email,
         "username" : username,
         "password" : password
+    };
+}
+export function CREATE_BODY_SEARCH_ACCOUN(search) {
+    return {
+        "query" : search
+    };
+}
+export function CREATE_BODY_STATUS_ACCOUNT(type, value) {
+    return {
+        "type" : type,
+        "value" : value
     };
 }
 export function CREATE_BODY_LOGIN(username, password) {
@@ -43,11 +67,12 @@ export function CREATE_BODY_CITY(city) {
         "id_city" : city
     };
 }
-export function CREATE_BODY_VERIFICATE(email, code, type) {
+export function CREATE_BODY_VERIFICATE(email, code, type, status) {
     return {
         "email" : email,
         "code" : code,
-        "type" : type
+        "type" : type,
+        "restore" : status ? "Si" : "No"
     };
 }
 export async function SET_TOKEN_SESSION(TOKEN) {
@@ -105,3 +130,26 @@ export async function DELETE_TOKEN_SESSION() {
     }
 }
 export const METHOD_POST = "POST";
+export async function GENERATE_CODE_EMAIL(EMAIL) {
+    try {
+        await AsyncStorage.setItem(
+          '@EMAIL',
+          EMAIL.toString()
+        );
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GET_CODE_GENERATE_EMAIL() {
+    try {
+        const value = await AsyncStorage.getItem('@EMAIL');
+        if (value !== null) {
+            return value;
+        }else{
+            return null;
+        }
+    } catch (error) {
+        return null;
+    }
+}

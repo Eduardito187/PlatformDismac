@@ -37,7 +37,6 @@ const AddAccount = ({route, navigation }) => {
         if (Name.length > 0 && Email.length > 0 && UserName.length > 0) {
             SETLOADING(true);
             axios.post(URL_API("register/account"),CREATE_BODY_NEW_ACCOUNT(Name, Email, UserName, Password),await GET_HEADER_ACCOUNT()).then(res => {
-                console.log(res.data);
                 if (res.data != null) {
                     ShowAlertMessage(res.data.responseText);
                 }

@@ -19,7 +19,7 @@ const Loading = ({route, navigation }) => {
   async function loadInterval(res) {
     if (res) {
       if (await GET_TOKEN_SESSION() != null) {
-        ResetNavigation("Home",{},navigation);
+        ResetNavigation("Inicio",{},navigation);
       }else{
         navigation.navigate('Login');
       }

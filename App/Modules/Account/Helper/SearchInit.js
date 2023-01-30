@@ -11,7 +11,7 @@ const SearchInit = (props) => {
     return(
         <View style={{justifyContent: "center", alignItems: "center", padding: 10}}>
             <ImgDis style={PageLoading.img} animation={PageLoading.animation} />
-            <Text>Digite para buscar cuentas.</Text>
+            <Text>Digite para buscar.</Text>
         </View>
     );
 };

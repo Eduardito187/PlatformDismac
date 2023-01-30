@@ -72,7 +72,9 @@ export const style = {
     TextPwd : {
         padding: 5,
         alignItems: "flex-end",
-        width: (windowWidth - 30)
+        width: (windowWidth - 30),
+        marginTop: 5,
+        marginBottom: 5
     },
     containButton : {
         padding: 5,

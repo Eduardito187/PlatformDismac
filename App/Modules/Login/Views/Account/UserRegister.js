@@ -33,12 +33,11 @@ const UserRegister = ({route, navigation }) => {
         SETREGISTER(JSON.parse(await GetRegister()));
     }
     function generateCode() {
-        console.log(REGISTER);
         if (REGISTER != null) {
             if (REGISTER.partner.email == Email) {
                 ShowAlertMessage("El email se encuentra en uso, por favor introduzca otro.");
             }else{
-                if (GenerateCode(Email, "account", ShowAlertMessage)) {
+                if (GenerateCode(Email, "account", false, ShowAlertMessage)) {
                     SetPercent(true);
                     setIsModalOpen(true);
                 }else{

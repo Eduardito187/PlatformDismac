@@ -41,13 +41,14 @@ const Home = ({route, navigation }) => {
         <Drawer.Navigator useLegacyImplementation drawerContent={(props) => <CustomDrawer {...props} />}>
           <Drawer.Screen name="LandingHome" options={({navigation}) => ({
                 headerTitle: () => (<LogoDismac />),
-                drawerLabel: "Home",
+                drawerLabel: "Inicio",
                 drawerIcon: ({focused, size}) => (<IconHome focus={focused} size={size} />),
                 drawerActiveTintColor : "#EC2427",
                 drawerInactiveTintColor : "#808080" 
             })} component={LandingHOME} />
           <Drawer.Screen name="Catalog" options={({navigation}) => ({
                 headerTitle: () => (<LogoDismac />),
+                headerRight: () => (<IconButton icon="book" iconColor={"#EC2427"} size={30} onPress={() => Navigation("AddCatalog", {}, navigation)} />),
                 drawerLabel: "Catalogo",
                 drawerIcon: ({focused, size}) => (<IconCatalog focus={focused} size={size} />),
                 drawerActiveTintColor : "#EC2427",

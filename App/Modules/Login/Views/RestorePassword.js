@@ -4,18 +4,17 @@ import { Text, View, Image } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { STYLE,ContentFORM,BottomNEXT,RowForm,AlingForm,TitleSub,Label,P5,SecondaryStyle,SecondaryText } from '../Style/style';
 import { GenerateCode } from '../../../Helpers/Code';
-import { settingRegister } from '../../../Helpers/SettingRegister';
+import { GENERATE_CODE_EMAIL } from '../../../Helpers/API';
 /** Components */
 import Subtitle from '../../../Components/Subtitle';
-import Top from './Component/Top';
+import TopNoSteep from './Component/TopNoSteep';
 import Next from './Component/Next';
 import { Route } from '../Interfaces/Route';
 import Verify from './Component/Verifiy';
 import MessageBox from '../../../Components/MessageBox';
 /** */
 
-const Register = ({route, navigation }) => {
-    const [Steps, SetSteps] = React.useState(Route.length);
+const RestorePassword = ({route, navigation }) => {
     const [Step, SetStep] = React.useState(1);
     const [Email, SetEmail] = React.useState("");
     const [Disable, SetDisable] = React.useState(true);
@@ -27,7 +26,7 @@ const Register = ({route, navigation }) => {
         //
     }, []);
     function generateCode() {
-        if (GenerateCode(Email, "partner", false, ShowAlertMessage)) {
+        if (GenerateCode(Email, "partner", true, ShowAlertMessage)) {
             SetPercent(true);
             setIsModalOpen(true);
         }else{
@@ -36,8 +35,8 @@ const Register = ({route, navigation }) => {
         }
     }
     async function StepNext() {
-        await settingRegister(Email, Step);
-        navigation.push(Route[Step-1]["Next"]);
+        await GENERATE_CODE_EMAIL(Email);
+        navigation.push("RestorePWD");
     }
     function successVerify() {
         SetDisable(false);
@@ -57,7 +56,7 @@ const Register = ({route, navigation }) => {
         <View style={STYLE.RegisterContainer}>
             <StatusBar style="light" />
             <View style={STYLE.SECCTION_TITLE}>
-                <Top Step={Step} Steps={Steps} Title={Route[Step-1]["title"]} navigation={navigation} />
+                <TopNoSteep Title={"Restauracion de cuentas"} navigation={navigation} />
             </View>
             <View style={STYLE.SECCTION_FORM}>
                 <View style={ContentFORM}>
@@ -85,4 +84,4 @@ const Register = ({route, navigation }) => {
     );
 };
 
-export default Register;
+export default RestorePassword;
