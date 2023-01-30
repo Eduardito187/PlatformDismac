@@ -54,10 +54,12 @@ const Account = (props) => {
         confirmMessage(msg, true);
     }
     function confirmMessage(msg, accept) {
-        Alert.alert("Dismac", msg, [
-            accept ? {text: "Confirmar",onPress: () => changeStateAccount(account.account_status.status)} : null,
-            {text: accept ? "Cancelar" : "OK",onPress: () => console.log("Cancelar"),style: 'cancel'}
-        ]);
+        let content = [];
+        if (accept) {
+            content.push({text: "Confirmar",onPress: () => changeStateAccount(account.account_status.status)});
+        }
+        content.push({text: accept ? "Cancelar" : "OK",onPress: () => console.log("Cancelar"),style: 'cancel'});
+        Alert.alert("Dismac", msg, content);
     }
     if (account == null) {
         return(<ActivityIndicator size="large" color="#EC2427" />);
