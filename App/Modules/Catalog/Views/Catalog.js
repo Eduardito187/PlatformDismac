@@ -10,7 +10,7 @@ import SearchBox from '../../../Components/Button/SearchBox';
 import SearchInit from '../../Account/Helper/SearchInit';
 import Searching from '../../Account/Helper/Searching';
 import MessageBox from '../../../Components/MessageBox';
-import ListView from '../../Account/Helper/ListView';
+import ListCatalog from '../../Account/Helper/ListCatalog';
 
 const Catalog = (props) => {
     const [TOKEN, SetTOKEN] = React.useState("");
@@ -20,7 +20,7 @@ const Catalog = (props) => {
     const [searching, Setsearching] = React.useState(false);
     const [style, Setstyle] = React.useState(props.style);
     const [data, Setdata] = React.useState(props.data);
-    const [accounts, Setaccounts] = React.useState([]);
+    const [catalogs, SetCatalogs] = React.useState([]);
     React.useEffect(() => {
         setSocket();
     }, []);
@@ -43,7 +43,7 @@ const Catalog = (props) => {
             SetShowMessage(true);
         }else{
             Setsearching(false);
-            Setaccounts(response);
+            SetCatalogs(response);
         }
     }
 
@@ -53,6 +53,15 @@ const Catalog = (props) => {
 
     function sendQuery(text){
         if (text.length > 0) {
+            axios.post(URL_API("search/inventory"),CREATE_BODY_SEARCH_ACCOUN(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
+                if(res.data != null){
+                    thenSearch(res.data.response, res.data.responseText);
+                }else{
+                    thenSearch(false, "Algo salio mal.");
+                }
+            }).catch(err => {
+                thenSearch(false, err);
+            });
         }
     }
 
@@ -63,7 +72,7 @@ const Catalog = (props) => {
             </View>
             {searching == false && search.length == 0 && (<SearchInit />)}
             {searching == true && (<Searching />)}
-            {searching == false && search.length > 0 && (<ListView Account={accounts} />)}
+            {searching == false && search.length > 0 && (<ListCatalog Catalog={catalogs} />)}
             <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
         </ScrollView>
     );

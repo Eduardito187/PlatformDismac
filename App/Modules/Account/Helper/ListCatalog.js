@@ -1,21 +1,21 @@
 import React, {useState} from 'react';
 /** */
 import CountResult from '../../../Components/Result/CountResult';
-import Account from './Account';
+import Catalog from './Catalog';
 import ResultNone from './ResultNone';
 
-const ListView = (props) => {
+const ListCatalog = (props) => {
     React.useEffect(() => {
         //
     }, []);
-    if (props.Account.length > 0) {
+    if (props.Catalog.length > 0) {
         return(
             <>
-                <CountResult Count={props.Account.length} />
+                <CountResult Count={props.Catalog.length} />
                 {
-                    props.Account.map((account) => {
+                    props.Catalog.map((catalog) => {
                         return (
-                            <Account Account={account} />
+                            <Catalog Catalog={catalog} />
                         )
                     })
                 }
@@ -25,4 +25,4 @@ const ListView = (props) => {
         return(<ResultNone />);
     }
 };
-export default ListView;
+export default ListCatalog;
