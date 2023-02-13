@@ -23,13 +23,14 @@ import IconHome from '../Helper/IconHome';
 import ListAccount from '../../Account/Views/ListAccount';
 import IconAccount from '../../Account/Helper/IconAccount';
 import AddAccount from '../../Account/Views/AddAccount';
+import Partner from '../../Partner/Views/Partner';
 /** */
 
 const Home = ({route, navigation }) => {
     const LandingHOME = () => <LandingHome style={{}} data={{}} />;
     const CATALOG = () => <Catalog style={{}} data={{}} />;
     const IMPROVEMENTS = () => <Improvements style={{}} data={{}} />;
-    const MANAGEMENT = () => <Management style={{}} data={{}} />;
+    const MANAGEMENT = () => <Partner style={{}} data={{}} />;
     const SUPPORTTECHNICAL = () => <SupportTechnical style={{}} data={{}} />;
     const LogoDismac = () => <ImgDis style={{width: 30,height: 30}} animation={{border: 5, time: 1000}} />;
     const LISTACCOUNT = () => <ListAccount style={{}} data={{}} />;
@@ -70,6 +71,7 @@ const Home = ({route, navigation }) => {
             })} component={IMPROVEMENTS} />
           <Drawer.Screen name="Management" options={({navigation}) => ({
                 headerTitle: () => (<LogoDismac />),
+                headerRight: () => (<Text style={{fontWeight: "900", fontSize: 20,marginRight: 4, color: "#808080"}}>DISMAC</Text>),
                 drawerLabel: "Mi Partner",
                 drawerIcon: ({focused, size}) => (<IconManagement focus={focused} size={size} />),
                 drawerActiveTintColor : "#EC2427",

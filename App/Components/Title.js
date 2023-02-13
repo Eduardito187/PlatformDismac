@@ -40,7 +40,7 @@ class Title extends React.Component {
     render() {
         return(
             <Animated.View>
-                <Animated.Text style={[this.state.style,{fontSize: this.state.size}]} >{this.state.text}</Animated.Text>
+                <Animated.Text style={[this.state.style,{fontSize: this.state.size}]}>{this.state.text}</Animated.Text>
             </Animated.View>
         );
     }

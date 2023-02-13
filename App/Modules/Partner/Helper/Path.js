@@ -1,0 +1,2 @@
+export const URL_PATH = "https://www.dismac.com.bo/media/magefan_og/Logo_Dismac_SEO.png";
+export const URL_PATH_1 = "https://www.dismac.com.bo/static/version1667355057/frontend/Wagento/Dismac/default/images/logogarantia.png";

@@ -40,7 +40,7 @@ class Circle extends React.Component {
 
     render() {
         return(
-            <Animated.View style={[this.state.style,{width: this.state.width, height: this.state.width, borderRadius: (this.state.size / 2)}]} ></Animated.View>
+            <Animated.View style={[this.state.style,{width: this.state.width, height: this.state.width, borderRadius: (this.state.size / 2)}]}></Animated.View>
         );
     }
 }
