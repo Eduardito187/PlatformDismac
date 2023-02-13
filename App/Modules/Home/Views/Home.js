@@ -24,12 +24,15 @@ import ListAccount from '../../Account/Views/ListAccount';
 import IconAccount from '../../Account/Helper/IconAccount';
 import AddAccount from '../../Account/Views/AddAccount';
 import Partner from '../../Partner/Views/Partner';
+import Scanner from '../../Qr/Views/Scanner';
+import IconScanner from '../../Qr/Helper/IconScanner';
 /** */
 
 const Home = ({route, navigation }) => {
     const LandingHOME = () => <LandingHome style={{}} data={{}} />;
     const CATALOG = () => <Catalog style={{}} data={{}} />;
     const IMPROVEMENTS = () => <Improvements style={{}} data={{}} />;
+    const SCANNER_QR = () => <Scanner style={{}} data={{}} />;
     const MANAGEMENT = () => <Partner style={{}} data={{}} />;
     const SUPPORTTECHNICAL = () => <SupportTechnical style={{}} data={{}} />;
     const LogoDismac = () => <ImgDis style={{width: 30,height: 30}} animation={{border: 5, time: 1000}} />;
@@ -62,6 +65,13 @@ const Home = ({route, navigation }) => {
                 drawerActiveTintColor : "#EC2427",
                 drawerInactiveTintColor : "#808080" 
             })} component={SUPPORTTECHNICAL} />
+          <Drawer.Screen name="ScannerQR" options={({navigation}) => ({
+                headerTitle: () => (<LogoDismac />),
+                drawerLabel: "Scanner de QR",
+                drawerIcon: ({focused, size}) => (<IconScanner focus={focused} size={size} />),
+                drawerActiveTintColor : "#EC2427",
+                drawerInactiveTintColor : "#808080" 
+            })} component={SCANNER_QR} />
           <Drawer.Screen name="Improvements" options={({navigation}) => ({
                 headerTitle: () => (<LogoDismac />),
                 drawerLabel: "Buzón de mejoras",
