@@ -15,11 +15,11 @@ import Campain from './Components/Campain';
 const Partner = (props) => {
     const [TOKEN, SetTOKEN] = React.useState("");
     React.useEffect(() => {
-        setSocket();
+        setToken();
     }, []);
 
 
-    async function setSocket(){
+    async function setToken(){
         SetTOKEN(await GET_TOKEN_SESSION());
     }
 

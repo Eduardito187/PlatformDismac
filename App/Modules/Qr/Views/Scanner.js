@@ -10,7 +10,7 @@ const Scanner = (props) => {
     const [hasPermission, setHasPermission] = React.useState(null);
     const [scanned, setScanned] = React.useState(false);
     React.useEffect(() => {
-        setSocket();
+        setToken();
 
         const getBarCodeScannerPermissions = async () => {
           const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -20,7 +20,7 @@ const Scanner = (props) => {
         getBarCodeScannerPermissions();
     }, []);
 
-    async function setSocket(){
+    async function setToken(){
         SetTOKEN(await GET_TOKEN_SESSION());
     }
 

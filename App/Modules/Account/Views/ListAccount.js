@@ -22,7 +22,7 @@ const ListAccount = (props) => {
     const [data, Setdata] = React.useState(props.data);
     const [accounts, Setaccounts] = React.useState([]);
     React.useEffect(() => {
-        setSocket();
+        setToken();
     }, []);
 
     
@@ -47,7 +47,7 @@ const ListAccount = (props) => {
         }
     }
 
-    async function setSocket(){
+    async function setToken(){
         SetTOKEN(await GET_TOKEN_SESSION());
     }
 

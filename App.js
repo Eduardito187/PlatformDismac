@@ -19,6 +19,7 @@ import AddAccount from './App/Modules/Account/Views/AddAccount';
 import AddCatalog from './App/Modules/Catalog/Views/AddCatalog';
 import RestorePassword from './App/Modules/Login/Views/RestorePassword';
 import RestorePwd from './App/Modules/Login/Views/Account/RestorePwd';
+import ShowCatalog from './App/Modules/Catalog/Views/ShowCatalog';
 /** */
 
 const Stack = createStackNavigator();
@@ -43,6 +44,7 @@ export default function App() {
         <Stack.Screen name="AddCatalog" component={AddCatalog} options={{headerShown: true,title: "Registro de catalogos"}} />
         <Stack.Screen name="RestorePassword" component={RestorePassword} />
         <Stack.Screen name="RestorePWD" component={RestorePwd} />
+        <Stack.Screen name="ShowCatalog" component={ShowCatalog} options={{headerShown: true,title: ""}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

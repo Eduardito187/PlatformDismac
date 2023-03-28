@@ -10,7 +10,7 @@ const Account = (props) => {
     const [account, Setaccount] = React.useState(null); 
     const [TOKEN, SetTOKEN] = React.useState("");
     React.useEffect(() => {
-        setSocket();
+        setToken();
         setLoader(null);
     }, []);
     function setLoader(val = null) {
@@ -22,7 +22,7 @@ const Account = (props) => {
         SetMessage(text);
         SetShowMessage(bool);
     }
-    async function setSocket(){
+    async function setToken(){
         SetTOKEN(await GET_TOKEN_SESSION());
     }
     async function changeStateAccount(bool) {
