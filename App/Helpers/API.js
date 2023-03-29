@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { URL_HOSTING,EXTEND_API,TOKEN_API } from "../../Config";
+import { URL_HOSTING,EXTEND_API,TOKEN_API,EXTEND_API_SHOW } from "../../Config";
 export function URL_API(Controller) {
     return URL_HOSTING+EXTEND_API+Controller;
+}
+export function URL_API_SHOW(Controller, ID) {
+    return URL_HOSTING+EXTEND_API+Controller+EXTEND_API_SHOW+ID;
 }
 export function GET_TOKEN() {
     return TOKEN_API;

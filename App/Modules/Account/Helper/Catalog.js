@@ -18,7 +18,7 @@ const Catalog = (props) => {
         }, 500)
     }
     function selectCatalog(catalog) {
-        navigation.navigate("ShowCatalog", {"Catalog":catalog});
+        navigation.navigate("ShowCatalog", {"Catalog":catalog, "TOKEN":props.TOKEN});
     }
     if (catalog == null) {
         return(<ActivityIndicator key={load} size="large" color="#EC2427" />);
