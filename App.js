@@ -20,6 +20,7 @@ import AddCatalog from './App/Modules/Catalog/Views/AddCatalog';
 import RestorePassword from './App/Modules/Login/Views/RestorePassword';
 import RestorePwd from './App/Modules/Login/Views/Account/RestorePwd';
 import ShowCatalog from './App/Modules/Catalog/Views/ShowCatalog';
+import NewCategory from './App/Modules/Catalog/Views/NewCategory';
 /** */
 
 const Stack = createStackNavigator();
@@ -45,6 +46,7 @@ export default function App() {
         <Stack.Screen name="RestorePassword" component={RestorePassword} />
         <Stack.Screen name="RestorePWD" component={RestorePwd} />
         <Stack.Screen name="ShowCatalog" component={ShowCatalog} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="NewCategory" component={NewCategory} options={{headerShown: true,title: "Nueva categoría"}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

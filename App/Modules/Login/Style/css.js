@@ -43,6 +43,18 @@ export const modalStyle = {
     shadowRadius: 5,
     elevation: 5,
 };
+export const modalInfo = {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    borderRadius: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    shadowColor: '#808080',
+    shadowOffset: {width: 2, height: 6},
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+};
 export const titleStyle = {
     color: 'black',
     fontSize: 20,
@@ -52,7 +64,22 @@ export const bordePlomo = {
     borderColor: '#808080',
     borderWidth: 1
 };
-
+export const Margin_5 = {
+    margin: 5
+};
+export const Margin_Top_5 = {
+    marginTop: 5
+};
+export const Color_Dismac = {
+    color: "EC2427"
+};
+export const Color_White = {
+    color: 'white'
+};
+export const Background_Dismac = {
+    backgroundColor: "#EC2427",
+    color: "white"
+};
 export const BTN = {
     backgroundColor: "#EC2427",
     marginTop: 10
