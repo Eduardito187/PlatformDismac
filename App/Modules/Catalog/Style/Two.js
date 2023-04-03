@@ -11,10 +11,14 @@ export const column = {
 export const label1 = {
     fontWeight: "bold",
     fontSize: 16,
-    color: "black"
+    color: "black",
+    position: "absolute",
+    left:5
 };
 export const label2 = {
     fontWeight: "bold",
     fontSize: 14,
-    color: "#808080"
+    color: "#808080",
+    position: "absolute",
+    right:5
 };

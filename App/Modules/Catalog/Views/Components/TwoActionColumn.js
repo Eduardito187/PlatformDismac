@@ -12,7 +12,7 @@ const TwoActionColumn = (props) => {
                 <Text style={label1}>{props.label1}</Text>
             </View>
             <View style={[{width:props.column2},column]}>
-                <Chip key={Math.random()+'_ACTION_'+Math.random()} style={[Background_Dismac]} onPress={() => props.Action()}>
+                <Chip key={Math.random()+'_ACTION_'+Math.random()} style={[Background_Dismac,label2]} onPress={() => props.Action()}>
                     <Text style={[label2,Color_White]}>{props.label2}</Text>
                 </Chip>
             </View>
