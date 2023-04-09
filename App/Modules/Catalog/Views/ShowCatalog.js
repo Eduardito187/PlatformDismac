@@ -86,13 +86,13 @@ const ShowCatalog = ({route, navigation }) => {
             return (
                 <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
                     <View style={{backgroundColor: '#FFFFFF', padding: 5, borderRadius: 5}}>
-                        <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Catálogo'} label2={CatalogAPI.name} />
-                        <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Código'} label2={CatalogAPI.code} />
-                        <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Productos'} label2={CatalogAPI.products} />
-                        <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Categoías'} label2={'Crear'} Action={() => NewCategory()} />
+                        <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Nombre del catálogo'} label2={CatalogAPI.name} />
+                        <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Código del producto'} label2={CatalogAPI.code} />
+                        <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Cantidad de Productos'} label2={CatalogAPI.products} />
+                        <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Categorías'} label2={'Crear'} Action={() => NewCategory()} />
                         <DataTable>
                             <DataTable.Header>
-                                <DataTable.Title>Categoría</DataTable.Title>
+                                <DataTable.Title>Nombre de categorías</DataTable.Title>
                                 <DataTable.Title numeric>Código</DataTable.Title>
                             </DataTable.Header>
                             {

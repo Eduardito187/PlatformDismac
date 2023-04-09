@@ -6,6 +6,9 @@ export function URL_API(Controller) {
 export function URL_API_SHOW(Controller, ID) {
     return URL_HOSTING+EXTEND_API+Controller+EXTEND_API_SHOW+ID;
 }
+export function URL_API_GET(Controller) {
+    return URL_HOSTING+EXTEND_API+Controller;
+}
 export function GET_TOKEN() {
     return TOKEN_API;
 }
@@ -154,5 +157,55 @@ export async function GET_CODE_GENERATE_EMAIL() {
         }
     } catch (error) {
         return null;
+    }
+}
+export async function SAVE_STORES(STORES) {
+    try {
+        await AsyncStorage.setItem(
+          '@STORES',
+          JSON.stringify(STORES)
+        );
+        for (let index = 0; index < STORES.length; index++) {
+            STORES[index]["check"] = false;
+        }
+        SAVE_STORES_CHECK(STORES);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GET_STORES() {
+    try {
+        const value = await AsyncStorage.getItem('@STORES');
+        if (value !== null) {
+            return JSON.parse(value);
+        }else{
+            return [];
+        }
+    } catch (error) {
+        return [];
+    }
+}
+export async function SAVE_STORES_CHECK(STORES) {
+    try {
+        await AsyncStorage.setItem(
+          '@STORES_CHECK',
+          JSON.stringify(STORES)
+        );
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GET_STORES_CHECK() {
+    try {
+        const value = await AsyncStorage.getItem('@STORES_CHECK');
+        if (value !== null) {
+            return JSON.parse(value);
+        }else{
+            return [];
+        }
+    } catch (error) {
+        return [];
     }
 }

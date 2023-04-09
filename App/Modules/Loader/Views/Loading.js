@@ -3,8 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View} from 'react-native';
 import { PageLoading } from '../../../Themes/Dismac/ThemeDismac';
 import Constants from "expo-constants";
-import { GET_TOKEN_SESSION } from '../../../Helpers/API';
+import { GET_TOKEN_SESSION, URL_API_GET, GET_HEADER_TOKEN, SAVE_STORES } from '../../../Helpers/API';
 import { ResetNavigation } from '../../../Helpers/Nav';
+import axios from 'axios';
 
 /** Components */
 import ProgressDismac from '../../../Components/ProgressDismac';
@@ -13,9 +14,24 @@ import ImgDis from '../../../Components/ImgDis';
 /** */
 
 const Loading = ({route, navigation }) => {
+  const [TOKEN, SetTOKEN] = React.useState(null);
   React.useEffect(() => {
-    //
+    setToken();
   }, []);
+  async function setToken(){
+    let token = await GET_TOKEN_SESSION();
+    SetTOKEN(token);
+    getStores(token);
+  }
+
+  function getStores(token){
+    axios.get(URL_API_GET("store"),GET_HEADER_TOKEN(token)).then(res => {
+      SAVE_STORES(res.data);
+    }).catch(err => {
+      console.warn("ERROR AL OBTENER LAS STORES");
+    });
+  }
+
   async function loadInterval(res) {
     if (res) {
       if (await GET_TOKEN_SESSION() != null) {

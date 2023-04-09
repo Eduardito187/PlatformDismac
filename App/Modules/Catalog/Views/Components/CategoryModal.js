@@ -19,14 +19,14 @@ const CategoryModal = (props) => {
                     <View style={{ flex: 1,backgroundColor: 'rgba(0,0,0,.5)'}} /></TouchableWithoutFeedback>} onSwipeComplete={() => props.closeModal()}>
                     <View style={[modalContainerStyle]}>
                         <View style={[modalInfo,bordePlomo]}>
-                            <TwoColumn width={widthView} column1={widthView*.65} column2={widthView*.35} label1={'Categoría'} label2={props.category.name} />
-                            <TwoColumn width={widthView} column1={widthView*.65} column2={widthView*.35} label1={'Código'} label2={props.category.code} />
+                            <TwoColumn width={widthView} column1={widthView*.65} column2={widthView*.35} label1={'Nombre de categoría'} label2={props.category.name} />
+                            <TwoColumn width={widthView} column1={widthView*.65} column2={widthView*.35} label1={'Código de categoría'} label2={props.category.code} />
                             <TwoColumn width={widthView} column1={widthView*.65} column2={widthView*.35} label1={'Estado'} label2={props.category.status == 1 ? "Activado" : "Desactivado"} />
-                            <TwoColumn width={widthView} column1={widthView*.65} column2={widthView*.35} label1={'Productos'} label2={props.category.products} />
+                            <TwoColumn width={widthView} column1={widthView*.80} column2={widthView*.20} label1={'Cantidad de productos'} label2={props.category.products} />
                             <DataTable>
                                 <DataTable.Header>
                                     <DataTable.Title>Ciudad</DataTable.Title>
-                                    <DataTable.Title numeric>Productos</DataTable.Title>
+                                    <DataTable.Title numeric>Cantidad de productos</DataTable.Title>
                                 </DataTable.Header>
                                 {
                                     props.category.stores.map((store) => {

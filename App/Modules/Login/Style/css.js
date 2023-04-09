@@ -70,8 +70,9 @@ export const Margin_5 = {
 export const Margin_Top_5 = {
     marginTop: 5
 };
+export const RED_DIS = "#EC2427";
 export const Color_Dismac = {
-    color: "EC2427"
+    color: "#EC2427"
 };
 export const Color_White = {
     color: 'white'
