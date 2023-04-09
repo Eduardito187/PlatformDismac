@@ -70,6 +70,11 @@ export const Margin_5 = {
 export const Margin_Top_5 = {
     marginTop: 5
 };
+export const ROW_SECTION = {
+    backgroundColor: '#FFFFFF',
+    padding: 5,
+    borderRadius: 5
+};
 export const RED_DIS = "#EC2427";
 export const Color_Dismac = {
     color: "#EC2427"
