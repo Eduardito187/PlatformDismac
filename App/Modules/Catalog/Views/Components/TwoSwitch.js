@@ -8,7 +8,9 @@ import { RED_DIS } from '../../../Login/Style/css';
 const TwoSwitch = (props) => {
     const [isSwitchOn, setIsSwitchOn] = React.useState(false);
     function chnageSwitch() {
-        setIsSwitchOn(!isSwitchOn);
+        let state = !isSwitchOn;
+        setIsSwitchOn(state);
+        props.Action(state);
     }
     return(
         <View style={[{width:props.width},displayFlex]}>

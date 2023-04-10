@@ -3,9 +3,10 @@ import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
-import { Chip, List, TextInput } from 'react-native-paper';
-import { RED_DIS, Margin_Top_5, ROW_SECTION } from '../../Login/Style/css';
-import { CREATE_BODY_SEARCH_ACCOUN, URL_API, URL_API_SHOW, GET_HEADER_TOKEN } from '../../../Helpers/API';
+import { Snackbar, List, TextInput, Button } from 'react-native-paper';
+import { Margin_Bottom_50, Margin_Top_5, ROW_SECTION } from '../../Login/Style/css';
+import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN } from '../../../Helpers/API';
+import { style } from '../../Login/Style/style';
 import TwoSelectSku from './Components/TwoSelectSku';
 
 /** Components */
@@ -20,6 +21,8 @@ const NewCategory = ({route, navigation }) => {
     const [Message, SetMessage] = React.useState("");
     const [ShowMessage, SetShowMessage] = React.useState(false);
     const [Status, SetStatus] = React.useState(false);
+    const [Visible, SetVisible] = React.useState(false);
+    const [Filtros, SetFiltros] = React.useState(false);
     const [Name, SetName] = React.useState("");
     const [IdPos, SetIdPos] = React.useState("");
     const [Url, SetUrl] = React.useState("");
@@ -35,8 +38,13 @@ const NewCategory = ({route, navigation }) => {
     const [Stores, SetStores] = React.useState(false);
     const [Products, SetProducts] = React.useState([]);
     const [Product, SetProduct] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
+    const [disable, setDisable] = React.useState(false);
+    const [ProductId, SetProductId] = React.useState([]);
+    const [StoreSelect, SetStoreSelect] = React.useState([]);
+    const [register, setRegister] = React.useState(false);
     React.useEffect(() => {
-        //
+        console.log(route.params);
     }, []);
 
     const ToogleMetadata = () => SetMetadata(!Metadata);
@@ -45,26 +53,78 @@ const NewCategory = ({route, navigation }) => {
     const ToogleStores = () => SetStores(!Stores);
     const ToogleProduct = () => SetProduct(!Product);
 
-    function thenSearch(response, responseText){
-        if (response === false) {
-            SetMessage(responseText);
-            SetShowMessage(true);
-        }else{
-            //
-        }
+    function clickButton(bool){
+        setLoading(bool);
+        setDisable(bool);
     }
 
-    function getCategory(){
-        axios.post(URL_API_SHOW("partner/inventory/catalog", Catalog.id),GET_HEADER_TOKEN(TOKEN)).then(res => {
-            if(res.data != null){
-                thenSearch(res.data.response, res.data.responseText);
+    function validateSku(query){
+        axios.post(URL_API("partner/inventory/Validate"),query,GET_HEADER_TOKEN(TOKEN)).then(res => {
+            let Response = res.data.response;
+            let ResponseText = res.data.responseText;
+            if (Response.length == 0) {
+                showMessage(ResponseText);
             }else{
-                thenSearch(false, "Algo salio mal.");
+                let id_Products = ProductId;
+                let products = Products;
+                for (let index = 0; index < Response.length; index++) {
+                    if (!products.includes(Response[index]["id"])) {
+                        id_Products.push(Response[index]["id"]);
+                        products.push(Response[index]);
+                    }
+                }
+                SetProductId(id_Products);
+                SetProducts(products);
+                showMessage(ResponseText);
             }
-            SetStatus(true);
         }).catch(err => {
-            thenSearch(false, err);
+            //
         });
+    }
+
+    function posRegister(){
+        route.params.onGoBack();
+        navigation.goBack();
+    }
+
+    function sendRegister(query){
+        axios.post(URL_API("catalog/inventory/category"),query,GET_HEADER_TOKEN(TOKEN)).then(res => {
+            let Response = res.data.response;
+            let ResponseText = res.data.responseText;
+            setRegister(Response);
+            showMessage(ResponseText);
+        }).catch(err => {
+            //
+        });
+    }
+
+    function registerCategory() {
+        clickButton(true);
+        let query = {
+            "id_catalog": route.params.id_catalog,
+            "inheritance": route.params.inheritance,
+            "name": Name,
+            "estado": Status,
+            "visible": Visible,
+            "filtros": Filtros,
+            "sub_category_pos": route.params.inheritance == null ? false : true,
+            "id_pos": IdPos,
+            "url": Url,
+            "productos": ProductId,
+            "stores": StoreSelect,
+            "landing": {
+                "title": Titulo,
+                "code": Codigo,
+                "body": Cuerpo
+            },
+            "metadata": {
+                "titulo": TituloMeta,
+                "descripcion": DescripcionMeta,
+                "metadata": ClavesMeta
+            },
+            "custom": []
+        };
+        sendRegister(query);
     }
 
     function selectProduct(product){
@@ -72,23 +132,36 @@ const NewCategory = ({route, navigation }) => {
     }
 
     function addSkuCategory(sku){
-        console.log(sku);
+        let query = {
+            "sku" : sku.split(",")
+        };
+        validateSku(query);
     }
 
     function SelectedFile(){
         
     }
+
+    function showMessage(msg){
+        SetMessage(msg);
+        SetShowMessage(true);
+    }
+
+    function hideMessaje(){
+        SetMessage("");
+        SetShowMessage(false);
+    }
     
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
             <View style={ROW_SECTION}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Estado'} Action={() => NewCategory()} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Estado'} Action={(a) => SetStatus(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Visible en menu'} Action={() => NewCategory()} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Visible en menu'} Action={(a) => SetVisible(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Filtros visibles'} Action={() => NewCategory()} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Filtros visibles'} Action={(a) => SetFiltros(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
                 <TextInput mode='outlined' placeholder="Nombre de la categoría" selectionColor="rgba(0, 0, 0, 0.5)" underlineColor="#EC2427" activeUnderlineColor="#EC2427" activeOutlineColor="#EC2427" label="Nombre de la categoría" value={Name} onChangeText={text => SetName(text)} />
@@ -108,7 +181,7 @@ const NewCategory = ({route, navigation }) => {
             <View style={[ROW_SECTION, Margin_Top_5]}>
                 <List.Accordion title="Stores" expanded={Stores} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleStores}>
                     <View style={ROW_SECTION}>
-                        <SelectedStore />
+                        <SelectedStore Action={(a) => SetStoreSelect(a)} />
                     </View>
                 </List.Accordion>
             </View>
@@ -141,6 +214,19 @@ const NewCategory = ({route, navigation }) => {
             <View style={[ROW_SECTION, Margin_Top_5]}>
                 <List.Accordion title="Custom Attributes" expanded={Custom} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleCustom}>
                 </List.Accordion>
+            </View>
+            <View style={[ROW_SECTION, Margin_Top_5, Margin_Bottom_50]}>
+                <View style={style.containButton}>
+                    <Button icon="plus" loading={loading} disabled={disable} style={style.fondoRojo} mode="contained" onPress={() => registerCategory()}>
+                        <Text style={style.FontButton}>Registrar categoría</Text>
+                    </Button>
+                </View>
+            </View>
+            
+            <View style={style.FloatSnackScroll}>    
+                <Snackbar visible={ShowMessage} onDismiss={() => hideMessaje()} action={{label: "Cerrar", onPress: register ? () => posRegister() : () => hideMessaje()}}>
+                    {Message}
+                </Snackbar>
             </View>
         </ScrollView>
     );

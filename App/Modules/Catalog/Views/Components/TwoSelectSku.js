@@ -13,8 +13,10 @@ const TwoSelectSku = (props) => {
     }
 
     function validateSku(){
-        props.Action(Sku);
-        SetSku("");
+        if (Sku.length > 2) {
+            props.Action(Sku);
+            SetSku("");
+        }
     }
 
     return(

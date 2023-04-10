@@ -1,5 +1,5 @@
 import React from 'react';  
-import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { View, ScrollView, LogBox, ActivityIndicator } from 'react-native';
 import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
@@ -13,6 +13,10 @@ import ResultNone from '../../Account/Helper/ResultNone';
 import { Background_Dismac, Color_White, Margin_5 } from '../../Login/Style/css';
 import TwoColumn from './Components/TwoColumn';
 import TwoActionColumn from './Components/TwoActionColumn';
+
+LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+]);
 
 const ShowCatalog = ({route, navigation }) => {
     const widthView = windowWidth-20;
@@ -44,7 +48,7 @@ const ShowCatalog = ({route, navigation }) => {
     }
 
     function NewCategory(){
-        navigation.navigate("NewCategory", {"id_catalog":CatalogAPI.id, "TOKEN":TOKEN,onGoBack: onGoBackAction()});
+        navigation.navigate("NewCategory", {"id_catalog":CatalogAPI.id, "TOKEN":TOKEN, "onGoBack": onGoBackAction, "inheritance": null});
     }
 
     function onGoBackAction(){

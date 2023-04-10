@@ -11,7 +11,6 @@ const SelectedStore = (props) => {
         GetStores();
     }, []);
     function gestionStore(id) {
-        
         let stores = STORES.map((store) => {
             if (id === store.id) {
                 store.check = !store.check;
@@ -19,6 +18,16 @@ const SelectedStore = (props) => {
             return store;
         });
         SETSTORES(stores);
+        emitStores(stores);
+    }
+    function emitStores(stores){
+        let Stores = [];
+        for (let index = 0; index < stores.length; index++) {
+            if (stores[index]["check"]) {
+                Stores.push(stores[index]["id"]);
+            }
+        }
+        props.Action(Stores);
     }
     async function GetStores(){
         SETSTORES(await GET_STORES_CHECK());

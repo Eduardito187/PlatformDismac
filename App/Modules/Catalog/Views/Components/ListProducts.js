@@ -19,8 +19,8 @@ const ListProducts = (props) => {
                 props.Products.map((product) => {
                     return (
                         <DataTable.Row key={Math.random()+'_PRODUCT_'+Math.random()} onPress={() => showInfoProduct(product)}>
-                            <DataTable.Cell>156325</DataTable.Cell>
-                            <DataTable.Cell numeric><ActivityIndicator color={RED_DIS} /></DataTable.Cell>
+                            <DataTable.Cell>{product.sku}</DataTable.Cell>
+                            <DataTable.Cell numeric>{product.stock}</DataTable.Cell>
                         </DataTable.Row>
                     )
                 })

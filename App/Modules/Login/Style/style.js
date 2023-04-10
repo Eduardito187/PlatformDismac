@@ -102,6 +102,13 @@ export const style = {
         bottom: 0,
         left: 0,
         right: 0
+    },
+    FloatSnackScroll : {
+        position: "absolute",
+        zIndex: 100,
+        bottom: 40,
+        left: 0,
+        right: 0
     }
 }
 export const SUCCESS = {

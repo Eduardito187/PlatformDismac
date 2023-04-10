@@ -75,6 +75,9 @@ export const ROW_SECTION = {
     padding: 5,
     borderRadius: 5
 };
+export const Margin_Bottom_50 = {
+    marginBottom: 50
+}
 export const RED_DIS = "#EC2427";
 export const Color_Dismac = {
     color: "#EC2427"
