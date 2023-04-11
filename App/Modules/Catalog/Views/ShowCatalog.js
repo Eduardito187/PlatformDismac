@@ -111,7 +111,7 @@ const ShowCatalog = ({route, navigation }) => {
                             }
                         </DataTable>
                     </View>
-                    <CategoryModal closeModal={() => closeModal()} isModalVisible={isModalVisible} category={category} /> 
+                    <CategoryModal closeModal={() => closeModal()} isModalVisible={isModalVisible} navigation={navigation} TOKEN={TOKEN} category={category} idCatalog={CatalogAPI.id} /> 
                 </ScrollView>
             );
         }

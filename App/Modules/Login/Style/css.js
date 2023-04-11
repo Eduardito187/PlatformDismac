@@ -78,6 +78,39 @@ export const ROW_SECTION = {
 export const Margin_Bottom_50 = {
     marginBottom: 50
 }
+export const OPACITY = {
+    opacity:0.4
+};
+export const SECTION_CLOSE = {
+    position: 'absolute',
+    top: 10,
+    right: 5
+};
+export const NAME = {
+    fontSize: 15,
+    fontWeight:"bold",
+    color: "white"
+};
+export const MAIL = {
+    color: "#808080"
+};
+export const IMAGE_PROFILE = {
+    width:70,
+    height:70,
+    borderRadius:35,
+    borderWidth:2,
+    borderColor: "white"
+};
+export const SECTION_DRAWER = {
+    justifyContent:"space-between",
+    alignItems:"center",
+    padding:20,
+    marginTop: -10,
+    marginBottom:10,
+    backgroundColor:"rgb(0,0,0)",
+    borderBottomWidth:2,
+    borderColor: "red"
+};
 export const RED_DIS = "#EC2427";
 export const PLO_DIS = "#808080";
 export const Color_Dismac = {

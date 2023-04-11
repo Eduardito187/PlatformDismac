@@ -10,6 +10,15 @@ import TwoColumn from './TwoColumn';
 
 const CategoryModal = (props) => {
     const widthView = windowWidth-80;
+
+    function ShowCategory(id){
+        props.closeModal();
+        props.navigation.push("ShowCategory", {"id_catalog":props.idCatalog,"id_category":id,"TOKEN":props.TOKEN,"onGoBack": onGoBackAction,"inheritance": null});
+    }
+
+    function onGoBackAction(){
+    }
+
     if (props.category == null) {
         return(null);
     }else{
@@ -39,7 +48,7 @@ const CategoryModal = (props) => {
                                     })
                                 }
                             </DataTable>
-                            <Button mode="contained" style={[Background_Dismac, Margin_Top_5]} onPress={() => console.log('Pressed')}>
+                            <Button mode="contained" style={[Background_Dismac, Margin_Top_5]} onPress={() => ShowCategory(props.category.id)}>
                                 Ver mas
                             </Button>
                         </View>

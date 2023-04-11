@@ -29,7 +29,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar barStyle='dark-content' />
+      <StatusBar style="auto" />
       <Stack.Navigator initialRouteName="Loading" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="Inicio" component={Home} />

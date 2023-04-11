@@ -3,9 +3,9 @@ import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
-import { Snackbar, List, TextInput, Button, IconButton } from 'react-native-paper';
-import { Margin_Bottom_50, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
-import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN, URL_API_SHOW } from '../../../Helpers/API';
+import { Snackbar, List, TextInput, Button } from 'react-native-paper';
+import { Margin_Bottom_50, Margin_Top_5, ROW_SECTION } from '../../Login/Style/css';
+import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN } from '../../../Helpers/API';
 import { style } from '../../Login/Style/style';
 import TwoSelectSku from './Components/TwoSelectSku';
 
@@ -13,13 +13,11 @@ import TwoSelectSku from './Components/TwoSelectSku';
 import SelectedStore from './Components/SelectedStore';
 import TwoSwitch from './Components/TwoSwitch';
 import ListProducts from './Components/ListProducts';
-import { Navigation } from '../../../Helpers/Nav';
 
-const ShowCategory = ({route, navigation }) => {
-    const { TOKEN, id_catalog, id_category, inheritance} = route.params;
+const EditCategory = ({route, navigation }) => {
     const widthView = windowWidth-20;
+    const [TOKEN, SetTOKEN] = React.useState(route.params.TOKEN);
     const [Catalog, SetCatalog] = React.useState({});
-    const [Category, SetCategory] = React.useState({});
     const [Message, SetMessage] = React.useState("");
     const [ShowMessage, SetShowMessage] = React.useState(false);
     const [Status, SetStatus] = React.useState(false);
@@ -46,10 +44,7 @@ const ShowCategory = ({route, navigation }) => {
     const [StoreSelect, SetStoreSelect] = React.useState([]);
     const [register, setRegister] = React.useState(false);
     React.useEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (<ActivityIndicator color={RED_DIS} />)
-        });
-        getCategory();
+        console.log(route.params);
     }, []);
 
     const ToogleMetadata = () => SetMetadata(!Metadata);
@@ -92,28 +87,44 @@ const ShowCategory = ({route, navigation }) => {
         navigation.goBack();
     }
 
-    function setData(Response){
-        SetStatus(Response.status);
-        SetVisible(Response.in_menu);
-        SetFiltros(Response.filtros);
-    }
-
-    function getCategory(){
-        axios.get(URL_API_SHOW("catalog/inventory/category", id_category+"/"+id_catalog),GET_HEADER_TOKEN(TOKEN)).then(res => {
-            if (res.data != null) {
-                let Response = res.data.response;
-                let ResponseText = res.data.responseText;
-                SetCategory(Response);
-                showMessage(ResponseText);
-                navigation.setOptions({
-                    title: Response.name,
-                    headerRight: () => (<IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddCatalog", {}, navigation)} />)
-                });
-                setData(Response);
-            }
+    function sendRegister(query){
+        axios.post(URL_API("catalog/inventory/category"),query,GET_HEADER_TOKEN(TOKEN)).then(res => {
+            let Response = res.data.response;
+            let ResponseText = res.data.responseText;
+            setRegister(Response);
+            showMessage(ResponseText);
         }).catch(err => {
             //
         });
+    }
+
+    function registerCategory() {
+        clickButton(true);
+        let query = {
+            "id_catalog": route.params.id_catalog,
+            "inheritance": route.params.inheritance,
+            "name": Name,
+            "estado": Status,
+            "visible": Visible,
+            "filtros": Filtros,
+            "sub_category_pos": route.params.inheritance == null ? false : true,
+            "id_pos": IdPos,
+            "url": Url,
+            "productos": ProductId,
+            "stores": StoreSelect,
+            "landing": {
+                "title": Titulo,
+                "code": Codigo,
+                "body": Cuerpo
+            },
+            "metadata": {
+                "titulo": TituloMeta,
+                "descripcion": DescripcionMeta,
+                "metadata": ClavesMeta
+            },
+            "custom": []
+        };
+        sendRegister(query);
     }
 
     function selectProduct(product){
@@ -200,9 +211,16 @@ const ShowCategory = ({route, navigation }) => {
                     </View>
                 </List.Accordion>
             </View>
-            <View style={[ROW_SECTION, Margin_Top_5, Margin_Bottom_50]}>
+            <View style={[ROW_SECTION, Margin_Top_5]}>
                 <List.Accordion title="Custom Attributes" expanded={Custom} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleCustom}>
                 </List.Accordion>
+            </View>
+            <View style={[ROW_SECTION, Margin_Top_5, Margin_Bottom_50]}>
+                <View style={style.containButton}>
+                    <Button icon="plus" loading={loading} disabled={disable} style={style.fondoRojo} mode="contained" onPress={() => registerCategory()}>
+                        <Text style={style.FontButton}>Registrar categoría</Text>
+                    </Button>
+                </View>
             </View>
             
             <View style={style.FloatSnackScroll}>    
@@ -214,4 +232,4 @@ const ShowCategory = ({route, navigation }) => {
     );
 };
 
-export default ShowCategory;
+export default EditCategory;
