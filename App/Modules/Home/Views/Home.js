@@ -7,6 +7,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
 import { Navigation } from '../../../Helpers/Nav';
 import { GET_TOKEN_SESSION } from '../../../Helpers/API';
+import { RED_DIS, PLO_DIS } from '../../Login/Style/css';
+import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas } from '../../../Router/Route';
 const Drawer = createDrawerNavigator();
 /** Components */
 import LandingHome from './LandingHome';
@@ -48,58 +50,44 @@ const Home = ({route, navigation }) => {
   }
   return (
       <Drawer.Navigator useLegacyImplementation drawerContent={(props) => <CustomDrawer {...props} TOKEN={TOKEN} />}>
-        <Drawer.Screen name="LandingHome" options={({navigation}) => ({
+        <Drawer.Screen name={Text_LandingHome} options={({navigation}) => ({
               headerTitle: () => (<LogoDismac />),
               drawerLabel: "Inicio",
               drawerIcon: ({focused, size}) => (<IconHome focus={focused} size={size} />),
-              drawerActiveTintColor : "#EC2427",
-              drawerInactiveTintColor : "#808080" 
-          })} component={LandingHOME} />
-        <Drawer.Screen name="Catalog" options={({navigation}) => ({
+              drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={LandingHOME} />
+        <Drawer.Screen name={Text_Catalog} options={({navigation}) => ({
               headerTitle: () => (<LogoDismac />),
-              headerRight: () => (<IconButton icon="book" iconColor={"#EC2427"} size={30} onPress={() => Navigation("AddCatalog", {}, navigation)} />),
+              headerRight: () => (<IconButton icon="book" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddCatalog", {}, navigation)} />),
               drawerLabel: "Catalogo",
               drawerIcon: ({focused, size}) => (<IconCatalog focus={focused} size={size} />),
-              drawerActiveTintColor : "#EC2427",
-              drawerInactiveTintColor : "#808080" 
-          })} component={CATALOG} />
-        <Drawer.Screen name="SupportTechnical" options={({navigation}) => ({
+              drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={CATALOG} />
+        <Drawer.Screen name={Text_SupportTechnical} options={({navigation}) => ({
               headerTitle: () => (<LogoDismac />),
               drawerLabel: "Soport tecnico",
               drawerIcon: ({focused, size}) => (<IconSupport focus={focused} size={size} />),
-              drawerActiveTintColor : "#EC2427",
-              drawerInactiveTintColor : "#808080" 
-          })} component={SUPPORTTECHNICAL} />
-        <Drawer.Screen name="ScannerQR" options={({navigation}) => ({
+              drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={SUPPORTTECHNICAL} />
+        <Drawer.Screen name={Text_ScannerQR} options={({navigation}) => ({
               headerTitle: () => (<LogoDismac />),
               drawerLabel: "Scanner de QR",
               drawerIcon: ({focused, size}) => (<IconScanner focus={focused} size={size} />),
-              drawerActiveTintColor : "#EC2427",
-              drawerInactiveTintColor : "#808080" 
-          })} component={SCANNER_QR} />
-        <Drawer.Screen name="Improvements" options={({navigation}) => ({
+              drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={SCANNER_QR} />
+        <Drawer.Screen name={Text_Improvements} options={({navigation}) => ({
               headerTitle: () => (<LogoDismac />),
               drawerLabel: "Buzón de mejoras",
               drawerIcon: ({focused, size}) => (<IconImprovements focus={focused} size={size} />),
-              drawerActiveTintColor : "#EC2427",
-              drawerInactiveTintColor : "#808080" 
-          })} component={IMPROVEMENTS} />
-        <Drawer.Screen name="Management" options={({navigation}) => ({
+              drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={IMPROVEMENTS} />
+        <Drawer.Screen name={Text_Management} options={({navigation}) => ({
               headerTitle: () => (<LogoDismac />),
-              headerRight: () => (<Text style={{fontWeight: "900", fontSize: 20,marginRight: 4, color: "#808080"}}>DISMAC</Text>),
+              headerRight: () => (<Text style={{fontWeight: "900", fontSize: 20,marginRight: 4, color: PLO_DIS}}>DISMAC</Text>),
               drawerLabel: "Mi Partner",
               drawerIcon: ({focused, size}) => (<IconManagement focus={focused} size={size} />),
-              drawerActiveTintColor : "#EC2427",
-              drawerInactiveTintColor : "#808080" 
-          })} component={MANAGEMENT} />
-        <Drawer.Screen name="Cuentas" options={({navigation}) => ({
+              drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={MANAGEMENT} />
+        <Drawer.Screen name={Text_Cuentas} options={({navigation}) => ({
               headerTitle: () => (<LogoDismac />),
-              headerRight: () => (<IconButton icon="account-plus" iconColor={"#EC2427"} size={30} onPress={() => Navigation("AddAccount", {}, navigation)} />),
+              headerRight: () => (<IconButton icon="account-plus" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddAccount", {}, navigation)} />),
               drawerLabel: "Cuentas",
               drawerIcon: ({focused, size}) => (<IconAccount focus={focused} size={size} />),
-              drawerActiveTintColor : "#EC2427",
-              drawerInactiveTintColor : "#808080" 
-          })} component={LISTACCOUNT} />
+              drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={LISTACCOUNT} />
       </Drawer.Navigator>
   );
 };

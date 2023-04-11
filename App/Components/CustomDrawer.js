@@ -27,6 +27,7 @@ const CustomDrawer = (props) => {
 
     function getAccount(){
         axios.get(URL_API("currentAccount"),GET_HEADER_TOKEN(props.TOKEN)).then(res => {
+            console.warn(res.data);
             if(res.data != null){
                 thenSearch(res.data.response, res.data.responseText);
             }else{

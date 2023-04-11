@@ -79,6 +79,7 @@ export const Margin_Bottom_50 = {
     marginBottom: 50
 }
 export const RED_DIS = "#EC2427";
+export const PLO_DIS = "#808080";
 export const Color_Dismac = {
     color: "#EC2427"
 };
