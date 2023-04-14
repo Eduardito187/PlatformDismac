@@ -155,13 +155,13 @@ const EditCategory = ({route, navigation }) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
             <View style={ROW_SECTION}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Estado'} Action={(a) => SetStatus(a)} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Status} label1={'Estado'} Action={(a) => SetStatus(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Visible en menu'} Action={(a) => SetVisible(a)} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Visible} label1={'Visible en menu'} Action={(a) => SetVisible(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Filtros visibles'} Action={(a) => SetFiltros(a)} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Filtros} label1={'Filtros visibles'} Action={(a) => SetFiltros(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
                 <TextInput mode='outlined' placeholder="Nombre de la categoría" selectionColor="rgba(0, 0, 0, 0.5)" underlineColor="#EC2427" activeUnderlineColor="#EC2427" activeOutlineColor="#EC2427" label="Nombre de la categoría" value={Name} onChangeText={text => SetName(text)} />

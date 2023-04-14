@@ -58,6 +58,20 @@ const NewCategory = ({route, navigation }) => {
         setDisable(bool);
     }
 
+    function SetTableProduct(Response, ResponseText){
+        let id_Products = ProductId;
+        let products = Products;
+        for (let index = 0; index < Response.length; index++) {
+            if (!products.includes(Response[index]["id"])) {
+                id_Products.push(Response[index]["id"]);
+                products.push(Response[index]);
+            }
+        }
+        SetProductId(id_Products);
+        SetProducts(products);
+        showMessage(ResponseText);
+    }
+
     function validateSku(query){
         axios.post(URL_API("partner/inventory/Validate"),query,GET_HEADER_TOKEN(TOKEN)).then(res => {
             let Response = res.data.response;
@@ -65,17 +79,7 @@ const NewCategory = ({route, navigation }) => {
             if (Response.length == 0) {
                 showMessage(ResponseText);
             }else{
-                let id_Products = ProductId;
-                let products = Products;
-                for (let index = 0; index < Response.length; index++) {
-                    if (!products.includes(Response[index]["id"])) {
-                        id_Products.push(Response[index]["id"]);
-                        products.push(Response[index]);
-                    }
-                }
-                SetProductId(id_Products);
-                SetProducts(products);
-                showMessage(ResponseText);
+                SetTableProduct(Response, ResponseText);
             }
         }).catch(err => {
             //
@@ -155,13 +159,13 @@ const NewCategory = ({route, navigation }) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
             <View style={ROW_SECTION}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Estado'} Action={(a) => SetStatus(a)} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Status} label1={'Estado'} Action={(a) => SetStatus(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Visible en menu'} Action={(a) => SetVisible(a)} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Visible} label1={'Visible en menu'} Action={(a) => SetVisible(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
-                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Filtros visibles'} Action={(a) => SetFiltros(a)} />
+                <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Filtros} label1={'Filtros visibles'} Action={(a) => SetFiltros(a)} />
             </View>
             <View style={[ROW_SECTION, Margin_Top_5]}>
                 <TextInput mode='outlined' placeholder="Nombre de la categoría" selectionColor="rgba(0, 0, 0, 0.5)" underlineColor="#EC2427" activeUnderlineColor="#EC2427" activeOutlineColor="#EC2427" label="Nombre de la categoría" value={Name} onChangeText={text => SetName(text)} />

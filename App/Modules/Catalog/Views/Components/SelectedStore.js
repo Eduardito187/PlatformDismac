@@ -8,7 +8,7 @@ import { GET_STORES_CHECK } from '../../../../Helpers/API';
 const SelectedStore = (props) => {
     const [STORES, SETSTORES] = React.useState([]);
     React.useEffect(() => {
-        GetStores();
+        GetStores(props.value);
     }, []);
     function gestionStore(id) {
         let stores = STORES.map((store) => {
@@ -29,8 +29,25 @@ const SelectedStore = (props) => {
         }
         props.Action(Stores);
     }
-    async function GetStores(){
-        SETSTORES(await GET_STORES_CHECK());
+    function ifExistStore(value, id){
+        for (let index = 0; index < value.length; index++) {
+            if (value[index]["id"] == id) {
+                if (value[index]["products"] > 0) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+    async function GetStores(value){
+        let store_array = await GET_STORES_CHECK();
+        let stores = store_array.map((store) => {
+            store.check = ifExistStore(value, store.id);
+            return store;
+        });
+        SETSTORES(stores);
     }
     return(
         <View>

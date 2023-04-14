@@ -7,6 +7,9 @@ import { RED_DIS } from '../../../Login/Style/css';
 
 const TwoSwitch = (props) => {
     const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+    React.useEffect(() => {
+        setIsSwitchOn(props.value);
+    }, []);
     function chnageSwitch() {
         let state = !isSwitchOn;
         setIsSwitchOn(state);
