@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import axios from 'axios';
 import { IconButton } from 'react-native-paper';
 import { Navigation } from '../../../Helpers/Nav';
-import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN } from '../../../Helpers/API';
+import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION } from '../../../Helpers/API';
 import { RED_DIS, PLO_DIS } from '../../Login/Style/css';
 import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas } from '../../../Router/Route';
 const Drawer = createDrawerNavigator();
@@ -51,12 +51,17 @@ const Home = ({route, navigation }) => {
   React.useEffect(() => {
     setToken();
   }, []);
+  
+  async function setSession(data){
+    SetCurrentAccount(data);
+    await SAVE_CURRENT_SESSION(data);
+    SetLoad(true);
+  }
 
   function getAccount(token){
     axios.get(URL_API("currentAccount"),GET_HEADER_TOKEN(token)).then(res => {
       if(res.data != null){
-        SetCurrentAccount(res.data.response);
-        SetLoad(true);
+        setSession(res.data.response);
       }else{
         SetLoad(null);
       }
@@ -85,7 +90,7 @@ const Home = ({route, navigation }) => {
         <Drawer.Screen name={Text_SupportTechnical} options={({navigation}) => ({ headerTitle: () => (<LogoDismac />), drawerLabel: "Sopórte tecnico", drawerIcon: ({focused, size}) => (<IconSupport focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={SUPPORTTECHNICAL} />
         <Drawer.Screen name={Text_ScannerQR} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Scanner QR", drawerIcon: ({focused, size}) => (<IconScanner focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={SCANNER_QR} />
         <Drawer.Screen name={Text_Improvements} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Buzón de mejoras", drawerIcon: ({focused, size}) => (<IconImprovements focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={IMPROVEMENTS} />
-        <Drawer.Screen name={Text_Management} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), headerRight: () => (<Text style={{fontWeight: "900", fontSize: 20,marginRight: 4, color: PLO_DIS}}>DISMAC</Text>), drawerLabel: "Mi Partner", drawerIcon: ({focused, size}) => (<IconManagement focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={MANAGEMENT} />
+        <Drawer.Screen name={Text_Management} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Mi Partner", drawerIcon: ({focused, size}) => (<IconManagement focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={MANAGEMENT} />
         <Drawer.Screen name={Text_Cuentas} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), headerRight: () => (<IconButton icon="account-plus" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddAccount", {}, navigation)} />), drawerLabel: "Cuentas", drawerIcon: ({focused, size}) => (<IconAccount focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={LISTACCOUNT} />
       </Drawer.Navigator>
     );

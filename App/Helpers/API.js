@@ -212,3 +212,26 @@ export async function GET_STORES_CHECK() {
         return [];
     }
 }
+export async function SAVE_CURRENT_SESSION(SESSION) {
+    try {
+        await AsyncStorage.setItem(
+          '@CURRENT_SESSION',
+          JSON.stringify(SESSION)
+        );
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GET_CURRENT_SESSION() {
+    try {
+        const value = await AsyncStorage.getItem('@CURRENT_SESSION');
+        if (value !== null) {
+            return JSON.parse(value);
+        }else{
+            return null;
+        }
+    } catch (error) {
+        return null;
+    }
+}

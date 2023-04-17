@@ -24,12 +24,12 @@ const ProfilePartner = (props) => {
     return(
         <Animated.View style={{width: (windowWidth - 20), borderRadius: border, backgroundColor: "#FFFFFF", padding: 5}} >
             <View style={{width: (windowWidth - 30), height: (windowWidth - 30)}}>
-                <ImagenAnimation style={{width: (windowWidth - 30), height: (windowWidth - 30)}} url={URL_PATH} animation={{border: 10, time: 1000}} />
+                <ImagenAnimation style={{width: (windowWidth - 30), height: (windowWidth - 30)}} url={props.Partner.cover} animation={{border: 10, time: 1000}} />
                 <View style={{position: "absolute", left: 10, bottom: 10}}>
-                    <ImagenAnimation style={{width: 80, height: 80}} url={URL_PATH_1} animation={{border: 40, time: 1000}} />
+                    <ImagenAnimation style={{width: 80, height: 80}} url={props.Partner.profile} animation={{border: 40, time: 1000}} />
                 </View>
                 <View style={{position: "absolute", left: 95, bottom: 35}}>
-                    <Text style={{fontSize: 20, fontWeight: "900", color: "#EC2427", backgroundColor: "#FFFFFF", padding: 3, borderRadius: 5}}>Dismac S.A.</Text>
+                    <Text style={{fontSize: 20, fontWeight: "900", color: "#EC2427", backgroundColor: "#FFFFFF", padding: 3, borderRadius: 5}}>{props.Partner.name}</Text>
                 </View>
             </View>
         </Animated.View>
