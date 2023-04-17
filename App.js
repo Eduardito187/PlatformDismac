@@ -22,6 +22,7 @@ import RestorePwd from './App/Modules/Login/Views/Account/RestorePwd';
 import ShowCatalog from './App/Modules/Catalog/Views/ShowCatalog';
 import NewCategory from './App/Modules/Catalog/Views/NewCategory';
 import ShowCategory from './App/Modules/Catalog/Views/ShowCategory';
+import EditCategory from './App/Modules/Catalog/Views/EditCategory';
 /** */
 
 const Stack = createStackNavigator();
@@ -49,6 +50,7 @@ export default function App() {
         <Stack.Screen name="ShowCatalog" component={ShowCatalog} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="NewCategory" component={NewCategory} options={{headerShown: true,title: "Nueva categoría"}} />
         <Stack.Screen name="ShowCategory" component={ShowCategory} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="EditCategory" component={EditCategory} options={{headerShown: true,title: "Editar categoría"}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

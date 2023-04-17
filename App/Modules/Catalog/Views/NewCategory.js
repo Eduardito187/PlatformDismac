@@ -42,6 +42,7 @@ const NewCategory = ({route, navigation }) => {
     const [disable, setDisable] = React.useState(false);
     const [ProductId, SetProductId] = React.useState([]);
     const [StoreSelect, SetStoreSelect] = React.useState([]);
+    const [PreSelectedStore, SetPreSelectedStore] = React.useState([]);
     const [register, setRegister] = React.useState(false);
     React.useEffect(() => {
         console.log(route.params);
@@ -185,7 +186,7 @@ const NewCategory = ({route, navigation }) => {
             <View style={[ROW_SECTION, Margin_Top_5]}>
                 <List.Accordion title="Stores" expanded={Stores} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleStores}>
                     <View style={ROW_SECTION}>
-                        <SelectedStore Action={(a) => SetStoreSelect(a)} />
+                        <SelectedStore Action={(a) => SetStoreSelect(a)} value={PreSelectedStore} />
                     </View>
                 </List.Accordion>
             </View>

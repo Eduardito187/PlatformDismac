@@ -3,6 +3,9 @@ import { URL_HOSTING,EXTEND_API,TOKEN_API,EXTEND_API_SHOW } from "../../Config";
 export function URL_API(Controller) {
     return URL_HOSTING+EXTEND_API+Controller;
 }
+export function URL_API_POS(Controller, ID) {
+    return URL_HOSTING+EXTEND_API+Controller+ID;
+}
 export function URL_API_SHOW(Controller, ID) {
     return URL_HOSTING+EXTEND_API+Controller+EXTEND_API_SHOW+ID;
 }
