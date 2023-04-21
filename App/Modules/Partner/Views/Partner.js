@@ -7,7 +7,6 @@ import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import ProfilePartner from './Components/ProfilePartner';
 import Valor from './Components/Valor';
 import SectionNumber from './Components/SectionNumber';
-import Social from './Components/Social';
 import Campain from './Components/Campain';
 import { RED_DIS } from '../../Login/Style/css';
 import axios from 'axios';
@@ -54,8 +53,8 @@ const Partner = (props) => {
         return (
             <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingLeft: 10, paddingRight: 10}}>
                 <ProfilePartner Partner={Partner} />
-                <Social TOKEN={TOKEN} style={{marginTop: 10}} />
                 <Campain TOKEN={TOKEN} style={{marginTop: 10}} />
+                <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countSocialNetworkPartner"} label={"Redes socialestas"} icon={(<FontAwesome name={"share-square"} size={45} color={"#EC2427"} />)} />
                 <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countAccount"} label={"Cuentas"} icon={(<MaterialIcons name={"account-circle"} size={45} color={"#EC2427"} />)} />
                 <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countProduct"} label={"Productos"} icon={(<FontAwesome name={"archive"} size={45} color={"#EC2427"} />)} />
                 <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countWarehouse"} label={"Almacenes"} icon={(<FontAwesome name={"sitemap"} size={45} color={RED_DIS} />)} />
