@@ -14,7 +14,7 @@ const Price = (props) => {
                 ? (
                     <View>
                         <View style={ROW_PRICE}>
-                            <Text style={[PRICE_STYLE, PRICE_BEFORE]}>1{props.Price.price+'.50 Bs'}</Text>
+                            <Text style={[PRICE_STYLE, PRICE_BEFORE]}>{props.Price.price+'.50 Bs'}</Text>
                         </View>
                         <View style={PRICE_AFTER}>
                             <Text style={PRICE_STYLE}>{props.Price.special_price+' Bs'}</Text>
