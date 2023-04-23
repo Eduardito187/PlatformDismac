@@ -113,6 +113,8 @@ export const SECTION_DRAWER = {
 };
 export const RED_DIS = "#EC2427";
 export const PLO_DIS = "#808080";
+export const WHITE = "#FFFFFF";
+export const GREEN_PRICE = "#88D377";
 export const Color_Dismac = {
     color: "#EC2427"
 };
@@ -139,4 +141,26 @@ export const textLine = {
     color: 'black',
     fontSize: 13,
     fontWeight: '400'
+};
+export const PRICE_STYLE = {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: WHITE
+};
+export const ROW_PRICE = {
+    backgroundColor: RED_DIS,
+    borderRadius: 10,
+    padding: 5,
+    position: 'absolute'
+};
+export const PRICE_BEFORE = {
+    textDecorationLine: 'line-through',
+    textDecorationStyle: 'solid'
+};
+export const PRICE_AFTER = {
+    backgroundColor: GREEN_PRICE,
+    borderRadius: 10,
+    padding: 5,
+    position: 'absolute',
+    left: 100
 };

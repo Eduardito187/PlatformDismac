@@ -28,6 +28,7 @@ import Partner from '../../Partner/Views/Partner';
 import Scanner from '../../Qr/Views/Scanner';
 import IconScanner from '../../Qr/Helper/IconScanner';
 import IconProduct from '../../Catalog/Helper/IconProduct';
+import Product from '../../Catalog/Views/Product';
 /** */
 
 const Home = ({route, navigation }) => {
@@ -42,6 +43,7 @@ const Home = ({route, navigation }) => {
   });
   const LandingHOME = () => <LandingHome style={{}} data={{}} />;
   const CATALOG = () => <Catalog style={{}} data={{}} />;
+  const PRODUCT = () => <Product style={{}} data={{}} />;
   const IMPROVEMENTS = () => <Improvements style={{}} data={{}} />;
   const SCANNER_QR = () => <Scanner style={{}} data={{}} />;
   const MANAGEMENT = () => <Partner style={{}} data={{}} />;
@@ -88,7 +90,7 @@ const Home = ({route, navigation }) => {
       <Drawer.Navigator useLegacyImplementation drawerContent={(props) => <CustomDrawer {...props} TOKEN={TOKEN} Account={currentAccount} />}>
         <Drawer.Screen name={Text_LandingHome} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Inicio", drawerIcon: ({focused, size}) => (<IconHome focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={LandingHOME} />
         <Drawer.Screen name={Text_Catalog} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), headerRight: () => (<IconButton icon="book" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddCatalog", {}, navigation)} />), drawerLabel: "Catálogo", drawerIcon: ({focused, size}) => (<IconCatalog focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={CATALOG} />
-        <Drawer.Screen name={Text_Products} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), headerRight: () => (<IconButton icon="plus" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddCatalog", {}, navigation)} />), drawerLabel: "Productos", drawerIcon: ({focused, size}) => (<IconProduct focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={CATALOG} />
+        <Drawer.Screen name={Text_Products} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), headerRight: () => (<IconButton icon="plus" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddProduct", {}, navigation)} />), drawerLabel: "Productos", drawerIcon: ({focused, size}) => (<IconProduct focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={PRODUCT} />
         <Drawer.Screen name={Text_SupportTechnical} options={({navigation}) => ({ headerTitle: () => (<LogoDismac />), drawerLabel: "Sopórte tecnico", drawerIcon: ({focused, size}) => (<IconSupport focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={SUPPORTTECHNICAL} />
         <Drawer.Screen name={Text_ScannerQR} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Scanner QR", drawerIcon: ({focused, size}) => (<IconScanner focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={SCANNER_QR} />
         <Drawer.Screen name={Text_Improvements} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Buzón de mejoras", drawerIcon: ({focused, size}) => (<IconImprovements focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={IMPROVEMENTS} />

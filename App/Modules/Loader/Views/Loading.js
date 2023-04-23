@@ -21,14 +21,16 @@ const Loading = ({route, navigation }) => {
   async function setToken(){
     let token = await GET_TOKEN_SESSION();
     SetTOKEN(token);
-    getStores(token);
+    if (token != null) {
+      getStores(token);
+    }
   }
 
   function getStores(token){
     axios.get(URL_API_GET("store"),GET_HEADER_TOKEN(token)).then(res => {
       SAVE_STORES(res.data);
     }).catch(err => {
-      console.warn("ERROR AL OBTENER LAS STORES");
+      console.warn(err, "ERROR AL OBTENER LAS STORES");
     });
   }
 

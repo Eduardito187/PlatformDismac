@@ -10,9 +10,9 @@ import SearchBox from '../../../Components/Button/SearchBox';
 import SearchInit from '../../Account/Helper/SearchInit';
 import Searching from '../../Account/Helper/Searching';
 import MessageBox from '../../../Components/MessageBox';
-import ListCatalog from '../../Account/Helper/ListCatalog';
+import ListProduct from './Components/ListProduct';
 
-const Catalog = (props) => {
+const Product = (props) => {
     const [TOKEN, SetTOKEN] = React.useState("");
     const [Message, SetMessage] = React.useState("");
     const [ShowMessage, SetShowMessage] = React.useState(false);
@@ -20,7 +20,7 @@ const Catalog = (props) => {
     const [searching, Setsearching] = React.useState(false);
     const [style, Setstyle] = React.useState(props.style);
     const [data, Setdata] = React.useState(props.data);
-    const [catalogs, SetCatalogs] = React.useState([]);
+    const [products, SetProducts] = React.useState([]);
     React.useEffect(() => {
         setToken();
     }, []);
@@ -31,9 +31,9 @@ const Catalog = (props) => {
         SetMessage("");
     }
 
-    function searchCatalog(text){
+    function searchProduct(text){
         Setsearch(text);
-        Setsearching(text.length == 0 ? false : true);
+        Setsearching(text.length <= 4 ? false : true);
         sendQuery(text);
     }
 
@@ -43,8 +43,13 @@ const Catalog = (props) => {
             SetShowMessage(true);
         }else{
             Setsearching(false);
-            SetCatalogs(response);
+            SetProducts(response);
         }
+    }
+
+    function clearProducts(){
+        Setsearching(false);
+        SetProducts([]);
     }
 
     async function setToken(){
@@ -52,8 +57,8 @@ const Catalog = (props) => {
     }
 
     function sendQuery(text){
-        if (text.length > 0) {
-            axios.post(URL_API("search/inventory"),CREATE_BODY_SEARCH_ACCOUN(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
+        if (text.length >= 4) {
+            axios.post(URL_API("searchProduct"),CREATE_BODY_SEARCH_ACCOUN(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
                 if(res.data != null){
                     thenSearch(res.data.response, res.data.responseText);
                 }else{
@@ -62,20 +67,22 @@ const Catalog = (props) => {
             }).catch(err => {
                 thenSearch(false, err);
             });
+        }else{
+            clearProducts();
         }
     }
 
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
             <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5}}>
-                <SearchBox Label={"Catalogos"} ChangeText={(text) => searchCatalog(text)} /> 
+                <SearchBox Label={"Productos"} ChangeText={(text) => searchProduct(text)} /> 
             </View>
             {searching == false && search.length == 0 && (<SearchInit />)}
             {searching == true && (<Searching />)}
-            {searching == false && search.length > 0 && (<ListCatalog TOKEN={TOKEN} Catalog={catalogs} />)}
+            {searching == false && search.length > 0 && (<ListProduct TOKEN={TOKEN} Product={products} />)}
             <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
         </ScrollView>
     );
 };
 
-export default Catalog;
+export default Product;
