@@ -41,7 +41,7 @@ const Home = ({route, navigation }) => {
     "profile": "",
     "cover": ""
   });
-  const LandingHOME = () => <LandingHome style={{}} data={{}} />;
+  const LandingHOME = () => <LandingHome TOKEN={TOKEN} />;
   const CATALOG = () => <Catalog style={{}} data={{}} />;
   const PRODUCT = () => <Product style={{}} data={{}} />;
   const IMPROVEMENTS = () => <Improvements style={{}} data={{}} />;
