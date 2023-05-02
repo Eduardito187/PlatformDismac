@@ -6,7 +6,7 @@ import { windowWidth } from '../../../../Helpers/GetMobil';
 
 const CategoryLast = (props) => {
     React.useEffect(() => {
-        console.log(props.categorys);
+        //
     }, []);
     if (props.categorys.length > 0) {
         return(

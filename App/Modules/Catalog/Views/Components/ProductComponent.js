@@ -25,7 +25,7 @@ const ProductComponent = (props) => {
         }, 500)
     }
     function selectProduct(product) {
-        //navigation.navigate("ShowProduct", {"Product":product, "TOKEN":props.TOKEN});
+        navigation.push("ShowProduct", {"id_product":product.id,"TOKEN":props.TOKEN});
     }
     if (product == null) {
         return(<ActivityIndicator key={load} size="large" color="#EC2427" />);

@@ -75,6 +75,10 @@ export const ROW_SECTION = {
     padding: 5,
     borderRadius: 5
 };
+export const ROW_SECTION_NO_PADDING = {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 5
+};
 export const Margin_Bottom_50 = {
     marginBottom: 50
 }
@@ -112,9 +116,11 @@ export const SECTION_DRAWER = {
     borderColor: "red"
 };
 export const RED_DIS = "#EC2427";
+export const OUTLINE = "outlined";
 export const PLO_DIS = "#808080";
 export const WHITE = "#FFFFFF";
 export const GREEN_PRICE = "#88D377";
+export const RGBA_05 = "rgba(0, 0, 0, 0.5)";
 export const Color_Dismac = {
     color: "#EC2427"
 };
