@@ -5,7 +5,6 @@ import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 /** Components */
 import ProfilePartner from './Components/ProfilePartner';
-import Valor from './Components/Valor';
 import SectionNumber from './Components/SectionNumber';
 import Campain from './Components/Campain';
 import { RED_DIS } from '../../Login/Style/css';
@@ -59,8 +58,7 @@ const Partner = (props) => {
                 <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countProduct"} label={"Productos"} icon={(<FontAwesome name={"archive"} size={45} color={"#EC2427"} />)} />
                 <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countWarehouse"} label={"Almacenes"} icon={(<FontAwesome name={"sitemap"} size={45} color={RED_DIS} />)} />
                 <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countStorePartner"} label={"Tiendas"} icon={(<MaterialIcons name={"store"} size={45} color={"#EC2427"} />)} />
-                <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/valuePartner"} label={"Valor del catálogo"} icon={(<Text style={{color: "#EC2427", fontSize: 40, fontWeight: "900", padding: 10}}>BOB</Text>)} />
-                <Valor TOKEN={TOKEN} style={{marginTop: 10, marginBottom: 20}} />
+                <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/valuePartner"} label={"Valor del inventario"} icon={(<Text style={{color: "#EC2427", fontSize: 40, fontWeight: "900", padding: 10}}>BOB</Text>)} />
             </ScrollView>
         );
     }
