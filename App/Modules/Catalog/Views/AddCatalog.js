@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Text, View, ScrollView } from 'react-native';
-import { PageLoading, Page } from '../../../Themes/Dismac/ThemeDismac';
+import { PageLoading, Page, SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
 import { AlingFormItem, RowForm, TitleSub } from '../../Login/Style/style';
 import { TextInput, Button } from 'react-native-paper';
 import { windowWidth, windowHeight } from '../../../Helpers/GetMobil';
@@ -42,7 +42,7 @@ const AddCatalog = ({route, navigation }) => {
     }
     return (
         <View>
-            <ScrollView showsVerticalScrollIndicator={false} style={{paddingLeft: 5, paddingRight: 5}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                 <View style={{width: windowWidth, height: windowHeight}}>
                     <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5,marginBottom: 5}}>
                         <View style={AlingFormItem}>

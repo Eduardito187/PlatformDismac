@@ -10,7 +10,7 @@ const IconCatalog = (props) => {
     if (props.focus) {
         return (<Ionicons name="book-outline" size={props.size} color={NavBars.focus} />);
     }else{
-        return (<Foundation name="book-bookmark" size={props.size} style={{marginLeft: 5}} color={NavBars.nofocus} />);
+        return (<Foundation name="book-bookmark" size={props.size} color={NavBars.nofocus} />);
     }
 };
 export default IconCatalog;

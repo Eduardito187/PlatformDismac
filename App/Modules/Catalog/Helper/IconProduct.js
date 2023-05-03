@@ -10,7 +10,7 @@ const IconProduct = (props) => {
     if (props.focus) {
         return (<FontAwesome name="dropbox" size={props.size} color={NavBars.focus} />);
     }else{
-        return (<FontAwesome name="dropbox" size={props.size} style={{marginLeft: 5}} color={NavBars.nofocus} />);
+        return (<FontAwesome name="dropbox" size={props.size} color={NavBars.nofocus} />);
     }
 };
 export default IconProduct;

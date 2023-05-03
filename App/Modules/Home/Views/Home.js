@@ -1,20 +1,18 @@
-import React, {useState} from 'react';
-import { Text, View, TextInput, ActivityIndicator } from 'react-native';
+import React, {useState,useRef} from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Text, View, ImageBackground, Animated, Image, SafeAreaView, TouchableOpacity } from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { AntDesign } from '@expo/vector-icons'; 
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import axios from 'axios';
-import { IconButton } from 'react-native-paper';
-import { Navigation } from '../../../Helpers/Nav';
-import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION } from '../../../Helpers/API';
-import { RED_DIS, PLO_DIS } from '../../Login/Style/css';
-import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products } from '../../../Router/Route';
+import { Navigation, ResetNavigation } from '../../../Helpers/Nav';
+import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION } from '../../../Helpers/API';
+import { RED_DIS, PLO_DIS, containerScreen, TEXT_NAME, PROFILE_PICTURE, DRAWER_CONTENT, SOLID_BG, OPACITY, IMAGE_BG, IMAGE_STYLE, MAIL_TEXT } from '../../Login/Style/css';
+import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION } from '../../../Router/Route';
 const Drawer = createDrawerNavigator();
 /** Components */
 import LandingHome from './LandingHome';
 import ImgDis from '../../../Components/ImgDis';
 import Catalog from '../../Catalog/Views/Catalog';
-import CustomDrawer from '../../../Components/CustomDrawer';
 import Improvements from '../../Improvements/Views/Improvements';
 import SupportTechnical from '../../SupportTechnical/Views/SupportTechnical';
 import IconImprovements from '../../Improvements/Helper/IconImprovements';
@@ -30,10 +28,25 @@ import IconScanner from '../../Qr/Helper/IconScanner';
 import IconProduct from '../../Catalog/Helper/IconProduct';
 import Product from '../../Catalog/Views/Product';
 /** */
+import TabButton from './Components/TabButton';
+import LoadingPage from './Components/LoadingPage';
+import IconExit from '../Helper/IconExit';
 
 const Home = ({route, navigation }) => {
+  const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
+
+  const [currentTab, setCurrentTab] = React.useState(Text_LandingHome);
+  // To get the curretn Status of menu ...
+  const [showMenu, setShowMenu] = React.useState(false);
+  // Animated Properties...
+  const offsetValue = React.useRef(new Animated.Value(0)).current;
+  // Scale Intially must be One...
+  const scaleValue = React.useRef(new Animated.Value(1)).current;
+  const closeButtonOffset = React.useRef(new Animated.Value(0)).current;
+
   const [TOKEN, SetTOKEN] = React.useState("");
   const [Load, SetLoad] = React.useState(false);
+  const [CurrentScreen, setCurrentScreen]= React.useState(null);
   const [currentAccount, SetCurrentAccount] = React.useState({
     "id" : 0,
     "name" : "",
@@ -41,15 +54,7 @@ const Home = ({route, navigation }) => {
     "profile": "",
     "cover": ""
   });
-  const LandingHOME = () => <LandingHome TOKEN={TOKEN} />;
-  const CATALOG = () => <Catalog style={{}} data={{}} />;
-  const PRODUCT = () => <Product style={{}} data={{}} />;
-  const IMPROVEMENTS = () => <Improvements style={{}} data={{}} />;
-  const SCANNER_QR = () => <Scanner style={{}} data={{}} />;
-  const MANAGEMENT = () => <Partner style={{}} data={{}} />;
-  const SUPPORTTECHNICAL = () => <SupportTechnical style={{}} data={{}} />;
   const LogoDismac = () => <ImgDis style={{width: 30,height: 30}} animation={{border: 5, time: 1000}} />;
-  const LISTACCOUNT = () => <ListAccount style={{}} data={{}} />;
 
   React.useEffect(() => {
     setToken();
@@ -65,6 +70,7 @@ const Home = ({route, navigation }) => {
     axios.get(URL_API("currentAccount"),GET_HEADER_TOKEN(token)).then(res => {
       if(res.data != null){
         setSession(res.data.response);
+        setCurrentScreen(() => <LandingHome TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
       }else{
         SetLoad(null);
       }
@@ -79,24 +85,108 @@ const Home = ({route, navigation }) => {
     getAccount(token);
   }
 
+  function animatedScreen(status){
+    Animated.timing(scaleValue, {
+      toValue: status ? 1 : 0.88,
+      duration: 300,
+      useNativeDriver: true
+    }).start();
+
+    Animated.timing(offsetValue, {
+      // YOur Random Value...
+      toValue: status ? 0 : 230,
+      duration: 300,
+      useNativeDriver: true
+    }).start();
+
+    Animated.timing(closeButtonOffset, {
+      toValue: !status ? -30 : 0,
+      duration: 300,
+      useNativeDriver: true
+    }).start();
+
+    setShowMenu(!status);
+  }
+
+  function changeScreen(name) {
+    let newState = !showMenu;
+    setCurrentTab(name);
+    switch (name) {
+      case Text_LandingHome:
+        setCurrentScreen(() => <LandingHome TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case Text_Catalog:
+        setCurrentScreen(() => <Catalog TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case Text_Products:
+        setCurrentScreen(() => <Product TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case Text_SupportTechnical:
+        setCurrentScreen(() => <SupportTechnical TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case Text_ScannerQR:
+        setCurrentScreen(() => <Scanner TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case Text_Improvements:
+        setCurrentScreen(() => <Improvements TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case Text_Management:
+        setCurrentScreen(() => <Partner TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case Text_Cuentas:
+        setCurrentScreen(() => <ListAccount TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case CLOSE_SESSION:
+        closeSession();
+        break;
+    }
+    animatedScreen(showMenu);
+  }
+
+  async function closeSession() {
+    if (await DELETE_TOKEN_SESSION()) {
+      ResetNavigation("Loading",{}, navigation);
+    }
+  }
+
   if (Load === false) {
     return (
-      <>
-        <ActivityIndicator color={RED_DIS} size={"large"} />
-      </>
+      <LoadingPage />
     );
   }else{
     return (
-      <Drawer.Navigator useLegacyImplementation drawerContent={(props) => <CustomDrawer {...props} TOKEN={TOKEN} Account={currentAccount} />}>
-        <Drawer.Screen name={Text_LandingHome} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Inicio", drawerIcon: ({focused, size}) => (<IconHome focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={LandingHOME} />
-        <Drawer.Screen name={Text_Catalog} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), headerRight: () => (<IconButton icon="book" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddCatalog", {}, navigation)} />), drawerLabel: "Catálogo", drawerIcon: ({focused, size}) => (<IconCatalog focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={CATALOG} />
-        <Drawer.Screen name={Text_Products} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), headerRight: () => (<IconButton icon="plus" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddProduct", {}, navigation)} />), drawerLabel: "Productos", drawerIcon: ({focused, size}) => (<IconProduct focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={PRODUCT} />
-        <Drawer.Screen name={Text_SupportTechnical} options={({navigation}) => ({ headerTitle: () => (<LogoDismac />), drawerLabel: "Sopórte tecnico", drawerIcon: ({focused, size}) => (<IconSupport focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={SUPPORTTECHNICAL} />
-        <Drawer.Screen name={Text_ScannerQR} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Scanner QR", drawerIcon: ({focused, size}) => (<IconScanner focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={SCANNER_QR} />
-        <Drawer.Screen name={Text_Improvements} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Buzón de mejoras", drawerIcon: ({focused, size}) => (<IconImprovements focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={IMPROVEMENTS} />
-        <Drawer.Screen name={Text_Management} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), drawerLabel: "Mi Partner", drawerIcon: ({focused, size}) => (<IconManagement focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={MANAGEMENT} />
-        <Drawer.Screen name={Text_Cuentas} options={({navigation}) => ({headerTitle: () => (<LogoDismac />), headerRight: () => (<IconButton icon="account-plus" iconColor={RED_DIS} size={30} onPress={() => Navigation("AddAccount", {}, navigation)} />), drawerLabel: "Cuentas", drawerIcon: ({focused, size}) => (<IconAccount focus={focused} size={size} />), drawerActiveTintColor : RED_DIS,drawerInactiveTintColor : PLO_DIS})} component={LISTACCOUNT} />
-      </Drawer.Navigator>
+      <SafeAreaView style={containerScreen}>
+        <View style={DRAWER_CONTENT}>
+          <View style={{marginTop: heightBar}}>
+            <ImageBackground source={{uri: currentAccount.cover}} style={IMAGE_BG} imageStyle={IMAGE_STYLE}>
+              <Image source={{uri: currentAccount.profile}} style={PROFILE_PICTURE} />
+              <Text style={TEXT_NAME}>{currentAccount.name}</Text>
+              <TouchableOpacity>
+                <Text style={MAIL_TEXT}>{currentAccount.email}</Text>
+              </TouchableOpacity>
+            </ImageBackground>
+          </View>
+          <View style={{ flexGrow: 1, marginTop: 20 }}>
+            {TabButton(currentTab, changeScreen, Text_LandingHome, <IconHome focus={currentTab == Text_LandingHome ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_Catalog, <IconCatalog focus={currentTab == Text_Catalog ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_Products, <IconProduct focus={currentTab == Text_Products ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_SupportTechnical, <IconSupport focus={currentTab == Text_SupportTechnical ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_ScannerQR, <IconScanner focus={currentTab == Text_ScannerQR ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_Improvements, <IconImprovements focus={currentTab == Text_Improvements ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_Management, <IconManagement focus={currentTab == Text_Management ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_Cuentas, <IconAccount focus={currentTab == Text_Cuentas ? true : false} size={25} />)}
+          </View>
+          <View>
+            {TabButton(currentTab, changeScreen, CLOSE_SESSION, <IconExit focus={currentTab == CLOSE_SESSION ? true : false} size={25} />)}
+          </View>
+        </View>
+        <Animated.View style={{flexGrow: 1,position: 'absolute',top: heightBar,bottom: 0,left: 0,right: 0,transform: [{ scale: scaleValue },{ translateX: offsetValue }]}}>
+          <Animated.View style={{transform: [{translateY: closeButtonOffset}],backgroundColor:SOLID_BG, borderRadius: showMenu ? 10 : 0}}>
+            {CurrentScreen}
+          </Animated.View>
+        </Animated.View>
+        <StatusBar style="light" />
+      </SafeAreaView>
     );
   }
 };

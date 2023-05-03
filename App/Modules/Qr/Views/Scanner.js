@@ -4,6 +4,8 @@ import { GET_TOKEN_SESSION } from '../../../Helpers/API';
 
 /** Components */
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE } from '../../../Themes/Dismac/ThemeDismac';
+import Header from '../../Home/Views/Components/Header';
 
 const Scanner = (props) => {
     const [TOKEN, SetTOKEN] = React.useState("");
@@ -37,9 +39,16 @@ const Scanner = (props) => {
     }
 
     return (
-        <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center'}}>
-            <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
-            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+        <View style={SCREEN_RELATIVE}>
+            <View style={SCREEN_ABSOLUTE_HEADER}>
+                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} />
+            </View>
+            <View style={SCREEN_ABSOLUTE_BODY}>
+                <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center'}}>
+                    <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
+                    {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+                </View>
+            </View>
         </View>
     );
 };

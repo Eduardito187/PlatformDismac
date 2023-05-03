@@ -1,26 +1,34 @@
 import React from 'react';  
 import { View, Animated, Image, Easing, Text, ScrollView  } from 'react-native';
 import axios from 'axios';
-import {Page} from "./../../../Themes/Dismac/ThemeDismac";
+import {Page, SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE} from "./../../../Themes/Dismac/ThemeDismac";
 import { Badge, DataTable, ProgressBar } from 'react-native-paper';
 import { GET_HEADER_ACCOUNT, GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
-import CategoryLast from './Components/CategoryLast';
+import LoadingPage from './Components/LoadingPage';
 import ImageUrl from '../../../Components/ImageUrl';
 import { RED_DIS } from '../../Login/Style/css';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { CONTAIN_CENTER, ROW } from '../../Catalog/Style/Row';
+import Campains from './Components/Campains';
+import Header from './Components/Header';
 
 const LandingHome = (props) => {
     const [CategoryComponent, SetCategoryComponent] = React.useState(null);
     const [ProductComponent, SetProductComponent] = React.useState(null);
-    const [Campains, SetCampains] = React.useState(null);
+    const [Campain, SetCampain] = React.useState([
+        {
+            "ID":1
+        },
+        {
+            "ID":2
+        }
+    ]);
     const [TotalsCatalog, SetTotalsCatalog] = React.useState(null);
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
     const [Load, SetLoad] = React.useState(false);
     React.useEffect(() => {
         getCategoryLast();
-        getProductLast();
-        SetCampainsComponent();
+        //SetCampainsComponent();
         SetTotalsCatalogComponent();
     }, []);
 
@@ -31,10 +39,10 @@ const LandingHome = (props) => {
             }else{
                 setCategoryComponent(null);
             }
+            getProductLast();
         }).catch(err => {
             setCategoryComponent(null);
         });
-        SetLoad(true);
     }
 
     function getProductLast(){
@@ -44,10 +52,10 @@ const LandingHome = (props) => {
             }else{
                 setProductComponent(null);
             }
+            SetLoad(true);
         }).catch(err => {
             setProductComponent(null);
         });
-        SetLoad(true);
     }
 
     function setProductComponent(ProductsData){
@@ -149,14 +157,25 @@ const LandingHome = (props) => {
         ));
     }
 
-    return (
-        <ScrollView showsVerticalScrollIndicator={false} style={{paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
-            {TotalsCatalog}
-            {Campains}
-            {CategoryComponent}
-            {ProductComponent}
-        </ScrollView>
-    );
+    if (Load === false) {
+        return (<LoadingPage />);
+    }else{
+        return (
+            <View style={SCREEN_RELATIVE}>
+                <View style={SCREEN_ABSOLUTE_HEADER}>
+                    <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} />
+                </View>
+                <View style={SCREEN_ABSOLUTE_BODY}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
+                        {TotalsCatalog}
+                        <Campains width={windowWidth-10} height={100} data={Campain} />
+                        {CategoryComponent}
+                        {ProductComponent}
+                    </ScrollView>
+                </View>
+            </View>
+        );
+    }
 };
 
 export default LandingHome;

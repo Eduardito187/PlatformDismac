@@ -1,3 +1,9 @@
+export const RED_DIS = "#EC2427";
+export const OUTLINE = "outlined";
+export const PLO_DIS = "#808080";
+export const WHITE = "#FFFFFF";
+export const GREEN_PRICE = "#88D377";
+export const RGBA_05 = "rgba(0, 0, 0, 0.5)";
 export const inputValidate = {
     backgroundColor: "white",
     borderColor: "red",
@@ -12,6 +18,21 @@ export const inputValidate = {
     color: "red",
     fontSize: 22,
     margin: 2
+};
+export const TEXT_NAME = {fontSize: 13,fontWeight: 'bold',color: 'white',marginTop: 20};
+export const PROFILE_PICTURE = {width: 60,height: 60,borderRadius: 10,marginTop: 8};
+export const IMAGE_BG = {paddingLeft: 5,paddingBottom:5};
+export const MAIL_TEXT = {fontSize:12, marginTop: 6,color: 'white'}
+export const IMAGE_STYLE = {borderRadius: 15};
+export const DRAWER_CONTENT = {justifyContent: 'flex-start', padding: 15};
+export const TEXT_OPTION_DRAWER = {fontSize: 15,fontWeight: 'bold',paddingLeft: 15};
+export const SOLID_BG = "#F2F2F2";
+export const CONTIANER_LOADING = {position: 'relative',width: "100%", height: "100%",justifyContent: "center", alignItems: "center", flex: 1, alignContent: "center"};
+export const containerScreen = {
+    flex: 1,
+    backgroundColor: RED_DIS,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
 };
 export const SButton = {
     backgroundColor: "#EC2427",
@@ -115,12 +136,6 @@ export const SECTION_DRAWER = {
     borderBottomWidth:2,
     borderColor: "red"
 };
-export const RED_DIS = "#EC2427";
-export const OUTLINE = "outlined";
-export const PLO_DIS = "#808080";
-export const WHITE = "#FFFFFF";
-export const GREEN_PRICE = "#88D377";
-export const RGBA_05 = "rgba(0, 0, 0, 0.5)";
 export const Color_Dismac = {
     color: "#EC2427"
 };

@@ -1,25 +1,28 @@
 import React from 'react';  
-import { View, Animated, Image, Easing, Text  } from 'react-native';
+import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
+import {Page, SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE} from "./../../../Themes/Dismac/ThemeDismac";
+import axios from 'axios';
 
-class SupportTechnical extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            style : props.style,
-            data: props.data
-        };
-    }
+/** Components */
+import Header from '../../Home/Views/Components/Header';
 
-    componentDidMount(){
+const SupportTechnical = (props) => {
+    const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
+    React.useEffect(() => {
         //
-    }
-
-    render() {
-        return(
-            <View>
-                <Text>SupportTechnical</Text>
+    }, []);
+    
+    return (
+        <View style={SCREEN_RELATIVE}>
+            <View style={SCREEN_ABSOLUTE_HEADER}>
+                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} />
             </View>
-        );
-    }
-}
+            <View style={SCREEN_ABSOLUTE_BODY}>
+                <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
+                </ScrollView>
+            </View>
+        </View>
+    );
+};
+
 export default SupportTechnical;

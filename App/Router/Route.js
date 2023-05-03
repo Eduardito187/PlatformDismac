@@ -1,8 +1,9 @@
-export const Text_LandingHome = "LandingHome";
-export const Text_Catalog = "Catalog";
-export const Text_Products = "Products";
-export const Text_SupportTechnical = "SupportTechnical";
-export const Text_ScannerQR = "ScannerQR";
-export const Text_Improvements = "Improvements";
-export const Text_Management = "Management";
+export const Text_LandingHome = "Inicio";
+export const Text_Catalog = "Catálogo";
+export const Text_Products = "Productos";
+export const Text_SupportTechnical = "Sopórte tecnico";
+export const Text_ScannerQR = "Scanner QR";
+export const Text_Improvements = "Buzón de mejoras";
+export const Text_Management = "Mi Partner";
 export const Text_Cuentas = "Cuentas";
+export const CLOSE_SESSION = "Cerrar sesión";
