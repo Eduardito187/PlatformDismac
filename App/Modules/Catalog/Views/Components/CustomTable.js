@@ -19,7 +19,7 @@ const CustomTable = (props) => {
                     {
                         props.header.map((row) => {
                             return (
-                                <DataTable.Title key={Math.random()+'_ROW_'+Math.random()}>{row}</DataTable.Title>
+                                <DataTable.Title key={Math.random()+'_ROW_'+props.key+'_ROW_'+Math.random()}>{row}</DataTable.Title>
                             )
                         })
                     }
@@ -30,7 +30,7 @@ const CustomTable = (props) => {
                             <DataTable.Row onPress={() => selectedRow(row)}>
                                 {
                                     row.map((item) => {
-                                        return (<DataTable.Cell key={Math.random()+'_COLUMN_'+Math.random()}>{item}</DataTable.Cell>);
+                                        return (<DataTable.Cell key={Math.random()+'_COLUMN_'+props.key+'_COLUMN_'+Math.random()}>{item}</DataTable.Cell>);
                                     })
                                 }
                             </DataTable.Row>
