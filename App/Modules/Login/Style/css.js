@@ -26,6 +26,7 @@ export const MAIL_TEXT = {fontSize:12, marginTop: 6,color: 'white'}
 export const IMAGE_STYLE = {borderRadius: 15};
 export const DRAWER_CONTENT = {justifyContent: 'flex-start', padding: 15};
 export const TEXT_OPTION_DRAWER = {fontSize: 15,fontWeight: 'bold',paddingLeft: 15};
+export const JUSTIFY_CONTENT = {justifyContent: "center", alignItems: "center"};
 export const SOLID_BG = "#F2F2F2";
 export const CONTIANER_LOADING = {position: 'relative',width: "100%", height: "100%",justifyContent: "center", alignItems: "center", flex: 1, alignContent: "center"};
 export const containerScreen = {

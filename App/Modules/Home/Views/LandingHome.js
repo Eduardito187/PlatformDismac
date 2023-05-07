@@ -17,10 +17,20 @@ const LandingHome = (props) => {
     const [ProductComponent, SetProductComponent] = React.useState(null);
     const [Campain, SetCampain] = React.useState([
         {
-            "ID":1
+            "ID":1,
+            "Social":"Facebook"
         },
         {
-            "ID":2
+            "ID":2,
+            "Social":"Instagram"
+        },
+        {
+            "ID":3,
+            "Social":"You Tube"
+        },
+        {
+            "ID":4,
+            "Social":"Whatsapp"
         }
     ]);
     const [TotalsCatalog, SetTotalsCatalog] = React.useState(null);
@@ -28,8 +38,9 @@ const LandingHome = (props) => {
     const [Load, SetLoad] = React.useState(false);
     React.useEffect(() => {
         getCategoryLast();
-        //SetCampainsComponent();
+        getProductLast();
         SetTotalsCatalogComponent();
+        SetLoad(true);
     }, []);
 
     function getCategoryLast(){
@@ -39,7 +50,6 @@ const LandingHome = (props) => {
             }else{
                 setCategoryComponent(null);
             }
-            getProductLast();
         }).catch(err => {
             setCategoryComponent(null);
         });
@@ -52,7 +62,6 @@ const LandingHome = (props) => {
             }else{
                 setProductComponent(null);
             }
-            SetLoad(true);
         }).catch(err => {
             setProductComponent(null);
         });
@@ -112,24 +121,6 @@ const LandingHome = (props) => {
                 </View>
             ));
         }
-    }
-
-    function SetCampainsComponent(){
-        SetCampains((
-            <View style={{backgroundColor: '#FFFFFF', width: windowWidth-10, padding: 10, borderRadius: 10, marginTop: 20}}>
-                <Text style={{fontWeight: 'bold', fontSize: 18, color: RED_DIS}}>Campains</Text>
-                <View style={{width: windowWidth-30, padding: 5}}>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View key={Math.random()+'_Categorys_'+Math.random()} style={{width: windowWidth-70, height: 150, borderRadius: 5, backgroundColor: "red", margin: 5,shadowColor: "#000",shadowOffset: {width: 0,height: 4,},shadowOpacity: 0.30,shadowRadius: 4.65,elevation: 8, position: 'relative'}}>
-                            
-                        </View>
-                        <View key={Math.random()+'_Categorys_'+Math.random()} style={{width: windowWidth-70, height: 150, borderRadius: 5, backgroundColor: "blue", margin: 5,shadowColor: "#000",shadowOffset: {width: 0,height: 4,},shadowOpacity: 0.30,shadowRadius: 4.65,elevation: 8, position: 'relative'}}>
-                            
-                        </View>
-                    </ScrollView>
-                </View>
-            </View>
-        ));
     }
 
     function SetTotalsCatalogComponent(){

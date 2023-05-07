@@ -70,7 +70,8 @@ const Home = ({route, navigation }) => {
     axios.get(URL_API("currentAccount"),GET_HEADER_TOKEN(token)).then(res => {
       if(res.data != null){
         setSession(res.data.response);
-        setCurrentScreen(() => <LandingHome TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
+        setCurrentTab(Text_LandingHome);
+        setCurrentScreen(() => <LandingHome navigation={navigation} TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
       }else{
         SetLoad(null);
       }
@@ -113,28 +114,28 @@ const Home = ({route, navigation }) => {
     setCurrentTab(name);
     switch (name) {
       case Text_LandingHome:
-        setCurrentScreen(() => <LandingHome TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <LandingHome navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Catalog:
-        setCurrentScreen(() => <Catalog TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Catalog navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Products:
-        setCurrentScreen(() => <Product TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Product navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_SupportTechnical:
-        setCurrentScreen(() => <SupportTechnical TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <SupportTechnical navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_ScannerQR:
-        setCurrentScreen(() => <Scanner TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Scanner navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Improvements:
-        setCurrentScreen(() => <Improvements TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Improvements navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Management:
-        setCurrentScreen(() => <Partner TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Partner navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Cuentas:
-        setCurrentScreen(() => <ListAccount TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <ListAccount navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case CLOSE_SESSION:
         closeSession();
