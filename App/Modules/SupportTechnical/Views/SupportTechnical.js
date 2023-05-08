@@ -8,6 +8,7 @@ import { FAB } from 'react-native-paper';
 import Header from '../../Home/Views/Components/Header';
 import { RED_DIS, WHITE } from '../../Login/Style/css';
 import ProblemItem from '../../Catalog/Views/Components/ProblemItem';
+import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
 
 const SupportTechnical = (props) => {
     const [Items, SetItems] = React.useState([]);
@@ -26,64 +27,7 @@ const SupportTechnical = (props) => {
     }
     
     function loadOptionsItems() {
-        let items = [
-            {
-                "id" : 1,
-                "title" : "Error #1",
-                "description" : "Descripcion #1",
-                "account" : {
-                    "id" : 1,
-                    "name" : "Eduard Henslin Huallata Chavez",
-                    "email" : "eduardchavez302@gmail.com"
-                },
-                "time" : "14 min"
-            },
-            {
-                "id" : 2,
-                "title" : "Error #2",
-                "description" : "Descripcion #2",
-                "account" : {
-                    "id" : 1,
-                    "name" : "Eduard Henslin Huallata Chavez",
-                    "email" : "eduardchavez302@gmail.com"
-                },
-                "time" : "3 hrs"
-            },
-            {
-                "id" : 3,
-                "title" : "Error #3",
-                "description" : "Descripcion #3",
-                "account" : {
-                    "id" : 1,
-                    "name" : "Eduard Henslin Huallata Chavez",
-                    "email" : "eduardchavez302@gmail.com"
-                },
-                "time" : "2 D"
-            },
-            {
-                "id" : 4,
-                "title" : "Error #4",
-                "description" : "Descripcion #4",
-                "account" : {
-                    "id" : 1,
-                    "name" : "Eduard Henslin Huallata Chavez",
-                    "email" : "eduardchavez302@gmail.com"
-                },
-                "time" : "23 D"
-            },
-            {
-                "id" : 5,
-                "title" : "Error #5",
-                "description" : "Descripcion #5",
-                "account" : {
-                    "id" : 1,
-                    "name" : "Eduard Henslin Huallata Chavez",
-                    "email" : "eduardchavez302@gmail.com"
-                },
-                "time" : "3 M"
-            }
-        ];
-        SetItems(items);
+        getTicketsAccount();
     }
 
     function plusAction() {
@@ -91,7 +35,24 @@ const SupportTechnical = (props) => {
     }
 
     function onGoBackAction(){
-        //
+        getTicketsAccount();
+    }
+
+    function getSupportTickets(url) {
+        axios.get(URL_API(url),GET_HEADER_TOKEN(TOKEN)).then(res => {
+            if(res.data != null){
+                SetItems(res.data.response);
+            }
+        }).catch(err => {
+            //
+        });
+    }
+
+    function getTicketsAccount(){
+        getSupportTickets("currentAccount/getTicketsAccount");
+    }
+    function getTicketsPartner(){
+        getSupportTickets("currentAccount/getTicketsPartner");
     }
 
     return (
@@ -112,8 +73,8 @@ const SupportTechnical = (props) => {
                 <FAB.Group backdropColor={"rgba(0,0,0,0.5)"} color={RED_DIS} open={open} visible icon={open ? 'star' : 'plus'}
                     actions={[
                         {icon: 'plus',color: RED_DIS, onPress: () => plusAction() },
-                        {icon: 'account',label: 'Propios',color: RED_DIS,labelTextColor: WHITE,onPress: () => console.log('Pressed star')},
-                        {icon: 'account-child-circle',label: 'Partner',color: RED_DIS,labelTextColor: WHITE,onPress: () => console.log('Pressed email')},
+                        {icon: 'account',label: 'Propios',color: RED_DIS,labelTextColor: WHITE,onPress: () => getTicketsAccount()},
+                        {icon: 'account-child-circle',label: 'Partner',color: RED_DIS,labelTextColor: WHITE,onPress: () => getTicketsPartner()},
                     ]}
                     onStateChange={onStateChange}
                     onPress={() => accionOpen()}

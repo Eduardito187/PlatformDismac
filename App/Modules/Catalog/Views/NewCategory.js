@@ -45,7 +45,7 @@ const NewCategory = ({route, navigation }) => {
     const [PreSelectedStore, SetPreSelectedStore] = React.useState([]);
     const [register, setRegister] = React.useState(false);
     React.useEffect(() => {
-        console.log(route.params);
+        //
     }, []);
 
     const ToogleMetadata = () => SetMetadata(!Metadata);

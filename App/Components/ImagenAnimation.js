@@ -10,7 +10,6 @@ class ImagenAnimation extends React.Component {
             animation: props.animation,
             border: new Animated.Value(3)
         };
-        console.log(props.url);
     }
 
     componentDidMount(){

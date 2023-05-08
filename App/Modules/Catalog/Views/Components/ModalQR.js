@@ -9,7 +9,6 @@ import { modalContainerStyle,bordePlomo,modalInfo } from '../../../Login/Style/c
 const ModalQR = (props) => {
     const [Code, SetCode] = React.useState("");
     React.useEffect(() => {
-        console.log(props);
         SetCode(JSON.stringify({"key": props.type,"value": props.value}));
     }, []);
 

@@ -50,7 +50,6 @@ const ListAccount = (props) => {
     function sendQuery(text){
         if (text.length > 0) {
             axios.post(URL_API("search/account"),CREATE_BODY_SEARCH_ACCOUN(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
-                console.log(res.data);
                 if(res.data != null){
                     thenSearch(res.data.response, res.data.responseText);
                 }else{

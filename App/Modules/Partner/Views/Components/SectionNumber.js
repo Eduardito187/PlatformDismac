@@ -7,6 +7,7 @@ import { GET_HEADER_TOKEN, URL_API } from '../../../../Helpers/API';
 import { ALING_CENTER, ROW_SECTION, SECTION_ICON, SECTION_NUMBER, SECTION_ONE, SECTION_TEXT, TEXT_COUNT } from '../../Style/Style';
 import { RED_DIS } from '../../../Login/Style/css';
 import { ActivityIndicator } from 'react-native-paper';
+import LoadItem from '../../../../Components/LoadItem';
 
 const SectionNumber = (props) => {
     const [border, SetBorder] = useState(new Animated.Value(0));
@@ -38,14 +39,10 @@ const SectionNumber = (props) => {
     }
 
     if (Load === false) {
-        return (
-            <>
-                <ActivityIndicator color={RED_DIS} size={"large"} />
-            </>
-        );
+        return (<LoadItem />);
     }else{
         return(
-            <Animated.View style={[{width: (windowWidth - 20), borderRadius: border}, ROW_SECTION, props.style]}>
+            <Animated.View style={[{width: "100%", borderRadius: border}, ROW_SECTION, props.style]}>
                 <View style={SECTION_ONE}>
                     <Text style={SECTION_TEXT}>{props.label}</Text>
                 </View>

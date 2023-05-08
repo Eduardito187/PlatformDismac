@@ -31,7 +31,6 @@ const RestorePwd = ({route, navigation }) => {
             "email" : await GET_CODE_GENERATE_EMAIL(),
             "password" : password
         };
-        console.log(BODY);
         await RestorePasswordAction(BODY, registerAccount);
         navigation.push(Route[Step-1]["Next"]);
     }

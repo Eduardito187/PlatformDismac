@@ -31,6 +31,7 @@ import Product from '../../Catalog/Views/Product';
 import TabButton from './Components/TabButton';
 import LoadingPage from './Components/LoadingPage';
 import IconExit from '../Helper/IconExit';
+import DrawerAccount from './Components/DrawerAccount';
 
 const Home = ({route, navigation }) => {
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
@@ -159,13 +160,7 @@ const Home = ({route, navigation }) => {
       <SafeAreaView style={containerScreen}>
         <View style={DRAWER_CONTENT}>
           <View style={{marginTop: heightBar}}>
-            <ImageBackground source={{uri: currentAccount.cover}} style={IMAGE_BG} imageStyle={IMAGE_STYLE}>
-              <Image source={{uri: currentAccount.profile}} style={PROFILE_PICTURE} />
-              <Text style={TEXT_NAME}>{currentAccount.name}</Text>
-              <TouchableOpacity>
-                <Text style={MAIL_TEXT}>{currentAccount.email}</Text>
-              </TouchableOpacity>
-            </ImageBackground>
+            <DrawerAccount Account={currentAccount} />
           </View>
           <View style={{ flexGrow: 1, marginTop: 20 }}>
             {TabButton(currentTab, changeScreen, Text_LandingHome, <IconHome focus={currentTab == Text_LandingHome ? true : false} size={25} />)}
