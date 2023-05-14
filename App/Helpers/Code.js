@@ -1,6 +1,8 @@
 import { URL_API,GET_HEADERS,CREATE_BODY_VERIFICATE,GENERATE_CODE,CREATE_BODY_STATUS_ACCOUNT, GET_HEADER_ACCOUNT } from './API';
 import axios from "axios";
 
+export const LISTA = "list";
+export const MOSAICO = "mosaico";
 export async function GenerateCode(email, type, bool, ShowAlertMessage) {
     let difference = 99999 - 10000; 
     let rand = Math.random();
@@ -47,4 +49,13 @@ export function enableAccount(type, value) {
     }).catch(err => {
         alert(err);
     });
+}
+export function itemsListProductsWidth(width){
+    if (width <= 550) {
+        return ((width - 20) / 2);
+    }else if (width <= 850) {
+        return ((width - 30) / 3);
+    }else {
+        return ((width - 40) / 4);
+    }
 }

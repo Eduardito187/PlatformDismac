@@ -1,4 +1,15 @@
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
+export const CONTENT_SECTION = {
+    backgroundColor: '#FFFFFF',
+    width: windowWidth-10,
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 20
+};
+export const SECTION_CONTENT = {
+    width: windowWidth-30,
+    padding: 5
+};
 export const style = {
     container : {
         backgroundColor: "white",

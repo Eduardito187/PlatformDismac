@@ -57,7 +57,6 @@ const Home = ({route, navigation }) => {
     "profile": "",
     "cover": ""
   });
-  const LogoDismac = () => <ImgDis style={{width: 30,height: 30}} animation={{border: 5, time: 1000}} />;
 
   React.useEffect(() => {
     setToken();
@@ -71,6 +70,7 @@ const Home = ({route, navigation }) => {
 
   function getAccount(token){
     axios.get(URL_API("currentAccount"),GET_HEADER_TOKEN(token)).then(res => {
+      console.log(res.data);
       if(res.data != null){
         setSession(res.data.response);
         setCurrentTab(Text_LandingHome);

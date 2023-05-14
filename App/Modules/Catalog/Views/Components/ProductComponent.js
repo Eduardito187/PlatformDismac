@@ -6,13 +6,15 @@ import { CONTAIN_CENTER, ROW, R_30, R_70 } from '../../Style/Row';
 import ImagenAnimation from '../../../../Components/ImagenAnimation';
 import ImageUrl from '../../../../Components/ImageUrl';
 import Price from './Price';
+import LoadItem from '../../../../Components/LoadItem';
+import { LISTA } from '../../../../Helpers/Code';
+import { column } from '../../Style/Two';
+import { ACTION_RECENT, ITEM_PRODUCT, PRODUCT_NAME, PRODUCT_SKU, WHITE } from '../../../Login/Style/css';
 /** */
 
 const ProductComponent = (props) => {
-    const SCREEN_WIDTH = windowWidth-10;
-    const COLUMN_ONE = Math.round((100 * 100) / SCREEN_WIDTH);
-    const COLUMN_TWO = Math.round(((SCREEN_WIDTH-100) * 100) / SCREEN_WIDTH);
     const navigation = useNavigation();
+    const [VIEW, SETVIEW] = React.useState(props.VIEW);
     const [product, SetProduct] = React.useState(null);
     const [key, SetKey] = React.useState(Math.random()+'_Product_'+Math.random());
     const [load, SetKeyLoad] = React.useState(Math.random()+'_Load_'+Math.random());
@@ -32,26 +34,30 @@ const ProductComponent = (props) => {
     }
     
     if (product == null) {
-        return(<ActivityIndicator key={load} size="large" color="#EC2427" />);
+        return(
+            <View key={key+"_load"} style={[{width: props.SCREEN_WIDTH}, ITEM_PRODUCT]}>
+                <LoadItem />
+            </View>
+        );
     }else{
         return(
-            <TouchableOpacity onPress={() => selectProduct(product)} key={key} style={{width: SCREEN_WIDTH, borderRadius: 5, backgroundColor: "#FFFFFF", marginTop: 10, marginBottom: 5, padding: 10}}>
+            <TouchableOpacity onPress={() => selectProduct(product)} key={key} style={[{width: props.SCREEN_WIDTH}, ITEM_PRODUCT]}>
                 <View style={ROW}>
-                    <View style={[{width: COLUMN_ONE.toString()+'%'}, CONTAIN_CENTER]}>
-                        <ImageUrl style={{width: 80, height: 120}} url={product.image} />
+                    <View style={[{width: props.COLUMN_ONE.toString()+'%'}, CONTAIN_CENTER]}>
+                        <ImageUrl style={props.IMAGE} url={product.image} />
                     </View>
-                    <View style={{width: COLUMN_TWO.toString()+'%'}}>
-                        <Text style={{fontSize: 15, color: "#808080"}}>{product.name}</Text>
-                        <Text style={{fontWeight: "bold", fontSize: 13, color: "#808080"}}>{product.sku}</Text>
+                    <View style={{width: props.COLUMN_TWO.toString()+'%'}}>
+                        <Text style={PRODUCT_NAME}>{product.name}</Text>
+                        <Text style={PRODUCT_SKU}>{product.sku}</Text>
                         {
                             product.frecuence_updated === null
-                            ? (<Text style={{fontWeight: "bold", fontSize: 13, color: "#808080", marginTop: 5, marginBottom: 5}}>{product.frecuence_created}</Text>)
-                            : (<Text style={{fontWeight: "bold", fontSize: 13, color: "#808080", marginTop: 5, marginBottom: 5}}>{product.frecuence_updated}</Text>)
+                            ? (<Text style={ACTION_RECENT}>{product.frecuence_created}</Text>)
+                            : (<Text style={ACTION_RECENT}>{product.frecuence_updated}</Text>)
                         }
-                        <Price Price={product.price} />
+                        <View style={{width: "100%", height: 30}}>
+                            <Price Price={product.price} />
+                        </View>
                     </View>
-                </View>
-                <View style={{width: (windowWidth-10)}}>
                 </View>
             </TouchableOpacity>
         );

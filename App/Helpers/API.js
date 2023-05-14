@@ -235,3 +235,24 @@ export async function GET_CURRENT_SESSION() {
         return null;
     }
 }
+export async function SAVE_VIEW_PRODUCTS(value) {
+    try {
+        await AsyncStorage.setItem(
+          '@VIEW_PRODUCTS', value
+        );
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GET_VIEW_PRODUCTS() {
+    try {
+        const value = await AsyncStorage.getItem('@VIEW_PRODUCTS');
+        if (value == null) {
+            return "list";
+        }
+        return value;
+    } catch (error) {
+        return "list";
+    }
+}

@@ -19,23 +19,170 @@ export const inputValidate = {
     fontSize: 22,
     margin: 2
 };
-export const TEXT_NAME = {fontSize: 13,fontWeight: 'bold',color: 'white',marginTop: 20};
-export const PROFILE_PICTURE = {width: 60,height: 60,borderRadius: 10,marginTop: 8};
-export const IMAGE_BG = {paddingLeft: 5,paddingBottom:5};
-export const MAIL_TEXT = {fontSize:12, marginTop: 6,color: 'white'}
-export const IMAGE_STYLE = {borderRadius: 15};
-export const DRAWER_CONTENT = {justifyContent: 'flex-start', padding: 15};
-export const TEXT_OPTION_DRAWER = {fontSize: 15,fontWeight: 'bold',paddingLeft: 15};
-export const JUSTIFY_CONTENT = {justifyContent: "center", alignItems: "center"};
+export const ROW_SECTION_VIEW = {
+    width: 90,
+    marginRight: 15
+};
+export const PRODUCT_NAME = {
+    fontSize: 16,
+    color: PLO_DIS
+};
+export const PRODUCT_SKU = {
+    fontSize: 14,
+    marginTop: 5,
+    color: PLO_DIS
+};
+export const ITEM_PRODUCT = {
+    borderRadius: 5,
+    padding: 5,
+    backgroundColor: WHITE,
+    margin: 5,
+    shadowColor: PLO_DIS,
+    shadowOffset: {width: 2, height: 6},
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5
+}
+export const COLUMN_ONE = {
+    width: 40,
+    paddingRight:10
+};
+export const COLUMN_TWO = {
+    width: 40
+};
+export const SECTION_RIGHT_LIST = {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: WHITE,
+    borderRadius: 10
+};
+export const CONTENT_LIST_VIEW = {
+    width: "100%",
+    height: 50,
+    position: "relative",
+    marginBottom: 5
+};
+export const TITLE_SECTION = {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: RED_DIS
+};
+export const TEXT_NAME = {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: 'white',
+    marginTop: 20
+};
+export const PROFILE_PICTURE = {
+    width: 60,
+    height: 60,
+    borderRadius: 10,
+    marginTop: 8
+};
+export const RADIUS_PICTURE_IMAGE = {
+    borderRadius: 10
+};
+export const IMAGE_BG = {
+    paddingLeft: 5,
+    paddingBottom:5
+};
+export const MAIL_TEXT = {
+    fontSize:12,
+    marginTop: 6,
+    color: 'white'
+}
+export const IMAGE_STYLE = {
+    borderRadius: 15
+};
+export const DRAWER_CONTENT = {
+    justifyContent: 'flex-start',
+    padding: 15
+};
+export const TEXT_OPTION_DRAWER = {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingLeft: 15
+};
+export const JUSTIFY_CONTENT = {
+    justifyContent: "center",
+    alignItems: "center"
+};
 export const SOLID_BG = "#F2F2F2";
-export const CONTIANER_LOADING = {position: 'relative',width: "100%", height: "100%",justifyContent: "center", alignItems: "center", flex: 1, alignContent: "center"};
-export const IMAGE_MAX = {width: "100%", height: "100%"};
-export const DESGRADE_CONTENT = {position: 'absolute',left: 0, right: 0, height: 100, bottom: 0, justifyContent: 'center', alignItems: 'center'};
-export const DESGRADE_CONTENT_CATEGORY = {position: 'absolute',left: 0, right: 0, height: 50, bottom: 0, justifyContent: 'center', alignItems: 'center'};
-export const DESGRADE_ARRAY = ['transparent', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.6)', 'rgba(0,0,0,0.8)'];
-export const LINEAR_GRADIENT = {width: 200, height: 100,padding: 5};
-export const NAME_TEXT = {fontWeight: 'bold', color: "white", fontSize: 14,marginTop: 20, height: 34};
-export const SKU_TEXT = {fontWeight: 'bold', color: "white", fontSize: 12, marginTop: 10};
+export const CONTIANER_LOADING = {
+    position: 'relative',
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    alignContent: "center"
+};
+export const IMAGE_MAX = {
+    width: "100%",
+    height: "100%"
+};
+export const DESGRADE_CONTENT = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    height: 100,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+};
+export const DESGRADE_CONTENT_LARGE = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    height: 180,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+};
+export const DESGRADE_CONTENT_CATEGORY = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    height: 50,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+};
+export const DESGRADE_ARRAY = [
+    'transparent',
+    'rgba(0,0,0,0.3)',
+    'rgba(0,0,0,0.6)',
+    'rgba(0,0,0,0.8)'
+];
+export const LINEAR_GRADIENT = {
+    width: 200,
+    height: 100,
+    padding: 5
+};
+export const NAME_TEXT = {
+    fontWeight: 'bold',
+    color: "white",
+    fontSize: 14,
+    marginTop: 20,
+    height: 34
+};
+export const SKU_TEXT = {
+    fontWeight: 'bold',
+    color: "white",
+    fontSize: 12,
+    marginTop: 10
+};
+export const CONTENT_GRADIENT = {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    padding: 5
+};
 export const CARD_PRODUCT = {
     width: 200,
     height: 300,
@@ -60,11 +207,11 @@ export const CARD_CATEGORY = {
     shadowColor: "#000",
     shadowOffset: {
         width: 0,
-        height: 4
+        height: 3
     },
     shadowOpacity: 0.30,
-    shadowRadius: 4.65,
-    elevation: 8,
+    shadowRadius: 2.65,
+    elevation: 4,
     position: 'relative'
 };
 export const containerScreen = {
@@ -203,15 +350,14 @@ export const textLine = {
     fontWeight: '400'
 };
 export const PRICE_STYLE = {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: 'bold',
     color: WHITE
 };
 export const ROW_PRICE = {
     backgroundColor: RED_DIS,
-    borderRadius: 10,
-    padding: 5,
-    position: 'absolute'
+    borderRadius: 8,
+    padding: 3
 };
 export const PRICE_BEFORE = {
     textDecorationLine: 'line-through',
@@ -219,8 +365,13 @@ export const PRICE_BEFORE = {
 };
 export const PRICE_AFTER = {
     backgroundColor: GREEN_PRICE,
-    borderRadius: 10,
-    padding: 5,
-    position: 'absolute',
-    left: 100
+    borderRadius: 8,
+    padding: 3
+};
+export const ACTION_RECENT = {
+    fontWeight: "bold",
+    fontSize: 13,
+    color: "#808080",
+    marginTop: 5,
+    marginBottom: 5
 };

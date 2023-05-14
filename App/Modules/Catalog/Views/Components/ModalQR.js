@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { View, TouchableWithoutFeedback } from 'react-native';
 import { windowHeight, windowWidth } from '../../../../Helpers/GetMobil';
+import Constants from "expo-constants";
 import Modal from "react-native-modal";
 import QRCode from 'react-native-qrcode-svg';
 import { modalContainerStyle,bordePlomo,modalInfo } from '../../../Login/Style/css';
@@ -9,7 +10,7 @@ import { modalContainerStyle,bordePlomo,modalInfo } from '../../../Login/Style/c
 const ModalQR = (props) => {
     const [Code, SetCode] = React.useState("");
     React.useEffect(() => {
-        SetCode(JSON.stringify({"key": props.type,"value": props.value}));
+        SetCode(JSON.stringify({"key": props.type,"value": props.value,"version": Constants.manifest.version}));
     }, []);
 
     return(

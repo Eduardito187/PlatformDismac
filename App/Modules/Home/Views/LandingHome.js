@@ -7,15 +7,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { GET_HEADER_ACCOUNT, GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
 import LoadingPage from './Components/LoadingPage';
 import ImageUrl from '../../../Components/ImageUrl';
-import { CARD_CATEGORY, CARD_PRODUCT, DESGRADE_ARRAY, DESGRADE_CONTENT, DESGRADE_CONTENT_CATEGORY, IMAGE_BG, IMAGE_MAX, IMAGE_STYLE, LINEAR_GRADIENT, NAME_TEXT, RED_DIS, SKU_TEXT } from '../../Login/Style/css';
+import { CARD_CATEGORY, CARD_PRODUCT, CONTENT_GRADIENT, DESGRADE_ARRAY, DESGRADE_CONTENT, DESGRADE_CONTENT_CATEGORY, IMAGE_BG, IMAGE_MAX, IMAGE_STYLE, LINEAR_GRADIENT, NAME_TEXT, RADIUS_PICTURE_IMAGE, RED_DIS, SKU_TEXT } from '../../Login/Style/css';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { CONTAIN_CENTER, ROW } from '../../Catalog/Style/Row';
 import Campains from './Components/Campains';
 import Header from './Components/Header';
+import CategoryLast from './Components/CategoryLast';
+import ProductLast from './Components/ProductLast';
 
 const LandingHome = (props) => {
-    const [CategoryComponent, SetCategoryComponent] = React.useState(null);
-    const [ProductComponent, SetProductComponent] = React.useState(null);
+    const [Categorys, SetCategorys] = React.useState([]);
+    const [Products, SetProducts] = React.useState([]);
     const [Campain, SetCampain] = React.useState([
         {
             "ID":1,
@@ -49,88 +51,29 @@ const LandingHome = (props) => {
     function getCategoryLast(){
         axios.get(URL_API("partner/lastHistoryCategory"),GET_HEADER_TOKEN(TOKEN)).then(res => {
             if(res.data != null){
-                setCategoryComponent(res.data.response);
+                SetCategorys(res.data.response);
             }else{
-                setCategoryComponent(null);
+                SetCategorys([]);
             }
         }).catch(err => {
-            setCategoryComponent(null);
+            SetCategorys([]);
         });
     }
 
     function getProductLast(){
         axios.get(URL_API("partner/lastHistoryProducts"),GET_HEADER_TOKEN(TOKEN)).then(res => {
             if(res.data != null){
-                setProductComponent(res.data.response);
+                SetProducts(res.data.response);
             }else{
-                setProductComponent(null);
+                SetProducts([]);
             }
         }).catch(err => {
-            setProductComponent(null);
+            SetProducts([]);
         });
     }
 
     function viewProduct(id_product) {
         Navigation.push("ViewProduct", {"id_product":id_product,"TOKEN":TOKEN});
-    }
-
-    function setProductComponent(ProductsData){
-        if (ProductsData.length > 0) {
-            SetProductComponent((
-                <View style={{backgroundColor: '#FFFFFF', width: windowWidth-10, padding: 10, borderRadius: 10, marginTop: 20}}>
-                    <Text style={{fontWeight: 'bold', fontSize: 18, color: RED_DIS}}>Productos {"("+ProductsData.length+")"}</Text>
-                    <View style={{width: windowWidth-30, padding: 5}}>
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        {
-                            ProductsData.map((product) => {
-                                return (
-                                    <TouchableOpacity onPress={() => viewProduct(product.id)} key={Math.random()+'_Products_'+Math.random()} style={CARD_PRODUCT}>
-                                        <ImageBackground source={{uri: product.image}} style={IMAGE_MAX} imageStyle={{borderRadius: 10}}>
-                                            <View style={DESGRADE_CONTENT}>
-                                                <LinearGradient colors={DESGRADE_ARRAY} style={LINEAR_GRADIENT}>
-                                                    <Text style={NAME_TEXT}>{product.name}</Text>
-                                                    <Text style={SKU_TEXT}>{product.sku}</Text>
-                                                </LinearGradient>
-                                            </View>
-                                        </ImageBackground>
-                                    </TouchableOpacity>
-                                )
-                            })
-                        }
-                        </ScrollView>
-                    </View>
-                </View>
-            ));
-        }
-    }
-
-    function setCategoryComponent(CategorysData){
-        if (CategorysData.length > 0) {
-            SetCategoryComponent((
-                <View style={{backgroundColor: '#FFFFFF', width: windowWidth-10, padding: 10, borderRadius: 10, marginTop: 20}}>
-                    <Text style={{fontWeight: 'bold', fontSize: 18, color: RED_DIS}}>Categorías {"("+CategorysData.length+")"}</Text>
-                    <View style={{width: windowWidth-30, padding: 5}}>
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        {
-                            CategorysData.map((category) => {
-                                return (
-                                    <View key={Math.random()+'_Categorys_'+Math.random()} style={CARD_CATEGORY}>
-                                        <ImageBackground source={{uri: category.image}} style={IMAGE_MAX} imageStyle={{borderRadius: 10}}>
-                                            <View style={DESGRADE_CONTENT_CATEGORY}>
-                                                <LinearGradient colors={DESGRADE_ARRAY} style={LINEAR_GRADIENT}>
-                                                    <Text style={NAME_TEXT}>{category.name}</Text>
-                                                </LinearGradient>
-                                            </View>
-                                        </ImageBackground>
-                                    </View>
-                                )
-                            })
-                        }
-                        </ScrollView>
-                    </View>
-                </View>
-            ));
-        }
     }
 
     function SetTotalsCatalogComponent(){
@@ -170,8 +113,8 @@ const LandingHome = (props) => {
                     <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                         {TotalsCatalog}
                         <Campains width={windowWidth-20} height={100} data={Campain} />
-                        {CategoryComponent}
-                        {ProductComponent}
+                        {Categorys.length > 0 && (<CategoryLast navigation={Navigation} TOKEN={TOKEN} categorys={Categorys} />)}
+                        {Products.length > 0 && (<ProductLast navigation={Navigation} TOKEN={TOKEN} products={Products} />)}
                     </ScrollView>
                 </View>
             </View>
