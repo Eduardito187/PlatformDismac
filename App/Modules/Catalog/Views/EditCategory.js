@@ -14,6 +14,7 @@ import SelectedStore from './Components/SelectedStore';
 import TwoSwitch from './Components/TwoSwitch';
 import ListProducts from './Components/ListProducts';
 import { Navigation } from '../../../Helpers/Nav';
+import { StatusBar } from 'expo-status-bar';
 
 const EditCategory = ({route, navigation }) => {
     const { TOKEN, id_catalog, id_category, inheritance} = route.params;
@@ -280,6 +281,7 @@ const EditCategory = ({route, navigation }) => {
                         {Message}
                     </Snackbar>
                 </View>
+                <StatusBar backgroundColor={RED_DIS} style="light" />
             </ScrollView>
         );
     }

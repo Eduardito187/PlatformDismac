@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Navigation, ResetNavigation } from '../../../Helpers/Nav';
 import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION } from '../../../Helpers/API';
 import { RED_DIS, PLO_DIS, containerScreen, TEXT_NAME, PROFILE_PICTURE, DRAWER_CONTENT, SOLID_BG, OPACITY, IMAGE_BG, IMAGE_STYLE, MAIL_TEXT } from '../../Login/Style/css';
-import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION } from '../../../Router/Route';
+import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas } from '../../../Router/Route';
 const Drawer = createDrawerNavigator();
 /** Components */
 import LandingHome from './LandingHome';
@@ -32,6 +32,8 @@ import TabButton from './Components/TabButton';
 import LoadingPage from './Components/LoadingPage';
 import IconExit from '../Helper/IconExit';
 import DrawerAccount from './Components/DrawerAccount';
+import SaleIcon from '../../Account/Helper/SaleIcon';
+import Sales from '../../Sales/Views/Sales';
 
 const Home = ({route, navigation }) => {
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
@@ -123,6 +125,9 @@ const Home = ({route, navigation }) => {
       case Text_Products:
         setCurrentScreen(() => <Product navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
+      case Text_Ventas:
+        setCurrentScreen(() => <Sales navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
       case Text_SupportTechnical:
         setCurrentScreen(() => <SupportTechnical navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
@@ -166,6 +171,7 @@ const Home = ({route, navigation }) => {
             {TabButton(currentTab, changeScreen, Text_LandingHome, <IconHome focus={currentTab == Text_LandingHome ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Catalog, <IconCatalog focus={currentTab == Text_Catalog ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Products, <IconProduct focus={currentTab == Text_Products ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_Ventas, <SaleIcon focus={currentTab == Text_Ventas ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_SupportTechnical, <IconSupport focus={currentTab == Text_SupportTechnical ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_ScannerQR, <IconScanner focus={currentTab == Text_ScannerQR ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Improvements, <IconImprovements focus={currentTab == Text_Improvements ? true : false} size={25} />)}
@@ -181,7 +187,7 @@ const Home = ({route, navigation }) => {
             {CurrentScreen}
           </Animated.View>
         </Animated.View>
-        <StatusBar style="light" />
+        <StatusBar backgroundColor={RED_DIS} style="light" />
       </SafeAreaView>
     );
   }

@@ -11,6 +11,8 @@ import Searching from '../../Account/Helper/Searching';
 import MessageBox from '../../../Components/MessageBox';
 import ListCatalog from '../../Account/Helper/ListCatalog';
 import Header from '../../Home/Views/Components/Header';
+import { RED_DIS } from '../../Login/Style/css';
+import { IconButton } from 'react-native-paper';
 
 const Catalog = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
@@ -19,9 +21,10 @@ const Catalog = (props) => {
     const [search, Setsearch] = React.useState("");
     const [searching, Setsearching] = React.useState(false);
     const [catalogs, SetCatalogs] = React.useState([]);
+    const [Navigation, SetNavigation] = React.useState(props.navigation);
+
     React.useEffect(() => {
     }, []);
-
     
     function HideAlertMessage() {
         SetShowMessage(false);
@@ -58,10 +61,14 @@ const Catalog = (props) => {
         }
     }
 
+    function createCatalog() {
+        Navigation.push("AddCatalog", {});
+    }
+
     return (
         <View style={SCREEN_RELATIVE}>
             <View style={SCREEN_ABSOLUTE_HEADER}>
-                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} />
+                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(<IconButton icon="plus" iconColor={RED_DIS} size={24} onPress={() => createCatalog()} />)} />
             </View>
             <View style={SCREEN_ABSOLUTE_BODY}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>

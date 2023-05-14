@@ -4,7 +4,7 @@ import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, Button } from 'react-native-paper';
-import { Margin_Bottom_50, Margin_Top_5, ROW_SECTION } from '../../Login/Style/css';
+import { Margin_Bottom_50, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
 import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN } from '../../../Helpers/API';
 import { style } from '../../Login/Style/style';
 import TwoSelectSku from './Components/TwoSelectSku';
@@ -13,6 +13,7 @@ import TwoSelectSku from './Components/TwoSelectSku';
 import SelectedStore from './Components/SelectedStore';
 import TwoSwitch from './Components/TwoSwitch';
 import ListProducts from './Components/ListProducts';
+import { StatusBar } from 'expo-status-bar';
 
 const NewCategory = ({route, navigation }) => {
     const widthView = windowWidth-20;
@@ -233,6 +234,7 @@ const NewCategory = ({route, navigation }) => {
                     {Message}
                 </Snackbar>
             </View>
+            <StatusBar backgroundColor={RED_DIS} style="light" />
         </ScrollView>
     );
 };

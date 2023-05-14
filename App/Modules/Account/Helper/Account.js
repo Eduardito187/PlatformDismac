@@ -1,30 +1,47 @@
 import React, {useState} from 'react';
 import { View, Text, ActivityIndicator, Alert } from 'react-native';
 import { windowWidth } from '../../../Helpers/GetMobil';
-import { IconButton } from 'react-native-paper';
+import { IconButton, Card, Chip } from 'react-native-paper';
 import axios from 'axios';
 import { URL_API,CREATE_BODY_STATUS_ACCOUNT,GET_HEADER_TOKEN,GET_TOKEN_SESSION } from '../../../Helpers/API';
+import { RED_DIS, GREEN_PRICE } from '../../Login/Style/css';
+import LoadItem from '../../../Components/LoadItem';
+import ModalQR from '../../Catalog/Views/Components/ModalQR';
 /** */
 
 const Account = (props) => {
     const [account, Setaccount] = React.useState(null); 
     const [TOKEN, SetTOKEN] = React.useState("");
+    const [isModalVisible, setModalVisible] = React.useState(false);
+
     React.useEffect(() => {
         setToken();
         setLoader(null);
     }, []);
+
+    function showModal() {
+        setModalVisible(true);
+    }
+
+    function closeModal() {
+        setModalVisible(false);
+    }
+
     function setLoader(val = null) {
         setTimeout(() => {
             Setaccount(val == null ? props.Account : val);
         }, 500)
     }
+
     function setModal(bool, text) {
         SetMessage(text);
         SetShowMessage(bool);
     }
+
     async function setToken(){
         SetTOKEN(await GET_TOKEN_SESSION());
     }
+
     async function changeStateAccount(bool) {
         axios.post(URL_API(bool ? "partner/account/disable" : "partner/account/enable"),CREATE_BODY_STATUS_ACCOUNT("email", account.email),GET_HEADER_TOKEN(TOKEN)).then(res => {
             if (res.data.response != null) {
@@ -44,6 +61,7 @@ const Account = (props) => {
             confirmMessage(err, false);
         });
     }
+
     function openModal() {
         let msg = "";
         if (account.account_status.status) {
@@ -61,24 +79,22 @@ const Account = (props) => {
         content.push({text: accept ? "Cancelar" : "OK",onPress: () => console.log("Cancelar"),style: 'cancel'});
         Alert.alert("Dismac", msg, content);
     }
+
     if (account == null) {
-        return(<ActivityIndicator size="large" color="#EC2427" />);
+        return(<LoadItem />);
     }else{
         return(
-            <View key={account.id.toString()+"_account"} style={{width: windowWidth-10, borderRadius: 5, backgroundColor: "#FFFFFF", marginTop: 10, marginBottom: 5, padding: 10}}>
-                <View style={{width: (windowWidth-10)}}>
-                    <Text style={{fontWeight: "bold", fontSize: 14.5, color: "#808080"}}>{account.name}</Text>
-                    <Text style={{fontWeight: "bold", fontSize: 14.5, color: "#808080"}}>{account.email}</Text>
-                    <Text style={{fontWeight: "bold", fontSize: 14.5, color: account.account_status.status ? "green" : "red"}}>{account.account_status.status ? "Habilitada" : "Inhabilitada"}</Text>
-                    {account.rol_account.length > 0 && (<Text style={{fontWeight: "bold", fontSize: 14.5, color: "green"}}>{account.rol_account.length} ROLES</Text>)}
-                    {account.rol_account.length == 0 && (<Text style={{fontWeight: "bold", fontSize: 14.5, color: "red"}}>SIN ROLES</Text>)}
-                </View>
-                <View style={{position: "absolute",zIndex: 100,right: 10,top: 10}}>
-                    <View style={{width: 50, height: 50}}>
-                        <IconButton icon={"account"} iconColor={account.account_status.status ? "green" : "red"} onPress={() => openModal()} />
-                    </View>
-                </View>
-            </View>
+            <Card key={account.id.toString()+"_account"} style={{window:windowWidth-10, borderRadius: 5, backgroundColor: "#FFFFFF", marginTop: 10, marginBottom: 5, padding: 10}}>
+                <Card.Title title={account.name} subtitle={account.email} right={() => <Text style={{fontWeight: "bold", fontSize: 14.5, color: account.account_status.status ? "green" : "red"}}>{account.account_status.status ? "Habilitada" : "Inhabilitada"}</Text>} />
+                <Card.Content>
+                    <Chip icon="information" onPress={() => console.log('Pressed')}>{account.rol_account.length == 0 ? "SIN ROLES" : account.rol_account.length+" ROLES"}</Chip>
+                </Card.Content>
+                <Card.Actions>
+                    <IconButton icon={"qrcode"} iconColor={RED_DIS} onPress={() => showModal()} />
+                    <IconButton icon={"account"} iconColor={account.account_status.status ? GREEN_PRICE : RED_DIS} onPress={() => openModal()} />
+                </Card.Actions>
+                <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"account"} type={"account"} value={account != null ? account.id : 0} />
+            </Card>
         );
     }
 };

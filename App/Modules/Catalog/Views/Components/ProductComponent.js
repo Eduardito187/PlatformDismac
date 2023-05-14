@@ -16,17 +16,21 @@ const ProductComponent = (props) => {
     const [product, SetProduct] = React.useState(null);
     const [key, SetKey] = React.useState(Math.random()+'_Product_'+Math.random());
     const [load, SetKeyLoad] = React.useState(Math.random()+'_Load_'+Math.random());
+
     React.useEffect(() => {
         setLoader(null);
     }, []);
+
     function setLoader(val = null) {
         setTimeout(() => {
             SetProduct(val == null ? props.Product : val);
         }, 500)
     }
+
     function selectProduct(product) {
         navigation.push("ShowProduct", {"id_product":product.id,"TOKEN":props.TOKEN});
     }
+    
     if (product == null) {
         return(<ActivityIndicator key={load} size="large" color="#EC2427" />);
     }else{

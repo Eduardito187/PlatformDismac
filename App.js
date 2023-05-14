@@ -26,6 +26,7 @@ import EditCategory from './App/Modules/Catalog/Views/EditCategory';
 import ShowProduct from './App/Modules/Product/Views/ShowProduct';
 import NewST from './App/Modules/Home/Views/NewST';
 import NewIM from './App/Modules/Home/Views/NewIM';
+import ViewProduct from './App/Modules/Product/Views/ViewProduct';
 /** */
 
 const Stack = createStackNavigator();
@@ -57,6 +58,7 @@ export default function App() {
         <Stack.Screen name="ShowProduct" component={ShowProduct} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="NewSupportTechnical" component={NewST} options={{headerShown: true,title: "Ticket de Soporte"}} />
         <Stack.Screen name="NewImprovements" component={NewIM} options={{headerShown: true,title: "Buzón de mejoras"}} />
+        <Stack.Screen name="ViewProduct" component={ViewProduct} options={{headerShown: true,title: ""}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

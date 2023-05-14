@@ -10,6 +10,8 @@ import axios from 'axios';
 /** Components */
 import Subtitle from '../../../Components/Subtitle';
 import MessageBox from '../../../Components/MessageBox';
+import { StatusBar } from 'expo-status-bar';
+import { RED_DIS } from '../../Login/Style/css';
 /** */
 
 const AddCatalog = ({route, navigation }) => {
@@ -18,9 +20,11 @@ const AddCatalog = ({route, navigation }) => {
     const [LOADING, SETLOADING] = React.useState(false);
     const [ShowMessage, SetShowMessage] = React.useState(false);
     const [Message, SetSetMessage] = React.useState("");
+
     React.useEffect(() => {
         //
     }, []);
+
     async function registerCatalog() {
         if (Name.length > 0 && Codigo.length > 0) {
             SETLOADING(true);
@@ -35,11 +39,13 @@ const AddCatalog = ({route, navigation }) => {
             SETLOADING(false);
         }
     }
+
     function ShowAlertMessage(text) {
         SetSetMessage(text);
         SetShowMessage(true);
         SETLOADING(false);
     }
+
     return (
         <View>
             <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
@@ -80,6 +86,7 @@ const AddCatalog = ({route, navigation }) => {
                 </View>
             </ScrollView>
             <MessageBox ShowMessage={ShowMessage} CloseMessage={() => SetShowMessage(false)} Title={"Dismac"} Text={Message} />
+            <StatusBar backgroundColor={RED_DIS} style="light" />
         </View>
     );
 };

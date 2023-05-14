@@ -1,12 +1,13 @@
 import React from 'react';  
-import { View, Animated, Image, Easing, Text, ScrollView  } from 'react-native';
+import { View, Animated, Image, TouchableOpacity, Text, ScrollView, ImageBackground } from 'react-native';
 import axios from 'axios';
 import {Page, SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE} from "./../../../Themes/Dismac/ThemeDismac";
 import { Badge, DataTable, ProgressBar } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
 import { GET_HEADER_ACCOUNT, GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
 import LoadingPage from './Components/LoadingPage';
 import ImageUrl from '../../../Components/ImageUrl';
-import { RED_DIS } from '../../Login/Style/css';
+import { CARD_CATEGORY, CARD_PRODUCT, DESGRADE_ARRAY, DESGRADE_CONTENT, DESGRADE_CONTENT_CATEGORY, IMAGE_BG, IMAGE_MAX, IMAGE_STYLE, LINEAR_GRADIENT, NAME_TEXT, RED_DIS, SKU_TEXT } from '../../Login/Style/css';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { CONTAIN_CENTER, ROW } from '../../Catalog/Style/Row';
 import Campains from './Components/Campains';
@@ -35,7 +36,9 @@ const LandingHome = (props) => {
     ]);
     const [TotalsCatalog, SetTotalsCatalog] = React.useState(null);
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
+    const [Navigation, SetNavigation] = React.useState(props.navigation);
     const [Load, SetLoad] = React.useState(false);
+    
     React.useEffect(() => {
         getCategoryLast();
         getProductLast();
@@ -67,6 +70,10 @@ const LandingHome = (props) => {
         });
     }
 
+    function viewProduct(id_product) {
+        Navigation.push("ViewProduct", {"id_product":id_product,"TOKEN":TOKEN});
+    }
+
     function setProductComponent(ProductsData){
         if (ProductsData.length > 0) {
             SetProductComponent((
@@ -77,14 +84,16 @@ const LandingHome = (props) => {
                         {
                             ProductsData.map((product) => {
                                 return (
-                                    <View key={Math.random()+'_Products_'+Math.random()} style={{width: 100, height: 150, borderRadius: 5, backgroundColor: "white", margin: 5,shadowColor: "#000",shadowOffset: {width: 0,height: 4,},shadowOpacity: 0.30,shadowRadius: 4.65,elevation: 8, position: 'relative'}}>
-                                        <View style={{position: 'absolute',left: 0, right: 0, top: 0, bottom: 120}}>
-                                            <ImageUrl style={{width: 100, height: 120}} url={product.image} />
-                                        </View>
-                                        <View style={{position: 'absolute',left: 0, right: 0, top: 120, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-                                            <Text style={{fontWeight: 'bold', color: RED_DIS, fontSize: 10}}>{product.sku}</Text>
-                                        </View>
-                                    </View>
+                                    <TouchableOpacity onPress={() => viewProduct(product.id)} key={Math.random()+'_Products_'+Math.random()} style={CARD_PRODUCT}>
+                                        <ImageBackground source={{uri: product.image}} style={IMAGE_MAX} imageStyle={{borderRadius: 10}}>
+                                            <View style={DESGRADE_CONTENT}>
+                                                <LinearGradient colors={DESGRADE_ARRAY} style={LINEAR_GRADIENT}>
+                                                    <Text style={NAME_TEXT}>{product.name}</Text>
+                                                    <Text style={SKU_TEXT}>{product.sku}</Text>
+                                                </LinearGradient>
+                                            </View>
+                                        </ImageBackground>
+                                    </TouchableOpacity>
                                 )
                             })
                         }
@@ -105,13 +114,14 @@ const LandingHome = (props) => {
                         {
                             CategorysData.map((category) => {
                                 return (
-                                    <View key={Math.random()+'_Categorys_'+Math.random()} style={{width: 100, height: 150, borderRadius: 5, backgroundColor: "white", margin: 5,shadowColor: "#000",shadowOffset: {width: 0,height: 4,},shadowOpacity: 0.30,shadowRadius: 4.65,elevation: 8, position: 'relative'}}>
-                                        <View style={{position: 'absolute',left: 0, right: 0, top: 0, bottom: 120}}>
-                                            <ImageUrl style={{width: 100, height: 120}} url={category.image} />
-                                        </View>
-                                        <View style={{position: 'absolute',left: 0, right: 0, top: 120, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-                                            <Text style={{fontWeight: 'bold', color: RED_DIS}}>{category.name}</Text>
-                                        </View>
+                                    <View key={Math.random()+'_Categorys_'+Math.random()} style={CARD_CATEGORY}>
+                                        <ImageBackground source={{uri: category.image}} style={IMAGE_MAX} imageStyle={{borderRadius: 10}}>
+                                            <View style={DESGRADE_CONTENT_CATEGORY}>
+                                                <LinearGradient colors={DESGRADE_ARRAY} style={LINEAR_GRADIENT}>
+                                                    <Text style={NAME_TEXT}>{category.name}</Text>
+                                                </LinearGradient>
+                                            </View>
+                                        </ImageBackground>
                                     </View>
                                 )
                             })
@@ -159,7 +169,7 @@ const LandingHome = (props) => {
                 <View style={SCREEN_ABSOLUTE_BODY}>
                     <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                         {TotalsCatalog}
-                        <Campains width={windowWidth-10} height={100} data={Campain} />
+                        <Campains width={windowWidth-20} height={100} data={Campain} />
                         {CategoryComponent}
                         {ProductComponent}
                     </ScrollView>

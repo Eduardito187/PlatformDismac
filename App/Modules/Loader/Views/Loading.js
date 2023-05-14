@@ -44,15 +44,15 @@ const Loading = ({route, navigation }) => {
     }
   }
     return (
-        <View style={PageLoading.container}>
-          <ImgDis style={PageLoading.img} animation={PageLoading.animation} />
-          <ProgressDismac End={(res) => loadInterval(res)} />
-          <View style={PageLoading.posLogo}>
-            <LogoDismac style={PageLoading.logo} />
-          </View>
-          <Text style={PageLoading.version}>V {Constants.manifest.version}</Text>
-          <StatusBar style="auto" />
+      <View style={PageLoading.container}>
+        <ImgDis style={PageLoading.img} animation={PageLoading.animation} />
+        <ProgressDismac End={(res) => loadInterval(res)} />
+        <View style={PageLoading.posLogo}>
+          <LogoDismac style={PageLoading.logo} />
         </View>
+        <Text style={PageLoading.version}>V {Constants.manifest.version}</Text>
+        <StatusBar style="auto" />
+      </View>
     );
 };
 

@@ -12,6 +12,7 @@ import Tarea from '../../Catalog/Views/Components/Tarea';
 import CustomTable from '../../Catalog/Views/Components/CustomTable';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
 import { StatusBar } from 'expo-status-bar';
+import { column, displayFlex } from '../../Catalog/Style/Two';
 
 /** Components */
 
@@ -249,6 +250,10 @@ const ShowProduct = ({route, navigation }) => {
         }
     }
 
+    function viewProduct() {
+        navigation.push("ViewProduct", {"id_product":id_product,"TOKEN":TOKEN});
+    }
+
     function getProduct(){
         axios.get(URL_API_SHOW("product", +id_product),GET_HEADER_TOKEN(TOKEN)).then(res => {
             if (res.data != null) {
@@ -257,8 +262,18 @@ const ShowProduct = ({route, navigation }) => {
                 SetProduct(Response);
                 showMessage(ResponseText);
                 navigation.setOptions({
-                    headerTitle: () => (<IconButton icon="qrcode" iconColor={RED_DIS} size={30} onPress={() => showModal()} />),
-                    headerRight: () => (<IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigate()} />)
+                    headerRight: () => (
+                        <View style={[{width: 140,marginRight: 15},displayFlex]}>
+                            <View style={[{width: 40,paddingRight:10},column]}>
+                                <IconButton icon="qrcode" iconColor={RED_DIS} size={30} onPress={() => showModal()} />
+                            </View>
+                            <View style={[{width: 40,paddingRight:10},column]}>
+                                <IconButton icon="eye" iconColor={RED_DIS} size={30} onPress={() => viewProduct()} />
+                            </View>
+                            <View style={[{width: 40},column]}>
+                                <IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigate()} />
+                            </View>
+                        </View>)
                 });
                 setData(Response);
             }

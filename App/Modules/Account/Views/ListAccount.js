@@ -73,7 +73,7 @@ const ListAccount = (props) => {
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}
                     {searching == true && (<Searching />)}
-                    {searching == false && search.length > 0 && (<ListView Account={accounts} />)}
+                    {searching == false && search.length > 0 && (<ListView key={Math.random()+'_LISTVIEW_'+Math.random()} Account={accounts} />)}
                     <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
                 </ScrollView>
             </View>

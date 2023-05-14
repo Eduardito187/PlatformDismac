@@ -7,3 +7,4 @@ export const Text_Improvements = "Buzón de mejoras";
 export const Text_Management = "Mi Partner";
 export const Text_Cuentas = "Cuentas";
 export const CLOSE_SESSION = "Cerrar sesión";
+export const Text_Ventas = "Ventas";

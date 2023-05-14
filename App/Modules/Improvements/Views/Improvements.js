@@ -51,6 +51,7 @@ const Improvements = (props) => {
     function getImprovementsActive(){
         getImprovements("currentAccount/getImprovementsActive");
     }
+    
     function getImprovementsInactive(){
         getImprovements("currentAccount/getImprovementsInactive");
     }

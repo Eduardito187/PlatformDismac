@@ -39,13 +39,7 @@ const Address = ({route, navigation }) => {
                 <View style={ContentFORM}>
                     <View style={AlingForm}>
                         <View style={AlingFormItem}>
-                            {
-                                CountryHide == false && (
-                                    <View style={RowForm}>
-                                        <Subtitle style={TitleSub} text={"Pais."} />
-                                    </View>
-                                )
-                            }
+                            {CountryHide == false && (<View style={RowForm}><Subtitle style={TitleSub} text={"Pais."} /></View>)}
                             <View style={RowForm}>
                                 <Country hide={CountryHide} type={"CO"} Disable={true} changed={(val) => SetPais(val)} />
                             </View>
@@ -64,12 +58,8 @@ const Address = ({route, navigation }) => {
                         {
                             OpenDP == false && (
                                 <View style={AlingFormItem}>
-                                    <View style={RowForm}>
-                                        <Subtitle style={TitleSub} text={"Provincia."} />
-                                    </View>
-                                    <View style={RowForm}>
-                                        <Country hide={false} type={"PV"} Query={Departamento} Disable={false} changed={(val) => SetProvincia(val)} />
-                                    </View>
+                                    <View style={RowForm}><Subtitle style={TitleSub} text={"Provincia."} /></View>
+                                    <View style={RowForm}><Country hide={false} type={"PV"} Query={Departamento} Disable={false} changed={(val) => SetProvincia(val)} /></View>
                                 </View>
                             ) 
                         }

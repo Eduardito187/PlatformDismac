@@ -14,7 +14,7 @@ const TabButton = (currentTab, setCurrentTab, title, icon) => {
     
     return (
         <TouchableOpacity onPress={() => actionPress()}>
-            <View style={{flexDirection: "row",alignItems: 'center',paddingVertical: 8,backgroundColor: currentTab == title ? SOLID_BG : 'transparent',paddingLeft: 13,paddingRight: 35,borderRadius: 8,marginTop: 15}}>
+            <View style={{flexDirection: "row",alignItems: 'center',paddingVertical: 4,backgroundColor: currentTab == title ? SOLID_BG : 'transparent',paddingLeft: 13,paddingRight: 35,borderRadius: 8,marginTop: 15}}>
                 {icon}
                 <Text style={[TEXT_OPTION_DRAWER,{color: currentTab == title ? NavBars.focus : NavBars.nofocus}]}>{title}</Text>
             </View>

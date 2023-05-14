@@ -10,6 +10,8 @@ import axios from 'axios';
 /** Components */
 import Subtitle from '../../../Components/Subtitle';
 import MessageBox from '../../../Components/MessageBox';
+import { StatusBar } from 'expo-status-bar';
+import { RED_DIS } from '../../Login/Style/css';
 /** */
 
 const AddAccount = ({route, navigation }) => {
@@ -128,6 +130,7 @@ const AddAccount = ({route, navigation }) => {
                 </View>
             </ScrollView>
             <MessageBox ShowMessage={ShowMessage} CloseMessage={() => SetShowMessage(false)} Title={"Dismac"} Text={Message} />
+            <StatusBar backgroundColor={RED_DIS} style="light" />
         </View>
     );
 };

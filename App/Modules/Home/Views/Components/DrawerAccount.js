@@ -13,11 +13,11 @@ const DrawerAccount = (props) => {
     return (
         <TouchableOpacity>
             <ImageBackground source={{uri: Account.cover}} style={IMAGE_BG} imageStyle={IMAGE_STYLE}>
-            <Image source={{uri: Account.profile}} style={PROFILE_PICTURE} />
-            <Text style={TEXT_NAME}>{Account.name}</Text>
-            <TouchableOpacity>
-                <Text style={MAIL_TEXT}>{Account.email}</Text>
-            </TouchableOpacity>
+                <Image source={{uri: Account.profile}} style={PROFILE_PICTURE} />
+                <Text style={TEXT_NAME}>{Account.name}</Text>
+                <TouchableOpacity>
+                    <Text style={MAIL_TEXT}>{Account.email}</Text>
+                </TouchableOpacity>
             </ImageBackground>
         </TouchableOpacity>
     );

@@ -29,6 +29,44 @@ export const TEXT_OPTION_DRAWER = {fontSize: 15,fontWeight: 'bold',paddingLeft: 
 export const JUSTIFY_CONTENT = {justifyContent: "center", alignItems: "center"};
 export const SOLID_BG = "#F2F2F2";
 export const CONTIANER_LOADING = {position: 'relative',width: "100%", height: "100%",justifyContent: "center", alignItems: "center", flex: 1, alignContent: "center"};
+export const IMAGE_MAX = {width: "100%", height: "100%"};
+export const DESGRADE_CONTENT = {position: 'absolute',left: 0, right: 0, height: 100, bottom: 0, justifyContent: 'center', alignItems: 'center'};
+export const DESGRADE_CONTENT_CATEGORY = {position: 'absolute',left: 0, right: 0, height: 50, bottom: 0, justifyContent: 'center', alignItems: 'center'};
+export const DESGRADE_ARRAY = ['transparent', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.6)', 'rgba(0,0,0,0.8)'];
+export const LINEAR_GRADIENT = {width: 200, height: 100,padding: 5};
+export const NAME_TEXT = {fontWeight: 'bold', color: "white", fontSize: 14,marginTop: 20, height: 34};
+export const SKU_TEXT = {fontWeight: 'bold', color: "white", fontSize: 12, marginTop: 10};
+export const CARD_PRODUCT = {
+    width: 200,
+    height: 300,
+    borderRadius: 10,
+    backgroundColor: "white",
+    margin: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 4
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+    elevation: 8
+};
+export const CARD_CATEGORY = {
+    width: 200,
+    height: 150,
+    borderRadius: 10,
+    backgroundColor: "white",
+    margin: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 4
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+    elevation: 8,
+    position: 'relative'
+};
 export const containerScreen = {
     flex: 1,
     backgroundColor: RED_DIS,

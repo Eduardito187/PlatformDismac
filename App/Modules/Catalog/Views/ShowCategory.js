@@ -13,7 +13,10 @@ import TwoSelectSku from './Components/TwoSelectSku';
 import SelectedStore from './Components/SelectedStore';
 import TwoSwitch from './Components/TwoSwitch';
 import ListProducts from './Components/ListProducts';
+import ModalQR from './Components/ModalQR';
 import { Navigation } from '../../../Helpers/Nav';
+import { column, displayFlex } from '../Style/Two';
+import { StatusBar } from 'expo-status-bar';
 
 const ShowCategory = ({route, navigation }) => {
     const { TOKEN, id_catalog, id_category, inheritance} = route.params;
@@ -45,12 +48,24 @@ const ShowCategory = ({route, navigation }) => {
     const [StoreSelect, SetStoreSelect] = React.useState([]);
     const [StoresShow , SetStoresShow] = React.useState([]);
     const [register, setRegister] = React.useState(false);
+    const [isModalVisibleQR, setModalVisibleQR] = React.useState(false);
+    const [IdCatalgo, SetIdCatalgo] = React.useState(null);
+
     React.useEffect(() => {
         navigation.setOptions({
             headerRight: () => (<ActivityIndicator color={RED_DIS} />)
         });
         getCategory();
     }, []);
+
+
+    function showModalQR() {
+        setModalVisibleQR(true);
+    }
+
+    function closeModalQR() {
+        setModalVisibleQR(false);
+    }
 
     const ToogleMetadata = () => SetMetadata(!Metadata);
     const ToogleLanding = () => SetLanding(!Landing);
@@ -64,6 +79,7 @@ const ShowCategory = ({route, navigation }) => {
     }
 
     function setData(Response){
+        SetIdCatalgo(Response.id);
         SetStatus(Response.status);
         SetVisible(Response.in_menu);
         SetFiltros(Response.filtros);
@@ -114,7 +130,15 @@ const ShowCategory = ({route, navigation }) => {
                 showMessage(ResponseText);
                 navigation.setOptions({
                     title: Response.name,
-                    headerRight: () => (<IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigate()} />)
+                    headerRight: () => (
+                    <View style={[{width: 90,marginRight: 15},displayFlex]}>
+                        <View style={[{width: 40,paddingRight:10},column]}>
+                            <IconButton icon="qrcode" iconColor={RED_DIS} size={30} onPress={() => showModalQR()} />
+                        </View>
+                        <View style={[{width: 40},column]}>
+                            <IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigate()} />
+                        </View>
+                    </View>)
                 });
                 setData(Response);
             }
@@ -208,6 +232,8 @@ const ShowCategory = ({route, navigation }) => {
                         {Message}
                     </Snackbar>
                 </View>
+                <ModalQR closeModal={() => closeModalQR()} isModalVisible={isModalVisibleQR} key={"category"} type={"category"} value={IdCatalgo != null ? IdCatalgo : 0} />
+                <StatusBar backgroundColor={RED_DIS} style="light" />
             </ScrollView>
         );
     }

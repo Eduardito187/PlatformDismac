@@ -21,7 +21,7 @@ const Campains = (props) => {
     };
 
     return(
-        <View style={{}}>
+        <View style={{padding: 5}}>
             <Carousel data={props.data} renderItem={_renderItem} sliderWidth={props.width} itemWidth={props.width} />
         </View>
     );

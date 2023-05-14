@@ -3,16 +3,18 @@ import { View, ScrollView, LogBox, ActivityIndicator } from 'react-native';
 import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
-import { Badge, Chip, DataTable } from 'react-native-paper';
+import { Badge, Chip, DataTable, IconButton } from 'react-native-paper';
 import { CREATE_BODY_SEARCH_ACCOUN, URL_API, URL_API_SHOW, GET_HEADER_TOKEN } from '../../../Helpers/API';
 
 /** Components */
 import Searching from '../../Account/Helper/Searching';
 import CategoryModal from './Components/CategoryModal';
 import ResultNone from '../../Account/Helper/ResultNone';
-import { Background_Dismac, Color_White, Margin_5 } from '../../Login/Style/css';
+import { Background_Dismac, Color_White, Margin_5, RED_DIS } from '../../Login/Style/css';
 import TwoColumn from './Components/TwoColumn';
 import TwoActionColumn from './Components/TwoActionColumn';
+import ModalQR from './Components/ModalQR';
+import { StatusBar } from 'expo-status-bar';
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -29,15 +31,19 @@ const ShowCatalog = ({route, navigation }) => {
     const [Store, SetStore] = React.useState(null);
     const [isModalVisible, setModalVisible] = React.useState(false);
     const [category, SetCategory] = React.useState(null);
+    const [isModalVisibleQR, setModalVisibleQR] = React.useState(false);
 
     React.useEffect(() => {
-        /*
-        navigation.setOptions({
-            title: Catalog.name
-        });
-        */
         getCatalog();
     }, []);
+
+    function showModalQR() {
+        setModalVisibleQR(true);
+    }
+
+    function closeModalQR() {
+        setModalVisibleQR(false);
+    }
 
     function selectCategory(category) {
         SetCategory(category);
@@ -63,6 +69,9 @@ const ShowCatalog = ({route, navigation }) => {
             SetShowMessage(true);
         }else{
             SetCatalogAPI(response);
+            navigation.setOptions({
+                headerRight: () => (<IconButton icon={"qrcode"} iconColor={RED_DIS} onPress={() => showModalQR()} />)
+            });
         }
     }
 
@@ -111,7 +120,9 @@ const ShowCatalog = ({route, navigation }) => {
                             }
                         </DataTable>
                     </View>
-                    <CategoryModal closeModal={() => closeModal()} isModalVisible={isModalVisible} navigation={navigation} TOKEN={TOKEN} category={category} idCatalog={CatalogAPI.id} /> 
+                    <ModalQR closeModal={() => closeModalQR()} isModalVisible={isModalVisibleQR} key={"catalog"} type={"catalog"} value={CatalogAPI != null ? CatalogAPI.id : 0} />
+                    <CategoryModal closeModal={() => closeModal()} isModalVisible={isModalVisible} navigation={navigation} TOKEN={TOKEN} category={category} idCatalog={CatalogAPI.id} />
+                    <StatusBar backgroundColor={RED_DIS} style="light" />
                 </ScrollView>
             );
         }
