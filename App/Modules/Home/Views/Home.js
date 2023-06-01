@@ -6,8 +6,8 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import axios from 'axios';
 import { Navigation, ResetNavigation } from '../../../Helpers/Nav';
 import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION } from '../../../Helpers/API';
-import { RED_DIS, PLO_DIS, containerScreen, TEXT_NAME, PROFILE_PICTURE, DRAWER_CONTENT, SOLID_BG, OPACITY, IMAGE_BG, IMAGE_STYLE, MAIL_TEXT } from '../../Login/Style/css';
-import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas } from '../../../Router/Route';
+import { RED_DIS, PLO_DIS, containerScreen, TEXT_NAME, PROFILE_PICTURE, DRAWER_CONTENT, SOLID_BG, OPACITY, IMAGE_BG, IMAGE_STYLE, MAIL_TEXT, UPLOAD_BTN } from '../../Login/Style/css';
+import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas, Upload } from '../../../Router/Route';
 const Drawer = createDrawerNavigator();
 /** Components */
 import LandingHome from './LandingHome';
@@ -34,6 +34,8 @@ import IconExit from '../Helper/IconExit';
 import DrawerAccount from './Components/DrawerAccount';
 import SaleIcon from '../../Account/Helper/SaleIcon';
 import Sales from '../../Sales/Views/Sales';
+import IconUpload from '../Helper/IconUpload';
+import UploadMassive from '../../Account/Views/UploadMassive';
 
 const Home = ({route, navigation }) => {
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
@@ -143,6 +145,9 @@ const Home = ({route, navigation }) => {
       case Text_Cuentas:
         setCurrentScreen(() => <ListAccount navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
+      case Upload:
+        setCurrentScreen(() => <UploadMassive navigation={navigation} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
       case CLOSE_SESSION:
         closeSession();
         break;
@@ -172,10 +177,10 @@ const Home = ({route, navigation }) => {
             {TabButton(currentTab, changeScreen, Text_Catalog, <IconCatalog focus={currentTab == Text_Catalog ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Products, <IconProduct focus={currentTab == Text_Products ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Ventas, <SaleIcon focus={currentTab == Text_Ventas ? true : false} size={25} />)}
-            {TabButton(currentTab, changeScreen, Text_SupportTechnical, <IconSupport focus={currentTab == Text_SupportTechnical ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Upload, <IconUpload focus={currentTab == Upload ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_ScannerQR, <IconScanner focus={currentTab == Text_ScannerQR ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_SupportTechnical, <IconSupport focus={currentTab == Text_SupportTechnical ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Improvements, <IconImprovements focus={currentTab == Text_Improvements ? true : false} size={25} />)}
-            {TabButton(currentTab, changeScreen, Text_Management, <IconManagement focus={currentTab == Text_Management ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Cuentas, <IconAccount focus={currentTab == Text_Cuentas ? true : false} size={25} />)}
           </View>
           <View>
@@ -187,6 +192,10 @@ const Home = ({route, navigation }) => {
             {CurrentScreen}
           </Animated.View>
         </Animated.View>
+        
+        {
+          showMenu && (<View style={UPLOAD_BTN}>{TabButton(currentTab, changeScreen, Text_Management, <IconManagement focus={currentTab == Text_Management ? true : false} size={25} />)}</View>)
+        }
         <StatusBar backgroundColor={RED_DIS} style="light" />
       </SafeAreaView>
     );

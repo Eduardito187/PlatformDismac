@@ -15,6 +15,7 @@ import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import LoadItem from '../../../Components/LoadItem';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
 import { IconButton } from 'react-native-paper';
+import { column, displayFlex } from '../../Catalog/Style/Two';
 
 const Partner = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
@@ -48,7 +49,16 @@ const Partner = (props) => {
         return (
             <View style={SCREEN_RELATIVE}>
                 <View style={SCREEN_ABSOLUTE_HEADER}>
-                    <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(<IconButton icon={"qrcode"} onPress={() => showModal()} iconColor={RED_DIS} size={24} />)} />
+                    <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(
+                        <View style={[{width: 90},displayFlex]}>
+                            <View style={[{width: 40,paddingRight:10},column]}>
+                                <IconButton icon={"pencil"} iconColor={RED_DIS} size={24} onPress={() => console.log('Pressed')} />
+                            </View>
+                            <View style={[{width: 40},column]}>
+                                <IconButton icon={"qrcode"} onPress={() => showModal()} iconColor={RED_DIS} size={24} />
+                            </View>
+                        </View>)} 
+                    />
                 </View>
                 <View style={SCREEN_ABSOLUTE_BODY}>
                     <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>

@@ -109,6 +109,11 @@ export const JUSTIFY_CONTENT = {
     justifyContent: "center",
     alignItems: "center"
 };
+export const UPLOAD_BTN = {
+    position: "absolute",
+    right: 0,
+    bottom: 15
+};
 export const SOLID_BG = "#F2F2F2";
 export const CONTIANER_LOADING = {
     position: 'relative',

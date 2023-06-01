@@ -1,10 +1,11 @@
 export const Text_LandingHome = "Inicio";
-export const Text_Catalog = "Catálogo";
+export const Text_Catalog = "Categorías";
 export const Text_Products = "Productos";
 export const Text_SupportTechnical = "Sopórte tecnico";
 export const Text_ScannerQR = "Scanner QR";
 export const Text_Improvements = "Buzón de mejoras";
-export const Text_Management = "Mi Partner";
+export const Text_Management = "Mi partner";
 export const Text_Cuentas = "Cuentas";
 export const CLOSE_SESSION = "Cerrar sesión";
 export const Text_Ventas = "Ventas";
+export const Upload = "Cargar excel";

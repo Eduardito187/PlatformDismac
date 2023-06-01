@@ -4,6 +4,8 @@ import { windowWidth } from '../../../../Helpers/GetMobil';
 import { URL_PATH, URL_PATH_1 } from '../../Helper/Path';
 /** */
 import ImagenAnimation from '../../../../Components/ImagenAnimation';
+import { RED_DIS, WHITE } from '../../../Login/Style/css';
+import { IconButton } from 'react-native-paper';
 
 const ProfilePartner = (props) => {
     const [border, SetBorder] = useState(new Animated.Value(0));
@@ -27,9 +29,15 @@ const ProfilePartner = (props) => {
                 <ImagenAnimation style={{width: "100%", height: (windowWidth - 20)}} url={props.Partner.cover} animation={{border: 10, time: 1000}} />
                 <View style={{position: "absolute", left: 10, bottom: 10}}>
                     <ImagenAnimation style={{width: 80, height: 80}} url={props.Partner.profile} animation={{border: 40, time: 1000}} />
+                    <View style={{position: 'absolute', bottom: -8, right: -10}}>
+                        <IconButton icon="camera" iconColor={RED_DIS} style={{backgroundColor: WHITE}} size={15} onPress={() => console.log('Pressed')} />
+                    </View>
                 </View>
                 <View style={{position: "absolute", left: 95, bottom: 35}}>
                     <Text style={{fontSize: 20, fontWeight: "900", color: "#EC2427", backgroundColor: "#FFFFFF", padding: 3, borderRadius: 5}}>{props.Partner.name}</Text>
+                </View>
+                <View style={{position: 'absolute', bottom: 10, right: 10}}>
+                    <IconButton icon="camera" iconColor={RED_DIS} style={{backgroundColor: WHITE}} size={25} onPress={() => console.log('Pressed')} />
                 </View>
             </View>
         </Animated.View>

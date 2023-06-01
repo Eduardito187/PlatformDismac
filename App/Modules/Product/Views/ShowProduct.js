@@ -13,6 +13,7 @@ import CustomTable from '../../Catalog/Views/Components/CustomTable';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
 import { StatusBar } from 'expo-status-bar';
 import { column, displayFlex } from '../../Catalog/Style/Two';
+import LoadingPage from '../../Home/Views/Components/LoadingPage';
 
 /** Components */
 
@@ -297,7 +298,7 @@ const ShowProduct = ({route, navigation }) => {
     }
     
     if (loading === false) {
-        return (<ActivityIndicator color={RED_DIS} size={'large'} />);
+        return (<LoadingPage />);
     }else{
         return (
             <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
