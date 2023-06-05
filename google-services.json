@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "127322741666",
+    "project_id": "modalidad-682cf",
+    "storage_bucket": "modalidad-682cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127322741666:android:72429a19311f8115db30fb",
+        "android_client_info": {
+          "package_name": "com.eduardito.PlatformDismac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127322741666-gk0qh6cgsm538sci4j82vgpi7ssm6639.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIzHID8rITOJT8SEZKxP7ld0Effl_RBOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127322741666-gk0qh6cgsm538sci4j82vgpi7ssm6639.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

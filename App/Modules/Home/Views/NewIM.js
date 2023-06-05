@@ -8,6 +8,7 @@ import { style } from '../../Login/Style/style';
 import { StatusBar } from 'expo-status-bar';
 import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
 import { SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
+import LoadingPage from './Components/LoadingPage';
 
 /** Components */
 
@@ -71,7 +72,7 @@ const NewIM = ({route, navigation }) => {
     }
     
     if (loading === false) {
-        return (<ActivityIndicator color={RED_DIS} size={'large'} />);
+        return (<LoadingPage />);
     }else{
         return (
             <SafeAreaView style={{flex: 1}}>

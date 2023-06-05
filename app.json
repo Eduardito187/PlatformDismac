@@ -27,12 +27,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.eduardito.PlatformDismac"
+      "package": "com.eduardito.PlatformDismac",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
+      "userInterfaceStyle": "automatic",
       "eas": {
         "projectId": "44ed4d0f-452f-47cf-82fb-6578fddb5157"
       }

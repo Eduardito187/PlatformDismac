@@ -19,6 +19,13 @@ export const inputValidate = {
     fontSize: 22,
     margin: 2
 };
+export const Option_Table = {position: "relative", width: "100%", height: 35, padding: 5, marginBottom: 1, marginTop: 1};
+export const Column_One = {position: "absolute", left: 0, top: 0, bottom: 0, right: 101, justifyContent: "center", alignItems: "center", backgroundColor: WHITE};
+export const Column_Two = {position: "absolute", right: 0, top: 0, bottom: 0, width: 100, justifyContent: "center", alignItems: "center", backgroundColor: WHITE};
+export const Column_Price = {position: "absolute", right: 0, top: 0, bottom: 0, width: 100, justifyContent: "center", alignItems: "center"};
+export const Column_Image = {position: "absolute", left: 0, top: 0, bottom: 0, width: 90};
+export const Column_Content = {position: "relative", width: "100%", height: 135, padding: 5};
+export const Column_Detail = {position: "absolute", left: 91, top: 0, bottom: 0, right: 101, padding: 5};
 export const ROW_SECTION_VIEW = {
     width: 90,
     marginRight: 15

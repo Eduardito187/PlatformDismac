@@ -17,6 +17,7 @@ import ModalQR from './Components/ModalQR';
 import { Navigation } from '../../../Helpers/Nav';
 import { column, displayFlex } from '../Style/Two';
 import { StatusBar } from 'expo-status-bar';
+import LoadingPage from '../../Home/Views/Components/LoadingPage';
 
 const ShowCategory = ({route, navigation }) => {
     const { TOKEN, id_catalog, id_category, inheritance} = route.params;
@@ -162,7 +163,7 @@ const ShowCategory = ({route, navigation }) => {
     }
     
     if (loading === false) {
-        return (<ActivityIndicator color={RED_DIS} size={'large'} />);
+        return (<LoadingPage />);
     }else{
         return (
             <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>

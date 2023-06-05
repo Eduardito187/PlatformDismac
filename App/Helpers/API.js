@@ -39,6 +39,16 @@ export async function GET_HEADER_ACCOUNT() {
         }
     };
 }
+export function CREATE_BODY_SALE_QUERY(query, status, date){
+    return {
+        "query":query,
+        "status":status,
+        "filters": {
+            "date_ini":date.firstDate,
+            "date_end":date.secondDate
+        }
+    };
+}
 export function CREATE_BODY_SET_CATALOG(name, code) {
     return {
         "name" : name,
@@ -254,5 +264,28 @@ export async function GET_VIEW_PRODUCTS() {
         return value;
     } catch (error) {
         return "list";
+    }
+}
+export async function GET_FILTER_SALE_DATE() {
+    try {
+        const value = await AsyncStorage.getItem('@FILTER_SALE_DATE');
+        if (value == null) {
+            return {"firstDate": "", "secondDate": ""};
+        }
+        else {
+            return JSON.parse(value);
+        }
+    } catch (error) {
+        return {"firstDate": "", "secondDate": ""};
+    }
+}
+export async function SAVE_FILTER_SALE_DATE(value) {
+    try {
+        await AsyncStorage.setItem(
+          '@FILTER_SALE_DATE', JSON.stringify(value)
+        );
+        return true;
+    } catch (error) {
+        return false;
     }
 }

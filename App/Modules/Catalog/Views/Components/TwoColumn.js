@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
-import { View, Text } from 'react-native';
-import { displayFlex, column, label1, label2 } from '../../Style/Two';
+import { View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { displayFlex, column, label1, label2, columnChild } from '../../Style/Two';
 /** */
 
 const TwoColumn = (props) => {
+    const [style, SetStyle] = React.useState(props.child != null ? columnChild : column);
     return(
         <View style={[{width:props.width},displayFlex]}>
-            <View style={[{width:props.column1},column]}>
-                <Text style={label1}>{props.label1}</Text>
+            <View style={[{width:props.column1},style]}>
+                <Text variant="bodyMedium" style={label1}>{props.label1}</Text>
             </View>
-            <View style={[{width:props.column2},column]}>
-                <Text style={label2}>{props.label2}</Text>
+            <View style={[{width:props.column2},style]}>
+                <Text variant="bodyMedium" style={label2}>{props.label2}</Text>
             </View>
         </View>
     );

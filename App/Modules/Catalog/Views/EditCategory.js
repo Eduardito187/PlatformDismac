@@ -15,6 +15,7 @@ import TwoSwitch from './Components/TwoSwitch';
 import ListProducts from './Components/ListProducts';
 import { Navigation } from '../../../Helpers/Nav';
 import { StatusBar } from 'expo-status-bar';
+import LoadingPage from '../../Home/Views/Components/LoadingPage';
 
 const EditCategory = ({route, navigation }) => {
     const { TOKEN, id_catalog, id_category, inheritance} = route.params;
@@ -203,7 +204,7 @@ const EditCategory = ({route, navigation }) => {
     }
     
     if (loading === false) {
-        return (<ActivityIndicator color={RED_DIS} size={'large'} />);
+        return (<LoadingPage />);
     }else{
         return (
             <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>

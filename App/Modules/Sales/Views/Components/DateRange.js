@@ -5,18 +5,27 @@ import moment from "moment";
 import Constants from "expo-constants";
 import Modal from "react-native-modal";
 import { modalContainerStyle,bordePlomo,modalInfo } from '../../../Login/Style/css';
+import { GET_FILTER_SALE_DATE, SAVE_FILTER_SALE_DATE } from '../../../../Helpers/API';
 /** */
 
 const DateRange = (props) => {
     const [selectedRange, setRange] = React.useState({});
 
     React.useEffect(() => {
-        //
+        getRangeDate();
     }, []);
 
-    function changeRange(Range){
+    async function getRangeDate() {
+        let date = await GET_FILTER_SALE_DATE();
+        setRange(date);
+        props.changeValue(date);
+    }
+
+    async function changeRange(Range){
+        await SAVE_FILTER_SALE_DATE(Range);
         setRange(Range);
-        console.log(Range);
+        props.changeValue(Range);
+        props.closeModal();
     }
 
     return(

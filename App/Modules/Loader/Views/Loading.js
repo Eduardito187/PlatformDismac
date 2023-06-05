@@ -6,15 +6,18 @@ import Constants from "expo-constants";
 import { GET_TOKEN_SESSION, URL_API_GET, GET_HEADER_TOKEN, SAVE_STORES } from '../../../Helpers/API';
 import { ResetNavigation } from '../../../Helpers/Nav';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 
 /** Components */
 import ProgressDismac from '../../../Components/ProgressDismac';
 import LogoDismac from '../../../Components/LogoDismac';
 import ImgDis from '../../../Components/ImgDis';
+import { getTokenNotification } from '../../../Helpers/Code';
 /** */
 
 const Loading = ({route, navigation }) => {
   const [TOKEN, SetTOKEN] = React.useState(null);
+  const [TokenNotify, SetTokenNotify] = React.useState("");
   React.useEffect(() => {
     setToken();
   }, []);
@@ -37,7 +40,12 @@ const Loading = ({route, navigation }) => {
   async function loadInterval(res) {
     if (res) {
       if (await GET_TOKEN_SESSION() != null) {
-        ResetNavigation("Inicio",{},navigation);
+        const socket = io("http://31.220.31.243:3000/", {
+          autoConnect: true
+        });
+        const token_expo = await getTokenNotification();
+        console.log(token_expo);
+        ResetNavigation("Inicio",{"socket":socket},navigation);
       }else{
         navigation.navigate('Login');
       }

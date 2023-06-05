@@ -24,9 +24,15 @@ const Address = ({route, navigation }) => {
     React.useEffect(() => {
         //
     }, []);
+
     async function StepNext() {
         await settingRegister([Pais,Departamento,Provincia], Step);
         navigation.push(Route[Step-1]["Next"]);
+    }
+
+    function selectDep(value){
+        SetOpenDP(value);
+        SetCountryHide(value);
     }
 
     return (
@@ -49,10 +55,7 @@ const Address = ({route, navigation }) => {
                                 <Subtitle style={TitleSub} text={"Departamento."} />
                             </View>
                             <View style={RowForm}>
-                                <Country hide={false} type={"DP"} Open={(value) => {
-                                    SetOpenDP(value);
-                                    SetCountryHide(value);
-                                }} Disable={false} changed={(val) => SetDepartamento(val)} />
+                                <Country hide={false} type={"DP"} Open={(value) => selectDep(value)} Disable={false} changed={(val) => SetDepartamento(val)} />
                             </View>
                         </View>
                         {

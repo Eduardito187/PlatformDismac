@@ -28,6 +28,7 @@ import NewST from './App/Modules/Home/Views/NewST';
 import NewIM from './App/Modules/Home/Views/NewIM';
 import ViewProduct from './App/Modules/Product/Views/ViewProduct';
 import Reportes from './App/Modules/Account/Views/Resportes';
+import ShowSale from './App/Modules/Sales/Views/ShowSale';
 /** */
 
 const Stack = createStackNavigator();
@@ -61,6 +62,7 @@ export default function App() {
         <Stack.Screen name="NewImprovements" component={NewIM} options={{headerShown: true,title: "Buzón de mejoras"}} />
         <Stack.Screen name="ViewProduct" component={ViewProduct} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="Reportes" component={Reportes} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="ShowSale" component={ShowSale} options={{headerShown: false,title: ""}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
