@@ -36,6 +36,7 @@ import SaleIcon from '../../Account/Helper/SaleIcon';
 import Sales from '../../Sales/Views/Sales';
 import IconUpload from '../Helper/IconUpload';
 import UploadMassive from '../../Account/Views/UploadMassive';
+import TabAccount from './Components/TabAccount';
 
 const Home = ({route, navigation }) => {
   const {socket} = route.params;
@@ -172,7 +173,7 @@ const Home = ({route, navigation }) => {
       <SafeAreaView style={containerScreen}>
         <View style={DRAWER_CONTENT}>
           <View style={{marginTop: heightBar}}>
-            <DrawerAccount Account={currentAccount} />
+            {TabAccount(currentTab, changeScreen, Text_Management, currentAccount)}
           </View>
           <View style={{ flexGrow: 1, marginTop: 20 }}>
             {TabButton(currentTab, changeScreen, Text_LandingHome, <IconHome focus={currentTab == Text_LandingHome ? true : false} size={25} />)}
@@ -196,7 +197,7 @@ const Home = ({route, navigation }) => {
         </Animated.View>
         
         {
-          showMenu && (<View style={UPLOAD_BTN}>{TabButton(currentTab, changeScreen, Text_Management, <IconManagement focus={currentTab == Text_Management ? true : false} size={25} />)}</View>)
+          showMenu && (<View style={UPLOAD_BTN}></View>)
         }
         <StatusBar backgroundColor={RED_DIS} style="light" />
       </SafeAreaView>

@@ -18,6 +18,7 @@ import { IconButton } from 'react-native-paper';
 import { column, displayFlex } from '../../Catalog/Style/Two';
 
 const Partner = (props) => {
+    const [Socket, SetSocket] = React.useState(props.socket);
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
     const [Load, SetLoad] = React.useState(false);
     const [Partner, SetPartner] = React.useState(null);
@@ -50,10 +51,7 @@ const Partner = (props) => {
             <View style={SCREEN_RELATIVE}>
                 <View style={SCREEN_ABSOLUTE_HEADER}>
                     <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(
-                        <View style={[{width: 90},displayFlex]}>
-                            <View style={[{width: 40,paddingRight:10},column]}>
-                                <IconButton icon={"pencil"} iconColor={RED_DIS} size={24} onPress={() => console.log('Pressed')} />
-                            </View>
+                        <View style={[{width: 40},displayFlex]}>
                             <View style={[{width: 40},column]}>
                                 <IconButton icon={"qrcode"} onPress={() => showModal()} iconColor={RED_DIS} size={24} />
                             </View>
@@ -64,7 +62,7 @@ const Partner = (props) => {
                     <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                         {
                             Partner != null
-                            ? <ProfilePartner Partner={Partner} />
+                            ? <ProfilePartner TOKEN={TOKEN} Partner={Partner} Socket={Socket} />
                             : <LoadItem />
                         }
                         <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countCampaignsPartner"} label={"Campañas"} icon={(<FontAwesome name={"calendar"} size={45} color={RED_DIS} />)} />

@@ -31,6 +31,14 @@ export function GET_HEADER_TOKEN(token) {
         }
     };
 }
+export function GET_HEADER_TOKEN_FILE(token) {
+    return {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "multipart/form-data"
+        }
+    };
+}
 export async function GET_HEADER_ACCOUNT() {
     return {
         headers: {

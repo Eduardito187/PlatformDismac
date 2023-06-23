@@ -3,7 +3,6 @@ import { View, ScrollView } from 'react-native';
 import {Page, SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import DropDownPicker from 'react-native-dropdown-picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import * as DocumentPicker from "expo-document-picker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
@@ -13,10 +12,10 @@ import { TitleSub } from '../../Login/Style/style';
 import Subtitle from '../../../Components/Subtitle';
 import TwoActionColumn from '../../Catalog/Views/Components/TwoActionColumn';
 import { windowWidth } from '../../../Helpers/GetMobil';
-import { Button, RadioButton, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { RED_DIS } from '../../Login/Style/css';
-import { column, displayFlex, label1 } from '../../Catalog/Style/Two';
 import TwoRadio from '../../Catalog/Views/Components/TwoRadio';
+import { GET_HEADER_TOKEN_FILE, URL_API } from '../../../Helpers/API';
 
 const UploadMassive = (props) => {
     const [DateEjecute, SetDateEjecute] = React.useState(false);
@@ -47,12 +46,9 @@ const UploadMassive = (props) => {
         SetDateEjecute(false);
     };
 
-    const confirmDateEjecucion = (a) => {
-        var localDate = new Date(a).toLocaleString("es_BO", {timeZone: "America/La_Paz"});
-
-        console.log("Ejecucion", a, localDate);
-
-        SetFechaEjecucion(localDate);
+    const confirmDateEjecucion = (d) => {
+        var datestring = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+        SetFechaEjecucion(datestring);
         hideDateEjecute();
     };
 
@@ -64,12 +60,9 @@ const UploadMassive = (props) => {
         SetDateDuracion(false);
     };
 
-    const confirmDateDuracion = (a) => {
-        var localDate = new Date(a).toLocaleString("es_BO", {timeZone: "America/La_Paz"});
-
-        console.log("Duracion", a, localDate);
-
-        SetFechaDuracion(localDate);
+    const confirmDateDuracion = (d) => {
+        var datestring = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+        SetFechaDuracion(datestring);
         hideDateDuracion();
     };
 
@@ -107,7 +100,29 @@ const UploadMassive = (props) => {
     }
 
     function sentForm() {
-        let dataForm = new FormData();
+        SetDisable(true);
+        if (File != null) {
+            let formData = new FormData();
+            formData.append('File', { uri: File.uri, name: File.name, type: File.mimeType });
+            formData.append('Type', Value);
+            formData.append('Ejecucion', ejecucion);
+            formData.append('Duracion', duracion);
+            if (ejecucion == "PROGRAMAR") {
+                formData.append('FechaEjecucion', FechaEjecucion);
+            }
+            if (duracion == "TEMPORAL") {
+                formData.append('FechaDuracion', FechaDuracion);
+            }
+            axios.post(URL_API("uploadFile"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
+                if (res.response) {
+                    SetDisable(false);
+                }
+            }).catch(err => {
+                SetDisable(false);
+            });
+        }else{
+            SetDisable(false);
+        }
     }
 
     return (
@@ -120,7 +135,7 @@ const UploadMassive = (props) => {
                     <View style={{width: "100%"}}>
                         <Subtitle style={TitleSub} text={"Acción:"} />
                         <View style={{marginTop: 5}}>
-                            <DropDownPicker disabled={Disable} open={Open} value={Value} items={Items} setOpen={(value) => SetOpen(value)} setValue={(value) => SetValue(value)} setItems={SetItems} />
+                            <DropDownPicker open={Open} value={Value} items={Items} setOpen={(value) => SetOpen(value)} setValue={(value) => SetValue(value)} setItems={SetItems} />
                         </View>
                     </View>
                     <View style={{width: "100%", marginTop: 10}}>
@@ -157,7 +172,7 @@ const UploadMassive = (props) => {
                         </View>
                     </View>
                     <View style={{width: "100%", justifyContent: "center", alignItems: "center"}}>
-                        <Button icon="upload" mode="contained" style={{backgroundColor: RED_DIS, width: 150}} onPress={() => console.log('Pressed')}>
+                        <Button icon="upload" disabled={Disable} mode="contained" style={{backgroundColor: RED_DIS, width: 150}} onPress={() => sentForm()}>
                             Subir Data
                         </Button>
                     </View>

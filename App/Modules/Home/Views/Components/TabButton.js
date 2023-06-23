@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
-import IconHome from '../../Helper/IconHome';
 import { NavBars } from '../../../../Themes/Dismac/ThemeDismac';
 import { SOLID_BG, TEXT_OPTION_DRAWER } from '../../../Login/Style/css';
 /** */
