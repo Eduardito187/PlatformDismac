@@ -4,7 +4,7 @@ import { View, Text, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedba
 import { windowHeight, windowWidth } from '../../../../Helpers/GetMobil';
 import { Chip,DataTable,Button, Badge } from 'react-native-paper';
 import Modal from "react-native-modal";
-import { modalContainerStyle,Background_Dismac,bordePlomo,modalInfo,Margin_5,Margin_Top_5, Color_White } from '../../../Login/Style/css';
+import { modalContainerStyle,Background_Dismac,bordePlomo,modalInfo,Margin_5,Margin_Top_5, Color_White, Section_Max_Absolute, Flex_Section } from '../../../Login/Style/css';
 /** */
 import TwoColumn from './TwoColumn';
 
@@ -24,8 +24,8 @@ const CategoryModal = (props) => {
     }else{
         return(
             <>
-                <Modal isVisible={props.isModalVisible} swipeDirection={'down'} customBackdrop={<TouchableWithoutFeedback style={{position: 'absolute', left:0,right: 0,top: 0, bottom:0}} onPress={() => props.closeModal()}>
-                    <View style={{ flex: 1,backgroundColor: 'rgba(0,0,0,.5)'}} /></TouchableWithoutFeedback>} onSwipeComplete={() => props.closeModal()}>
+                <Modal isVisible={props.isModalVisible} swipeDirection={'down'} customBackdrop={<TouchableWithoutFeedback style={Section_Max_Absolute} onPress={() => props.closeModal()}>
+                    <View style={Flex_Section} /></TouchableWithoutFeedback>} onSwipeComplete={() => props.closeModal()}>
                     <View style={[modalContainerStyle]}>
                         <View style={[modalInfo,bordePlomo]}>
                             <TwoColumn width={widthView} column1={widthView*.65} column2={widthView*.35} label1={'Nombre de categoría'} label2={props.category.name} />

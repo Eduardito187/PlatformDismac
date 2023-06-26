@@ -3,7 +3,7 @@ import { ScrollView, Text, View, ImageBackground, Dimensions } from 'react-nativ
 import { LinearGradient } from 'expo-linear-gradient';
 import {LineChart,BarChart,PieChart,ProgressChart,ContributionGraph,StackedBarChart} from "react-native-chart-kit";
 import { CARD_CATEGORY, CONTENT_GRADIENT, DESGRADE_ARRAY, DESGRADE_CONTENT_CATEGORY, IMAGE_MAX, NAME_TEXT, RADIUS_PICTURE_IMAGE, RED_DIS, TITLE_SECTION, WHITE } from '../../../Login/Style/css';
-import { CONTENT_SECTION, SECTION_CONTENT } from '../../../Login/Style/style';
+import { CONTENT_SECTION, P5, SECTION_CONTENT, Style_Opacity } from '../../../Login/Style/style';
 /** */
 
 const data = [
@@ -53,7 +53,7 @@ const ChartTarget = (props) => {
     }, []);
     
     return(
-        <View style={{padding: 5}}>
+        <View style={P5}>
             <BarChart
                 data={{labels: ["Semana 1", "Semana 2", "Semana 3", "Semana 4"],
                 datasets: [
@@ -63,7 +63,7 @@ const ChartTarget = (props) => {
                 ]}} yAxisLabel="BS " yAxisSuffix="k"
                 width={props.width}
                 height={props.height}
-                chartConfig={{backgroundColor: WHITE,backgroundGradientFrom: RED_DIS,backgroundGradientTo: "#EA4B4D",decimalPlaces: 1,color: (opacity = 1) => WHITE,labelColor: (opacity = 1) => WHITE,}} style={{marginVertical: 8,borderRadius: 5}}
+                chartConfig={{backgroundColor: WHITE,backgroundGradientFrom: RED_DIS,backgroundGradientTo: "#EA4B4D",decimalPlaces: 1,color: (opacity = 1) => WHITE,labelColor: (opacity = 1) => WHITE,}} style={Style_Opacity}
             />
         </View>
     );

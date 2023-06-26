@@ -4,7 +4,7 @@ import { windowHeight, windowWidth } from '../../../../Helpers/GetMobil';
 import Constants from "expo-constants";
 import Modal from "react-native-modal";
 import QRCode from 'react-native-qrcode-svg';
-import { modalContainerStyle,bordePlomo,modalInfo } from '../../../Login/Style/css';
+import { modalContainerStyle,bordePlomo,modalInfo, Section_Max_Absolute, Flex_Section } from '../../../Login/Style/css';
 /** */
 
 const ModalQR = (props) => {
@@ -15,8 +15,8 @@ const ModalQR = (props) => {
 
     return(
         <>
-            <Modal isVisible={props.isModalVisible} swipeDirection={'down'} customBackdrop={<TouchableWithoutFeedback style={{position: 'absolute', left:0,right: 0,top: 0, bottom:0}} onPress={() => props.closeModal()}>
-                <View style={{ flex: 1,backgroundColor: 'rgba(0,0,0,.5)'}} /></TouchableWithoutFeedback>} onSwipeComplete={() => props.closeModal()}>
+            <Modal isVisible={props.isModalVisible} swipeDirection={'down'} customBackdrop={<TouchableWithoutFeedback style={Section_Max_Absolute} onPress={() => props.closeModal()}>
+                <View style={Flex_Section} /></TouchableWithoutFeedback>} onSwipeComplete={() => props.closeModal()}>
                 <View style={[modalContainerStyle]}>
                     <View style={[modalInfo,bordePlomo]}>
                         <QRCode value={Code} size={windowWidth*0.6} />

@@ -99,7 +99,7 @@ const Login = ({route, navigation }) => {
                         <Title text={"Iniciar Sesión"} size={35} style={style.Title} />
                     </View>
                     <View style={style.padding5}>
-                        <TextInput mode='outlined' left={<TextInput.Icon icon="account" onPress={() => InfoClickUsername()} />} style={{width: (windowWidth - 30), paddingTop: userP}} placeholder="Ingrese su usuario" selectionColor="rgba(0, 0, 0, 0.5)" 
+                        <TextInput mode='outlined' left={<TextInput.Icon icon="account" onPress={() => InfoClickUsername()} />} style={[{width: (windowWidth - 30), paddingTop: userP}]} placeholder="Ingrese su usuario" selectionColor="rgba(0, 0, 0, 0.5)" 
                         underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={<Text style={style.LabelButton}>Usuario</Text>} 
                         value={username} onChangeText={text => setUserName(text)} onFocus={() => setuserP(2)} onBlur={() => setuserP(0)} />
                         {
@@ -107,7 +107,7 @@ const Login = ({route, navigation }) => {
                         }
                     </View>
                     <View style={style.padding5}>
-                        <TextInput secureTextEntry={iconPWD == "eye" ? true : false} right={<TextInput.Icon icon={iconPWD} onPress={ iconPWD == "eye" ? () => setIconPWD("eye-off") : () => setIconPWD("eye")} />} mode='outlined' style={{width: (windowWidth - 30), paddingTop: pwdP}} placeholder="Ingrese su contraseña" selectionColor="rgba(0, 0, 0, 0.5)" 
+                        <TextInput secureTextEntry={iconPWD == "eye" ? true : false} right={<TextInput.Icon icon={iconPWD} onPress={ iconPWD == "eye" ? () => setIconPWD("eye-off") : () => setIconPWD("eye")} />} mode='outlined' style={[{width: (windowWidth - 30), paddingTop: pwdP}]} placeholder="Ingrese su contraseña" selectionColor="rgba(0, 0, 0, 0.5)" 
                         underlineColor="#EC2427" activeUnderlineColor="#EC2427" textColor="#EC2427" activeOutlineColor="#EC2427" label={<Text style={style.LabelButton}>Contraseña</Text>} 
                         value={password} onChangeText={text => setPassword(text)} onFocus={() => setpwdP(2)} onBlur={() => setpwdP(0)} />
                     </View>

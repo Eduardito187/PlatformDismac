@@ -1,6 +1,6 @@
 import { TextInput, View } from "react-native";
 import React,{ useRef } from "react";
-import { inputValidate } from "../../Style/css";
+import { Section_Content_Flex, Section_Row, inputValidate } from "../../Style/css";
 import { GET_CODE_GENERATE } from "../../../../Helpers/API";
 
 const InputVerification = (props) => {
@@ -34,8 +34,8 @@ const InputVerification = (props) => {
     }
 
     return(
-        <View style={{flex: 1, justifyContent: "center", alignContent: "center"}}>
-            <View style={{flexDirection: "row"}}>
+        <View style={Section_Content_Flex}>
+            <View style={Section_Row}>
                 <TextInput style={inputValidate} onChangeText={ text => {
                     SetOneInput(text);
                     text.length > 0 ?twoInput.current.focus() :oneInput.current.blur();

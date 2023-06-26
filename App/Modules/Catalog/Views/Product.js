@@ -1,6 +1,6 @@
 import React from 'react';  
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
-import {Page, SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE} from "./../../../Themes/Dismac/ThemeDismac";
+import {Page, SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN, GET_VIEW_PRODUCTS } from '../../../Helpers/API';
 
@@ -78,7 +78,7 @@ const Product = (props) => {
             </View>
             <View style={SCREEN_ABSOLUTE_BODY}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5}}>
+                    <View style={Section_Content_Padding}>
                         <SearchBox Label={"Productos"} ChangeText={(text) => searchProduct(text)} />
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}

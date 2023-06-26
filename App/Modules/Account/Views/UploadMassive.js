@@ -8,12 +8,12 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 /** Components */
 import Header from '../../Home/Views/Components/Header';
-import { TitleSub } from '../../Login/Style/style';
+import { Margin_Top, Margin_Top_20, SeparationButton, SubSeparation, TitleSub, Width_Max, Width_Max_Padding } from '../../Login/Style/style';
 import Subtitle from '../../../Components/Subtitle';
 import TwoActionColumn from '../../Catalog/Views/Components/TwoActionColumn';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { Button } from 'react-native-paper';
-import { RED_DIS } from '../../Login/Style/css';
+import { RED_DIS, Style_Button } from '../../Login/Style/css';
 import TwoRadio from '../../Catalog/Views/Components/TwoRadio';
 import { GET_HEADER_TOKEN_FILE, URL_API } from '../../../Helpers/API';
 
@@ -83,13 +83,17 @@ const UploadMassive = (props) => {
             {
                 "label" : "Precios",
                 "value" : "Precios"
+            },
+            {
+                "label" : "Fotos",
+                "value" : "Fotos"
             }
         ];
         SetItems(items);
     }
 
     async function selectFile() {
-        let result = await DocumentPicker.getDocumentAsync({type: ["text/comma-separated-values"], copyToCacheDirectory: true, multiple: true});
+        let result = await DocumentPicker.getDocumentAsync({type: [Value == "Fotos" ? "application/zip" : "text/comma-separated-values"], copyToCacheDirectory: true, multiple: true});
         if (result.type === 'success') {
             SetFileName(result.name);
             SetFile(result);
@@ -116,6 +120,7 @@ const UploadMassive = (props) => {
             axios.post(URL_API("uploadFile"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
                 if (res.response) {
                     SetDisable(false);
+                    SetValue("");
                 }
             }).catch(err => {
                 SetDisable(false);
@@ -131,51 +136,65 @@ const UploadMassive = (props) => {
                 <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} />
             </View>
             <View style={SCREEN_ABSOLUTE_BODY}>
-                <View style={{width: "100%", padding: 10}}>
-                    <View style={{width: "100%"}}>
+                <View style={Width_Max_Padding}>
+                    <View style={Width_Max}>
                         <Subtitle style={TitleSub} text={"Acción:"} />
-                        <View style={{marginTop: 5}}>
+                        <View style={Margin_Top}>
                             <DropDownPicker open={Open} value={Value} items={Items} setOpen={(value) => SetOpen(value)} setValue={(value) => SetValue(value)} setItems={SetItems} />
                         </View>
                     </View>
-                    <View style={{width: "100%", marginTop: 10}}>
-                        <Subtitle style={TitleSub} text={"Data:"} />
-                        <View style={{marginTop: 5}}>
-                            <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Subír archivo'} label2={'Seleccionar'} Action={() => selectFile()} />    
-                            {
-                                FileName.length > 0 && (<Subtitle style={TitleSub} text={FileName} />)
-                            }
-                        </View>
-                    </View>
-                    <View style={{width: "100%", marginTop: 10}}>
-                        <Subtitle style={TitleSub} text={"Ejecución:"} />
-                        <View style={{marginTop: 5}}>
-                            <TwoRadio label1={"Ahóra"} value={"AHORA"} select={ejecucion} setValue={(a) => setEjecucion(a)} />
-                            <TwoRadio label1={"Programar"} value={"PROGRAMAR"} select={ejecucion} setValue={(a) => setEjecucion(a)} />
-                            {
-                                ejecucion == "PROGRAMAR" && (
-                                    <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Fecha'} label2={'Seleccionar'} Action={() => showDateEjecute()} />    
-                                )
-                            }
-                        </View>
-                    </View>
-                    <View style={{width: "100%", marginTop: 10}}>
-                        <Subtitle style={TitleSub} text={"Duración:"} />
-                        <View style={{marginTop: 5}}>
-                            <TwoRadio label1={"Permanente"} value={"PERMANENTE"} select={duracion} setValue={(a) => setDuracion(a)} />
-                            <TwoRadio label1={"Temporal"} value={"TEMPORAL"} select={duracion} setValue={(a) => setDuracion(a)} />
-                            {
-                                duracion == "TEMPORAL" && (
-                                    <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Fecha'} label2={'Seleccionar'} Action={() => showDateDuracion()} />    
-                                )
-                            }
-                        </View>
-                    </View>
-                    <View style={{width: "100%", justifyContent: "center", alignItems: "center"}}>
-                        <Button icon="upload" disabled={Disable} mode="contained" style={{backgroundColor: RED_DIS, width: 150}} onPress={() => sentForm()}>
-                            Subir Data
-                        </Button>
-                    </View>
+                    {
+                        Value != "" && (
+                            <View style={SubSeparation}>
+                                <Subtitle style={TitleSub} text={"Data:"} />
+                                <View style={Margin_Top}>
+                                    <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Subír archivo'} label2={'Seleccionar'} Action={() => selectFile()} />    
+                                    {
+                                        FileName.length > 0 && (<Subtitle style={TitleSub} text={FileName} />)
+                                    }
+                                </View>
+                            </View>
+                        )
+                    }
+                    {
+                        Value != "" && Value != "Fotos" && (
+                            <>
+                                <View style={SubSeparation}>
+                                    <Subtitle style={TitleSub} text={"Ejecución:"} />
+                                    <View style={Margin_Top}>
+                                        <TwoRadio label1={"Ahóra"} value={"AHORA"} select={ejecucion} setValue={(a) => setEjecucion(a)} />
+                                        <TwoRadio label1={"Programar"} value={"PROGRAMAR"} select={ejecucion} setValue={(a) => setEjecucion(a)} />
+                                        {
+                                            ejecucion == "PROGRAMAR" && (
+                                                <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Fecha'} label2={'Seleccionar'} Action={() => showDateEjecute()} />    
+                                            )
+                                        }
+                                    </View>
+                                </View>
+                                <View style={SubSeparation}>
+                                    <Subtitle style={TitleSub} text={"Duración:"} />
+                                    <View style={Margin_Top}>
+                                        <TwoRadio label1={"Permanente"} value={"PERMANENTE"} select={duracion} setValue={(a) => setDuracion(a)} />
+                                        <TwoRadio label1={"Temporal"} value={"TEMPORAL"} select={duracion} setValue={(a) => setDuracion(a)} />
+                                        {
+                                            duracion == "TEMPORAL" && (
+                                                <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Fecha'} label2={'Seleccionar'} Action={() => showDateDuracion()} />    
+                                            )
+                                        }
+                                    </View>
+                                </View>
+                            </>
+                        )
+                    }
+                    {
+                        Value != "" && (
+                            <View style={[SeparationButton, Margin_Top_20]}>
+                                <Button icon="upload" disabled={Disable} mode="contained" style={Style_Button} onPress={() => sentForm()}>
+                                    Subir Data
+                                </Button>
+                            </View>
+                        )
+                    }
                 </View>
             </View>
             <DateTimePickerModal isVisible={DateEjecute} is24Hour={true} mode="datetime" onConfirm={confirmDateEjecucion} onCancel={hideDateEjecute} />

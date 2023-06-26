@@ -4,7 +4,7 @@ import { windowWidth } from '../../../Helpers/GetMobil';
 import { IconButton, Card, Chip } from 'react-native-paper';
 import axios from 'axios';
 import { URL_API,CREATE_BODY_STATUS_ACCOUNT,GET_HEADER_TOKEN,GET_TOKEN_SESSION } from '../../../Helpers/API';
-import { RED_DIS, GREEN_PRICE } from '../../Login/Style/css';
+import { RED_DIS, GREEN_PRICE, Section_Card, Section_Card_Title } from '../../Login/Style/css';
 import LoadItem from '../../../Components/LoadItem';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
 /** */
@@ -84,8 +84,8 @@ const Account = (props) => {
         return(<LoadItem />);
     }else{
         return(
-            <Card key={account.id.toString()+"_account"} style={{window:windowWidth-10, borderRadius: 5, backgroundColor: "#FFFFFF", marginTop: 10, marginBottom: 5, padding: 10}}>
-                <Card.Title title={account.name} subtitle={account.email} right={() => <Text style={{fontWeight: "bold", fontSize: 14.5, color: account.account_status.status ? "green" : "red"}}>{account.account_status.status ? "Habilitada" : "Inhabilitada"}</Text>} />
+            <Card key={account.id.toString()+"_account"} style={[{window:windowWidth-10}, Section_Card]}>
+                <Card.Title title={account.name} subtitle={account.email} right={() => <Text style={[Section_Card_Title, {color: account.account_status.status ? "green" : "red"}]}>{account.account_status.status ? "Habilitada" : "Inhabilitada"}</Text>} />
                 <Card.Content>
                     <Chip icon="information" onPress={() => console.log('Pressed')}>{account.rol_account.length == 0 ? "SIN ROLES" : account.rol_account.length+" ROLES"}</Chip>
                 </Card.Content>

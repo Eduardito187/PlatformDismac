@@ -6,7 +6,7 @@ import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, Button, IconButton } from 'react-native-paper';
 import { Margin_Bottom_50, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
 import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN, URL_API_SHOW } from '../../../Helpers/API';
-import { style } from '../../Login/Style/style';
+import { Section_Scroll, style } from '../../Login/Style/style';
 import TwoColumnBg from '../../Catalog/Views/Components/TwoColumnBg';
 import Tarea from '../../Catalog/Views/Components/Tarea';
 import CustomTable from '../../Catalog/Views/Components/CustomTable';
@@ -301,7 +301,7 @@ const ShowProduct = ({route, navigation }) => {
         return (<LoadingPage />);
     }else{
         return (
-            <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={Section_Scroll}>
                 <View style={[ROW_SECTION, Margin_Top_5]}>
                     <TextInput disabled mode='outlined' placeholder="Nombre" selectionColor="rgba(0, 0, 0, 0.5)" underlineColor="#EC2427" activeUnderlineColor="#EC2427" activeOutlineColor="#EC2427" label="Nombre" value={Name} />
                 </View>

@@ -9,7 +9,7 @@ import Price from './Price';
 import LoadItem from '../../../../Components/LoadItem';
 import { LISTA } from '../../../../Helpers/Code';
 import { column } from '../../Style/Two';
-import { ACTION_RECENT, ITEM_PRODUCT, PRODUCT_NAME, PRODUCT_SKU, WHITE } from '../../../Login/Style/css';
+import { ACTION_RECENT, Height_30, ITEM_PRODUCT, PRODUCT_NAME, PRODUCT_SKU, WHITE } from '../../../Login/Style/css';
 /** */
 
 const ProductComponent = (props) => {
@@ -46,7 +46,7 @@ const ProductComponent = (props) => {
                     <View style={[{width: props.COLUMN_ONE.toString()+'%'}, CONTAIN_CENTER]}>
                         <ImageUrl style={props.IMAGE} url={product.image} />
                     </View>
-                    <View style={{width: props.COLUMN_TWO.toString()+'%'}}>
+                    <View style={[{width: props.COLUMN_TWO.toString()+'%'}]}>
                         <Text style={PRODUCT_NAME}>{product.name}</Text>
                         <Text style={PRODUCT_SKU}>{product.sku}</Text>
                         {
@@ -54,7 +54,7 @@ const ProductComponent = (props) => {
                             ? (<Text style={ACTION_RECENT}>{product.frecuence_created}</Text>)
                             : (<Text style={ACTION_RECENT}>{product.frecuence_updated}</Text>)
                         }
-                        <View style={{width: "100%", height: 30}}>
+                        <View style={Height_30}>
                             <Price Price={product.price} />
                         </View>
                     </View>

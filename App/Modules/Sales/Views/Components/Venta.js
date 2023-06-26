@@ -5,6 +5,7 @@ import { Card, Button, Text } from 'react-native-paper';
 import LoadItem from '../../../../Components/LoadItem';
 import TwoColumn from '../../../Catalog/Views/Components/TwoColumn';
 import { windowWidth } from '../../../../Helpers/GetMobil';
+import { Margin_5 } from '../../../Login/Style/css';
 
 const Venta = (props) => {
     const widthView = windowWidth - 60;
@@ -35,7 +36,7 @@ const Venta = (props) => {
         return (<LoadItem />);
     }else{
         return (
-            <Card key={Math.random()+'_Sale_'+Math.random()} style={{margin: 5}} onPress={() => showSale(Venta.id)}>
+            <Card key={Math.random()+'_Sale_'+Math.random()} style={Margin_5} onPress={() => showSale(Venta.id)}>
                 <Card.Title title={Title} subtitle={SubTitle} />
                 <Card.Content>
                     <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} child={true} label1={'IP'} label2={Venta.ip} />

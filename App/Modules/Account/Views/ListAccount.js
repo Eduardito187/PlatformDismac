@@ -1,6 +1,6 @@
 import React from 'react';  
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
-import {Page, SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE} from "./../../../Themes/Dismac/ThemeDismac";
+import {Page, SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN } from '../../../Helpers/API';
 
@@ -68,7 +68,7 @@ const ListAccount = (props) => {
             </View>
             <View style={SCREEN_ABSOLUTE_BODY}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5}}>
+                    <View style={Section_Content_Padding}>
                         <SearchBox Label={"Cuentas"} ChangeText={(text) => searchAccount(text)} /> 
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}

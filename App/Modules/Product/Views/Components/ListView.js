@@ -26,10 +26,10 @@ const ListView = (props) => {
             <View style={SECTION_RIGHT_LIST}>
                 <View style={[ROW_SECTION_VIEW,displayFlex]}>
                     <View style={[COLUMN_ONE,column]}>
-                        <IconButton icon="format-list-bulleted-square" iconColor={VIEW == LISTA ? WHITE : RED_DIS} style={{backgroundColor: VIEW == LISTA ? RED_DIS : WHITE}} size={28} onPress={() => changeViewItems(LISTA)} />
+                        <IconButton icon="format-list-bulleted-square" iconColor={VIEW == LISTA ? WHITE : RED_DIS} style={[{backgroundColor: VIEW == LISTA ? RED_DIS : WHITE}]} size={28} onPress={() => changeViewItems(LISTA)} />
                     </View>
                     <View style={[COLUMN_TWO,column]}>
-                        <IconButton icon="apps" iconColor={VIEW == MOSAICO ? WHITE : RED_DIS} style={{backgroundColor: VIEW == MOSAICO ? RED_DIS : WHITE}} size={28} onPress={() => changeViewItems(MOSAICO)} />
+                        <IconButton icon="apps" iconColor={VIEW == MOSAICO ? WHITE : RED_DIS} style={[{backgroundColor: VIEW == MOSAICO ? RED_DIS : WHITE}]} size={28} onPress={() => changeViewItems(MOSAICO)} />
                     </View>
                 </View>
             </View>

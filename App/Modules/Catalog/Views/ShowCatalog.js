@@ -10,7 +10,7 @@ import { CREATE_BODY_SEARCH_ACCOUN, URL_API, URL_API_SHOW, GET_HEADER_TOKEN } fr
 import Searching from '../../Account/Helper/Searching';
 import CategoryModal from './Components/CategoryModal';
 import ResultNone from '../../Account/Helper/ResultNone';
-import { Background_Dismac, Color_White, Margin_5, RED_DIS } from '../../Login/Style/css';
+import { Background_Dismac, Color_White, Margin_5, RED_DIS, Section_Background, Section_Content_Custom, Section_Content_Flex } from '../../Login/Style/css';
 import TwoColumn from './Components/TwoColumn';
 import TwoActionColumn from './Components/TwoActionColumn';
 import ModalQR from './Components/ModalQR';
@@ -91,14 +91,14 @@ const ShowCatalog = ({route, navigation }) => {
     if (Status === true) {
         if (ShowMessage === true) {
             return(
-                <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+                <View style={Section_Content_Flex}>
                     <ResultNone />
                 </View>
             );
         }else{
             return (
-                <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
-                    <View style={{backgroundColor: '#FFFFFF', padding: 5, borderRadius: 5}}>
+                <ScrollView showsVerticalScrollIndicator={false} style={Section_Content_Custom}>
+                    <View style={Section_Background}>
                         <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Nombre del catálogo'} label2={CatalogAPI.name} />
                         <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Código del producto'} label2={CatalogAPI.code} />
                         <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Cantidad de Productos'} label2={CatalogAPI.products} />
@@ -128,7 +128,7 @@ const ShowCatalog = ({route, navigation }) => {
         }
     }else{
         return(
-            <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+            <View style={Section_Content_Flex}>
                 <ActivityIndicator size="large" color="#EC2427" />
             </View>
         );

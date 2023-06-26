@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { NavBars } from '../../../../Themes/Dismac/ThemeDismac';
 import { SOLID_BG, TEXT_OPTION_DRAWER } from '../../../Login/Style/css';
+import { Section_One, Section_Two } from '../../../Login/Style/style';
 /** */
 
 const TabButton = (currentTab, setCurrentTab, title, icon) => {
+
     function actionPress(){
         if (currentTab != title) {
             setCurrentTab(title);
@@ -13,7 +15,7 @@ const TabButton = (currentTab, setCurrentTab, title, icon) => {
     
     return (
         <TouchableOpacity onPress={() => actionPress()}>
-            <View style={{flexDirection: "row",alignItems: 'center',paddingVertical: 4,backgroundColor: currentTab == title ? SOLID_BG : 'transparent',paddingLeft: 13,paddingRight: 35,borderRadius: 8,marginTop: 15}}>
+            <View style={[Section_One, {backgroundColor: currentTab == title ? SOLID_BG : 'transparent'}, Section_Two]}>
                 {icon}
                 <Text style={[TEXT_OPTION_DRAWER,{color: currentTab == title ? NavBars.focus : NavBars.nofocus}]}>{title}</Text>
             </View>

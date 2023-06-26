@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Text, View, ScrollView } from 'react-native';
-import { PageLoading, Page, SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
-import { AlingFormItem, RowForm, TitleSub } from '../../Login/Style/style';
+import { PageLoading, Page, SCROLL_STYLE, Padding_10_B_5 } from '../../../Themes/Dismac/ThemeDismac';
+import { AlingFormItem, Centered, RowForm, TitleSub, Top_15_Red } from '../../Login/Style/style';
 import { TextInput, Button } from 'react-native-paper';
 import { windowWidth, windowHeight } from '../../../Helpers/GetMobil';
 import { CREATE_BODY_SET_CATALOG, GET_HEADER_ACCOUNT, URL_API } from '../../../Helpers/API';
@@ -49,8 +49,8 @@ const AddCatalog = ({route, navigation }) => {
     return (
         <View>
             <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
-                <View style={{width: windowWidth, height: windowHeight}}>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5,marginBottom: 5}}>
+                <View style={[{width: windowWidth, height: windowHeight}]}>
+                    <View style={Padding_10_B_5}>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
                                 <Subtitle style={TitleSub} text={"Nombre."} />
@@ -62,7 +62,7 @@ const AddCatalog = ({route, navigation }) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5,marginBottom: 5}}>
+                    <View style={Padding_10_B_5}>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
                                 <Subtitle style={TitleSub} text={"Codigo."} />
@@ -76,8 +76,8 @@ const AddCatalog = ({route, navigation }) => {
                     </View>
                     {
                         Name.length > 5 && Codigo.length > 4 && (
-                            <View style={{justifyContent: "center", alignItems: "center"}}>
-                                <Button icon="book" loading={LOADING} mode="contained" style={{backgroundColor: "#EC2427",marginTop: 15}} onPress={() => registerCatalog()}>
+                            <View style={Centered}>
+                                <Button icon="book" loading={LOADING} mode="contained" style={Top_15_Red} onPress={() => registerCatalog()}>
                                     Registrar catalogo
                                 </Button>
                             </View>

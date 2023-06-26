@@ -5,12 +5,14 @@ import * as DocumentPicker from "expo-document-picker";
 import axios from 'axios';
 /** */
 import ImagenAnimation from '../../../../Components/ImagenAnimation';
-import { RED_DIS, WHITE } from '../../../Login/Style/css';
+import { Background_White, RED_DIS, Section_Max, Size_80, Size_Absolute, Size_Background, Size_Bottom, Size_Left, Size_Right, Size_Text, WHITE } from '../../../Login/Style/css';
 import { IconButton } from 'react-native-paper';
 import { GET_HEADER_TOKEN_FILE, URL_API } from '../../../../Helpers/API';
+import { emitSocket } from '../../../../Helpers/Code';
 
 const ProfilePartner = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
+    const [Socket, SetSocket] = React.useState(props.Socket);
     const [border, SetBorder] = useState(new Animated.Value(0));
 
     React.useEffect(() => {
@@ -46,6 +48,7 @@ const ProfilePartner = (props) => {
             formData.append('File', { uri: File.uri, name: File.name, type: File.mimeType });
             axios.post(URL_API(type == "cover" ? "changeCover" : "changeProfile"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
                 if (res.response) {
+                    emitSocket(Socket, "reload_profile", true);
                     console.log(res.response);
                 }
             }).catch(err => {
@@ -54,21 +57,25 @@ const ProfilePartner = (props) => {
         }
     }
 
+    function sendSocket(){
+        Socket.emit()
+    }
+
     return(
-        <Animated.View style={{width: "100%", borderRadius: border, backgroundColor: "#FFFFFF", padding: 5}} >
-            <View style={{width: "100%"}}>
-                <ImagenAnimation style={{width: "100%", height: (windowWidth - 20)}} url={props.Partner.cover} animation={{border: 10, time: 1000}} />
-                <View style={{position: "absolute", left: 10, bottom: 10}}>
-                    <ImagenAnimation style={{width: 80, height: 80}} url={props.Partner.profile} animation={{border: 40, time: 1000}} />
-                    <View style={{position: 'absolute', bottom: -8, right: -10}}>
-                        <IconButton icon="camera" iconColor={RED_DIS} style={{backgroundColor: WHITE}} size={15} onPress={() => changeProfile()} />
+        <Animated.View style={[Size_Background, {borderRadius: border}]} >
+            <View style={Section_Max}>
+                <ImagenAnimation style={[Section_Max, {height: (windowWidth - 20)}]} url={props.Partner.cover} animation={{border: 10, time: 1000}} />
+                <View style={Size_Absolute}>
+                    <ImagenAnimation style={Size_80} url={props.Partner.profile} animation={{border: 40, time: 1000}} />
+                    <View style={Size_Right}>
+                        <IconButton icon="camera" iconColor={RED_DIS} style={Background_White} size={15} onPress={() => changeProfile()} />
                     </View>
                 </View>
-                <View style={{position: "absolute", left: 95, bottom: 35}}>
-                    <Text style={{fontSize: 20, fontWeight: "900", color: "#EC2427", backgroundColor: "#FFFFFF", padding: 3, borderRadius: 5}}>{props.Partner.name}</Text>
+                <View style={Size_Left}>
+                    <Text style={Size_Text}>{props.Partner.name}</Text>
                 </View>
-                <View style={{position: 'absolute', bottom: 10, right: 10}}>
-                    <IconButton icon="camera" iconColor={RED_DIS} style={{backgroundColor: WHITE}} size={25} onPress={() => changeCover()} />
+                <View style={Size_Bottom}>
+                    <IconButton icon="camera" iconColor={RED_DIS} style={Background_White} size={25} onPress={() => changeCover()} />
                 </View>
             </View>
         </Animated.View>

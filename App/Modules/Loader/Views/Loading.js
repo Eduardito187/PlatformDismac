@@ -44,8 +44,7 @@ const Loading = ({route, navigation }) => {
           autoConnect: true
         });
         const token_expo = await getTokenNotification();
-        console.log(token_expo);
-        ResetNavigation("Inicio",{"socket":socket},navigation);
+        ResetNavigation("Inicio", {"socket":socket}, navigation);
       }else{
         navigation.navigate('Login');
       }

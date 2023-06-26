@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, SafeAreaView } from 'react-native';
 import axios from 'axios';
 import { windowWidth } from '../../../Helpers/GetMobil';
-import { PLO_DIS, RED_DIS, WHITE } from '../../Login/Style/css';
+import { PLO_DIS, RED_DIS, Section_Content_Back, Section_Content_One, Section_Content_Two, Section_Flex_Width, Text_Variant_Const, WHITE } from '../../Login/Style/css';
 import { StatusBar } from 'expo-status-bar';
 import { SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
@@ -14,6 +14,7 @@ import OptionSale from '../../Catalog/Views/Components/OptionSale';
 import ImagenAnimation from '../../../Components/ImagenAnimation';
 import OptionTable from '../../Catalog/Views/Components/OptionTable';
 import ProductOption from '../../Catalog/Views/Components/ProductOption';
+import { Section_Flex, Section_Sale } from '../../Login/Style/style';
 
 /** Components */
 
@@ -51,32 +52,32 @@ const ShowSale = ({route, navigation }) => {
         return (<LoadingPage />);
     }else{
         return (
-            <SafeAreaView style={{flex: 1}}>
-                <View style={{position: 'absolute', top: 0, left: 0, right: 0, height: 115, backgroundColor: RED_DIS, paddingTop: 40}}>
-                    <View style={{justifyContent: 'center', alignItems: 'center', padding: 5}}>
+            <SafeAreaView style={Section_Flex}>
+                <View style={Section_Content_One}>
+                    <View style={Section_Sale}>
                         <Text variant="titleMedium">{Venta.NroProforma}</Text>
                     </View>
-                    <View style={{justifyContent: 'center', alignItems: 'center', padding: 5}}>
+                    <View style={Section_Sale}>
                         <Text variant="bodyMedium">{Venta.Total} Bs</Text>
                     </View>
-                    <View style={{position: "absolute", left: 0, top: 20, zIndex: 10}}>
+                    <View style={Section_Content_Back}>
                         <IconButton icon={"arrow-left"} onPress={() => navigation.goBack()} size={24} iconColor={WHITE} />
                     </View>
                 </View>
-                <View style={{position: 'absolute', top: 115, left: 0, right: 0, bottom: 0}}>
+                <View style={Section_Content_Two}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Text variant="titleMedium" style={{marginLeft: 10, color: PLO_DIS, marginTop: 10}}>Datos de venta</Text>
-                        <View style={{justifyContent: 'center', alignItems: 'center', padding: 5}}>
-                            <View style={{width: "100%", borderColor: RED_DIS, borderRadius: 10, borderWidth: 1, padding: 5}}>
+                        <Text variant="titleMedium" style={Text_Variant_Const}>Datos de venta</Text>
+                        <View style={Section_Sale}>
+                            <View style={Section_Flex_Width}>
                                 <OptionSale margin={true} icon={"ballot"} title={"Nro Control"} value={Venta.NroControl} />
                                 <OptionSale margin={true} icon={"ballot"} title={"Nro Factura"} value={Venta.NroFactura} />
                                 <OptionSale margin={null} icon={"ballot"} title={"Nro Proforma"} value={Venta.NroProforma} />
                             </View>
                         </View>
                         <Divider key={"separation_1"} bold={true} />
-                        <Text variant="titleMedium" style={{marginLeft: 10, color: PLO_DIS, marginTop: 10}}>Datos del cliente</Text>
-                        <View style={{justifyContent: 'center', alignItems: 'center', padding: 5}}>
-                            <View style={{width: "100%", borderColor: RED_DIS, borderRadius: 10, borderWidth: 1, padding: 5}}>
+                        <Text variant="titleMedium" style={Text_Variant_Const}>Datos del cliente</Text>
+                        <View style={Section_Sale}>
+                            <View style={Section_Flex_Width}>
                                 <OptionSale margin={true} icon={"account"} title={"Cliente"} value={Customer} />
                                 <OptionSale margin={true} icon={"mail"} title={"Email"} value={CustomerData.email} />
                                 <OptionSale margin={true} icon={"mail"} title={"Telefono"} value={CustomerData.num_telefono} />
@@ -86,8 +87,8 @@ const ShowSale = ({route, navigation }) => {
                             </View>
                         </View>
                         <Divider key={"separation_3"} bold={true} />
-                        <Text variant="titleMedium" style={{marginLeft: 10, color: PLO_DIS, marginTop: 10}}>Detalles de venta</Text>
-                        <View style={{justifyContent: 'center', alignItems: 'center', padding: 5}}>
+                        <Text variant="titleMedium" style={Text_Variant_Const}>Detalles de venta</Text>
+                        <View style={Section_Sale}>
                             {
                                 Venta.detail_order != null && Venta.detail_order.length > 0 && (
                                     <OptionTable left={"Producto"} right={"Precio"} />
@@ -105,9 +106,9 @@ const ShowSale = ({route, navigation }) => {
                             <OptionTable left={"Total"} right={Venta.Total+" Bs"} />
                         </View>
                         <Divider key={"separation_2"} bold={true} />
-                        <Text variant="titleMedium" style={{marginLeft: 10, color: PLO_DIS, marginTop: 10}}>Dirección de envío</Text>
-                        <View style={{justifyContent: 'center', alignItems: 'center', padding: 5}}>
-                            <View style={{width: "100%", borderColor: RED_DIS, borderRadius: 10, borderWidth: 1, padding: 5}}>
+                        <Text variant="titleMedium" style={Text_Variant_Const}>Dirección de envío</Text>
+                        <View style={Section_Sale}>
+                            <View style={Section_Flex_Width}>
                                 <OptionSale margin={true} icon={"map"} title={"País"} value={Venta.address.Pais} />
                                 <OptionSale margin={true} icon={"map"} title={"Ciudad"} value={Venta.address.Ciudad} />
                                 <OptionSale margin={true} icon={"map"} title={"Municipio"} value={Venta.address.Municipio} />

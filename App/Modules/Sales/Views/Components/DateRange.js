@@ -6,6 +6,7 @@ import Constants from "expo-constants";
 import Modal from "react-native-modal";
 import { modalContainerStyle,bordePlomo,modalInfo } from '../../../Login/Style/css';
 import { GET_FILTER_SALE_DATE, SAVE_FILTER_SALE_DATE } from '../../../../Helpers/API';
+import { Modale_Date_Range, Separation_Flex, Width_Max } from '../../../Login/Style/style';
 /** */
 
 const DateRange = (props) => {
@@ -30,11 +31,11 @@ const DateRange = (props) => {
 
     return(
         <>
-            <Modal isVisible={props.isModalVisible} swipeDirection={'down'} customBackdrop={<TouchableWithoutFeedback style={{position: 'absolute', left:0,right: 0,top: 0, bottom:0}} onPress={() => props.closeModal()}>
-                <View style={{ flex: 1,backgroundColor: 'rgba(0,0,0,.5)'}} /></TouchableWithoutFeedback>} onSwipeComplete={() => props.closeModal()}>
+            <Modal isVisible={props.isModalVisible} swipeDirection={'down'} customBackdrop={<TouchableWithoutFeedback style={Modale_Date_Range} onPress={() => props.closeModal()}>
+                <View style={Separation_Flex} /></TouchableWithoutFeedback>} onSwipeComplete={() => props.closeModal()}>
                 <View style={[modalContainerStyle]}>
                     <View style={[modalInfo,bordePlomo]}>
-                        <View style={{width: "100%"}}>
+                        <View style={Width_Max}>
                             <DateRangePicker onSelectDateRange={(range) => changeRange(range)} onConfirm={() => props.closeModal()} blockSingleDateSelection={true} responseFormat="YYYY-MM-DD" maxDate={moment().add(1, "days")} />
                         </View>
                     </View>

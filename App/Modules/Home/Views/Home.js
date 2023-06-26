@@ -37,17 +37,15 @@ import Sales from '../../Sales/Views/Sales';
 import IconUpload from '../Helper/IconUpload';
 import UploadMassive from '../../Account/Views/UploadMassive';
 import TabAccount from './Components/TabAccount';
+import { Grow_20, Top_Custom } from '../../Login/Style/style';
 
 const Home = ({route, navigation }) => {
   const {socket} = route.params;
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
 
   const [currentTab, setCurrentTab] = React.useState(Text_LandingHome);
-  // To get the curretn Status of menu ...
   const [showMenu, setShowMenu] = React.useState(false);
-  // Animated Properties...
   const offsetValue = React.useRef(new Animated.Value(0)).current;
-  // Scale Intially must be One...
   const scaleValue = React.useRef(new Animated.Value(1)).current;
   const closeButtonOffset = React.useRef(new Animated.Value(0)).current;
 
@@ -70,16 +68,27 @@ const Home = ({route, navigation }) => {
     socket.connect();
     SetCurrentAccount(data);
     await SAVE_CURRENT_SESSION(data);
+    onSocket();
     SetLoad(true);
   }
 
-  function getAccount(token){
+  function onSocket(){
+    socket.on('reload_profile', (value) => {
+      if (value){
+        getAccount(TOKEN, false);
+      }
+    });
+  }
+
+  function getAccount(token, status){
     axios.get(URL_API("currentAccount"),GET_HEADER_TOKEN(token)).then(res => {
       console.log(res.data);
       if(res.data != null){
         setSession(res.data.response);
-        setCurrentTab(Text_LandingHome);
-        setCurrentScreen(() => <LandingHome navigation={navigation} socket={socket} TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
+        if (status == true){
+          setCurrentTab(Text_LandingHome);
+          setCurrentScreen(() => <LandingHome navigation={navigation} socket={socket} TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
+        }
       }else{
         SetLoad(null);
       }
@@ -91,7 +100,7 @@ const Home = ({route, navigation }) => {
   async function setToken(){
     let token = await GET_TOKEN_SESSION();
     SetTOKEN(token);
-    getAccount(token);
+    getAccount(token, true);
   }
 
   function animatedScreen(status){
@@ -102,7 +111,6 @@ const Home = ({route, navigation }) => {
     }).start();
 
     Animated.timing(offsetValue, {
-      // YOur Random Value...
       toValue: status ? 0 : 230,
       duration: 300,
       useNativeDriver: true
@@ -172,10 +180,10 @@ const Home = ({route, navigation }) => {
     return (
       <SafeAreaView style={containerScreen}>
         <View style={DRAWER_CONTENT}>
-          <View style={{marginTop: heightBar}}>
+          <View style={[{marginTop: heightBar}]}>
             {TabAccount(currentTab, changeScreen, Text_Management, currentAccount)}
           </View>
-          <View style={{ flexGrow: 1, marginTop: 20 }}>
+          <View style={Grow_20}>
             {TabButton(currentTab, changeScreen, Text_LandingHome, <IconHome focus={currentTab == Text_LandingHome ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Catalog, <IconCatalog focus={currentTab == Text_Catalog ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Products, <IconProduct focus={currentTab == Text_Products ? true : false} size={25} />)}
@@ -190,8 +198,8 @@ const Home = ({route, navigation }) => {
             {TabButton(currentTab, changeScreen, CLOSE_SESSION, <IconExit focus={currentTab == CLOSE_SESSION ? true : false} size={25} />)}
           </View>
         </View>
-        <Animated.View style={{flexGrow: 1,position: 'absolute',top: heightBar,bottom: 0,left: 0,right: 0,transform: [{ scale: scaleValue },{ translateX: offsetValue }]}}>
-          <Animated.View style={{transform: [{translateY: closeButtonOffset}],backgroundColor:SOLID_BG, borderRadius: showMenu ? 10 : 0}}>
+        <Animated.View style={[Top_Custom, {top: heightBar,transform: [{ scale: scaleValue },{ translateX: offsetValue }]}]}>
+          <Animated.View style={[{transform: [{translateY: closeButtonOffset}],backgroundColor:SOLID_BG, borderRadius: showMenu ? 10 : 0}]}>
             {CurrentScreen}
           </Animated.View>
         </Animated.View>

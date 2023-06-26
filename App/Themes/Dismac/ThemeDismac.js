@@ -6,14 +6,40 @@ export const ColorApp = {
     White : "#FFFFFF",
     Dis : "#EC2427"
 };
-export const SCREEN_RELATIVE = {position: 'relative',width: "100%", height: "100%"};
-export const SCREEN_ABSOLUTE_HEADER = {position: "absolute", zIndex:10, left: 0, right: 0, top: 0};
-export const SCREEN_ABSOLUTE_BODY = {position: "absolute", zIndex:10, left: 0, right: 0, top: 53, bottom: 0};
-export const SCROLL_STYLE = {paddingLeft: 5, paddingRight: 5};
+export const SCREEN_RELATIVE = {
+    position: 'relative',
+    width: "100%",
+    height: "100%"
+};
+export const SCREEN_ABSOLUTE_HEADER = {
+    position: "absolute",
+    zIndex:10,
+    left: 0,
+    right: 0,
+    top: 0
+};
+export const SCREEN_ABSOLUTE_BODY = {
+    position: "absolute",
+    zIndex:10,
+    left: 0,
+    right: 0,
+    top: 53,
+    bottom: 0
+};
+export const SCROLL_STYLE = {
+    paddingLeft: 5,
+    paddingRight: 5
+};
 export const Page = {
     "background" : "white",
     "fontSecondary" : "#808080",
     "fontPrimary" : "#EC2427"
+};
+export const Padding_10_B_5 = {
+    backgroundColor: Page.background,
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 5
 };
 export const PageLoading = {
     "container": {
@@ -45,4 +71,14 @@ export const PageLoading = {
         position: 'absolute',
         bottom: 30
     }
+};
+export const Section_Content_Padding = {
+    backgroundColor: Page.background,
+    padding: 10,
+    borderRadius: 5
+};
+export const BP_5 = {
+    backgroundColor: Page.background,
+    borderRadius: 5,
+    padding: 5
 };

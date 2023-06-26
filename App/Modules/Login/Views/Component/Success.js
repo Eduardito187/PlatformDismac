@@ -5,18 +5,19 @@ import { windowWidth,windowHeight } from '../../../../Helpers/GetMobil';
 import { Button } from 'react-native-paper';
 /** Components */
 import SuccessImage from '../../../../Components/SuccessImage';
+import { Bottom_Custom, Height_200, Red_Top_15 } from '../../Style/css';
 /** */
 const Success = (props) => {
     return (
         <>
-            <View style={{width: windowWidth, height: 200}}>
+            <View style={[{width: windowWidth}, Height_200]}>
                 <SuccessImage />
             </View>
-            <View style={{position: "absolute",bottom: (windowHeight / 20), left: 0, right: 0,justifyContent: "center", alignItems: "center"}}>
+            <View style={[Bottom_Custom, {bottom: (windowHeight / 20)}]}>
                 <Button icon="account" mode="contained" onPress={() => props.Mostrar()}>
                     Mostrar cuenta
                 </Button>
-                <Button icon="arrow-right" mode="contained" style={{backgroundColor: "#EC2427",marginTop: 15}} onPress={() => props.Session()}>
+                <Button icon="arrow-right" mode="contained" style={Red_Top_15} onPress={() => props.Session()}>
                     Iniciar Sesion
                 </Button>
             </View>

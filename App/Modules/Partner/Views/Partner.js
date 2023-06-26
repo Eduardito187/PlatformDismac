@@ -6,7 +6,7 @@ import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 /** Components */
 import ProfilePartner from './Components/ProfilePartner';
 import SectionNumber from './Components/SectionNumber';
-import { RED_DIS } from '../../Login/Style/css';
+import { Font_Bob, RED_DIS } from '../../Login/Style/css';
 import axios from 'axios';
 import { MT_10 } from '../Style/Style';
 import { SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
@@ -71,7 +71,7 @@ const Partner = (props) => {
                         <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countProduct"} label={"Productos"} icon={(<FontAwesome name={"archive"} size={45} color={RED_DIS} />)} />
                         <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countWarehouse"} label={"Almacenes"} icon={(<FontAwesome name={"sitemap"} size={45} color={RED_DIS} />)} />
                         <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countStorePartner"} label={"Tiendas"} icon={(<MaterialIcons name={"store"} size={45} color={RED_DIS} />)} />
-                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/valuePartner"} label={"Valor del inventario"} icon={(<Text style={{color: RED_DIS, fontSize: 34, fontWeight: "900", padding: 10}}>BOB</Text>)} />
+                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/valuePartner"} label={"Valor del inventario"} icon={(<Text style={Font_Bob}>BOB</Text>)} />
                     </ScrollView>
                     <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"partner"} type={"partner"} value={Partner != null ? Partner.id : 0} />
                 </View>

@@ -5,6 +5,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE } from '../../../Themes/Dismac/ThemeDismac';
 import Header from '../../Home/Views/Components/Header';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
+import { Column_Center } from '../../Login/Style/style';
 
 const Scanner = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
@@ -32,7 +33,7 @@ const Scanner = (props) => {
                     <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} />
                 </View>
                 <View style={SCREEN_ABSOLUTE_BODY}>
-                    <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center'}}>
+                    <View style={Column_Center}>
                         <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
                         {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
                     </View>

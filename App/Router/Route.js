@@ -8,4 +8,4 @@ export const Text_Management = "Mi partner";
 export const Text_Cuentas = "Cuentas";
 export const CLOSE_SESSION = "Cerrar sesión";
 export const Text_Ventas = "Ventas";
-export const Upload = "Cargar excel";
+export const Upload = "Cargar masiva";

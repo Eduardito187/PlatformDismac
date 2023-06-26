@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { Avatar, Card, IconButton, Badge } from 'react-native-paper';
-import { RED_DIS } from '../../../Login/Style/css';
+import { Margin_Bottom_5, RED_DIS } from '../../../Login/Style/css';
 /** */
 
 const ProblemItem = (props) => {
@@ -22,7 +22,7 @@ const ProblemItem = (props) => {
 
     if (Item != null) {
         return(
-            <Card key={Math.random()+'_PROBLEM_'+Item.id+'_CARD_'+Math.random()} style={{marginBottom: 5}} onPress={() => selectionCard()}>
+            <Card key={Math.random()+'_PROBLEM_'+Item.id+'_CARD_'+Math.random()} style={Margin_Bottom_5} onPress={() => selectionCard()}>
                 <Card.Title title={Item.title} subtitle={Item.description} left={() => <Avatar.Text size={40} label={Label} />} right={() => <Badge>{Item.time}</Badge>} />
             </Card>
         );

@@ -3,7 +3,7 @@ import { View, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, Button } from 'react-native-paper';
-import { JUSTIFY_CONTENT, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
+import { Background_Red_Dis, Flex_Content, JUSTIFY_CONTENT, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
 import { style } from '../../Login/Style/style';
 import { StatusBar } from 'expo-status-bar';
 import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
@@ -75,7 +75,7 @@ const NewIM = ({route, navigation }) => {
         return (<LoadingPage />);
     }else{
         return (
-            <SafeAreaView style={{flex: 1}}>
+            <SafeAreaView style={Flex_Content}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                     <View style={[ROW_SECTION, Margin_Top_5]}>
                         <TextInput mode='outlined' placeholder="Título" selectionColor="rgba(0, 0, 0, 0.5)" underlineColor="#EC2427" activeUnderlineColor="#EC2427" activeOutlineColor="#EC2427" label="Título" value={Title} onChangeText={text => SetTitle(text)} />
@@ -84,7 +84,7 @@ const NewIM = ({route, navigation }) => {
                         <TextInput mode='outlined' multiline numberOfLines={5} placeholder="Descripción" selectionColor="rgba(0, 0, 0, 0.5)" underlineColor="#EC2427" activeUnderlineColor="#EC2427" activeOutlineColor="#EC2427" label="Descripción" value={Description} onChangeText={text => SetDescription(text)} />
                     </View>
                     <View style={[ROW_SECTION, Margin_Top_5,JUSTIFY_CONTENT]}>
-                        <Button loading={LOADING} disabled={LOADING} icon={"plus"} mode="contained" style={{backgroundColor: RED_DIS}} onPress={() => sendFormMejora()}>Enviar formulario</Button>
+                        <Button loading={LOADING} disabled={LOADING} icon={"plus"} mode="contained" style={Background_Red_Dis} onPress={() => sendFormMejora()}>Enviar formulario</Button>
                     </View>
                 </ScrollView>
                 <View style={style.FloatSnack}>    

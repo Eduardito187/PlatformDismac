@@ -4,7 +4,7 @@ import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, Button } from 'react-native-paper';
-import { Margin_Bottom_50, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
+import { Margin_Bottom_50, Margin_Top_5, RED_DIS, ROW_SECTION, Section_Content_Custom } from '../../Login/Style/css';
 import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN } from '../../../Helpers/API';
 import { style } from '../../Login/Style/style';
 import TwoSelectSku from './Components/TwoSelectSku';
@@ -159,7 +159,7 @@ const NewCategory = ({route, navigation }) => {
     }
     
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={{paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5}}>
+        <ScrollView showsVerticalScrollIndicator={false} style={Section_Content_Custom}>
             <View style={ROW_SECTION}>
                 <TwoSwitch width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Status} label1={'Estado'} Action={(a) => SetStatus(a)} />
             </View>

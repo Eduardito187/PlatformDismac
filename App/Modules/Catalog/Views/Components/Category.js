@@ -4,7 +4,8 @@ import { View, Text, ActivityIndicator, TouchableOpacity, TouchableWithoutFeedba
 import { windowHeight, windowWidth } from '../../../../Helpers/GetMobil';
 import { Chip,DataTable,Button, Badge } from 'react-native-paper';
 import Modal from "react-native-modal";
-import { modalContainerStyle,Background_Dismac,bordePlomo,modalInfo,Margin_5,Margin_Top_5, Color_White } from '../../../Login/Style/css';
+import { modalContainerStyle,Background_Dismac,bordePlomo,modalInfo,Margin_5,Margin_Top_5, Color_White, Section_Max_Absolute, Flex_Section } from '../../../Login/Style/css';
+import { Flex_Row, Height_50_Centered, Height_50_Centered_N_Flex, Size_14_Bold, Size_20_Bold, Size_24_Bold, Top_Radius_5 } from '../../../Login/Style/style';
 /** */
 
 const Category = (props) => {
@@ -32,42 +33,42 @@ const Category = (props) => {
         return(<ActivityIndicator key={load} size="large" color="#EC2427" />);
     }else{
         return(
-            <TouchableOpacity onPress={() => selectCategory(category)} key={key} style={{width: props.width-10, borderRadius: 5, backgroundColor: "#FFFFFF", marginBottom: 5, padding: 5}}>
-                <View style={{width: (props.width-10),flexDirection: 'row',flexWrap: 'wrap'}}>
-                    <View style={{width:(props.width-10)*0.75, height: 50, flex: 1, justifyContent: 'center', alignItems: 'flex-start'}}>
-                        <Text style={{fontWeight: "bold", fontSize: 24, color: "#808080"}}>{category.name}</Text>
+            <TouchableOpacity onPress={() => selectCategory(category)} key={key} style={[{width: props.width-10}, Top_Radius_5]}>
+                <View style={[{width: (props.width-10)}, Flex_Row]}>
+                    <View style={[{width:(props.width-10)*0.75}, Height_50_Centered]}>
+                        <Text style={Size_24_Bold}>{category.name}</Text>
                     </View>
-                    <View style={{width:(props.width-10)*0.25, height: 50, justifyContent: 'center', alignItems: 'flex-end'}}>
-                        <Text style={{fontWeight: "bold", fontSize: 14, color: "#808080"}}>{category.code}</Text>
+                    <View style={[{width:(props.width-10)*0.25}, Height_50_Centered_N_Flex]}>
+                        <Text style={Size_14_Bold}>{category.code}</Text>
                     </View>
                 </View>
-                <Modal isVisible={isModalVisible} swipeDirection={'down'} customBackdrop={<TouchableWithoutFeedback style={{position: 'absolute', left:0,right: 0,top: 0, bottom:0}} onPress={() => closeModal()}>
-                    <View style={{ flex: 1,backgroundColor: 'rgba(0,0,0,.5)'}} /></TouchableWithoutFeedback>} onSwipeComplete={() => closeModal()}>
+                <Modal isVisible={isModalVisible} swipeDirection={'down'} customBackdrop={<TouchableWithoutFeedback style={Section_Max_Absolute} onPress={() => closeModal()}>
+                    <View style={Flex_Section} /></TouchableWithoutFeedback>} onSwipeComplete={() => closeModal()}>
                     <View style={[modalContainerStyle]}>
                         <View style={[modalInfo,bordePlomo]}>
-                            <View style={{width: (windowWidth-80),flexDirection: 'row',flexWrap: 'wrap'}}>
-                                <View style={{width:(windowWidth-80)*0.75, height: 50, flex: 1, justifyContent: 'center', alignItems: 'flex-start'}}>
-                                    <Text style={{fontWeight: "bold", fontSize: 24, color: "#808080"}}>{category.name}</Text>
+                            <View style={[{width: (windowWidth-80)}, Flex_Row]}>
+                                <View style={[{width:(windowWidth-80)*0.75}, Height_50_Centered]}>
+                                    <Text style={Size_24_Bold}>{category.name}</Text>
                                 </View>
-                                <View style={{width:(windowWidth-80)*0.25, height: 50, justifyContent: 'center', alignItems: 'flex-end'}}>
-                                    <Text style={{fontWeight: "bold", fontSize: 14, color: "#808080"}}>{category.code}</Text>
+                                <View style={[{width:(windowWidth-80)*0.25}, Height_50_Centered_N_Flex]}>
+                                    <Text style={Size_14_Bold}>{category.code}</Text>
                                 </View>
                             </View>
-                            <View style={{width: (windowWidth-80),flexDirection: 'row',flexWrap: 'wrap'}}>
-                                <View style={{width:(windowWidth-80)*0.60, height: 50, flex: 1, justifyContent: 'center', alignItems: 'flex-start'}}>
-                                    <Text style={{fontWeight: "bold", fontSize: 20, color: "#808080"}}>Estado</Text>
+                            <View style={[{width: (windowWidth-80)}, Flex_Row]}>
+                                <View style={[{width:(windowWidth-80)*0.60}, Height_50_Centered]}>
+                                    <Text style={Size_20_Bold}>Estado</Text>
                                 </View>
-                                <View style={{width:(windowWidth-80)*0.40, height: 50, justifyContent: 'center', alignItems: 'flex-end'}}>
+                                <View style={[{width:(windowWidth-80)*0.40}, Height_50_Centered_N_Flex]}>
                                     <Chip key={Math.random()+'_Status_'+Math.random()} style={[Margin_5,Background_Dismac]} onPress={() => console.log('Pressed')}>
                                         <Text style={Color_White}>{category.status == 1 ? "Activado" : "Desactivado"}</Text>
                                     </Chip>
                                 </View>
                             </View>
-                            <View style={{width: (windowWidth-80),flexDirection: 'row',flexWrap: 'wrap'}}>
-                                <View style={{width:(windowWidth-80)*0.60, height: 50, flex: 1, justifyContent: 'center', alignItems: 'flex-start'}}>
-                                    <Text style={{fontWeight: "bold", fontSize: 20, color: "#808080"}}>Productos</Text>
+                            <View style={[{width: (windowWidth-80)}, Flex_Row]}>
+                                <View style={[{width:(windowWidth-80)*0.60}, Height_50_Centered]}>
+                                    <Text style={Size_20_Bold}>Productos</Text>
                                 </View>
-                                <View style={{width:(windowWidth-80)*0.40, height: 50, justifyContent: 'center', alignItems: 'flex-end'}}>
+                                <View style={[{width:(windowWidth-80)*0.40}, Height_50_Centered_N_Flex]}>
                                     <Badge style={[Margin_5,Background_Dismac]} size={30}>{category.products}</Badge>
                                 </View>
                             </View>

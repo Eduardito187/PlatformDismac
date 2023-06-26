@@ -5,6 +5,10 @@ import * as Notifications from 'expo-notifications';
 
 export const LISTA = "list";
 export const MOSAICO = "mosaico";
+
+export function emitSocket(socket, channel, value) {
+    socket.emit(channel, value);
+}
 export async function GenerateCode(email, type, bool, ShowAlertMessage) {
     let difference = 99999 - 10000; 
     let rand = Math.random();

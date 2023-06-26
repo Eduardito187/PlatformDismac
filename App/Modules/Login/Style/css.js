@@ -4,6 +4,100 @@ export const PLO_DIS = "#808080";
 export const WHITE = "#FFFFFF";
 export const GREEN_PRICE = "#88D377";
 export const RGBA_05 = "rgba(0, 0, 0, 0.5)";
+export const Section_Content_One = {position: 'absolute', top: 0, left: 0, right: 0, height: 115, backgroundColor: RED_DIS, paddingTop: 40};
+export const Background_Red_Dis = {backgroundColor: RED_DIS}
+export const Section_Content_Two = {position: 'absolute', top: 115, left: 0, right: 0, bottom: 0};
+export const Section_Content_Back = {position: "absolute", left: 0, top: 20, zIndex: 10};
+export const Section_Card = {borderRadius: 5, backgroundColor: "#FFFFFF", marginTop: 10, marginBottom: 5, padding: 10};
+export const Section_Card_Title = {fontWeight: "bold", fontSize: 14.5};
+export const Section_Content_Custom = {paddingTop: 10,paddingBottom: 20,paddingLeft: 5, paddingRight: 5};
+export const Size_80 = {width: 80, height: 80};
+export const Size_Left = {position: "absolute", left: 95, bottom: 35};
+export const Size_Text = {fontSize: 20, fontWeight: "900", color: "#EC2427", backgroundColor: "#FFFFFF", padding: 3, borderRadius: 5};
+export const Size_Bottom = {position: 'absolute', bottom: 10, right: 10};
+export const Size_Right = {position: 'absolute', bottom: -8, right: -10};
+export const Size_Absolute = {position: "absolute", left: 10, bottom: 10};
+export const Size_Background = {width: "100%", backgroundColor: "#FFFFFF", padding: 5};
+export const Background_White = {backgroundColor: WHITE};
+export const Section_Background = {backgroundColor: '#FFFFFF', padding: 5, borderRadius: 5};
+export const Section_Max_Absolute = {position: 'absolute', left:0,right: 0,top: 0, bottom:0};
+export const Flex_Section = {flex: 1,backgroundColor: 'rgba(0,0,0,.5)'};
+export const Section_50 = {width: 50, height: 50, borderRadius: 25};
+export const Width_50 = {width: 50};
+export const P_20 = {paddingTop: 20,paddingBottom: 20,paddingLeft: 5, paddingRight: 5};
+export const Border_5= {borderWidth: 0.5,padding: 5, borderRadius: 5, display: 'flex'};
+export const Absolute_55 = {position: 'absolute', left: 55, top: 0, bottom: 0};
+export const Max_Content_Center = {width: "100%", justifyContent: "center", alignItems: "center"};
+export const Absolute_Left_5 = {position: "absolute", zIndex: 10, left: 5};
+export const Absolute_Right_5 = {position: "absolute", zIndex: 10, right: 5};
+export const Height_50 = {width: "100%", height: 50, backgroundColor: "white"};
+export const Bottom_Custom = {position: "absolute", left: 0, right: 0,justifyContent: "center", alignItems: "center"};
+export const Red_Top_15 = {backgroundColor: "#EC2427",marginTop: 15};
+export const Height_200 = {
+    height: 200
+};
+export const Flex_Content = {
+    flex: 1
+};
+export const Border_Radius_5 = {
+    borderRadius: 5
+};
+export const Absolte_Left ={
+    position: 'absolute',
+    left: 0
+};
+export const Height_135 = {
+    width: "100%",
+    height: 135
+};
+export const Height_50_White = {
+    width: "100%",
+    height: 50,
+    backgroundColor: "white"
+};
+export const Height_45 = {
+    width: "100%",
+    height: 45
+};
+export const Height_30 = {
+    width: "100%",
+    height: 30
+};
+export const Section_Row = {
+    flexDirection: "row"
+};
+export const Window_Auto = {
+    width: "auto"
+};
+export const Window_Auto_MR_5 = {
+    width: "auto",
+    marginRight: 5
+};
+export const Height_20 = {
+    height: 20
+};
+export const Section_Max = {
+    width: "100%"
+};
+export const Size_20 = {
+    fontSize: 20
+};
+export const Scroll_Section = {
+    paddingTop: 10,
+    paddingBottom: 20,
+    paddingLeft: 5,
+    paddingRight: 5
+};
+export const Section_Content_Flex = {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
+};
+export const Section_Content_Center = {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10
+};
 export const inputValidate = {
     backgroundColor: "white",
     borderColor: "red",
@@ -19,16 +113,89 @@ export const inputValidate = {
     fontSize: 22,
     margin: 2
 };
-export const Option_Table = {position: "relative", width: "100%", height: 35, padding: 5, marginBottom: 1, marginTop: 1};
-export const Column_One = {position: "absolute", left: 0, top: 0, bottom: 0, right: 101, justifyContent: "center", alignItems: "center", backgroundColor: WHITE};
-export const Column_Two = {position: "absolute", right: 0, top: 0, bottom: 0, width: 100, justifyContent: "center", alignItems: "center", backgroundColor: WHITE};
-export const Column_Price = {position: "absolute", right: 0, top: 0, bottom: 0, width: 100, justifyContent: "center", alignItems: "center"};
-export const Column_Image = {position: "absolute", left: 0, top: 0, bottom: 0, width: 90};
-export const Column_Content = {position: "relative", width: "100%", height: 135, padding: 5};
-export const Column_Detail = {position: "absolute", left: 91, top: 0, bottom: 0, right: 101, padding: 5};
+export const Text_Variant_Const = {
+    marginLeft: 10,
+    color: PLO_DIS,
+    marginTop: 10
+};
+export const Section_Flex_Width = {
+    width: "100%",
+    borderColor: RED_DIS,
+    borderRadius: 10,
+    borderWidth: 1,
+    padding: 5
+};
+export const Font_Bob = {
+    color: RED_DIS,
+    fontSize: 34,
+    fontWeight: "900",
+    padding: 10
+};
+export const Option_Table = {
+    position: "relative",
+    width: "100%",
+    height: 35,
+    padding: 5,
+    marginBottom: 1,
+    marginTop: 1
+};
+export const Column_One = {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    right: 101,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: WHITE
+};
+export const Column_Two = {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: WHITE
+};
+export const Column_Price = {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center"
+};
+export const Column_Image = {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: 90
+};
+export const Column_Content = {
+    position: "relative",
+    width: "100%",
+    height: 135,
+    padding: 5
+};
+export const Column_Detail = {
+    position: "absolute",
+    left: 91,
+    top: 0,
+    bottom: 0,
+    right: 101,
+    padding: 5
+};
 export const ROW_SECTION_VIEW = {
     width: 90,
     marginRight: 15
+};
+export const Style_Button = {
+    backgroundColor: RED_DIS,
+    width: 150
 };
 export const PRODUCT_NAME = {
     fontSize: 16,
@@ -300,7 +467,10 @@ export const ROW_SECTION_NO_PADDING = {
 };
 export const Margin_Bottom_50 = {
     marginBottom: 50
-}
+};
+export const Margin_Bottom_5 = {
+    marginBottom: 5
+};
 export const OPACITY = {
     opacity:0.4
 };

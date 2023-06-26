@@ -11,6 +11,7 @@ import DateRange from './Components/DateRange';
 import Venta from './Components/Venta';
 import { CREATE_BODY_SALE_QUERY, GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
 import ResultNone from '../../Account/Helper/ResultNone';
+import { Icon_Section } from '../../Login/Style/style';
 
 const Sales = (props) => {
     const [status, SetStatus] = React.useState("PENDIENTE");
@@ -66,7 +67,7 @@ const Sales = (props) => {
         <View style={SCREEN_RELATIVE}>
             <View style={SCREEN_ABSOLUTE_HEADER}>
                 <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(
-                    <View style={{width: 40,paddingRight:10}}>
+                    <View style={Icon_Section}>
                         <IconButton icon={"calendar"} iconColor={RED_DIS} size={24} onPress={() => showModal()} />
                     </View>)} />
             </View>

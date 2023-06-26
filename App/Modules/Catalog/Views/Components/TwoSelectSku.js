@@ -22,7 +22,7 @@ const TwoSelectSku = (props) => {
     return(
         <View style={[displayFlex]}>
             <View style={column}>
-                <TextInput mode='outlined' style={{width:props.width-100}} right={<TextInput.Icon icon={"check"} onPress={() => validateSku()} />} placeholder={props.label1} selectionColor="rgba(0, 0, 0, 0.5)" underlineColor="#EC2427" activeUnderlineColor="#EC2427" activeOutlineColor="#EC2427" label={props.label1} value={Sku} onChangeText={text => changeSku(text)} />
+                <TextInput mode='outlined' style={[{width:props.width-100}]} right={<TextInput.Icon icon={"check"} onPress={() => validateSku()} />} placeholder={props.label1} selectionColor="rgba(0, 0, 0, 0.5)" underlineColor="#EC2427" activeUnderlineColor="#EC2427" activeOutlineColor="#EC2427" label={props.label1} value={Sku} onChangeText={text => changeSku(text)} />
             </View>
             <View style={column}>
                 <Chip key={Math.random()+'_ACTION_'+Math.random()} style={[Background_Dismac,label2,{width: 80}]} onPress={() => props.Action()}>

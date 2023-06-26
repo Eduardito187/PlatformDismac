@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 /** */
 import { Text, View } from 'react-native';
-import { CONTIANER_LOADING, JUSTIFY_CONTENT, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../../Login/Style/css';
+import { Absolute_Left_5, Absolute_Right_5, Height_50_White, JUSTIFY_CONTENT, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../../Login/Style/css';
 import { IconButton } from 'react-native-paper';
 
 const Header = (props) => {
@@ -18,14 +18,14 @@ const Header = (props) => {
         //
     }, []);
     return(
-        <View style={{width: "100%", height: 50, backgroundColor: "white", borderTopLeftRadius: StatusDrawer ? 15 : 0, borderTopRightRadius: StatusDrawer ? 15 : 0}}>
+        <View style={[Height_50_White, {borderTopLeftRadius: StatusDrawer ? 15 : 0, borderTopRightRadius: StatusDrawer ? 15 : 0}]}>
             <View style={[ROW_SECTION, Margin_Top_5,JUSTIFY_CONTENT]}>
                 {Center}
             </View>
-            <View style={{position: "absolute", zIndex: 10, left: 5}}>
+            <View style={Absolute_Left_5}>
                 <IconButton icon={StatusDrawer ? "menu-open" : "menu"} onPress={() => showDrawer()} iconColor={RED_DIS} size={24} />
             </View>
-            <View style={{position: "absolute", zIndex: 10, right: 5}}>
+            <View style={Absolute_Right_5}>
                 {Right}
             </View>
         </View>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Text, View, ScrollView } from 'react-native';
-import { PageLoading, Page, SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
-import { AlingFormItem, RowForm, TitleSub } from '../../Login/Style/style';
+import { PageLoading, Page, SCROLL_STYLE, Padding_10_B_5 } from '../../../Themes/Dismac/ThemeDismac';
+import { AlingFormItem, Centered, RowForm, TitleSub, Top_15_Red } from '../../Login/Style/style';
 import { TextInput, Button } from 'react-native-paper';
 import { windowWidth, windowHeight } from '../../../Helpers/GetMobil';
 import { CREATE_BODY_NEW_ACCOUNT, GET_HEADER_ACCOUNT, URL_API } from '../../../Helpers/API';
@@ -57,8 +57,8 @@ const AddAccount = ({route, navigation }) => {
     return (
         <View>
             <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
-                <View style={{width: windowWidth, height: windowHeight}}>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5,marginBottom: 5}}>
+                <View style={[{width: windowWidth, height: windowHeight}]}>
+                    <View style={Padding_10_B_5}>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
                                 <Subtitle style={TitleSub} text={"Nombre."} />
@@ -70,7 +70,7 @@ const AddAccount = ({route, navigation }) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5,marginBottom: 5}}>
+                    <View style={Padding_10_B_5}>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
                                 <Subtitle style={TitleSub} text={"Correo electronico."} />
@@ -82,7 +82,7 @@ const AddAccount = ({route, navigation }) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5,marginBottom: 5}}>
+                    <View style={Padding_10_B_5}>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
                                 <Subtitle style={TitleSub} text={"Username."} />
@@ -94,7 +94,7 @@ const AddAccount = ({route, navigation }) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5,marginBottom: 5}}>
+                    <View style={Padding_10_B_5}>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
                                 <Subtitle style={TitleSub} text={"Contraseña."} />
@@ -106,7 +106,7 @@ const AddAccount = ({route, navigation }) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{backgroundColor: Page.background, padding: 10,borderRadius: 5,marginBottom: 5}}>
+                    <View style={Padding_10_B_5}>
                         <View style={AlingFormItem}>
                             <View style={RowForm}>
                                 <Subtitle style={TitleSub} text={"Verificar contraseña."} />
@@ -120,8 +120,8 @@ const AddAccount = ({route, navigation }) => {
                     </View>
                     {
                         !Disable && (
-                            <View style={{justifyContent: "center", alignItems: "center"}}>
-                                <Button icon="account" disabled={Password == Password_ && Password.length > 8 ? false : true} loading={LOADING} mode="contained" style={{backgroundColor: "#EC2427",marginTop: 15}} onPress={() => registerAccount()}>
+                            <View style={Centered}>
+                                <Button icon="account" disabled={Password == Password_ && Password.length > 8 ? false : true} loading={LOADING} mode="contained" style={Top_15_Red} onPress={() => registerAccount()}>
                                     Registrar cuenta
                                 </Button>
                             </View>

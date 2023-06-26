@@ -4,7 +4,7 @@ import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, Button } from 'react-native-paper';
 import { JUSTIFY_CONTENT, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
-import { style } from '../../Login/Style/style';
+import { Section_Flex, style } from '../../Login/Style/style';
 import { StatusBar } from 'expo-status-bar';
 import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
 import { SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
@@ -28,7 +28,7 @@ const ViewProduct = ({route, navigation }) => {
         return (<LoadingPage />);
     }else{
         return (
-            <SafeAreaView style={{flex: 1}}>
+            <SafeAreaView style={Section_Flex}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                 </ScrollView>
                 <StatusBar backgroundColor={RED_DIS} style="light" />
