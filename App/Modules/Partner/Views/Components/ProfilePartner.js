@@ -47,9 +47,8 @@ const ProfilePartner = (props) => {
             let formData = new FormData();
             formData.append('File', { uri: File.uri, name: File.name, type: File.mimeType });
             axios.post(URL_API(type == "cover" ? "changeCover" : "changeProfile"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
-                if (res.response) {
+                if (res.data.response) {
                     emitSocket(Socket, "reload_profile", true);
-                    console.log(res.response);
                 }
             }).catch(err => {
                 //

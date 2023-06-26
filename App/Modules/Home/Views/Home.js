@@ -1,23 +1,22 @@
 import React, {useState,useRef} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, ImageBackground, Animated, Image, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Animated, SafeAreaView } from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import axios from 'axios';
-import { Navigation, ResetNavigation } from '../../../Helpers/Nav';
+import { io } from 'socket.io-client';
+import { ResetNavigation } from '../../../Helpers/Nav';
 import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION } from '../../../Helpers/API';
-import { RED_DIS, PLO_DIS, containerScreen, TEXT_NAME, PROFILE_PICTURE, DRAWER_CONTENT, SOLID_BG, OPACITY, IMAGE_BG, IMAGE_STYLE, MAIL_TEXT, UPLOAD_BTN } from '../../Login/Style/css';
+import { RED_DIS, containerScreen, DRAWER_CONTENT, SOLID_BG, UPLOAD_BTN } from '../../Login/Style/css';
 import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas, Upload } from '../../../Router/Route';
 const Drawer = createDrawerNavigator();
 /** Components */
 import LandingHome from './LandingHome';
-import ImgDis from '../../../Components/ImgDis';
 import Catalog from '../../Catalog/Views/Catalog';
 import Improvements from '../../Improvements/Views/Improvements';
 import SupportTechnical from '../../SupportTechnical/Views/SupportTechnical';
 import IconImprovements from '../../Improvements/Helper/IconImprovements';
 import IconSupport from '../../SupportTechnical/Helper/IconSupport';
-import IconManagement from '../../Management/Helper/IconManagement';
 import IconCatalog from '../../Catalog/Helper/IconCatalog';
 import IconHome from '../Helper/IconHome';
 import ListAccount from '../../Account/Views/ListAccount';
@@ -31,7 +30,6 @@ import Product from '../../Catalog/Views/Product';
 import TabButton from './Components/TabButton';
 import LoadingPage from './Components/LoadingPage';
 import IconExit from '../Helper/IconExit';
-import DrawerAccount from './Components/DrawerAccount';
 import SaleIcon from '../../Account/Helper/SaleIcon';
 import Sales from '../../Sales/Views/Sales';
 import IconUpload from '../Helper/IconUpload';
@@ -40,7 +38,6 @@ import TabAccount from './Components/TabAccount';
 import { Grow_20, Top_Custom } from '../../Login/Style/style';
 
 const Home = ({route, navigation }) => {
-  const {socket} = route.params;
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
 
   const [currentTab, setCurrentTab] = React.useState(Text_LandingHome);
@@ -49,6 +46,7 @@ const Home = ({route, navigation }) => {
   const scaleValue = React.useRef(new Animated.Value(1)).current;
   const closeButtonOffset = React.useRef(new Animated.Value(0)).current;
 
+  const [SOCKET, SETSOCKET] = React.useState("");
   const [TOKEN, SetTOKEN] = React.useState("");
   const [Load, SetLoad] = React.useState(false);
   const [CurrentScreen, setCurrentScreen]= React.useState(null);
@@ -64,16 +62,24 @@ const Home = ({route, navigation }) => {
     setToken();
   }, []);
   
-  async function setSession(data){
-    socket.connect();
+  async function setSession(data, token){
+    const socket = io("http://31.220.31.243:3000/", {
+      autoConnect: true
+    });
+    //
+    setCurrentTab(Text_LandingHome);
+    setCurrentScreen(() => <LandingHome navigation={navigation} socket={socket} TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
+    //
+    SETSOCKET(socket);
     SetCurrentAccount(data);
     await SAVE_CURRENT_SESSION(data);
-    onSocket();
+    onSocket(socket);
     SetLoad(true);
   }
 
-  function onSocket(){
+  function onSocket(socket){
     socket.on('reload_profile', (value) => {
+      SetLoad(false);
       if (value){
         getAccount(TOKEN, false);
       }
@@ -82,12 +88,12 @@ const Home = ({route, navigation }) => {
 
   function getAccount(token, status){
     axios.get(URL_API("currentAccount"),GET_HEADER_TOKEN(token)).then(res => {
-      console.log(res.data);
       if(res.data != null){
-        setSession(res.data.response);
+        console.log(status, "Status");
         if (status == true){
-          setCurrentTab(Text_LandingHome);
-          setCurrentScreen(() => <LandingHome navigation={navigation} socket={socket} TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
+          setSession(res.data.response, token);
+        }else{
+          SetLoad(true);
         }
       }else{
         SetLoad(null);
@@ -130,34 +136,34 @@ const Home = ({route, navigation }) => {
     setCurrentTab(name);
     switch (name) {
       case Text_LandingHome:
-        setCurrentScreen(() => <LandingHome navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <LandingHome navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Catalog:
-        setCurrentScreen(() => <Catalog navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Catalog navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Products:
-        setCurrentScreen(() => <Product navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Product navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Ventas:
-        setCurrentScreen(() => <Sales navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Sales navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_SupportTechnical:
-        setCurrentScreen(() => <SupportTechnical navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <SupportTechnical navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_ScannerQR:
-        setCurrentScreen(() => <Scanner navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Scanner navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Improvements:
-        setCurrentScreen(() => <Improvements navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Improvements navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Management:
-        setCurrentScreen(() => <Partner navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <Partner navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Cuentas:
-        setCurrentScreen(() => <ListAccount navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <ListAccount navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Upload:
-        setCurrentScreen(() => <UploadMassive navigation={navigation} socket={socket} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        setCurrentScreen(() => <UploadMassive navigation={navigation} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case CLOSE_SESSION:
         closeSession();
@@ -181,7 +187,9 @@ const Home = ({route, navigation }) => {
       <SafeAreaView style={containerScreen}>
         <View style={DRAWER_CONTENT}>
           <View style={[{marginTop: heightBar}]}>
-            {TabAccount(currentTab, changeScreen, Text_Management, currentAccount)}
+            {
+              Load == true && (<TabAccount currentTab={currentTab} setCurrentTab={(a) => changeScreen(a)} title={Text_Management} Account={currentAccount} />)
+            }
           </View>
           <View style={Grow_20}>
             {TabButton(currentTab, changeScreen, Text_LandingHome, <IconHome focus={currentTab == Text_LandingHome ? true : false} size={25} />)}
