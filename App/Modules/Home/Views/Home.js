@@ -80,6 +80,7 @@ const Home = ({route, navigation }) => {
   function onSocket(socket){
     socket.on('reload_profile', (value) => {
       SetLoad(false);
+      console.log("reload_profile", value);
       if (value){
         getAccount(TOKEN, false);
       }
@@ -187,9 +188,7 @@ const Home = ({route, navigation }) => {
       <SafeAreaView style={containerScreen}>
         <View style={DRAWER_CONTENT}>
           <View style={[{marginTop: heightBar}]}>
-            {
-              Load == true && (<TabAccount currentTab={currentTab} setCurrentTab={(a) => changeScreen(a)} title={Text_Management} Account={currentAccount} />)
-            }
+            <TabAccount currentTab={currentTab} setCurrentTab={(a) => changeScreen(a)} title={Text_Management} Account={currentAccount} />
           </View>
           <View style={Grow_20}>
             {TabButton(currentTab, changeScreen, Text_LandingHome, <IconHome focus={currentTab == Text_LandingHome ? true : false} size={25} />)}

@@ -1,15 +1,11 @@
 import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { windowWidth } from '../../../../Helpers/GetMobil';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { CONTAIN_CENTER, ROW, R_30, R_70 } from '../../Style/Row';
-import ImagenAnimation from '../../../../Components/ImagenAnimation';
 import ImageUrl from '../../../../Components/ImageUrl';
 import Price from './Price';
 import LoadItem from '../../../../Components/LoadItem';
-import { LISTA } from '../../../../Helpers/Code';
-import { column } from '../../Style/Two';
-import { ACTION_RECENT, Height_30, ITEM_PRODUCT, PRODUCT_NAME, PRODUCT_SKU, WHITE } from '../../../Login/Style/css';
+import { ACTION_RECENT, Height_30, ITEM_PRODUCT, PRODUCT_NAME, PRODUCT_SKU } from '../../../Login/Style/css';
 /** */
 
 const ProductComponent = (props) => {

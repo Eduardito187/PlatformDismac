@@ -17,7 +17,7 @@ const ProblemItem = (props) => {
     }, []);
 
     function selectionCard() {
-        console.log(props.Screen);
+        //
     }
 
     if (Item != null) {

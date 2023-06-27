@@ -2,6 +2,14 @@ export const displayFlex = {
     flexDirection: 'row',
     flexWrap: 'wrap'
 };
+export const alingContentStatus = {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignContent: "flex-start",
+    justifyContent: "flex-start",
+    paddingLeft: 0,
+    paddingRight: 0
+};
 export const NONE_TEXT = {
     color: "#808080",
     fontWeight: "bold",

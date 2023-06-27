@@ -1,20 +1,19 @@
 import React from 'react';  
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
-import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
-import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
-import { Snackbar, List, TextInput, Button, IconButton } from 'react-native-paper';
-import { Margin_Bottom_50, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
-import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN, URL_API_SHOW } from '../../../Helpers/API';
-import { Section_Scroll, style } from '../../Login/Style/style';
+import { windowWidth } from '../../../Helpers/GetMobil';
+import { Snackbar, List, TextInput, IconButton, Chip, Badge } from 'react-native-paper';
+import { Height_30, Margin_5, Margin_Top_5, Only_Height_40, RED_DIS, ROW_SECTION, WHITE } from '../../Login/Style/css';
+import { GET_HEADER_TOKEN, URL_API_SHOW } from '../../../Helpers/API';
+import { MarginBottomM7, MarginBottomM9, MarginContentChip, Section_Scroll, Size_15_Bold, Width_Max, style } from '../../Login/Style/style';
 import TwoColumnBg from '../../Catalog/Views/Components/TwoColumnBg';
 import Tarea from '../../Catalog/Views/Components/Tarea';
 import CustomTable from '../../Catalog/Views/Components/CustomTable';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
 import { StatusBar } from 'expo-status-bar';
-import { column, displayFlex } from '../../Catalog/Style/Two';
+import { alingContentStatus, column, displayFlex } from '../../Catalog/Style/Two';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
-
+import Price from '../../Catalog/Views/Components/Price';
 /** Components */
 
 const ShowProduct = ({route, navigation }) => {
@@ -190,54 +189,15 @@ const ShowProduct = ({route, navigation }) => {
     }
 
     function setCuotaInicialTable(cuota_inicial) {
-        let Header = ["Ciudad", "Monto"];
-        let Body = [];
-        for (let index = 0; index < cuota_inicial.length; index++) {
-            Body.push([cuota_inicial[index]["store_name"], cuota_inicial[index]["monto"]]);
-        }
-        if (Body.length == 0) {
-            SetCuotaInicial(null);
-        }else{
-            SetCuotaInicial({
-                "Header" : Header,
-                "Body" : Body
-            });
-        }
+        SetCuotaInicial(cuota_inicial);
     }
 
     function setPricesTable(Prices){
-        let Header = ["Ciudad", "Precio", "Oferta"];
-        let Body = [];
-        for (let index = 0; index < Prices.length; index++) {
-            let store = Prices[index]["store_name"];
-            let price = Prices[index]["price"] == null ? 0 : Prices[index]["price"]["price"];
-            let special = Prices[index]["price"] == null ? 0 : Prices[index]["price"]["special_price"];
-            Body.push([store, price, special]);
-        }
-        if (Body.length == 0) {
-            SetPrices(null);
-        }else{
-            SetPrices({
-                "Header" : Header,
-                "Body" : Body
-            });
-        }
+        SetPrices(Prices);
     }
 
     function setStatusTable(Status){
-        let Header = ["Ciudad", "Estado"];
-        let Body = [];
-        for (let index = 0; index < Status.length; index++) {
-            Body.push([Status[index]["store_name"], Status[index]["status"] ? "Activo" : "Desactivado"]);
-        }
-        if (Body.length == 0) {
-            SetStatus(null);
-        }else{
-            SetStatus({
-                "Header" : Header,
-                "Body" : Body
-            });
-        }
+        SetStatus(Status);
     }
     
     function Navigate(){
@@ -315,30 +275,72 @@ const ShowProduct = ({route, navigation }) => {
                 { Clacom != null && (<TwoColumnBg width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Clacom'} label2={Clacom.label} />) }
                 { Type != null && (<TwoColumnBg width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Tipo'} label2={Type.type} />) }
                 { Status!=null && (
-                <View style={[ROW_SECTION, Margin_Top_5]}>
-                    <List.Accordion title="Estados del producto" expanded={state} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleState}>
-                        <CustomTable key={"Status"} body={Status.Body} header={Status.Header} />
-                    </List.Accordion>
-                </View>
+                    <View style={[ROW_SECTION, Margin_Top_5]}>
+                        <List.Accordion title="Estados del producto" expanded={state} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleState}>
+                            <View style={[Width_Max, alingContentStatus]}>
+                                {
+                                    Status.map((state) => {
+                                        return (
+                                            <Chip icon={state.status ? "check" : "close"} key={Math.random()+'_Product_Status_'+Math.random()} style={Margin_5} onPress={() => console.log('Pressed')}>{state.store_name}</Chip>
+                                        )
+                                    })
+                                }
+                            </View>
+                        </List.Accordion>
+                    </View>
                 ) }
                 { Prices!=null && (
-                <View style={[ROW_SECTION, Margin_Top_5]}>
-                    <List.Accordion title="Precios del producto" expanded={price} left={props => <List.Icon {...props} icon="information" />} onPress={TooglePrice}>
-                        <CustomTable key={"Prices"} body={Prices.Body} header={Prices.Header} />
-                    </List.Accordion>
-                </View>
+                    <View style={[ROW_SECTION, Margin_Top_5]}>
+                        <List.Accordion title="Precios del producto" expanded={price} left={props => <List.Icon {...props} icon="information" />} onPress={TooglePrice}>
+                            <View style={[Width_Max, alingContentStatus]}>
+                                {
+                                    Prices.map((state) => {
+                                        return (
+                                            <Chip key={Math.random()+'_Product_Prices_'+Math.random()} style={[Margin_5, Only_Height_40]} onPress={() => console.log('Pressed')}>
+                                                <View style={[Width_Max, alingContentStatus]}>
+                                                    <View style={[Height_30, MarginContentChip]}>
+                                                        <Text style={Size_15_Bold}>{state.store_name}</Text>
+                                                    </View>
+                                                    <View style={[Height_30, MarginBottomM7]}>
+                                                        <Price Price={state.price} />
+                                                    </View>
+                                                </View>
+                                            </Chip>
+                                        )
+                                    })
+                                }
+                            </View>
+                        </List.Accordion>
+                    </View>
                 ) }
                 { CuotaInicial!=null && (
-                <View style={[ROW_SECTION, Margin_Top_5]}>
-                    <List.Accordion title="Cuotas iniciales del producto" expanded={initial} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleInitials}>
-                        <CustomTable key={"CuotaInicial"} body={CuotaInicial.Body} header={CuotaInicial.Header} />
-                    </List.Accordion>
-                </View>
+                    <View style={[ROW_SECTION, Margin_Top_5]}>
+                        <List.Accordion title="Cuotas iniciales del producto" expanded={initial} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleInitials}>
+                            <View style={[Width_Max, alingContentStatus]}>
+                                {
+                                    CuotaInicial.map((state) => {
+                                        return (
+                                            <Chip key={Math.random()+'_Product_CuotaInicial_'+Math.random()} style={[Margin_5, Only_Height_40]} onPress={() => console.log('Pressed')}>
+                                                <View style={[Width_Max, alingContentStatus]}>
+                                                    <View style={[Height_30, MarginContentChip]}>
+                                                        <Text style={Size_15_Bold}>{state.store_name}</Text>
+                                                    </View>
+                                                    <View style={[Height_30, MarginBottomM9]}>
+                                                        <Badge>{state.monto+" Bs"}</Badge>
+                                                    </View>
+                                                </View>
+                                            </Chip>
+                                        )
+                                    })
+                                }
+                            </View>
+                        </List.Accordion>
+                    </View>
                 ) }
                 { Categorys!=null && (
                 <View style={[ROW_SECTION, Margin_Top_5]}>
                     <List.Accordion title="Categorías del producto" expanded={category} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleCategory}>
-                        <CustomTable key={"Categorys"} body={Categorys.Body} header={Categorys.Header} />
+                        <CustomTable key={Math.random()+"Categorys"+Math.random()} body={Categorys.Body} header={Categorys.Header} />
                     </List.Accordion>
                 </View>
                 ) }

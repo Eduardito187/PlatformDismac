@@ -27,7 +27,7 @@ const CustomTable = (props) => {
                 {
                     props.body.map((row) => {
                         return (
-                            <DataTable.Row onPress={() => selectedRow(row)}>
+                            <DataTable.Row key={Math.random()+'_COLUMN_'+props.key+'_ROW_'+Math.random()} onPress={() => selectedRow(row)}>
                                 {
                                     row.map((item) => {
                                         return (<DataTable.Cell key={Math.random()+'_COLUMN_'+props.key+'_COLUMN_'+Math.random()}>{item}</DataTable.Cell>);

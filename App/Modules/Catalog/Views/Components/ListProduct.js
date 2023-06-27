@@ -25,7 +25,6 @@ const ListProduct = (props) => {
         let COLUMN_ONE = 0;
         let COLUMN_TWO = 0;
         let image = {};
-        console.log("windowWidth", width);
         if (value == LISTA) {
             width = width - 10;
             COLUMN_ONE = Math.round((100 * 100) / width);
@@ -33,7 +32,6 @@ const ListProduct = (props) => {
             image = {width: 80, height: 120};
         }else {
             width = itemsListProductsWidth(width);
-            console.log("itemsListProductsWidth", width);
             COLUMN_ONE = 100;
             COLUMN_TWO = 100;
             image = {width: "100%", height: 180};

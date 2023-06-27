@@ -294,6 +294,11 @@ export const Size_14_Bold= {
     fontSize: 14,
     color: "#808080"
 };
+export const Size_15_Bold= {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "black"
+};
 export const Height_50_Centered_N_Flex = {
     height: 50,
     justifyContent: 'center',
@@ -392,4 +397,14 @@ export const Top_Radius_5 = {
     backgroundColor: "#FFFFFF",
     marginBottom: 5,
     padding: 5
+};
+export const MarginContentChip = {
+    marginBottom: -12,
+    marginRight: 5
+};
+export const MarginBottomM7 = {
+    marginBottom: -7
+};
+export const MarginBottomM9 = {
+    marginBottom: -9
 };
