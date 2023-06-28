@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
+import { View, TouchableWithoutFeedback, Image } from 'react-native';
 import axios from 'axios';
 import Modal from "react-native-modal";
 import * as DocumentPicker from "expo-document-picker";
@@ -36,16 +36,19 @@ const ModalAddImage = (props) => {
 
     function sendFilesApi(){
         let formData = new FormData();
-        for (let index = 0; index < File.length; index++) {
-            formData.append('File_'+index, { uri: File.uri, name: File.name, type: File.mimeType });
+        for (let index = 0; index < Files.length; index++) {
+            let file = Files[index];
+            formData.append('File_'+index, { uri: file.uri, name: file.name, type: file.mimeType });
         }
-        formData.append('Long', File.length);
-        axios.post(URL_API("uploadPictures"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
-            if (res.response) {
+        formData.append('Long', Files.length);
+        formData.append('sku', Sku);
+        console.log(formData);
+        axios.post(URL_API("uploadPictures"), formData, GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
+            if (res.data.response) {
                 props.reloadProduct(true);
             }
         }).catch(err => {
-            //
+            console.log(err);
         });
     }
 
@@ -68,7 +71,7 @@ const ModalAddImage = (props) => {
                         </View>
                         {
                             Files.length > 0 && (
-                                <Button icon="send" style={[Button_Red_Dis, Margin_Bottom_25, Margin_Top_25]} mode="contained" onPress={() => selectFile()}>
+                                <Button icon="send" style={[Button_Red_Dis, Margin_Bottom_25, Margin_Top_25]} mode="contained" onPress={() => sendFilesApi()}>
                                     Subir imagenes
                                 </Button>
                             )
