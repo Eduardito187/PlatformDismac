@@ -6,6 +6,10 @@ export const CONTENT_SECTION = {
     borderRadius: 10,
     marginTop: 20
 };
+export const Space_Separation = {
+    width: "100%",
+    height: 40
+};
 export const Margin_Top_20 = {
     marginTop: 20
 };
@@ -40,6 +44,17 @@ export const Size_14 = {
     fontWeight: "bold",
     fontSize: 14.5,
     color: "#808080"
+};
+export const Surface_Style = {
+    padding: 5,
+    borderRadius: 10,
+    paddingLeft: 0,
+    paddingRight: 0,
+    backgroundColor: "#f6f8fa",
+    marginBottom: 10
+};
+export const marginBottom10 = {
+    marginBottom: 10
 };
 export const style = {
     container : {

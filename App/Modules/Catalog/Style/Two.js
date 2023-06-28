@@ -10,6 +10,14 @@ export const alingContentStatus = {
     paddingLeft: 0,
     paddingRight: 0
 };
+export const alingContentCenter = {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignContent: "center",
+    justifyContent: "center",
+    paddingLeft: 0,
+    paddingRight: 0
+};
 export const NONE_TEXT = {
     color: "#808080",
     fontWeight: "bold",

@@ -13,6 +13,14 @@ export const Section_Content_One = {
     backgroundColor: RED_DIS,
     paddingTop: 40
 };
+export const Button_Red_Dis = {
+    backgroundColor: RED_DIS,
+    color: WHITE
+};
+export const Button_Plomo_Dis = {
+    backgroundColor: PLO_DIS,
+    color: WHITE
+};
 export const Background_Red_Dis = {
     backgroundColor: RED_DIS
 };
@@ -244,6 +252,9 @@ export const inputValidate = {
     color: "red",
     fontSize: 22,
     margin: 2
+};
+export const Margin_L5 = {
+    marginLeft: 5
 };
 export const Text_Variant_Const = {
     marginLeft: 10,
@@ -602,6 +613,12 @@ export const Margin_Bottom_50 = {
 };
 export const Margin_Bottom_5 = {
     marginBottom: 5
+};
+export const Margin_Top_25 = {
+    marginTop: 25
+};
+export const Margin_Bottom_25 = {
+    marginBottom: 25
 };
 export const OPACITY = {
     opacity:0.4

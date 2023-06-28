@@ -2,10 +2,10 @@ import React from 'react';
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import { windowWidth } from '../../../Helpers/GetMobil';
-import { Snackbar, List, TextInput, IconButton, Chip, Badge } from 'react-native-paper';
-import { Height_30, Margin_5, Margin_Top_5, Only_Height_40, RED_DIS, ROW_SECTION, WHITE } from '../../Login/Style/css';
+import { Snackbar, List, TextInput, IconButton, Chip, Badge, Surface } from 'react-native-paper';
+import { Height_30, Margin_5, Margin_Bottom_5, Margin_L5, Margin_Top_5, Only_Height_40, RED_DIS, ROW_SECTION, Section_Card_Title, WHITE } from '../../Login/Style/css';
 import { GET_HEADER_TOKEN, URL_API_SHOW } from '../../../Helpers/API';
-import { MarginBottomM7, MarginBottomM9, MarginContentChip, Section_Scroll, Size_15_Bold, Width_Max, style } from '../../Login/Style/style';
+import { MarginBottomM7, MarginBottomM9, MarginContentChip, P5, Section_Scroll, Size_15_Bold, Surface_Style, Width_Max, style } from '../../Login/Style/style';
 import TwoColumnBg from '../../Catalog/Views/Components/TwoColumnBg';
 import Tarea from '../../Catalog/Views/Components/Tarea';
 import CustomTable from '../../Catalog/Views/Components/CustomTable';
@@ -14,14 +14,14 @@ import { StatusBar } from 'expo-status-bar';
 import { alingContentStatus, column, displayFlex } from '../../Catalog/Style/Two';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import Price from '../../Catalog/Views/Components/Price';
+import Space from '../../../Components/Space';
+import ModalAddImage from '../../Catalog/Views/Components/ModalAddImage';
 /** Components */
 
 const ShowProduct = ({route, navigation }) => {
     const { TOKEN, id_product } = route.params;
     const widthView = windowWidth-10;
     const [Product, SetProduct] = React.useState({});
-    const [Message, SetMessage] = React.useState("");
-    const [ShowMessage, SetShowMessage] = React.useState(false);
     const [Name, SetName] = React.useState("");
     const [Sku, SetSku] = React.useState("");
     const [Brand, SetBrand] = React.useState(null);
@@ -46,6 +46,8 @@ const ShowProduct = ({route, navigation }) => {
     const [Warehouse, SetWarehouse] = React.useState(null);
     const [whs, SetWhs] = React.useState(false);
     const [isModalVisible, setModalVisible] = React.useState(false);
+    const [isModalVisiblePicture, setModalVisiblePicture] = React.useState(false);
+    const [Files, SetFiles] = React.useState([]);
     
     const ToogleState = () => SetState(!state);
     const TooglePrice = () => SetPrice(!price);
@@ -59,8 +61,17 @@ const ShowProduct = ({route, navigation }) => {
     function showModal() {
         setModalVisible(true);
     }
+
     function closeModal() {
         setModalVisible(false);
+    }
+
+    function showModalpicture() {
+        setModalVisiblePicture(true);
+    }
+
+    function closeModalpicture() {
+        setModalVisiblePicture(false);
     }
 
     React.useEffect(() => {
@@ -89,41 +100,11 @@ const ShowProduct = ({route, navigation }) => {
     }
 
     function setWarehouseTable(warehouses){
-        let Header = ["Ciudad", "Nombre almacen", "Código almacen", "Stock almacen"];
-        let Body = [];
-        for (let index = 0; index < warehouses.length; index++) {
-            for (let j = 0; j < warehouses[index]["warehouse"].length; j++) {
-                let wh = warehouses[index]["warehouse"][j];
-                Body.push([warehouses[index]["store_name"], wh["name"], wh["code"], wh["stock"]]);
-            }
-        }
-        if (Body.length == 0) {
-            SetWarehouse(null);
-        }else{
-            SetWarehouse({
-                "Header" : Header,
-                "Body" : Body
-            });
-        }
+        SetWarehouse(warehouses);
     }
 
     function setMinicuotasTable(minicuotas) {
-        let Header = ["Ciudad", "Meses", "Cuotas", "Monto"];
-        let Body = [];
-        for (let index = 0; index < minicuotas.length; index++) {
-            for (let j = 0; j < minicuotas[index]["minicuotas"].length; j++) {
-                let mini = minicuotas[index]["minicuotas"][j];
-                Body.push([minicuotas[index]["store_name"], mini["meses"], mini["cuotas"], mini["monto"]]);
-            }
-        }
-        if (Body.length == 0) {
-            SetMinicuotas(null);
-        }else{
-            SetMinicuotas({
-                "Header" : Header,
-                "Body" : Body
-            });
-        }
+        SetMinicuotas(minicuotas);
     }
 
     function setMedidasComerciales(medidas_comerciales){
@@ -215,16 +196,23 @@ const ShowProduct = ({route, navigation }) => {
         navigation.push("ViewProduct", {"id_product":id_product,"TOKEN":TOKEN});
     }
 
+    function saveFiles(files){
+        closeModalpicture();
+        SetFiles(files);
+        showModalpicture();
+    }
+
     function getProduct(){
         axios.get(URL_API_SHOW("product", +id_product),GET_HEADER_TOKEN(TOKEN)).then(res => {
             if (res.data != null) {
                 let Response = res.data.response;
-                let ResponseText = res.data.responseText;
                 SetProduct(Response);
-                showMessage(ResponseText);
                 navigation.setOptions({
                     headerRight: () => (
-                        <View style={[{width: 140,marginRight: 15},displayFlex]}>
+                        <View style={[{width: 190,marginRight: 15},displayFlex]}>
+                            <View style={[{width: 40,paddingRight:10},column]}>
+                                <IconButton icon="image" iconColor={RED_DIS} size={30} onPress={() => showModalpicture()} />
+                            </View>
                             <View style={[{width: 40,paddingRight:10},column]}>
                                 <IconButton icon="qrcode" iconColor={RED_DIS} size={30} onPress={() => showModal()} />
                             </View>
@@ -241,20 +229,6 @@ const ShowProduct = ({route, navigation }) => {
         }).catch(err => {
             //
         });
-    }
-
-    function selectProduct(product){
-
-    }
-
-    function showMessage(msg){
-        SetMessage(msg);
-        SetShowMessage(true);
-    }
-
-    function hideMessaje(){
-        SetMessage("");
-        SetShowMessage(false);
     }
     
     if (loading === false) {
@@ -338,11 +312,11 @@ const ShowProduct = ({route, navigation }) => {
                     </View>
                 ) }
                 { Categorys!=null && (
-                <View style={[ROW_SECTION, Margin_Top_5]}>
-                    <List.Accordion title="Categorías del producto" expanded={category} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleCategory}>
-                        <CustomTable key={Math.random()+"Categorys"+Math.random()} body={Categorys.Body} header={Categorys.Header} />
-                    </List.Accordion>
-                </View>
+                    <View style={[ROW_SECTION, Margin_Top_5]}>
+                        <List.Accordion title="Categorías del producto" expanded={category} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleCategory}>
+                            <CustomTable key={Math.random()+"Categorys"+Math.random()} body={Categorys.Body} header={Categorys.Header} />
+                        </List.Accordion>
+                    </View>
                 ) }
                 { DataSheet!=null && (
                 <View style={[ROW_SECTION, Margin_Top_5]}>
@@ -359,25 +333,64 @@ const ShowProduct = ({route, navigation }) => {
                 </View>
                 ) }
                 { Minicuotas!=null && (
-                <View style={[ROW_SECTION, Margin_Top_5]}>
-                    <List.Accordion title="Minicuotas" expanded={mini} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleMini}>
-                        <CustomTable key={"Minicuotas"} body={Minicuotas.Body} header={Minicuotas.Header} />
-                    </List.Accordion>
-                </View>
+                    <View style={[ROW_SECTION, Margin_Top_5]}>
+                        <List.Accordion title="Minicuotas" expanded={mini} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleMini}>
+                            <View style={[Width_Max, alingContentStatus]}>
+                                {
+                                    Minicuotas.map((state, j) => {
+                                        return (
+                                            <Surface key={Math.random()+'_Product_Minicuotas_'+Math.random()} style={[{width: (widthView-20)/2, marginRight: j % 2 == 0 ? 5 : 0, marginLeft: j % 2 == 0 ? 0 : 5}, Surface_Style]} elevation={4}>
+                                                <Text style={[Section_Card_Title, Margin_L5]}>{state.store_name}</Text>
+                                                <View style={[Width_Max, P5]}>
+                                                    {
+                                                        state.minicuotas.map((minicuota, i) => {
+                                                            return (
+                                                                <Text key={Math.random()+'_Text_'+i+'_Minicuota_'+Math.random()}>{"Bs "+minicuota.monto+" x "+minicuota.meses+" meses"}</Text>
+                                                            )
+                                                        })
+                                                    }
+                                                </View>
+                                            </Surface>
+                                        )
+                                    })
+                                }
+                            </View>
+                        </List.Accordion>
+                    </View>
                 ) }
                 { Warehouse!=null && (
-                <View style={[ROW_SECTION, Margin_Top_5]}>
-                    <List.Accordion title="Almacenes" expanded={whs} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleWhs}>
-                        <CustomTable key={"Warehouse"} body={Warehouse.Body} header={Warehouse.Header} />
-                    </List.Accordion>
-                </View>
+                    <View style={[ROW_SECTION, Margin_Top_5]}>
+                        <List.Accordion title="Almacenes" expanded={whs} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleWhs}>
+                            <View style={[Width_Max, alingContentStatus]}>
+                                {
+                                    Warehouse.map((state, j) => {
+                                        return (
+                                            <Surface key={Math.random()+'_Product_Warehouse_'+Math.random()} style={[{width: widthView-10}, Surface_Style]} elevation={4}>
+                                                <Text style={[Section_Card_Title, Margin_L5]}>{state.store_name}</Text>
+                                                <View style={[Width_Max, P5]}>
+                                                    {
+                                                        state.warehouse.map((warehouse, i) => {
+                                                            return (
+                                                                <View key={Math.random()+'_Text_'+i+'_Warehouse_Content_'+Math.random()} style={Margin_Bottom_5}>
+                                                                    <Text key={Math.random()+'_Text_'+i+'_Warehouse_'+Math.random()}>{"Almacen: "+warehouse.name}</Text>
+                                                                    <Text key={Math.random()+'_Text_'+i+'_Warehouse_'+Math.random()}>{"Código: "+warehouse.almacen}</Text>
+                                                                    <Text key={Math.random()+'_Text_'+i+'_Warehouse_'+Math.random()}>{"Stock: "+warehouse.stock}</Text>
+                                                                </View>
+                                                            )
+                                                        })
+                                                    }
+                                                </View>
+                                            </Surface>
+                                        )
+                                    })
+                                }
+                            </View>
+                        </List.Accordion>
+                    </View>
                 ) }
-                <View style={style.FloatSnackScroll}>    
-                    <Snackbar visible={ShowMessage} onDismiss={() => hideMessaje()} action={{label: "Cerrar", onPress: () => hideMessaje()}}>
-                        {Message}
-                    </Snackbar>
-                </View>
                 <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"product"} type={"product"} value={Sku} />
+                <ModalAddImage TOKEN={TOKEN} reloadProduct={(a) => onGoBackAction(a)} closeModal={() => closeModalpicture()} isModalVisible={isModalVisiblePicture} sendFile={(a) => saveFiles(a)} Files={Files} key={"picture"} value={Sku} />
+                <Space />
                 <StatusBar backgroundColor={RED_DIS} style="light" />
             </ScrollView>
         );
