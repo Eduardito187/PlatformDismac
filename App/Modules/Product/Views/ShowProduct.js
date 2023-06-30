@@ -1,5 +1,5 @@
 import React from 'react';  
-import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { View, ScrollView, Text, ActivityIndicator, Image } from 'react-native';
 import axios from 'axios';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, IconButton, Chip, Badge, Surface } from 'react-native-paper';
@@ -11,7 +11,7 @@ import Tarea from '../../Catalog/Views/Components/Tarea';
 import CustomTable from '../../Catalog/Views/Components/CustomTable';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
 import { StatusBar } from 'expo-status-bar';
-import { alingContentStatus, column, displayFlex } from '../../Catalog/Style/Two';
+import { alingContentCenter, alingContentStatus, column, displayFlex } from '../../Catalog/Style/Two';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import Price from '../../Catalog/Views/Components/Price';
 import Space from '../../../Components/Space';
@@ -48,7 +48,10 @@ const ShowProduct = ({route, navigation }) => {
     const [isModalVisible, setModalVisible] = React.useState(false);
     const [isModalVisiblePicture, setModalVisiblePicture] = React.useState(false);
     const [Files, SetFiles] = React.useState([]);
+    const [ShowPictures, setShowPictures] = React.useState(false);
+    const [Pictures, SetPictures] = React.useState([]);
     
+    const TooglePictures = () => setShowPictures(!ShowPictures);
     const ToogleState = () => SetState(!state);
     const TooglePrice = () => SetPrice(!price);
     const ToogleInitials = () => SetInitial(!initial);
@@ -88,23 +91,16 @@ const ShowProduct = ({route, navigation }) => {
         SetClacom(Response.clacom);
         SetType(Response.type);
         SetDescription(Response.descripcion == null ? "" : Response.descripcion.description);
-        setStatusTable(Response.status);
-        setPricesTable(Response.prices);
-        setCuotaInicialTable(Response.cuota_inicial);
+        SetStatus(Response.status);
+        SetPrices(Response.prices);
+        SetCuotaInicial(Response.cuota_inicial);
         setCategoryTable(Response.categorias);
         setDataSheetTable(Response.sheets);
         setMedidasComerciales(Response.medidas_comerciales);
-        setMinicuotasTable(Response.minicuotas);
-        setWarehouseTable(Response.warehouses);
+        SetMinicuotas(Response.minicuotas);
+        SetWarehouse(Response.warehouses);
+        SetPictures(Response.pictures);
         setLoading(true);
-    }
-
-    function setWarehouseTable(warehouses){
-        SetWarehouse(warehouses);
-    }
-
-    function setMinicuotasTable(minicuotas) {
-        SetMinicuotas(minicuotas);
     }
 
     function setMedidasComerciales(medidas_comerciales){
@@ -169,18 +165,6 @@ const ShowProduct = ({route, navigation }) => {
         }
     }
 
-    function setCuotaInicialTable(cuota_inicial) {
-        SetCuotaInicial(cuota_inicial);
-    }
-
-    function setPricesTable(Prices){
-        SetPrices(Prices);
-    }
-
-    function setStatusTable(Status){
-        SetStatus(Status);
-    }
-    
     function Navigate(){
         navigation.push("EditProduct", {"id_product":id_product,"TOKEN":TOKEN,"onGoBack": onGoBackAction});
     }
@@ -206,12 +190,13 @@ const ShowProduct = ({route, navigation }) => {
         axios.get(URL_API_SHOW("product", +id_product),GET_HEADER_TOKEN(TOKEN)).then(res => {
             if (res.data != null) {
                 let Response = res.data.response;
+                SetFiles([]);
                 SetProduct(Response);
                 navigation.setOptions({
                     headerRight: () => (
                         <View style={[{width: 190,marginRight: 15},displayFlex]}>
                             <View style={[{width: 40,paddingRight:10},column]}>
-                                <IconButton icon="image" iconColor={RED_DIS} size={30} onPress={() => showModalpicture()} />
+                                <IconButton icon="upload" iconColor={RED_DIS} size={30} onPress={() => showModalpicture()} />
                             </View>
                             <View style={[{width: 40,paddingRight:10},column]}>
                                 <IconButton icon="qrcode" iconColor={RED_DIS} size={30} onPress={() => showModal()} />
@@ -263,6 +248,21 @@ const ShowProduct = ({route, navigation }) => {
                         </List.Accordion>
                     </View>
                 ) }
+                <View style={[ROW_SECTION, Margin_Top_5]}>
+                    <List.Accordion title="Fotos del producto" expanded={ShowPictures} left={props => <List.Icon {...props} icon="information" />} onPress={TooglePictures}>
+                        <View style={[Width_Max, alingContentCenter]}>
+                                {
+                                    Pictures.map((state, i) => {
+                                        return (
+                                            <Surface key={Math.random()+'_Product__Image__'+Math.random()} style={[{width: windowWidth/4.5, margin: 5, height: windowWidth/4.5}, Surface_Style]} elevation={4}>
+                                                <Image key={Math.random()+'_Text_'+i+'_Image_'+Math.random()} style={[{width: "100%", height: "100%"}]} source={{uri: state.url}} />
+                                            </Surface>
+                                        )
+                                    })
+                                }
+                        </View>
+                    </List.Accordion>
+                </View>
                 { Prices!=null && (
                     <View style={[ROW_SECTION, Margin_Top_5]}>
                         <List.Accordion title="Precios del producto" expanded={price} left={props => <List.Icon {...props} icon="information" />} onPress={TooglePrice}>

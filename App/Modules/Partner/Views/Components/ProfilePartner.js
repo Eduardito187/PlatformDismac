@@ -8,7 +8,7 @@ import ImagenAnimation from '../../../../Components/ImagenAnimation';
 import { Background_White, RED_DIS, Section_Max, Size_80, Size_Absolute, Size_Background, Size_Bottom, Size_Left, Size_Right, Size_Text, WHITE } from '../../../Login/Style/css';
 import { IconButton } from 'react-native-paper';
 import { GET_HEADER_TOKEN_FILE, URL_API } from '../../../../Helpers/API';
-import { emitSocket } from '../../../../Helpers/Code';
+import { emitSocket, setDataForm } from '../../../../Helpers/Code';
 
 const ProfilePartner = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
@@ -45,7 +45,7 @@ const ProfilePartner = (props) => {
     function sentForm(File, type) {
         if (File != null) {
             let formData = new FormData();
-            formData.append('File', { uri: File.uri, name: File.name, type: File.mimeType });
+            formData = setDataForm(formData, 'File', { uri: File.uri, name: File.name, type: File.mimeType });
             axios.post(URL_API(type == "cover" ? "changeCover" : "changeProfile"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
                 if (res.data.response) {
                     emitSocket(Socket, "reload_profile", true);

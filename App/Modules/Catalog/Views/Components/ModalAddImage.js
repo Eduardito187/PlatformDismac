@@ -10,6 +10,7 @@ import Carousel from 'react-native-snap-carousel';
 import { Surface_Style, Width_Max } from '../../../Login/Style/style';
 import { alingContentCenter } from '../../Style/Two';
 import { GET_HEADER_TOKEN_FILE, URL_API } from '../../../../Helpers/API';
+import { setDataForm } from '../../../../Helpers/Code';
 /** */
 
 const ModalAddImage = (props) => {
@@ -38,17 +39,16 @@ const ModalAddImage = (props) => {
         let formData = new FormData();
         for (let index = 0; index < Files.length; index++) {
             let file = Files[index];
-            formData.append('File_'+index, { uri: file.uri, name: file.name, type: file.mimeType });
+            formData = setDataForm(formData, 'File_'+index, { uri: file.uri, name: file.name, type: file.mimeType });
         }
-        formData.append('Long', Files.length);
-        formData.append('sku', Sku);
-        console.log(formData);
+        formData = setDataForm(formData, 'Long', Files.length);
+        formData = setDataForm(formData, 'sku', Sku);
         axios.post(URL_API("uploadPictures"), formData, GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
             if (res.data.response) {
                 props.reloadProduct(true);
             }
         }).catch(err => {
-            console.log(err);
+            //
         });
     }
 

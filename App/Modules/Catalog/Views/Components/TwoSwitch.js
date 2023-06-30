@@ -21,7 +21,7 @@ const TwoSwitch = (props) => {
                 <Text style={label1}>{props.label1}</Text>
             </View>
             <View style={[{width:props.column2},column]}>
-                <Switch style={label2} color={RED_DIS} value={isSwitchOn} onValueChange={chnageSwitch} />
+                <Switch disabled={props.disabled} style={label2} color={RED_DIS} value={isSwitchOn} onValueChange={chnageSwitch} />
             </View>
         </View>
     );

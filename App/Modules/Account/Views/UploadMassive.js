@@ -16,6 +16,7 @@ import { Button } from 'react-native-paper';
 import { RED_DIS, Style_Button } from '../../Login/Style/css';
 import TwoRadio from '../../Catalog/Views/Components/TwoRadio';
 import { GET_HEADER_TOKEN_FILE, URL_API } from '../../../Helpers/API';
+import { setDataForm } from '../../../Helpers/Code';
 
 const UploadMassive = (props) => {
     const [DateEjecute, SetDateEjecute] = React.useState(false);
@@ -107,15 +108,15 @@ const UploadMassive = (props) => {
         SetDisable(true);
         if (File != null) {
             let formData = new FormData();
-            formData.append('File', { uri: File.uri, name: File.name, type: File.mimeType });
-            formData.append('Type', Value);
-            formData.append('Ejecucion', ejecucion);
-            formData.append('Duracion', duracion);
+            formData = setDataForm(formData, 'File', { uri: File.uri, name: File.name, type: File.mimeType });
+            formData = setDataForm(formData, 'Type', Value);
+            formData = setDataForm(formData, 'Ejecucion', ejecucion);
+            formData = setDataForm(formData, 'Duracion', duracion);
             if (ejecucion == "PROGRAMAR") {
-                formData.append('FechaEjecucion', FechaEjecucion);
+                formData = setDataForm(formData, 'FechaEjecucion', FechaEjecucion);
             }
             if (duracion == "TEMPORAL") {
-                formData.append('FechaDuracion', FechaDuracion);
+                formData = setDataForm(formData, 'FechaDuracion', FechaDuracion);
             }
             axios.post(URL_API("uploadFile"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
                 if (res.response) {

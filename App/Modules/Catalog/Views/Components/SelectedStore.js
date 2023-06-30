@@ -56,7 +56,7 @@ const SelectedStore = (props) => {
                     return (
                         <Checkbox.Item 
                             key={Math.random()+'_STORE_'+Math.random()} label={item.name} color={RED_DIS} 
-                            status={item.check ? 'checked' : 'unchecked'} onPress={() => gestionStore(item.id)} 
+                            status={item.check ? 'checked' : 'unchecked'} disabled={props.disabled} onPress={() => gestionStore(item.id)} 
                         />
                     )
                 })
