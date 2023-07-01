@@ -16,6 +16,7 @@ import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import Price from '../../Catalog/Views/Components/Price';
 import Space from '../../../Components/Space';
 import ModalAddImage from '../../Catalog/Views/Components/ModalAddImage';
+import Attribute from './Components/Attributes';
 /** Components */
 
 const ShowProduct = ({route, navigation }) => {
@@ -50,7 +51,11 @@ const ShowProduct = ({route, navigation }) => {
     const [Files, SetFiles] = React.useState([]);
     const [ShowPictures, setShowPictures] = React.useState(false);
     const [Pictures, SetPictures] = React.useState([]);
+    const [Familia, SetFamilia] = React.useState(null);
+    const [ShowAttributes, SetShowAttributes] = React.useState(false);
+    const [Attributos, SetAttributos] = React.useState(null);
     
+    const ToogleAttributes = () => SetShowAttributes(!ShowAttributes);
     const TooglePictures = () => setShowPictures(!ShowPictures);
     const ToogleState = () => SetState(!state);
     const TooglePrice = () => SetPrice(!price);
@@ -100,6 +105,8 @@ const ShowProduct = ({route, navigation }) => {
         SetMinicuotas(Response.minicuotas);
         SetWarehouse(Response.warehouses);
         SetPictures(Response.pictures);
+        SetFamilia(Response.family);
+        SetAttributos(Response.attributes);
         setLoading(true);
     }
 
@@ -171,6 +178,7 @@ const ShowProduct = ({route, navigation }) => {
 
     function onGoBackAction(a){
         if (a) {
+            closeModalpicture(false);
             setLoading(false);
             getProduct();
         }
@@ -215,6 +223,10 @@ const ShowProduct = ({route, navigation }) => {
             //
         });
     }
+
+    function changeCustomValue(code, value){
+
+    }
     
     if (loading === false) {
         return (<LoadingPage />);
@@ -233,6 +245,7 @@ const ShowProduct = ({route, navigation }) => {
                 { Brand != null && (<TwoColumnBg width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Marca'} label2={Brand.name} />) }
                 { Clacom != null && (<TwoColumnBg width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Clacom'} label2={Clacom.label} />) }
                 { Type != null && (<TwoColumnBg width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Tipo'} label2={Type.type} />) }
+                { Familia != null && (<TwoColumnBg width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Familia'} label2={Familia.name} />) }
                 { Status!=null && (
                     <View style={[ROW_SECTION, Margin_Top_5]}>
                         <List.Accordion title="Estados del producto" expanded={state} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleState}>
@@ -381,6 +394,21 @@ const ShowProduct = ({route, navigation }) => {
                                                     }
                                                 </View>
                                             </Surface>
+                                        )
+                                    })
+                                }
+                            </View>
+                        </List.Accordion>
+                    </View>
+                ) }
+                { Attributos!=null && (
+                    <View style={[ROW_SECTION, Margin_Top_5]}>
+                        <List.Accordion title="Attributos del producto" expanded={ShowAttributes} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleAttributes}>
+                            <View style={[Width_Max, alingContentStatus]}>
+                                {
+                                    Attributos.map((state, j) => {
+                                        return (
+                                            <Attribute key={Math.random()+'_Product_Warehouse_'+Math.random()} name={state.custom.name} value={state.value} code={state.custom.code} type={state.custom.type.type} disabled={true} setValue={(code, value) => changeCustomValue(code, value)} />
                                         )
                                     })
                                 }

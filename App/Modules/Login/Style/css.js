@@ -617,6 +617,9 @@ export const Margin_Bottom_5 = {
 export const Margin_Top_25 = {
     marginTop: 25
 };
+export const Margin_Bottom_10 = {
+    marginBottom: 10
+};
 export const Margin_Bottom_25 = {
     marginBottom: 25
 };

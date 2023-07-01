@@ -30,6 +30,14 @@ const LandingHome = (props) => {
         {
             "ID":4,
             "Social":"Whatsapp"
+        },
+        {
+            "ID":5,
+            "Social":"Twitter"
+        },
+        {
+            "ID":6,
+            "Social":"Linkedin"
         }
     ]);
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
