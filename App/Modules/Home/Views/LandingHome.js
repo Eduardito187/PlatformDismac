@@ -10,6 +10,7 @@ import Header from './Components/Header';
 import CategoryLast from './Components/CategoryLast';
 import ProductLast from './Components/ProductLast';
 import TwoActionColumn from '../../Catalog/Views/Components/TwoActionColumn';
+import Socials from './Components/Socials';
 
 const LandingHome = (props) => {
     const [Categorys, SetCategorys] = React.useState([]);
@@ -94,6 +95,7 @@ const LandingHome = (props) => {
                     <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                         <TwoActionColumn width={windowWidth-20} column1={(windowWidth-20)*0.75} column2={(windowWidth-20)*0.25} label1={'Reportes'} label2={'Ver'} Action={() => redirectReportes()}  />
                         <Campains width={windowWidth-20} height={100} data={Campain} />
+                        <Socials width={windowWidth-20} height={100} data={Campain} />
                         {Categorys.length > 0 && (<CategoryLast navigation={Navigation} TOKEN={TOKEN} categorys={Categorys} />)}
                         {Products.length > 0 && (<ProductLast navigation={Navigation} TOKEN={TOKEN} products={Products} />)}
                     </ScrollView>

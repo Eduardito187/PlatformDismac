@@ -1,12 +1,15 @@
 import React from 'react';  
 import { Animated, Easing  } from 'react-native';
 
-class LogoDismac extends React.Component {
+class SocialPicture extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             style : props.style,
-            border: new Animated.Value(0)
+            border : new Animated.Value(0),
+            path : "./../../assets/",
+            social : props.social,
+            extension : ".png"
         };
     }
 
@@ -21,8 +24,8 @@ class LogoDismac extends React.Component {
 
     render() {
         return(
-            <Animated.Image style={[this.state.style,{borderRadius: this.state.border}]} source={require('./../../assets/dismac_.png')} />
+            <Animated.Image style={[this.state.style,{borderRadius: this.state.border}]} source={require(this.state.path+this.state.social+this.state.extension)} />
         );
     }
 }
-export default LogoDismac;
+export default SocialPicture;
