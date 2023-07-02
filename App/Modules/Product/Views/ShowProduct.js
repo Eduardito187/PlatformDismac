@@ -1,10 +1,10 @@
 import React from 'react';  
-import { View, ScrollView, Text, ActivityIndicator, Image } from 'react-native';
+import { View, ScrollView, Text, ActivityIndicator, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, IconButton, Chip, Badge, Surface } from 'react-native-paper';
-import { Height_30, Margin_5, Margin_Bottom_5, Margin_L5, Margin_Top_5, Only_Height_40, RED_DIS, ROW_SECTION, Section_Card_Title, WHITE } from '../../Login/Style/css';
-import { GET_HEADER_TOKEN, URL_API_SHOW } from '../../../Helpers/API';
+import { Background_White, Height_30, Margin_5, Margin_Bottom_5, Margin_L5, Margin_Top_5, Only_Height_40, Position_Icon_Delete, RED_DIS, ROW_SECTION, Section_Card_Title, Section_Max_Content, WHITE } from '../../Login/Style/css';
+import { CREATE_BODY_DELETE_PICTURE, GET_HEADER_TOKEN, URL_API, URL_API_SHOW } from '../../../Helpers/API';
 import { MarginBottomM7, MarginBottomM9, MarginContentChip, P5, Section_Scroll, Size_15_Bold, Surface_Style, Width_Max, style } from '../../Login/Style/style';
 import TwoColumnBg from '../../Catalog/Views/Components/TwoColumnBg';
 import Tarea from '../../Catalog/Views/Components/Tarea';
@@ -17,6 +17,7 @@ import Price from '../../Catalog/Views/Components/Price';
 import Space from '../../../Components/Space';
 import ModalAddImage from '../../Catalog/Views/Components/ModalAddImage';
 import Attribute from './Components/Attributes';
+import ModalPicture from '../../Catalog/Views/Components/ModalPicture';
 /** Components */
 
 const ShowProduct = ({route, navigation }) => {
@@ -54,6 +55,8 @@ const ShowProduct = ({route, navigation }) => {
     const [Familia, SetFamilia] = React.useState(null);
     const [ShowAttributes, SetShowAttributes] = React.useState(false);
     const [Attributos, SetAttributos] = React.useState(null);
+    const [File_Picture, SetFile_Picture] = React.useState("");
+    const [PopPicture, SetPopPicture] = React.useState(false);
     
     const ToogleAttributes = () => SetShowAttributes(!ShowAttributes);
     const TooglePictures = () => setShowPictures(!ShowPictures);
@@ -66,6 +69,14 @@ const ShowProduct = ({route, navigation }) => {
     const ToogleMini = () => SetMini(!mini);
     const ToogleWhs = () => SetWhs(!whs);
 
+    function showPopPicture() {
+        SetPopPicture(true);
+    }
+
+    function closePopPicture() {
+        SetPopPicture(false);
+    }
+    
     function showModal() {
         setModalVisible(true);
     }
@@ -178,6 +189,7 @@ const ShowProduct = ({route, navigation }) => {
 
     function onGoBackAction(a){
         if (a) {
+            SetFile_Picture("");
             closeModalpicture(false);
             setLoading(false);
             getProduct();
@@ -227,6 +239,23 @@ const ShowProduct = ({route, navigation }) => {
     function changeCustomValue(code, value){
 
     }
+
+    function showPictureImage(picture) {
+        SetFile_Picture(picture.url);
+        showPopPicture();
+    }
+
+    function deletePictureImage(picture){
+        axios.post(URL_API("deletePicture"),CREATE_BODY_DELETE_PICTURE(picture.id),GET_HEADER_TOKEN(TOKEN)).then(res => {
+            if (res.data.response != null) {
+                if (res.data.response) {
+                    onGoBackAction(true);
+                }
+            }
+        }).catch(err => {
+            //
+        });
+    }
     
     if (loading === false) {
         return (<LoadingPage />);
@@ -268,7 +297,12 @@ const ShowProduct = ({route, navigation }) => {
                                     Pictures.map((state, i) => {
                                         return (
                                             <Surface key={Math.random()+'_Product__Image__'+Math.random()} style={[{width: windowWidth/4.5, margin: 5, height: windowWidth/4.5}, Surface_Style]} elevation={4}>
-                                                <Image key={Math.random()+'_Text_'+i+'_Image_'+Math.random()} style={[{width: "100%", height: "100%"}]} source={{uri: state.url}} />
+                                                <TouchableOpacity style={{position: "relative"}} onPress={() => showPictureImage(state)}>
+                                                    <Image key={Math.random()+'_Text_'+i+'_Image_'+Math.random()} style={[Section_Max_Content]} source={{uri: state.url}} />
+                                                    <View style={Position_Icon_Delete}>
+                                                        <IconButton icon={"delete"} style={Background_White} size={16} iconColor={RED_DIS} onPress={() => deletePictureImage(state)} />
+                                                    </View>
+                                                </TouchableOpacity>
                                             </Surface>
                                         )
                                     })
@@ -418,6 +452,7 @@ const ShowProduct = ({route, navigation }) => {
                 ) }
                 <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"product"} type={"product"} value={Sku} />
                 <ModalAddImage TOKEN={TOKEN} reloadProduct={(a) => onGoBackAction(a)} closeModal={() => closeModalpicture()} isModalVisible={isModalVisiblePicture} sendFile={(a) => saveFiles(a)} Files={Files} key={"picture"} value={Sku} />
+                <ModalPicture TOKEN={TOKEN} closeModal={() => closePopPicture()} isModalVisible={PopPicture} key={"picture_modal"} file={File_Picture} />
                 <Space />
                 <StatusBar backgroundColor={RED_DIS} style="light" />
             </ScrollView>

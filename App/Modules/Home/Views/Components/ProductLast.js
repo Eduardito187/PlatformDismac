@@ -15,7 +15,7 @@ const ProductLast = (props) => {
     }, []);
     
     function viewProduct(id_product) {
-        Navigation.push("ViewProduct", {"id_product":id_product,"TOKEN":TOKEN});
+        Navigation.push("ShowProduct", {"id_product":id_product,"TOKEN":TOKEN});
     }
     
     return(

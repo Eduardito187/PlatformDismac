@@ -47,6 +47,16 @@ export const label1 = {
     position: "absolute",
     left:5
 };
+export const label_1 = {
+    fontWeight: "bold",
+    fontSize: 15,
+    color: "black"
+};
+export const label_nb_1 = {
+    fontWeight: "400",
+    fontSize: 15,
+    color: "black"
+};
 export const label2 = {
     fontWeight: "bold",
     fontSize: 14,

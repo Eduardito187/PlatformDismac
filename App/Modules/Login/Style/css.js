@@ -91,6 +91,16 @@ export const Size_Background = {
     backgroundColor: "#FFFFFF",
     padding: 5
 };
+export const Section_Max_Content = {
+    width: "100%",
+    height: "100%"
+};
+export const Position_Icon_Delete = {
+    position: "absolute",
+    zIndex: 10,
+    right: -12,
+    top: -12
+};
 export const Background_White = {
     backgroundColor: WHITE
 };
@@ -136,6 +146,10 @@ export const Absolute_55 = {
     top: 0,
     bottom: 0
 };
+export const Content_Center = {
+    justifyContent: "center",
+    alignItems: "center"
+};
 export const Max_Content_Center = {
     width: "100%",
     justifyContent: "center",
@@ -160,7 +174,7 @@ export const Only_Height_40 = {
 export const Height_50 = {
     width: "100%",
     height: 50,
-    backgroundColor: "white"
+    backgroundColor: WHITE
 };
 export const Bottom_Custom = {
     position: "absolute",
@@ -193,7 +207,7 @@ export const Height_135 = {
 export const Height_50_White = {
     width: "100%",
     height: 50,
-    backgroundColor: "white"
+    backgroundColor: WHITE
 };
 export const Height_45 = {
     width: "100%",
@@ -239,7 +253,7 @@ export const Section_Content_Center = {
     padding: 10
 };
 export const inputValidate = {
-    backgroundColor: "white",
+    backgroundColor: WHITE,
     borderColor: "red",
     borderWidth: 2,
     borderRadius: 5,
@@ -485,14 +499,14 @@ export const LINEAR_GRADIENT = {
 };
 export const NAME_TEXT = {
     fontWeight: 'bold',
-    color: "white",
+    color: WHITE,
     fontSize: 14,
     marginTop: 20,
     height: 34
 };
 export const SKU_TEXT = {
     fontWeight: 'bold',
-    color: "white",
+    color: WHITE,
     fontSize: 12,
     marginTop: 10
 };
@@ -509,7 +523,7 @@ export const CARD_PRODUCT = {
     width: 200,
     height: 300,
     borderRadius: 10,
-    backgroundColor: "white",
+    backgroundColor: WHITE,
     margin: 5,
     shadowColor: "#000",
     shadowOffset: {
@@ -524,7 +538,7 @@ export const CARD_CATEGORY = {
     width: 200,
     height: 150,
     borderRadius: 10,
-    backgroundColor: "white",
+    backgroundColor: WHITE,
     margin: 5,
     shadowColor: "#000",
     shadowOffset: {
@@ -634,7 +648,7 @@ export const SECTION_CLOSE = {
 export const NAME = {
     fontSize: 15,
     fontWeight:"bold",
-    color: "white"
+    color: WHITE
 };
 export const MAIL = {
     color: "#808080"
@@ -644,7 +658,7 @@ export const IMAGE_PROFILE = {
     height:70,
     borderRadius:35,
     borderWidth:2,
-    borderColor: "white"
+    borderColor: WHITE
 };
 export const SECTION_DRAWER = {
     justifyContent:"space-between",
@@ -664,7 +678,7 @@ export const Color_White = {
 };
 export const Background_Dismac = {
     backgroundColor: "#EC2427",
-    color: "white"
+    color: WHITE
 };
 export const BTN = {
     backgroundColor: "#EC2427",

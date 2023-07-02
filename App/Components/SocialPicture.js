@@ -1,31 +1,26 @@
-import React from 'react';  
+import * as React from 'react';
 import { Animated, Easing  } from 'react-native';
 
-class SocialPicture extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            style : props.style,
-            border : new Animated.Value(0),
-            path : "./../../assets/",
-            social : props.social,
-            extension : ".png"
-        };
-    }
+const SocialPicture = (props) => {
+    const border = new Animated.Value(0);
+    const [Picture, SetPicture] = React.useState(props.picture);
 
-    componentDidMount(){
-        Animated.timing(this.state.border, {
+    React.useEffect(() => {
+        animateBorder();
+    }, []);
+
+    function animateBorder(){
+        Animated.timing(border, {
             toValue: 5,
             duration: 250,
             easing: Easing.linear,
             useNativeDriver: true
-          }).start();
+        }).start();
     }
 
-    render() {
-        return(
-            <Animated.Image style={[this.state.style,{borderRadius: this.state.border}]} source={require(this.state.path+this.state.social+this.state.extension)} />
-        );
-    }
+    return (
+        <Animated.Image style={[{width: props.height, height: props.height}, {borderRadius: border}, {resizeMode: "contain"}]} source={Picture} />
+    );
 }
+
 export default SocialPicture;

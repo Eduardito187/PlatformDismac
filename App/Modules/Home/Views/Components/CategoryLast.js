@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { ScrollView, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { CARD_CATEGORY, CONTENT_GRADIENT, DESGRADE_ARRAY, DESGRADE_CONTENT_CATEGORY, IMAGE_MAX, NAME_TEXT, RADIUS_PICTURE_IMAGE, RED_DIS, TITLE_SECTION } from '../../../Login/Style/css';
-import { CONTENT_SECTION, SECTION_CONTENT } from '../../../Login/Style/style';
+import { CONTENT_SECTION, CONTENT_SECTION_NT, SECTION_CONTENT } from '../../../Login/Style/style';
 /** */
 
 
@@ -23,7 +23,7 @@ const CategoryLast = (props) => {
     }
     
     return(
-        <View style={CONTENT_SECTION}>
+        <View style={CONTENT_SECTION_NT}>
             <Text style={TITLE_SECTION}>Categorías {"("+props.categorys.length+")"}</Text>
             <View style={SECTION_CONTENT}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

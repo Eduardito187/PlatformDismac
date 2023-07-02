@@ -82,6 +82,11 @@ export function CREATE_BODY_STATUS_ACCOUNT(type, value) {
         "value" : value
     };
 }
+export function CREATE_BODY_DELETE_PICTURE(id_picture) {
+    return {
+        "id_picture" : id_picture
+    };
+}
 export function CREATE_BODY_LOGIN(username, password) {
     return {
         "username" : username,

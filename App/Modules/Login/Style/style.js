@@ -6,6 +6,13 @@ export const CONTENT_SECTION = {
     borderRadius: 10,
     marginTop: 20
 };
+export const CONTENT_SECTION_NT = {
+    backgroundColor: '#FFFFFF',
+    width: windowWidth-10,
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 5
+};
 export const Space_Separation = {
     width: "100%",
     height: 40
