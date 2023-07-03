@@ -4,6 +4,109 @@ export const PLO_DIS = "#808080";
 export const WHITE = "#FFFFFF";
 export const GREEN_PRICE = "#88D377";
 export const RGBA_05 = "rgba(0, 0, 0, 0.5)";
+export const WIDTH_100 = "100%";
+export const BLACK = "#000000";
+export const DARK = "#777777";
+export const BLUE = "#0043F9";
+export const LIGHT = "#F0F0F3";
+export const CONTENT_DIRECTION_BODY = {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 14,
+    borderBottomColor: LIGHT,
+    borderBottomWidth: 1,
+    paddingBottom: 20
+};
+export const CONTENT_ICON_LOCATE = {
+    color: BLUE,
+    backgroundColor: LIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 12,
+    borderRadius: 100,
+    marginRight: 10
+};
+export const PRODUCT_INFORMATION = {paddingHorizontal: 16,marginTop: 6};
+export const PRODUCT_CONTENT_INFORMATION = {flexDirection: 'row',marginVertical: 4,alignItems: 'center',justifyContent: 'space-between'};
+export const ICON_LINK = {fontSize: 24,color: BLUE,backgroundColor: BLUE + 10,padding: 8,borderRadius: 100};
+export const CONTENT_DIRECTION = {flexDirection: 'row',width: '80%',alignItems: 'center'};
+export const CONTENT_PICTURE_RENDER = {
+    height: 240,
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+export const CONTENT_PICTURE_RENDER_ITEM = {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+};
+export const PRODUCT_DESCRIPTION = {
+    fontSize: 12,
+    color: DARK,
+    fontWeight: '400',
+    letterSpacing: 1,
+    opacity: 0.5,
+    lineHeight: 20,
+    maxWidth: '85%',
+    maxHeight: 44,
+    marginBottom: 18
+};
+export const PRODUCT_NAME_CONTENT = {
+    fontSize: 24,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+    marginVertical: 4,
+    color: BLACK,
+    maxWidth: '84%'
+};
+export const LOCATE = {
+    fontSize: 16,
+    color: RED_DIS
+};
+export const ARROW_RIGHT = {
+    fontSize: 22,
+    color: DARK
+};
+export const PADDING_HORIZONTAL_16 = {
+    paddingHorizontal: 16
+};
+export const CONTENT_PRICE = {
+    fontSize: 18,
+    fontWeight: '500',
+    maxWidth: '85%',
+    color: BLACK,
+    marginBottom: 4
+};
+export const CONTENT_BODY = {
+    width: WIDTH_100,
+    height: WIDTH_100,
+    backgroundColor:WHITE,
+    position: 'relative'
+};
+export const CONTENT_PICTURE = {
+    width: WIDTH_100,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 4
+};
+export const CONTENT_ANIMATION_PICTURE = {
+    width: WIDTH_100,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+    marginTop: 32
+};
+export const PICTURE_ANIMATION = {
+    width: '16%',
+    height: 2.4,
+    marginHorizontal: 4,
+    borderRadius: 100
+};
 export const Section_Content_One = {
     position: 'absolute',
     top: 0,
@@ -87,13 +190,13 @@ export const Size_Absolute = {
     bottom: 10
 };
 export const Size_Background = {
-    width: "100%",
+    width: WIDTH_100,
     backgroundColor: "#FFFFFF",
     padding: 5
 };
 export const Section_Max_Content = {
-    width: "100%",
-    height: "100%"
+    width: WIDTH_100,
+    height: WIDTH_100
 };
 export const Position_Icon_Delete = {
     position: "absolute",
@@ -151,7 +254,7 @@ export const Content_Center = {
     alignItems: "center"
 };
 export const Max_Content_Center = {
-    width: "100%",
+    width: WIDTH_100,
     justifyContent: "center",
     alignItems: "center"
 };
@@ -172,7 +275,7 @@ export const Only_Height_40 = {
     height: 40
 };
 export const Height_50 = {
-    width: "100%",
+    width: WIDTH_100,
     height: 50,
     backgroundColor: WHITE
 };
@@ -201,20 +304,20 @@ export const Absolte_Left ={
     left: 0
 };
 export const Height_135 = {
-    width: "100%",
+    width: WIDTH_100,
     height: 135
 };
 export const Height_50_White = {
-    width: "100%",
+    width: WIDTH_100,
     height: 50,
     backgroundColor: WHITE
 };
 export const Height_45 = {
-    width: "100%",
+    width: WIDTH_100,
     height: 45
 };
 export const Height_30 = {
-    width: "100%",
+    width: WIDTH_100,
     height: 30
 };
 export const Section_Row = {
@@ -231,7 +334,7 @@ export const Height_20 = {
     height: 20
 };
 export const Section_Max = {
-    width: "100%"
+    width: WIDTH_100
 };
 export const Size_20 = {
     fontSize: 20
@@ -276,7 +379,7 @@ export const Text_Variant_Const = {
     marginTop: 10
 };
 export const Section_Flex_Width = {
-    width: "100%",
+    width: WIDTH_100,
     borderColor: RED_DIS,
     borderRadius: 10,
     borderWidth: 1,
@@ -290,7 +393,7 @@ export const Font_Bob = {
 };
 export const Option_Table = {
     position: "relative",
-    width: "100%",
+    width: WIDTH_100,
     height: 35,
     padding: 5,
     marginBottom: 1,
@@ -334,7 +437,7 @@ export const Column_Image = {
 };
 export const Column_Content = {
     position: "relative",
-    width: "100%",
+    width: WIDTH_100,
     height: 135,
     padding: 5
 };
@@ -390,7 +493,7 @@ export const SECTION_RIGHT_LIST = {
     borderRadius: 10
 };
 export const CONTENT_LIST_VIEW = {
-    width: "100%",
+    width: WIDTH_100,
     height: 50,
     position: "relative",
     marginBottom: 5
@@ -448,16 +551,16 @@ export const UPLOAD_BTN = {
 export const SOLID_BG = "#F2F2F2";
 export const CONTIANER_LOADING = {
     position: 'relative',
-    width: "100%",
-    height: "100%",
+    width: WIDTH_100,
+    height: WIDTH_100,
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
     alignContent: "center"
 };
 export const IMAGE_MAX = {
-    width: "100%",
-    height: "100%"
+    width: WIDTH_100,
+    height: WIDTH_100
 };
 export const DESGRADE_CONTENT = {
     position: 'absolute',

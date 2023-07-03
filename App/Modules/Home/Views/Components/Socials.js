@@ -10,6 +10,7 @@ import SocialPicture from '../../../../Components/SocialPicture';
 import { label_1 } from '../../../Catalog/Style/Two';
 
 const Socials = (props) => {
+    const [Width, SetWidth] = React.useState(props.width-10);
     const [Facebook, SetFacebook] = useAssets(require("./../../../../../assets/Social/Facebook.png"));
     const [Instagram, SetInstagram] = useAssets(require("./../../../../../assets/Social/Instagram.png"));
     const [Linkedin, SetLinkedin] = useAssets(require("./../../../../../assets/Social/Linkedin.png"));
@@ -23,7 +24,7 @@ const Socials = (props) => {
 
     const _renderItem = ({item, index}) => {
         return (
-            <Card key={Math.random()+'_Social_'+Math.random()} style={[{width: props.width, height: props.height}, Border_Radius_5, Background_White, Content_Center]}>
+            <Card key={Math.random()+'_Social_'+Math.random()} style={[{width: Width, height: props.height}, Border_Radius_5, Background_White, Content_Center]}>
                 <SocialPicture height={props.height} picture={selectedPicture(item.social.name)} social={item.social.name} />
             </Card>
         );
@@ -52,7 +53,7 @@ const Socials = (props) => {
                 <View style={[Width_Max]}>
                     <Text style={label_1}>Redes sociales</Text>
                 </View>
-                <Carousel data={props.data} renderItem={_renderItem} sliderWidth={props.width} itemWidth={props.width} />
+                <Carousel data={props.data} renderItem={_renderItem} sliderWidth={Width} itemWidth={Width} />
             </View>
         </View>
     );
