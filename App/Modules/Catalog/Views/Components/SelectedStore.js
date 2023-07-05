@@ -6,11 +6,26 @@ import { GET_STORES_CHECK } from '../../../../Helpers/API';
 /** */
 
 const SelectedStore = (props) => {
+    const [CurrentStore, SetCurrentStore] = React.useState(props.CurrentStore != null ? props.CurrentStore : null);
+    const [Type, SetType] = React.useState(props.Type != null ? "name" : "id");
     const [STORES, SETSTORES] = React.useState([]);
+
     React.useEffect(() => {
         GetStores(props.value);
     }, []);
+
+    function clearOptions(){
+        let stores = STORES.map((store) => {
+            store.check = false;
+            return store;
+        });
+        SETSTORES(stores);
+    }
+
     function gestionStore(id) {
+        if (Type == "name"){
+            clearOptions();
+        }
         let stores = STORES.map((store) => {
             if (id === store.id) {
                 store.check = !store.check;
@@ -20,15 +35,17 @@ const SelectedStore = (props) => {
         SETSTORES(stores);
         emitStores(stores);
     }
+
     function emitStores(stores){
         let Stores = [];
         for (let index = 0; index < stores.length; index++) {
             if (stores[index]["check"]) {
-                Stores.push(stores[index]["id"]);
+                Stores.push(stores[index][Type]);
             }
         }
         props.Action(Stores);
     }
+
     function ifExistStore(value, id){
         for (let index = 0; index < value.length; index++) {
             if (value[index]["id"] == id) {
@@ -41,14 +58,28 @@ const SelectedStore = (props) => {
         }
         return false;
     }
+
     async function GetStores(value){
         let store_array = await GET_STORES_CHECK();
         let stores = store_array.map((store) => {
-            store.check = ifExistStore(value, store.id);
+            if (Type == "id"){
+                store.check = ifExistStore(value, store.id);
+            }
+            if (Type == "name" && CurrentStore != null){
+                store.check = verifyNameStore(store.name);
+            }
             return store;
         });
         SETSTORES(stores);
     }
+
+    function verifyNameStore(name){
+        if (CurrentStore == name){
+            return true;
+        }
+        return false;
+    }
+
     return(
         <View>
             {

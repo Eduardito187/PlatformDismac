@@ -9,6 +9,11 @@ export const BLACK = "#000000";
 export const DARK = "#777777";
 export const BLUE = "#0043F9";
 export const LIGHT = "#F0F0F3";
+export const PICTURE_PARTNER = {
+    width: 50,
+    height: 50,
+    borderRadius: 25
+};
 export const CONTENT_DIRECTION_BODY = {
     flexDirection: 'row',
     alignItems: 'center',
@@ -18,19 +23,41 @@ export const CONTENT_DIRECTION_BODY = {
     borderBottomWidth: 1,
     paddingBottom: 20
 };
+export const PADDING_BOTTOM_10 = {
+    paddingBottom: 10
+};
+export const SECTION_BOTTOM = {
+    borderBottomColor: LIGHT,
+    borderBottomWidth: 1
+};
 export const CONTENT_ICON_LOCATE = {
     color: BLUE,
-    backgroundColor: LIGHT,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 12,
-    borderRadius: 100,
     marginRight: 10
 };
-export const PRODUCT_INFORMATION = {paddingHorizontal: 16,marginTop: 6};
-export const PRODUCT_CONTENT_INFORMATION = {flexDirection: 'row',marginVertical: 4,alignItems: 'center',justifyContent: 'space-between'};
-export const ICON_LINK = {fontSize: 24,color: BLUE,backgroundColor: BLUE + 10,padding: 8,borderRadius: 100};
-export const CONTENT_DIRECTION = {flexDirection: 'row',width: '80%',alignItems: 'center'};
+export const PRODUCT_INFORMATION = {
+    paddingHorizontal: 16,
+    marginTop: 6
+};
+export const PRODUCT_CONTENT_INFORMATION = {
+    flexDirection: 'row',
+    marginVertical: 4,
+    alignItems: 'center',
+    justifyContent: 'space-between'
+};
+export const ICON_LINK = {
+    fontSize: 24,
+    color: BLUE,
+    backgroundColor: BLUE + 10,
+    padding: 8,
+    borderRadius: 100
+};
+export const CONTENT_DIRECTION = {
+    flexDirection: 'row',
+    width: '80%',
+    alignItems: 'center'
+};
 export const CONTENT_PICTURE_RENDER = {
     height: 240,
     alignItems: 'center',
@@ -40,6 +67,9 @@ export const CONTENT_PICTURE_RENDER_ITEM = {
     width: '100%',
     height: '100%',
     resizeMode: 'contain',
+};
+export const Margin_Bottom_18 = {
+    marginBottom: 18
 };
 export const PRODUCT_DESCRIPTION = {
     fontSize: 12,
@@ -62,7 +92,8 @@ export const PRODUCT_NAME_CONTENT = {
 };
 export const LOCATE = {
     fontSize: 16,
-    color: RED_DIS
+    color: RED_DIS,
+    fontWeight: "800"
 };
 export const ARROW_RIGHT = {
     fontSize: 22,
@@ -102,7 +133,6 @@ export const CONTENT_ANIMATION_PICTURE = {
     marginTop: 32
 };
 export const PICTURE_ANIMATION = {
-    width: '16%',
     height: 2.4,
     marginHorizontal: 4,
     borderRadius: 100
@@ -142,7 +172,7 @@ export const Section_Content_Back = {
 };
 export const Section_Card = {
     borderRadius: 5,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: WHITE,
     marginTop: 10,
     marginBottom: 5,
     padding: 10
@@ -170,7 +200,7 @@ export const Size_Text = {
     fontSize: 20,
     fontWeight: "900",
     color: "#EC2427",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: WHITE,
     padding: 3,
     borderRadius: 5
 };
@@ -191,7 +221,7 @@ export const Size_Absolute = {
 };
 export const Size_Background = {
     width: WIDTH_100,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: WHITE,
     padding: 5
 };
 export const Section_Max_Content = {
@@ -534,6 +564,9 @@ export const DRAWER_CONTENT = {
     justifyContent: 'flex-start',
     padding: 15
 };
+export const PADDING_CONTENT = {
+    paddingLeft: 15
+};
 export const TEXT_OPTION_DRAWER = {
     fontSize: 15,
     fontWeight: 'bold',
@@ -669,7 +702,7 @@ export const DisButton = {
 };
 export const SText = {
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: WHITE,
     fontSize: 20
 };
 export const modalContainerStyle = {
@@ -789,7 +822,12 @@ export const BTN = {
 };
 export const BTNText = {
     fontWeight: "900",
-    color: "#FFFFFF",
+    color: WHITE,
+    fontSize: 20
+};
+export const BTNBlackText = {
+    fontWeight: "500",
+    color: BLACK,
     fontSize: 20
 };
 export const h70 = {
