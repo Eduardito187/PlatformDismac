@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { BTNBlackText, Margin_Bottom_18, PADDING_CONTENT } from '../../../Login/Style/css';
 import { View, Text } from 'react-native';
 import { Width_Max } from '../../../Login/Style/style';
+import { label_1 } from '../../../Catalog/Style/Two';
 /** */
 
 const CaracteristicasUnicas = (props) => {
@@ -16,7 +17,7 @@ const CaracteristicasUnicas = (props) => {
             <View key={Math.random()+'_CaracteristicaUnica_'+Math.random()} style={Margin_Bottom_18}>
                 <View style={[Width_Max]}>
                     <View style={[Width_Max]}>
-                        <Text style={[BTNBlackText]}>Caracteristicas Unicas</Text>
+                        <Text style={label_1}>Características Unicas</Text>
                     </View>
                     <View key={Math.random()+'_CaracteristicaUnica_Content_'+Math.random()} style={[Width_Max, PADDING_CONTENT]}>
                         {

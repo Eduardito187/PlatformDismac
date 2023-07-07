@@ -17,6 +17,7 @@ const ModalAddImage = (props) => {
     const [TOKEN, SETTOKEN] = React.useState(props.TOKEN);
     const [Sku, SetSku] = React.useState(props.value);
     const [Files, SetFiles] = React.useState(props.Files);
+    const [Disable, SetDisable] = React.useState(false);
     
     React.useEffect(() => {
         //
@@ -30,12 +31,14 @@ const ModalAddImage = (props) => {
     }
 
     function addPicture(file){
-        let files = Files;
+        let files = props.Files;
         files.push(file);
+        SetFiles(files);
         props.sendFile(files);
     }
 
     function sendFilesApi(){
+        SetDisable(true);
         let formData = new FormData();
         for (let index = 0; index < Files.length; index++) {
             let file = Files[index];
@@ -45,6 +48,7 @@ const ModalAddImage = (props) => {
         formData = setDataForm(formData, 'sku', Sku);
         axios.post(URL_API("uploadPictures"), formData, GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
             if (res.data.response) {
+                SetDisable(false);
                 props.reloadProduct(true);
             }
         }).catch(err => {
@@ -71,7 +75,7 @@ const ModalAddImage = (props) => {
                         </View>
                         {
                             Files.length > 0 && (
-                                <Button icon="send" style={[Button_Red_Dis, Margin_Bottom_25, Margin_Top_25]} mode="contained" onPress={() => sendFilesApi()}>
+                                <Button icon="send" disabled={Disable} loading={Disable} style={[Button_Red_Dis, Margin_Bottom_25, Margin_Top_25]} mode="contained" onPress={() => sendFilesApi()}>
                                     Subir imagenes
                                 </Button>
                             )

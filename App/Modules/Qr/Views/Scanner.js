@@ -21,7 +21,6 @@ const Scanner = (props) => {
 
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
-        console.log(type, data);
     };
 
     if (hasPermission === false || hasPermission === null) {

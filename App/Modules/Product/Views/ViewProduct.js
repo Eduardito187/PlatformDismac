@@ -1,7 +1,6 @@
 import React from 'react';  
 import { View, ScrollView, Text, Animated, TouchableOpacity, FlatList, Image } from 'react-native';
 import axios from 'axios';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { BLACK, Button_Red_Dis, CONTENT_ANIMATION_PICTURE, CONTENT_BODY, CONTENT_PICTURE, CONTENT_PICTURE_RENDER, CONTENT_PICTURE_RENDER_ITEM, CONTENT_PRICE, Height_30, ICON_LINK, JUSTIFY_CONTENT, LOCATE, Margin_5, Margin_L5, Margin_Top_5, NAME, Only_Height_40, PADDING_BOTTOM_10, PADDING_HORIZONTAL_16, PICTURE_ANIMATION, PRODUCT_CONTENT_INFORMATION, PRODUCT_DESCRIPTION, PRODUCT_INFORMATION, PRODUCT_NAME_CONTENT, RED_DIS, SECTION_BOTTOM, Section_Card_Title } from '../../Login/Style/css';
 import { StatusBar } from 'expo-status-bar';
@@ -17,6 +16,12 @@ import { alingContentStatus, displayFlex } from '../../Catalog/Style/Two';
 import { Badge, Button, Chip, Surface } from 'react-native-paper';
 import Price from '../../Catalog/Views/Components/Price';
 import { MarginBottomM9, MarginContentChip, P5, Size_15_Bold, Surface_Style, Width_Max } from '../../Login/Style/style';
+import Name from './Components/Name';
+import Description from './Components/Description';
+import ProductIniciales from './Components/ProductIniciales';
+import ProductMinicuotas from './Components/ProductMinicuotas';
+import ProductPrice from './Components/ProductPrice';
+import ProductStatus from './Components/ProductStatus';
 /** Components */
 
 const ViewProduct = ({route, navigation }) => {
@@ -149,63 +154,31 @@ const ViewProduct = ({route, navigation }) => {
                 <StatusBar backgroundColor={RED_DIS} style="light" />
                 <ScrollView key={Math.random()+'_Scroll_'+Math.random()} showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                     <View key={Math.random()+'_Scroll_View_'+Math.random()} style={CONTENT_PICTURE}>
-                        <FlatList key={Math.random()+'_Flatlist_'+Math.random()} data={Product.pictures} horizontal renderItem={renderProduct} showsHorizontalScrollIndicator={false} decelerationRate={0.8} snapToInterval={width} bounces={false} onScroll={EventAnimated} />
+                        <FlatList key={Math.random()+'_Flatlist_'+Math.random()} data={Product.pictures} horizontal renderItem={renderProduct} keyExtractor={item => item.id} showsHorizontalScrollIndicator={false} decelerationRate={0.8} snapToInterval={width} bounces={false} onScroll={EventAnimated} />
                         <View key={Math.random()+'_Animation_View_'+Math.random()} style={CONTENT_ANIMATION_PICTURE}>
                             {
-                                Product.pictures.map((data, index) => {
-                                    let opacity = position.interpolate({inputRange: [index - 1, index, index + 1],outputRange: [0.2, 1, 0.2],extrapolate: 'clamp'});
-                                    return (
-                                        <Animated.View key={Math.random()+'_Animate_'+index+'_Picture_'+Math.random()} style={[PICTURE_ANIMATION, {backgroundColor: BLACK,opacity, width: parseInt(75/Product.pictures.length)+"%"}]}></Animated.View>
-                                    );
-                                })
+                                Product.pictures.length > 1 && (
+                                    Product.pictures.map((data, index) => {
+                                        let opacity = position.interpolate({inputRange: [index - 1, index, index + 1],outputRange: [0.2, 1, 0.2],extrapolate: 'clamp'});
+                                        return (
+                                            <Animated.View key={Math.random()+'_Animate_'+index+'_Picture_'+Math.random()} style={[PICTURE_ANIMATION, {backgroundColor: BLACK,opacity, width: parseInt(75/Product.pictures.length)+"%"}]}></Animated.View>
+                                        );
+                                    })
+                                )
                             }
                         </View>
                     </View>
-                    <View style={PRODUCT_INFORMATION}>
-                        <View style={PRODUCT_CONTENT_INFORMATION}>
-                            <Text style={PRODUCT_NAME_CONTENT}>
-                                {Product.name}
-                            </Text>
-                            <Ionicons name="link-outline" style={ICON_LINK} />
-                        </View>
-                        {Product.descripcion != null && (<Text style={PRODUCT_DESCRIPTION}>{Product.descripcion.description}</Text>)}
-                        {
-                            Minicuotas != null && (
-                                <View style={[Width_Max, alingContentStatus]}>
-                                    <Surface key={Math.random()+'_Product_Minicuotas_'+Math.random()} style={[{width: widthView}, Surface_Style]} elevation={4}>
-                                        <Text style={[Section_Card_Title, Margin_L5]}>{Minicuotas.store_name}</Text>
-                                        <View style={[Width_Max, P5]}>
-                                            {
-                                                Minicuotas.minicuotas.map((minicuota, i) => {
-                                                    return (
-                                                        <Text key={Math.random()+'_Text_'+i+'_Minicuota_'+Math.random()}>{"Bs "+minicuota.monto+" x "+minicuota.meses+" meses"}</Text>
-                                                    )
-                                                })
-                                            }
-                                        </View>
-                                    </Surface>
-                                </View>
-                            )
-                        }
-                        {
-                            Iniciales != null && (
-                                <View style={[Width_Max, alingContentStatus]}>
-                                    <Chip key={Math.random()+'_Product_CuotaInicial_'+Math.random()} style={[Margin_5, Only_Height_40]} onPress={() => console.log('Pressed')}>
-                                        <View style={[Width_Max, alingContentStatus]}>
-                                            <View style={[Height_30, MarginContentChip]}>
-                                                <Text style={Size_15_Bold}>{Iniciales.store_name}</Text>
-                                            </View>
-                                            <View style={[Height_30, MarginBottomM9]}>
-                                                <Badge>{Iniciales.monto+" Bs"}</Badge>
-                                            </View>
-                                        </View>
-                                    </Chip>
-                                </View>
-                            )
-                        }
-                        <View style={[PADDING_HORIZONTAL_16, SECTION_BOTTOM, PADDING_BOTTOM_10]}>
-                            {Precios != null && (<Price key={Math.random()+'_Product_Price_'+Math.random()} Price={Precios.price} />)}
-                        </View>
+                    <View style={[PRODUCT_INFORMATION, SECTION_BOTTOM]}>
+                        {Estados != null && (<ProductStatus status={Estados.status} />)}
+                        <Name name={Product.name} url={""} />
+                    </View>
+                    <View style={[PRODUCT_INFORMATION]}>
+                        {Product.descripcion != null && (<Description description={Product.descripcion.description} />)}
+                        {Minicuotas != null && (<ProductMinicuotas Minicuotas={Minicuotas} />)}
+                        {Iniciales != null && (<ProductIniciales Iniciales={Iniciales} />)}
+                        {Precios != null && (<ProductPrice Precios={Precios} />)}
+                    </View>
+                    <View style={[PRODUCT_INFORMATION, SECTION_BOTTOM]}>
                         { Product.brand != null && (<TwoColumnBg key={Math.random()+'_Brand_'+Math.random()} width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Marca'} label2={Product.brand.name} />) }
                         <CaracteristicasUnicas CaracteristicasUnicas={Product.sheets} />
                         <MedidasComerciales MedidaComercial={Product.medidas_comerciales} />

@@ -31,7 +31,7 @@ export function setCodeEmail(email, code, type, ShowAlertMessage, bool) {
             ShowAlertMessage("Error en el envio del codigo.");
         }
     }).catch(err => {
-        console.log(err);
+        //
     });
 }
 export function disableAccount(type, value) {

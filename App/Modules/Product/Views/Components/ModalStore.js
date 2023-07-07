@@ -16,7 +16,6 @@ const ModalStore = (props) => {
     }, []);
 
     function selectedStoreView(a) {
-        console.log(a);
         SetStoreSelect(a);
         props.selectedStore(a);
     }

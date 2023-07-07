@@ -7,7 +7,7 @@ export const ColorApp = {
     Dis : "#EC2427"
 };
 export const SCREEN_RELATIVE = {
-    position: 'relative',
+    position: "relative",
     width: "100%",
     height: "100%"
 };

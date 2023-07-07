@@ -9,7 +9,7 @@ const CustomTable = (props) => {
     }, []);
 
     function selectedRow(row) {
-        console.log(row);
+        //
     }
 
     return (

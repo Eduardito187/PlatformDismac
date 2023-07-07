@@ -80,7 +80,6 @@ const Home = ({route, navigation }) => {
   function onSocket(socket){
     socket.on('reload_profile', (value) => {
       SetLoad(false);
-      console.log("reload_profile", value);
       if (value){
         getAccount(TOKEN, false);
       }

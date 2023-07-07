@@ -9,6 +9,11 @@ export const BLACK = "#000000";
 export const DARK = "#777777";
 export const BLUE = "#0043F9";
 export const LIGHT = "#F0F0F3";
+export const VER_MAS_TEXT = {
+    fontWeight: "bold",
+    fontSize: 13,
+    color: RED_DIS
+};
 export const PICTURE_PARTNER = {
     width: 50,
     height: 50,
@@ -78,9 +83,15 @@ export const PRODUCT_DESCRIPTION = {
     letterSpacing: 1,
     opacity: 0.5,
     lineHeight: 20,
-    maxWidth: '85%',
-    maxHeight: 44,
-    marginBottom: 18
+    maxHeight: 44
+};
+export const PRODUCT_DESCRIPTION_SHOW = {
+    fontSize: 12,
+    color: DARK,
+    fontWeight: '400',
+    letterSpacing: 1,
+    opacity: 0.5,
+    lineHeight: 20
 };
 export const PRODUCT_NAME_CONTENT = {
     fontSize: 24,
@@ -863,4 +874,14 @@ export const ACTION_RECENT = {
     color: "#808080",
     marginTop: 5,
     marginBottom: 5
+};
+export const COLOR_GREEN = {
+    color: GREEN_PRICE,
+    fontSize: 16,
+    fontWeight: "bold"
+ };
+export const COLOR_DIS = {
+    color: RED_DIS,
+    fontSize: 16,
+    fontWeight: "bold"
 };
