@@ -5,7 +5,8 @@ import { Absolute_Left_5, Absolute_Right_5, Height_50_White, JUSTIFY_CONTENT, Ma
 import { IconButton } from 'react-native-paper';
 
 const Header = (props) => {
-    const [StatusDrawer, SetStatusDrawer] = React.useState(props.showMenu);
+    const [isHome, SetIsHome] = React.useState(props.showMenu == null ? false : true);
+    const [StatusDrawer, SetStatusDrawer] = React.useState(props.showMenu == null ? false : props.showMenu);
     const [Center, SetCenter] = React.useState(props.center != null ? props.center : null);
     const [Right, SetRight] = React.useState(props.right != null ? props.right : null);
 
@@ -23,7 +24,13 @@ const Header = (props) => {
                 {Center}
             </View>
             <View style={Absolute_Left_5}>
-                <IconButton icon={StatusDrawer ? "menu-open" : "menu"} onPress={() => showDrawer()} iconColor={RED_DIS} size={24} />
+                {
+                    isHome && (<IconButton icon={StatusDrawer ? "menu-open" : "menu"} onPress={() => showDrawer()} iconColor={RED_DIS} size={24} />)
+                }
+                {
+                    !isHome && (<IconButton icon={"arrow-left"} onPress={() => props.DrawerAction()} iconColor={RED_DIS} size={24} />)
+                }
+                
             </View>
             <View style={Absolute_Right_5}>
                 {Right}

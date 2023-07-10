@@ -8,6 +8,7 @@ import { Card } from 'react-native-paper';
 import { P5, Width_Max } from '../../../Login/Style/style';
 import SocialPicture from '../../../../Components/SocialPicture';
 import { label_1 } from '../../../Catalog/Style/Two';
+import { Navigation } from '../../../../Helpers/Nav';
 
 const Socials = (props) => {
     const [Width, SetWidth] = React.useState(props.width-10);
@@ -22,9 +23,13 @@ const Socials = (props) => {
         //
     }, []);
 
+    function selectSocial(item) {
+        Navigation("ShowSocial",{"social":item,"TOKEN":props.TOKEN,"socket":null},props.navigation);
+    }
+
     const _renderItem = ({item, index}) => {
         return (
-            <Card key={Math.random()+'_Social_'+Math.random()} style={[{width: Width, height: props.height}, Border_Radius_5, Background_White, Content_Center]}>
+            <Card key={Math.random()+'_Social_'+Math.random()} onPress={() => selectSocial(item)} style={[{width: Width, height: props.height}, Border_Radius_5, Background_White, Content_Center]}>
                 <SocialPicture height={props.height} picture={selectedPicture(item.social.name)} social={item.social.name} />
             </Card>
         );

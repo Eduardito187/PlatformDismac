@@ -62,7 +62,7 @@ const Partner = (props) => {
                     <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                         {
                             Partner != null
-                            ? <ProfilePartner TOKEN={TOKEN} Partner={Partner} Socket={Socket} />
+                            ? <ProfilePartner TOKEN={TOKEN} Partner={Partner} Edit={true} Socket={Socket} />
                             : <LoadItem />
                         }
                         <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countCampaignsPartner"} label={"Campañas"} icon={(<FontAwesome name={"calendar"} size={45} color={RED_DIS} />)} />

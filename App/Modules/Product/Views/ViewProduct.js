@@ -182,7 +182,9 @@ const ViewProduct = ({route, navigation }) => {
                         { Product.brand != null && (<TwoColumnBg key={Math.random()+'_Brand_'+Math.random()} width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Marca'} label2={Product.brand.name} />) }
                         <CaracteristicasUnicas CaracteristicasUnicas={Product.sheets} />
                         <MedidasComerciales MedidaComercial={Product.medidas_comerciales} />
-                        <PartnerLink Partner={Product.partner} />
+                        {
+                            Product.partner != null && (<PartnerLink Partner={Product.partner} TOKEN={TOKEN} Socket={null} />)
+                        }
                         <ModalStore closeModal={() => closePopUpStore()} selectedStore={(a) => selectedStoreCustom(a)} CurrentStore={CurrentStore} isModalVisible={PopUpStore} key={"modal_store"} type={"stores"} StoreSelect={StoresShow} />
                     </View>
                 </ScrollView>

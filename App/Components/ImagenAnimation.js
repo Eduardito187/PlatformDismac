@@ -23,7 +23,7 @@ class ImagenAnimation extends React.Component {
 
     render() {
         return(
-            <Animated.Image style={[this.state.style,{borderRadius: this.state.border}]} source={{uri: this.state.url}} />
+            <Animated.Image style={[this.state.style,{borderRadius: this.state.border},{resizeMode: "contain"}]} source={{uri: this.state.url}} />
         );
     }
 }

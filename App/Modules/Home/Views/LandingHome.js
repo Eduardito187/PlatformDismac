@@ -96,8 +96,8 @@ const LandingHome = (props) => {
                 <View style={SCREEN_ABSOLUTE_BODY}>
                     <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                         <TwoActionColumn width={windowWidth-20} column1={(windowWidth-20)*0.75} column2={(windowWidth-20)*0.25} label1={'Reportes'} label2={'Ver'} Action={() => redirectReportes()}  />
-                        {Campain.length > 0 && (<Campains width={windowWidth-20} height={100} data={Campain} />)}
-                        {SocialNewtwork.length > 0 && (<Socials width={windowWidth-20} height={100} data={SocialNewtwork} />)}
+                        {Campain.length > 0 && (<Campains width={windowWidth-20} height={100} TOKEN={TOKEN} data={Campain} navigation={props.navigation} />)}
+                        {SocialNewtwork.length > 0 && (<Socials width={windowWidth-20} height={100} TOKEN={TOKEN} data={SocialNewtwork} navigation={props.navigation} />)}
                         {Categorys.length > 0 && (<CategoryLast navigation={Navigation} TOKEN={TOKEN} categorys={Categorys} />)}
                         {Products.length > 0 && (<ProductLast navigation={Navigation} TOKEN={TOKEN} products={Products} />)}
                     </ScrollView>

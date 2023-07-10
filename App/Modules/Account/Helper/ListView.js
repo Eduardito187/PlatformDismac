@@ -15,7 +15,7 @@ const ListView = (props) => {
                 {
                     props.Account.map((account) => {
                         return (
-                            <Account key={Math.random()+'_ACCOUNT_'+Math.random()} Account={account} />
+                            <Account key={Math.random()+'_ACCOUNT_'+Math.random()} reloadAccounts={() => props.reloadAccounts()} TOKEN={props.TOKEN} navigation={props.navigation} Account={account} />
                         )
                     })
                 }

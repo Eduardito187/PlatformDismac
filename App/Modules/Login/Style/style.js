@@ -272,6 +272,10 @@ export const RowForm = {
     padding: 5,
     width: (windowWidth - 30)
 };
+export const RowFormFlex = {
+    padding: 5,
+    width: "100%"
+};
 export const AlingForm = {
     justifyContent: "center",
     alignItems: "center",
@@ -375,6 +379,11 @@ export const SeparationButton = {
 export const TitleSub = {
     fontWeight: "900",
     color: "#EC2427",
+    fontSize: 15
+};
+export const SubTitleText = {
+    fontWeight: "600",
+    color: "black",
     fontSize: 15
 };
 export const Label = {

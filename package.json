@@ -35,6 +35,7 @@
     "react-native-gesture-handler": "~2.8.0",
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^15.0.1",
+    "react-native-multiple-select": "^0.5.12",
     "react-native-pager-view": "6.0.1",
     "react-native-paper": "^5.0.0-rc.10",
     "react-native-progress": "^5.0.0",
@@ -46,6 +47,7 @@
     "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "^13.4.0",
     "react-native-svg-transformer": "^1.0.0",
+    "react-native-webview": "^11.23.1",
     "react-navigation": "^4.4.4",
     "rn-select-date-range": "^5.0.0",
     "socket.io-client": "^4.6.2"

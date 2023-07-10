@@ -22,8 +22,6 @@ const EditCategory = ({route, navigation }) => {
     const widthView = windowWidth-20;
     const [Catalog, SetCatalog] = React.useState({});
     const [Category, SetCategory] = React.useState({});
-    const [Message, SetMessage] = React.useState("");
-    const [ShowMessage, SetShowMessage] = React.useState(false);
     const [Status, SetStatus] = React.useState(false);
     const [Visible, SetVisible] = React.useState(false);
     const [Filtros, SetFiltros] = React.useState(false);
@@ -64,7 +62,7 @@ const EditCategory = ({route, navigation }) => {
             let Response = res.data.response;
             let ResponseText = res.data.responseText;
             if (Response.length == 0) {
-                showMessage(ResponseText);
+                alert(ResponseText);
             }else{
                 let id_Products = ProductId;
                 let products = Products;
@@ -76,7 +74,7 @@ const EditCategory = ({route, navigation }) => {
                 }
                 SetProductId(id_Products);
                 SetProducts(products);
-                showMessage(ResponseText);
+                alert(ResponseText);
             }
         }).catch(err => {
             //
@@ -125,7 +123,6 @@ const EditCategory = ({route, navigation }) => {
                 let Response = res.data.response;
                 let ResponseText = res.data.responseText;
                 SetCategory(Response);
-                showMessage(ResponseText);
                 setData(Response);
             }
         }).catch(err => {
@@ -140,10 +137,13 @@ const EditCategory = ({route, navigation }) => {
 
     function sendRegister(query){
         axios.patch(URL_API_POS("catalog/inventory/category/", id_category),query,GET_HEADER_TOKEN(TOKEN)).then(res => {
-            let Response = res.data.response;
-            let ResponseText = res.data.responseText;
             setRegister(Response);
-            showMessage(ResponseText);
+            if (res.data.response){
+                setRegister(res.data.response);
+                posRegister();
+            }else{
+                alert(res.data.responseText);
+            }
         }).catch(err => {
             //
         });
@@ -191,16 +191,6 @@ const EditCategory = ({route, navigation }) => {
 
     function SelectedFile(){
         
-    }
-
-    function showMessage(msg){
-        SetMessage(msg);
-        SetShowMessage(true);
-    }
-
-    function hideMessaje(){
-        SetMessage("");
-        SetShowMessage(false);
     }
     
     if (loading === false) {
@@ -275,12 +265,6 @@ const EditCategory = ({route, navigation }) => {
                             <Text style={style.FontButton}>Editar categoría</Text>
                         </Button>
                     </View>
-                </View>
-                
-                <View style={style.FloatSnackScroll}>    
-                    <Snackbar visible={ShowMessage} onDismiss={() => hideMessaje()} action={{label: "Cerrar", onPress: register ? () => posRegister() : () => hideMessaje()}}>
-                        {Message}
-                    </Snackbar>
                 </View>
                 <StatusBar backgroundColor={RED_DIS} style="light" />
             </ScrollView>

@@ -9,6 +9,11 @@ export const BLACK = "#000000";
 export const DARK = "#777777";
 export const BLUE = "#0043F9";
 export const LIGHT = "#F0F0F3";
+export const TEXT_HEADER = {
+    fontWeight: "700",
+    fontSize: 22,
+    color: RED_DIS
+};
 export const VER_MAS_TEXT = {
     fontWeight: "bold",
     fontSize: 13,
@@ -27,6 +32,12 @@ export const CONTENT_DIRECTION_BODY = {
     borderBottomColor: LIGHT,
     borderBottomWidth: 1,
     paddingBottom: 20
+};
+export const CONTENT_DIRECTION_BODY_NOW = {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderBottomColor: LIGHT
 };
 export const PADDING_BOTTOM_10 = {
     paddingBottom: 10
@@ -61,6 +72,11 @@ export const ICON_LINK = {
 export const CONTENT_DIRECTION = {
     flexDirection: 'row',
     width: '80%',
+    alignItems: 'center'
+};
+export const CONTENT_DIRECTION_NOW = {
+    flexDirection: 'row',
+    width: '90%',
     alignItems: 'center'
 };
 export const CONTENT_PICTURE_RENDER = {
@@ -202,13 +218,30 @@ export const Size_80 = {
     width: 80,
     height: 80
 };
+export const Size_50 = {
+    width: 50,
+    height: 50
+};
 export const Size_Left = {
     position: "absolute",
     left: 95,
     bottom: 35
 };
+export const Size_Left_30 = {
+    position: "absolute",
+    left: 65,
+    bottom: 35
+};
 export const Size_Text = {
     fontSize: 20,
+    fontWeight: "900",
+    color: "#EC2427",
+    backgroundColor: WHITE,
+    padding: 3,
+    borderRadius: 5
+};
+export const Size_Text_No = {
+    fontSize: 17,
     fontWeight: "900",
     color: "#EC2427",
     backgroundColor: WHITE,

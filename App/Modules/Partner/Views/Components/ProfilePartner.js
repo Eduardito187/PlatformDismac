@@ -5,7 +5,7 @@ import * as DocumentPicker from "expo-document-picker";
 import axios from 'axios';
 /** */
 import ImagenAnimation from '../../../../Components/ImagenAnimation';
-import { Background_White, RED_DIS, Section_Max, Size_80, Size_Absolute, Size_Background, Size_Bottom, Size_Left, Size_Right, Size_Text, WHITE } from '../../../Login/Style/css';
+import { Background_White, RED_DIS, Section_Max, Size_50, Size_80, Size_Absolute, Size_Background, Size_Bottom, Size_Left, Size_Left_30, Size_Right, Size_Text, Size_Text_No, WHITE } from '../../../Login/Style/css';
 import { IconButton } from 'react-native-paper';
 import { GET_HEADER_TOKEN_FILE, URL_API } from '../../../../Helpers/API';
 import { emitSocket, setDataForm } from '../../../../Helpers/Code';
@@ -63,19 +63,27 @@ const ProfilePartner = (props) => {
     return(
         <Animated.View style={[Size_Background, {borderRadius: border}]} >
             <View style={Section_Max}>
-                <ImagenAnimation style={[Section_Max, {height: (windowWidth - 20)}]} url={props.Partner.cover} animation={{border: 10, time: 1000}} />
+                <ImagenAnimation style={[Section_Max, {height: (windowWidth / 2)}]} url={props.Partner.cover} animation={{border: 10, time: 1000}} />
                 <View style={Size_Absolute}>
-                    <ImagenAnimation style={Size_80} url={props.Partner.profile} animation={{border: 40, time: 1000}} />
-                    <View style={Size_Right}>
-                        <IconButton icon="camera" iconColor={RED_DIS} style={Background_White} size={15} onPress={() => changeProfile()} />
-                    </View>
+                    <ImagenAnimation style={[props.Edit ? Size_80 : Size_50]} url={props.Partner.profile} animation={{border: 40, time: 1000}} />
+                    {
+                        props.Edit && (
+                            <View style={Size_Right}>
+                                <IconButton icon="camera" iconColor={RED_DIS} style={Background_White} size={15} onPress={() => changeProfile()} />
+                            </View>
+                        )
+                    }
                 </View>
-                <View style={Size_Left}>
-                    <Text style={Size_Text}>{props.Partner.name}</Text>
+                <View style={[props.Edit ? Size_Left : Size_Left_30]}>
+                    <Text style={[props.Edit ? Size_Text : Size_Text_No]}>{props.Partner.name}</Text>
                 </View>
-                <View style={Size_Bottom}>
-                    <IconButton icon="camera" iconColor={RED_DIS} style={Background_White} size={25} onPress={() => changeCover()} />
-                </View>
+                {
+                    props.Edit && (
+                        <View style={Size_Bottom}>
+                            <IconButton icon="camera" iconColor={RED_DIS} style={Background_White} size={25} onPress={() => changeCover()} />
+                        </View>
+                    )
+                }
             </View>
         </Animated.View>
     );

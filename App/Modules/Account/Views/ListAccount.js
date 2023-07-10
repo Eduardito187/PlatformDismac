@@ -11,6 +11,9 @@ import Searching from '../Helper/Searching';
 import MessageBox from '../../../Components/MessageBox';
 import ListView from '../Helper/ListView';
 import Header from '../../Home/Views/Components/Header';
+import { IconButton } from 'react-native-paper';
+import { Navigation } from '../../../Helpers/Nav';
+import { RED_DIS } from '../../Login/Style/css';
 
 const ListAccount = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
@@ -61,10 +64,18 @@ const ListAccount = (props) => {
         }
     }
 
+    function createAccount(){
+        Navigation("AddAccount", {}, props.navigation);
+    }
+
+    function reloadAccounts() {
+        sendQuery(search);
+    }
+
     return (
         <View style={SCREEN_RELATIVE}>
             <View style={SCREEN_ABSOLUTE_HEADER}>
-                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} />
+                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(<IconButton icon="plus" iconColor={RED_DIS} size={24} onPress={() => createAccount()} />)} />
             </View>
             <View style={SCREEN_ABSOLUTE_BODY}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
@@ -73,7 +84,7 @@ const ListAccount = (props) => {
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}
                     {searching == true && (<Searching />)}
-                    {searching == false && search.length > 0 && (<ListView key={Math.random()+'_LISTVIEW_'+Math.random()} Account={accounts} />)}
+                    {searching == false && search.length > 0 && (<ListView key={Math.random()+'_LISTVIEW_'+Math.random()} reloadAccounts={() => reloadAccounts()} TOKEN={TOKEN} navigation={props.navigation} Account={accounts} />)}
                     <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
                 </ScrollView>
             </View>
