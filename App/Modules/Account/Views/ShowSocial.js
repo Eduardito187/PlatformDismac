@@ -15,7 +15,6 @@ import PopUpLink from './Components/PopUpLink';
 /** */
 
 const ShowSocial = ({route, navigation }) => {
-    const widthView = windowWidth-30;
     const {social,TOKEN,socket} = route.params;
     const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
     const [LOADING, SETLOADING] = React.useState(false);

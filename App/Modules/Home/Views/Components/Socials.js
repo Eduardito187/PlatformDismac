@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 /** */
 import { Text, View } from 'react-native';
 import { useAssets } from 'expo-asset';
-import { Background_White, Border_Radius_5, Content_Center, Size_20 } from '../../../Login/Style/css';
+import { Background_White, Border_Radius_0, Border_Radius_5, Content_Center, Size_20 } from '../../../Login/Style/css';
 import Carousel from 'react-native-snap-carousel';
 import { Card } from 'react-native-paper';
 import { P5, Width_Max } from '../../../Login/Style/style';
@@ -29,7 +29,7 @@ const Socials = (props) => {
 
     const _renderItem = ({item, index}) => {
         return (
-            <Card key={Math.random()+'_Social_'+Math.random()} onPress={() => selectSocial(item)} style={[{width: Width, height: props.height}, Border_Radius_5, Background_White, Content_Center]}>
+            <Card key={Math.random()+'_Social_'+Math.random()} onPress={() => selectSocial(item)} style={[{width: Width, height: props.height}, Border_Radius_0, Background_White, Content_Center]}>
                 <SocialPicture height={props.height} picture={selectedPicture(item.social.name)} social={item.social.name} />
             </Card>
         );

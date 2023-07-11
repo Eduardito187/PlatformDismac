@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 /** */
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ActivityIndicator } from 'react-native-paper';
-import { RED_DIS } from '../../Login/Style/css';
+import { Margin_5, RED_DIS } from '../../Login/Style/css';
 
 const IconSocial = (props) => {
     const [Icon, SetIcon] = React.useState(null);
+
     React.useEffect(() => {
         getIconByName(props.icon);
     }, []);

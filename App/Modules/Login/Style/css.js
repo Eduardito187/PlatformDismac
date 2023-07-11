@@ -373,6 +373,9 @@ export const Flex_Content = {
 export const Border_Radius_5 = {
     borderRadius: 5
 };
+export const Border_Radius_0 = {
+    borderRadius: 0
+};
 export const Absolte_Left ={
     position: 'absolute',
     left: 0
