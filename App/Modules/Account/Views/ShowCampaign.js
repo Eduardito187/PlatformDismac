@@ -15,6 +15,7 @@ import PopUpLink from './Components/PopUpLink';
 import IconSocial from '../../Home/Helper/IconSocial';
 import { displayFlex } from '../../Catalog/Style/Two';
 import TwoActionColumn from '../../Catalog/Views/Components/TwoActionColumn';
+import { Navigation } from '../../../Helpers/Nav';
 /** */
 
 const ShowCampaign = ({route, navigation }) => {
@@ -42,8 +43,8 @@ const ShowCampaign = ({route, navigation }) => {
         navigation.goBack();
     }
 
-    function verProductos(){
-        
+    function verProductos(ID_CATEGORY){
+        Navigation("ProductCategory", {"SOCKET":socket,"TOKEN":TOKEN,"ID_CATEGORY":ID_CATEGORY}, navigation);
     }
 
     if (LOADING == false){
@@ -93,7 +94,7 @@ const ShowCampaign = ({route, navigation }) => {
                                         <View style={Padding_10_B_5}>
                                             <View style={AlingFormItem}>
                                                 <View style={RowForm}>
-                                                    <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Productos.'} label2={'Ver mas'} Action={() => verProductos()} />    
+                                                    <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Productos.'} label2={'Ver mas'} Action={() => verProductos(campaign.category.id)} />    
                                                 </View>
                                             </View>
                                         </View>

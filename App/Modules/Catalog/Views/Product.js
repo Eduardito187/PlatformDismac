@@ -1,6 +1,6 @@
 import React from 'react';  
-import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
-import {Page, SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
+import { View, ScrollView } from 'react-native';
+import {SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN, GET_VIEW_PRODUCTS } from '../../../Helpers/API';
 
@@ -14,6 +14,8 @@ import Header from '../../Home/Views/Components/Header';
 
 const Product = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
+    const [id_category, SetIdCategory] = React.useState(props.id_category != null ? props.id_category : null);
+    const [id_partner, SetIdPartner] = React.useState(props.id_partner != null ? props.id_partner : null);
     const [Message, SetMessage] = React.useState("");
     const [ShowMessage, SetShowMessage] = React.useState(false);
     const [search, Setsearch] = React.useState("");
@@ -45,19 +47,18 @@ const Product = (props) => {
             SetMessage(responseText);
             SetShowMessage(true);
         }else{
-            Setsearching(false);
-            SetProducts(response);
+            clearProducts(response);
         }
     }
 
-    function clearProducts(){
+    function clearProducts(productos){
         Setsearching(false);
-        SetProducts([]);
+        SetProducts(productos);
     }
 
     function sendQuery(text){
         if (text.length >= 4) {
-            axios.post(URL_API("searchProduct"),CREATE_BODY_SEARCH_ACCOUN(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
+            axios.post(URL_API("searchProduct"),CREATE_BODY_SEARCH_ACCOUN(text, id_category, id_partner),GET_HEADER_TOKEN(TOKEN)).then(res => {
                 if(res.data != null){
                     thenSearch(res.data.response, res.data.responseText);
                 }else{
@@ -67,7 +68,7 @@ const Product = (props) => {
                 thenSearch(false, err);
             });
         }else{
-            clearProducts();
+            clearProducts([]);
         }
     }
 

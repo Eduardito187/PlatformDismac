@@ -71,10 +71,17 @@ export function CREATE_BODY_NEW_ACCOUNT(name, email, username, password) {
         "password" : password
     };
 }
-export function CREATE_BODY_SEARCH_ACCOUN(search) {
-    return {
+export function CREATE_BODY_SEARCH_ACCOUN(search, id_category = null, id_partner = null) {
+    let params = {
         "query" : search
     };
+    if (id_category != null) {
+        params.id_category = id_category;
+    }
+    if (id_partner != null) {
+        params.id_partner = id_partner;
+    }
+    return params;
 }
 export function CREATE_BODY_STATUS_ACCOUNT(type, value) {
     return {

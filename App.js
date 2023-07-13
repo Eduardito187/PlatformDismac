@@ -33,6 +33,7 @@ import ViewAccount from './App/Modules/Account/Views/ViewAccount';
 import EditAccount from './App/Modules/Account/Views/EditAccount';
 import ShowSocial from './App/Modules/Account/Views/ShowSocial';
 import ShowCampaign from './App/Modules/Account/Views/ShowCampaign';
+import ProductCategory from './App/Modules/Catalog/Views/ProductCategory';
 /** */
 
 const Stack = createStackNavigator();
@@ -71,6 +72,7 @@ export default function App() {
         <Stack.Screen name="EditAccount" component={EditAccount} options={{headerShown: false,title: ""}} />
         <Stack.Screen name="ShowSocial" component={ShowSocial} options={{headerShown: false,title: ""}} />
         <Stack.Screen name="ShowCampaign" component={ShowCampaign} options={{headerShown: false,title: ""}} />
+        <Stack.Screen name="ProductCategory" component={ProductCategory} options={{headerShown: false,title: ""}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
