@@ -6,6 +6,16 @@ export const CONTENT_SECTION = {
     borderRadius: 10,
     marginTop: 20
 };
+export const TEXT_QR = {
+    color: "white",
+    fontWeight: "900"
+};
+export const BUTTON_CONTENT = {
+    padding: 5,
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center"
+};
 export const CONTENT_SECTION_NT = {
     backgroundColor: '#FFFFFF',
     width: windowWidth-10,

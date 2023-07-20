@@ -309,3 +309,31 @@ export async function SAVE_FILTER_SALE_DATE(value) {
         return false;
     }
 }
+export async function SAVE_TOKEN_INVITADO(value) {
+    try {
+        await AsyncStorage.setItem('@TOKEN_INVITADO', value);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GET_TOKEN_INVITADO() {
+    try {
+        const value = await AsyncStorage.getItem('@TOKEN_INVITADO');
+        if (value == null) {
+            return false;
+        }else {
+            return true;
+        }
+    } catch (error) {
+        return false;
+    }
+}
+export async function DELETE_TOKEN_INVITADO() {
+    try {
+        await AsyncStorage.removeItem('@TOKEN_INVITADO');
+        return true;
+    } catch (error) {
+        return false;
+    }
+}

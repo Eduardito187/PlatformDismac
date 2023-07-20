@@ -34,6 +34,7 @@ import EditAccount from './App/Modules/Account/Views/EditAccount';
 import ShowSocial from './App/Modules/Account/Views/ShowSocial';
 import ShowCampaign from './App/Modules/Account/Views/ShowCampaign';
 import ProductCategory from './App/Modules/Catalog/Views/ProductCategory';
+import Invitado from './App/Modules/Partner/Views/Invitado';
 /** */
 
 const Stack = createStackNavigator();
@@ -58,6 +59,7 @@ export default function App() {
         <Stack.Screen name="AddCatalog" component={AddCatalog} options={{headerShown: true,title: "Registro de catalogos"}} />
         <Stack.Screen name="RestorePassword" component={RestorePassword} />
         <Stack.Screen name="RestorePWD" component={RestorePwd} />
+        <Stack.Screen name="Invitado" component={Invitado} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="ShowCatalog" component={ShowCatalog} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="NewCategory" component={NewCategory} options={{headerShown: true,title: "Nueva categoría"}} />
         <Stack.Screen name="ShowCategory" component={ShowCategory} options={{headerShown: true,title: ""}} />
@@ -77,4 +79,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-

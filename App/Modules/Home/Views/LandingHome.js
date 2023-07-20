@@ -77,10 +77,6 @@ const LandingHome = (props) => {
         });
     }
 
-    function viewProduct(id_product) {
-        Navigation.push("ViewProduct", {"id_product":id_product,"TOKEN":TOKEN});
-    }
-
     function redirectReportes() {
         Navigation.push("Reportes", {"TOKEN":TOKEN});
     }

@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View} from 'react-native';
 import { PageLoading } from '../../../Themes/Dismac/ThemeDismac';
 import Constants from "expo-constants";
-import { GET_TOKEN_SESSION, URL_API_GET, GET_HEADER_TOKEN, SAVE_STORES } from '../../../Helpers/API';
+import { GET_TOKEN_SESSION, URL_API_GET, GET_HEADER_TOKEN, SAVE_STORES, SAVE_TOKEN_INVITADO, GET_TOKEN_INVITADO, GET_TOKEN } from '../../../Helpers/API';
 import { ResetNavigation } from '../../../Helpers/Nav';
 import axios from 'axios';
 
@@ -12,20 +12,33 @@ import ProgressDismac from '../../../Components/ProgressDismac';
 import LogoDismac from '../../../Components/LogoDismac';
 import ImgDis from '../../../Components/ImgDis';
 import { getTokenNotification } from '../../../Helpers/Code';
+import LoadingPage from '../../Home/Views/Components/LoadingPage';
 /** */
 
 const Loading = ({route, navigation }) => {
   const [TOKEN, SetTOKEN] = React.useState(null);
   const [TokenNotify, SetTokenNotify] = React.useState("");
+  const [Loader, SetLoarder] = React.useState(true);
+
   React.useEffect(() => {
     setToken();
   }, []);
+
   async function setToken(){
-    let token = await GET_TOKEN_SESSION();
-    SetTOKEN(token);
-    if (token != null) {
-      getStores(token);
+    let TOKEN_INVITADO = await GET_TOKEN_INVITADO();
+    if (route.params != null && route.params.TOKEN != null){
+      await SAVE_TOKEN_INVITADO("OK");
+      getStores(route.params.TOKEN);
+    }else if (TOKEN_INVITADO == true){
+      getStores(GET_TOKEN());
+    }else{
+      let token = await GET_TOKEN_SESSION();
+      SetTOKEN(token);
+      if (token != null) {
+        getStores(token);
+      }
     }
+    SetLoarder(true);
   }
 
   function getStores(token){
@@ -38,14 +51,21 @@ const Loading = ({route, navigation }) => {
 
   async function loadInterval(res) {
     if (res) {
-      if (await GET_TOKEN_SESSION() != null) {
-        const token_expo = await getTokenNotification();
-        ResetNavigation("Inicio", {}, navigation);
+      let TOKEN_INVITADO = await GET_TOKEN_INVITADO();
+      if (route.params != null && route.params.TOKEN != null|| TOKEN_INVITADO === true){
+        ResetNavigation("Invitado", {"TOKEN":route.params != null ? route.params.TOKEN : TOKEN_INVITADO}, navigation);
       }else{
-        navigation.navigate('Login');
+        if (await GET_TOKEN_SESSION() != null) {
+          const token_expo = await getTokenNotification();
+          ResetNavigation("Inicio", {}, navigation);
+        }else{
+          navigation.navigate('Login');
+        }
       }
     }
   }
+
+  if (Loader === true){
     return (
       <View style={PageLoading.container}>
         <ImgDis style={PageLoading.img} animation={PageLoading.animation} />
@@ -57,6 +77,9 @@ const Loading = ({route, navigation }) => {
         <StatusBar style="auto" />
       </View>
     );
+  }else{
+    <LoadingPage />
+  }
 };
 
 export default Loading;

@@ -5,7 +5,7 @@ import { TextInput, Button, HelperText, Snackbar } from 'react-native-paper';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { style } from '../Style/style';
 import axios from 'axios';
-import { URL_API,GET_HEADERS,SET_TOKEN_SESSION,CREATE_BODY_LOGIN } from '../../../Helpers/API';
+import { URL_API,GET_HEADERS,SET_TOKEN_SESSION,CREATE_BODY_LOGIN, GET_TOKEN } from '../../../Helpers/API';
 import { ResetNavigation,Navigation } from '../../../Helpers/Nav';
 
 /** Components */
@@ -26,9 +26,11 @@ const Login = ({route, navigation }) => {
     const [login, setLogin] = React.useState(false);
     const [response, SetRes] = React.useState("");
     const [visible, setVisible] = React.useState(false);
+    
     React.useEffect(() => {
         //
     }, []);
+
     function InfoClickUsername() {
         if (helperUser) {
             sethelperUser(false);
@@ -39,17 +41,21 @@ const Login = ({route, navigation }) => {
             }, 5000)
         }
     }
+
     function pressOK() {
         //
     }
+
     function toHome() {
         setLogin(false);
         ResetNavigation("Loading",{},navigation);
     }
+
     function clickButton(bool){
         setLoading(bool);
         setDisable(bool);
     }
+
     function rerificateLogin() {
         if (username.length > 0 && password.length > 0) {
             clickButton(true);
@@ -71,13 +77,20 @@ const Login = ({route, navigation }) => {
 
         }
     }
+
+    function modoInvitado(){
+        ResetNavigation("Loading",{"TOKEN":GET_TOKEN()},navigation);
+    }
+
     function openSnack(text) {
         SetRes(text);
         setVisible(true);
     }
+
     function dismissSnack() {
         setVisible(false);
     }
+
     function registerAccount() {
         Navigation("Register",{},navigation);
     }
@@ -122,6 +135,11 @@ const Login = ({route, navigation }) => {
                     <View style={style.containButton}>
                         <Button icon="account-plus" style={style.fondoPlomo} mode="contained" onPress={() => registerAccount()}>
                             <Text style={style.FontButton}>Crear mi cuenta</Text>
+                        </Button>
+                    </View>
+                    <View style={style.containButton}>
+                        <Button icon="eye" style={style.fondoPlomo} mode="contained" onPress={() => modoInvitado()}>
+                            <Text style={style.FontButton}>Modo invitado</Text>
                         </Button>
                     </View>
                 </View>
