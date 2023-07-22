@@ -4,7 +4,7 @@ import { SCROLL_STYLE, Padding_10_B_5, SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, 
 import { AlingFormItem, Centered, RowForm, SubTitleText, TitleSub, Top_15_Red, Width_Max } from '../../Login/Style/style';
 import { TextInput, Button, IconButton, Chip } from 'react-native-paper';
 import { windowWidth, windowHeight } from '../../../Helpers/GetMobil';
-import { CREATE_BODY_NEW_ACCOUNT, GET_HEADER_TOKEN, URL_API, URL_API_POS, URL_API_SHOW } from '../../../Helpers/API';
+import { CREATE_BODY_NEW_ACCOUNT, GET_HEADER_TOKEN, URL_API, URL_API_POS, URL_API_SHOW, existPermission } from '../../../Helpers/API';
 import axios from 'axios';
 
 /** Components */
@@ -23,7 +23,7 @@ import PartnerLink from '../../Product/Views/Components/PartnerLink';
 
 const ViewAccount = ({route, navigation }) => {
     const widthView = windowWidth-30;
-    const {id_account,TOKEN} = route.params;
+    const {id_account,TOKEN,roles} = route.params;
     const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
     const [Account, SetAccount] = React.useState(null);
     const [LOADING, SETLOADING] = React.useState(false);
@@ -93,8 +93,12 @@ const ViewAccount = ({route, navigation }) => {
                     <View style={SCREEN_ABSOLUTE_HEADER}>
                         <Header DrawerAction={() => backAccount()} right={(
                             <View style={[displayFlex]}>
-                                <IconButton icon="pencil" iconColor={RED_DIS} size={24} onPress={() => editAccount()} />
-                                <IconButton icon="shield" iconColor={RED_DIS} size={24} onPress={() => showModal()} />
+                                {
+                                    existPermission(roles, "cod_00002") && (<IconButton icon="pencil" iconColor={RED_DIS} size={24} onPress={() => editAccount()} />)
+                                }
+                                {
+                                    existPermission(roles, "cod_00005") && (<IconButton icon="shield" iconColor={RED_DIS} size={24} onPress={() => showModal()} />)
+                                }
                             </View>
                         )} />
                     </View>
@@ -127,8 +131,11 @@ const ViewAccount = ({route, navigation }) => {
                                             <Subtitle style={TitleSub} text={"Estado."} />
                                         </View>
                                         <View style={RowForm}>
-                                            <Subtitle style={SubTitleText} text={Status == true ? "Habilitado" : "Inhabilitado"} />
-                                            <TwoSwitch disabled={false} width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Status} label1={Status == true ? "Habilitado" : "Inhabilitado"} Action={(a) => changeStatusAccount(a)} />
+                                            {
+                                                existPermission(roles, "cod_00003")
+                                                ? <TwoSwitch disabled={false} width={widthView} column1={widthView*0.75} column2={widthView*0.25} value={Status} label1={Status == true ? "Habilitado" : "Inhabilitado"} Action={(a) => changeStatusAccount(a)} />
+                                                : <Subtitle style={SubTitleText} text={Status == true ? "Habilitado" : "Inhabilitado"} />
+                                            }
                                         </View>
                                     </View>
                                 </View>

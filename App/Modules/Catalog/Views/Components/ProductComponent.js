@@ -6,6 +6,7 @@ import ImageUrl from '../../../../Components/ImageUrl';
 import Price from './Price';
 import LoadItem from '../../../../Components/LoadItem';
 import { ACTION_RECENT, Height_30, ITEM_PRODUCT, PRODUCT_NAME, PRODUCT_SKU } from '../../../Login/Style/css';
+import { Size_14_Bold } from '../../../Login/Style/style';
 /** */
 
 const ProductComponent = (props) => {
@@ -14,6 +15,7 @@ const ProductComponent = (props) => {
     const [product, SetProduct] = React.useState(null);
     const [key, SetKey] = React.useState(Math.random()+'_Product_'+Math.random());
     const [load, SetKeyLoad] = React.useState(Math.random()+'_Load_'+Math.random());
+    const [Invitado, SetInvitado] = React.useState(props.invitado);
 
     React.useEffect(() => {
         setLoader(null);
@@ -26,7 +28,11 @@ const ProductComponent = (props) => {
     }
 
     function selectProduct(product) {
-        navigation.push("ShowProduct", {"id_product":product.id,"TOKEN":props.TOKEN});
+        if (Invitado){
+            navigation.push("ViewProduct", {"id_product":product.id,"TOKEN":props.TOKEN});
+        }else{
+            navigation.push("ShowProduct", {"id_product":product.id,"TOKEN":props.TOKEN});
+        }
     }
     
     if (product == null) {
@@ -44,11 +50,12 @@ const ProductComponent = (props) => {
                     </View>
                     <View style={[{width: props.COLUMN_TWO.toString()+'%'}]}>
                         <Text style={PRODUCT_NAME}>{product.name}</Text>
-                        <Text style={PRODUCT_SKU}>{product.sku}</Text>
+                        <Text style={[PRODUCT_SKU, Size_14_Bold]}>{product.sku}</Text>
                         {
-                            product.frecuence_updated === null
-                            ? (<Text style={ACTION_RECENT}>{product.frecuence_created}</Text>)
-                            : (<Text style={ACTION_RECENT}>{product.frecuence_updated}</Text>)
+                            Invitado == false && product.frecuence_updated === null && (<Text style={ACTION_RECENT}>{product.frecuence_created}</Text>)
+                        }
+                        {
+                            Invitado == false && product.frecuence_created === null && (<Text style={ACTION_RECENT}>{product.frecuence_updated}</Text>)
                         }
                         <View style={Height_30}>
                             <Price Price={product.price} />

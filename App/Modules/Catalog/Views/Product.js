@@ -2,13 +2,12 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import {SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
-import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN, GET_VIEW_PRODUCTS } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, GET_VIEW_PRODUCTS } from '../../../Helpers/API';
 
 /** Components */
 import SearchBox from '../../../Components/Button/SearchBox';
 import SearchInit from '../../Account/Helper/SearchInit';
 import Searching from '../../Account/Helper/Searching';
-import MessageBox from '../../../Components/MessageBox';
 import ListProduct from './Components/ListProduct';
 import Header from '../../Home/Views/Components/Header';
 
@@ -16,8 +15,6 @@ const Product = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
     const [id_category, SetIdCategory] = React.useState(props.id_category != null ? props.id_category : null);
     const [id_partner, SetIdPartner] = React.useState(props.id_partner != null ? props.id_partner : null);
-    const [Message, SetMessage] = React.useState("");
-    const [ShowMessage, SetShowMessage] = React.useState(false);
     const [search, Setsearch] = React.useState("");
     const [searching, Setsearching] = React.useState(false);
     const [products, SetProducts] = React.useState([]);
@@ -30,11 +27,6 @@ const Product = (props) => {
     async function getViewItems(){
         SETVIEW(await GET_VIEW_PRODUCTS());
     }
-    
-    function HideAlertMessage() {
-        SetShowMessage(false);
-        SetMessage("");
-    }
 
     function searchProduct(text){
         Setsearch(text);
@@ -42,10 +34,9 @@ const Product = (props) => {
         sendQuery(text);
     }
 
-    function thenSearch(response, responseText){
+    function thenSearch(response){
         if (response === false) {
-            SetMessage(responseText);
-            SetShowMessage(true);
+            clearProducts([]);
         }else{
             clearProducts(response);
         }
@@ -58,14 +49,14 @@ const Product = (props) => {
 
     function sendQuery(text){
         if (text.length >= 4) {
-            axios.post(URL_API("searchProduct"),CREATE_BODY_SEARCH_ACCOUN(text, id_category, id_partner),GET_HEADER_TOKEN(TOKEN)).then(res => {
+            axios.post(URL_API("searchProduct"),CREATE_BODY_SEARCH_ACCOUNT(text, id_category, id_partner),GET_HEADER_TOKEN(TOKEN)).then(res => {
                 if(res.data != null){
-                    thenSearch(res.data.response, res.data.responseText);
+                    thenSearch(res.data.response);
                 }else{
-                    thenSearch(false, "Algo salio mal.");
+                    thenSearch(false);
                 }
             }).catch(err => {
-                thenSearch(false, err);
+                thenSearch(false);
             });
         }else{
             clearProducts([]);
@@ -84,8 +75,7 @@ const Product = (props) => {
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}
                     {searching == true && (<Searching />)}
-                    {searching == false && search.length > 0 && (<ListProduct TOKEN={TOKEN} Product={products} VIEW={VIEW} />)}
-                    <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
+                    {searching == false && search.length > 0 && (<ListProduct TOKEN={TOKEN} Product={products} VIEW={VIEW} invitado={false} />)}
                 </ScrollView>
             </View>
         </View>

@@ -3,7 +3,7 @@ import { View, Text, ActivityIndicator, Alert } from 'react-native';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { IconButton, Card, Chip } from 'react-native-paper';
 import axios from 'axios';
-import { URL_API,CREATE_BODY_STATUS_ACCOUNT,GET_HEADER_TOKEN,GET_TOKEN_SESSION } from '../../../Helpers/API';
+import { URL_API,CREATE_BODY_STATUS_ACCOUNT,GET_HEADER_TOKEN,GET_TOKEN_SESSION, existPermission } from '../../../Helpers/API';
 import { RED_DIS, GREEN_PRICE, Section_Card, Section_Card_Title, Margin_5 } from '../../Login/Style/css';
 import LoadItem from '../../../Components/LoadItem';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
@@ -74,7 +74,7 @@ const Account = (props) => {
     }
 
     function selectAccount(){
-        Navigation("ViewAccount", {"id_account":account.id,"TOKEN":TOKEN,"onGoBack": onGoBackAction}, props.navigation);
+        Navigation("ViewAccount", {"id_account":account.id,"TOKEN":TOKEN,"onGoBack": onGoBackAction,"roles":props.roles}, props.navigation);
     }
     
     function onGoBackAction(a){
@@ -105,7 +105,9 @@ const Account = (props) => {
                 </Card.Content>
                 <Card.Actions>
                     <IconButton icon={"qrcode"} iconColor={RED_DIS} onPress={() => showModal()} />
-                    <IconButton icon={"account"} iconColor={account.status ? GREEN_PRICE : RED_DIS} onPress={() => openModal()} />
+                    {
+                        existPermission(props.roles, "cod_00003") && (<IconButton icon={"account"} iconColor={account.status ? GREEN_PRICE : RED_DIS} onPress={() => openModal()} />)
+                    }
                 </Card.Actions>
                 <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"account"} type={"account"} value={account != null ? account.id : 0} />
             </Card>

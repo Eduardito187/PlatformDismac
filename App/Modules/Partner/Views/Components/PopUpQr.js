@@ -6,6 +6,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { windowHeight } from '../../../../Helpers/GetMobil';
 import { BUTTON_CONTENT, TEXT_QR, Width_Max } from '../../../Login/Style/style';
 import { Button, Text } from 'react-native-paper';
+import Constants from "expo-constants";
 /** */
 
 const PopUpQr = (props) => {
@@ -24,9 +25,45 @@ const PopUpQr = (props) => {
     }, []);
     
     const handleBarCodeScanned = ({ type, data }) => {
-        console.log(type, data);
+        data = JSON.parse(data);
+        console.log(data);
+        if (validateVersion(data)){
+            redirectScanner(data);
+        }else{
+            alert("Versíon no compatible.");
+        }
         setScanned(true);
     };
+
+    function redirectScanner(data){
+        if (data.key == "product"){
+            props.navigation.push("ViewProduct", {"id_product":data.value,"TOKEN":props.TOKEN});
+        }
+    }
+
+    function validateVersion(data){
+        if (data.version != null){
+            if (data.version == Constants.manifest.version){
+                return true;
+            }else{
+                return isNewerVersion(data.version, Constants.manifest.version)
+            }
+        }else{
+            return false;
+        }
+    }
+
+    function isNewerVersion (oldVer, newVer) {
+        const oldParts = oldVer.split('.')
+        const newParts = newVer.split('.')
+        for (var i = 0; i < newParts.length; i++) {
+            const a = ~~newParts[i]
+            const b = ~~oldParts[i]
+            if (a > b) return true
+            if (a < b) return false
+        }
+        return false
+    }
 
     return(
         <>

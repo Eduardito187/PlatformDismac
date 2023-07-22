@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 import {Page, SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
-import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, existPermission } from '../../../Helpers/API';
 
 /** Components */
 import SearchBox from '../../../Components/Button/SearchBox';
@@ -52,7 +52,7 @@ const ListAccount = (props) => {
 
     function sendQuery(text){
         if (text.length > 0) {
-            axios.post(URL_API("search/account"),CREATE_BODY_SEARCH_ACCOUN(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
+            axios.post(URL_API("search/account"),CREATE_BODY_SEARCH_ACCOUNT(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
                 if(res.data != null){
                     thenSearch(res.data.response, res.data.responseText);
                 }else{
@@ -75,7 +75,7 @@ const ListAccount = (props) => {
     return (
         <View style={SCREEN_RELATIVE}>
             <View style={SCREEN_ABSOLUTE_HEADER}>
-                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(<IconButton icon="plus" iconColor={RED_DIS} size={24} onPress={() => createAccount()} />)} />
+                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(existPermission(props.roles, "cod_00001") ? <IconButton icon="plus" iconColor={RED_DIS} size={24} onPress={() => createAccount()} /> : null)} />
             </View>
             <View style={SCREEN_ABSOLUTE_BODY}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
@@ -84,7 +84,7 @@ const ListAccount = (props) => {
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}
                     {searching == true && (<Searching />)}
-                    {searching == false && search.length > 0 && (<ListView key={Math.random()+'_LISTVIEW_'+Math.random()} reloadAccounts={() => reloadAccounts()} TOKEN={TOKEN} navigation={props.navigation} Account={accounts} />)}
+                    {searching == false && search.length > 0 && (<ListView key={Math.random()+'_LISTVIEW_'+Math.random()} roles={props.roles} reloadAccounts={() => reloadAccounts()} TOKEN={TOKEN} navigation={props.navigation} Account={accounts} />)}
                     <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
                 </ScrollView>
             </View>

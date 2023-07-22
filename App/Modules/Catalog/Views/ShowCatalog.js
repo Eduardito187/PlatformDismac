@@ -4,7 +4,7 @@ import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Badge, Chip, DataTable, IconButton } from 'react-native-paper';
-import { CREATE_BODY_SEARCH_ACCOUN, URL_API, URL_API_SHOW, GET_HEADER_TOKEN } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, URL_API_SHOW, GET_HEADER_TOKEN } from '../../../Helpers/API';
 
 /** Components */
 import Searching from '../../Account/Helper/Searching';

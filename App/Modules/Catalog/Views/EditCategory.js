@@ -5,7 +5,7 @@ import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, Button, IconButton } from 'react-native-paper';
 import { Margin_Bottom_50, Margin_Top_5, RED_DIS, ROW_SECTION, Section_Content_Custom } from '../../Login/Style/css';
-import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN, URL_API_SHOW, URL_API_POS } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, URL_API_SHOW, URL_API_POS } from '../../../Helpers/API';
 import { style } from '../../Login/Style/style';
 import TwoSelectSku from './Components/TwoSelectSku';
 

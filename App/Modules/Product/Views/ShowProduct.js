@@ -26,6 +26,7 @@ const ShowProduct = ({route, navigation }) => {
     const [Product, SetProduct] = React.useState({});
     const [Name, SetName] = React.useState("");
     const [Sku, SetSku] = React.useState("");
+    const [ProdId, SetProdId] = React.useState("");
     const [Brand, SetBrand] = React.useState(null);
     const [Clacom, SetClacom] = React.useState(null);
     const [Type, SetType] = React.useState(null);
@@ -102,6 +103,7 @@ const ShowProduct = ({route, navigation }) => {
 
     function setData(Response){
         SetName(Response.name);
+        SetProdId(Response.id);
         SetSku(Response.sku);
         SetBrand(Response.brand);
         SetClacom(Response.clacom);
@@ -450,7 +452,7 @@ const ShowProduct = ({route, navigation }) => {
                         </List.Accordion>
                     </View>
                 ) }
-                <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"product"} type={"product"} value={Sku} />
+                <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"product"} type={"product"} value={ProdId} />
                 <ModalAddImage TOKEN={TOKEN} reloadProduct={(a) => onGoBackAction(a)} closeModal={() => closeModalpicture()} isModalVisible={isModalVisiblePicture} sendFile={(a) => saveFiles(a)} Files={Files} key={"picture"} value={Sku} />
                 <ModalPicture TOKEN={TOKEN} closeModal={() => closePopPicture()} isModalVisible={PopPicture} key={"picture_modal"} file={File_Picture} />
                 <Space />

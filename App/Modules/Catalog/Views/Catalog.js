@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 import {Page, SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
-import { CREATE_BODY_SEARCH_ACCOUN, URL_API, GET_HEADER_TOKEN } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, existPermission } from '../../../Helpers/API';
 
 /** Components */
 import SearchBox from '../../../Components/Button/SearchBox';
@@ -49,7 +49,7 @@ const Catalog = (props) => {
 
     function sendQuery(text){
         if (text.length > 0) {
-            axios.post(URL_API("search/inventory"),CREATE_BODY_SEARCH_ACCOUN(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
+            axios.post(URL_API("search/inventory"),CREATE_BODY_SEARCH_ACCOUNT(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
                 if(res.data != null){
                     thenSearch(res.data.response, res.data.responseText);
                 }else{
@@ -68,7 +68,7 @@ const Catalog = (props) => {
     return (
         <View style={SCREEN_RELATIVE}>
             <View style={SCREEN_ABSOLUTE_HEADER}>
-                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(<IconButton icon="plus" iconColor={RED_DIS} size={24} onPress={() => createCatalog()} />)} />
+                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(existPermission(props.roles, "cod_00006") ? <IconButton icon="plus" iconColor={RED_DIS} size={24} onPress={() => createCatalog()} /> : null)} />
             </View>
             <View style={SCREEN_ABSOLUTE_BODY}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>

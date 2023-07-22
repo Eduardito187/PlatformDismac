@@ -14,6 +14,7 @@ const ListProduct = (props) => {
     const [VIEW, SETVIEW] = React.useState(props.VIEW);
     const [WIDTH, SETWIDTH] = React.useState(0);
     const [Dimension, SetDimension] = React.useState(null);
+    const [Invitado, SetInvitado] = React.useState(props.invitado);
 
     React.useEffect(() => {
         changeScreenDevice(VIEW);
@@ -62,7 +63,7 @@ const ListProduct = (props) => {
                             {
                                 props.Product.map((product) => {
                                     return (
-                                        <ProductComponent key={Math.random()+'_Product_'+Math.random()} IMAGE={Dimension.IMAGE} SCREEN_WIDTH={Dimension.SCREEN_WIDTH} COLUMN_ONE={Dimension.COLUMN_ONE} COLUMN_TWO={Dimension.COLUMN_TWO} TOKEN={props.TOKEN} VIEW={VIEW} Product={product} />
+                                        <ProductComponent key={Math.random()+'_Product_'+Math.random()} invitado={Invitado} IMAGE={Dimension.IMAGE} SCREEN_WIDTH={Dimension.SCREEN_WIDTH} COLUMN_ONE={Dimension.COLUMN_ONE} COLUMN_TWO={Dimension.COLUMN_TWO} TOKEN={props.TOKEN} VIEW={VIEW} Product={product} />
                                     )
                                 })
                             }

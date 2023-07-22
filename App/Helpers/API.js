@@ -3,6 +3,16 @@ import { URL_HOSTING,EXTEND_API,TOKEN_API,EXTEND_API_SHOW } from "../../Config";
 export function URL_API(Controller) {
     return URL_HOSTING+EXTEND_API+Controller;
 }
+export function existPermission(rols, code){
+    for (let index = 0; index < rols.length; index++) {
+        for (let j = 0; j < rols[index]["permissions"].length; j++) {
+            if (rols[index]["permissions"][j]["code"] == code) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 export function URL_API_POS(Controller, ID) {
     return URL_HOSTING+EXTEND_API+Controller+ID;
 }
@@ -71,7 +81,7 @@ export function CREATE_BODY_NEW_ACCOUNT(name, email, username, password) {
         "password" : password
     };
 }
-export function CREATE_BODY_SEARCH_ACCOUN(search, id_category = null, id_partner = null) {
+export function CREATE_BODY_SEARCH_ACCOUNT(search, id_category = null, id_partner = null) {
     let params = {
         "query" : search
     };

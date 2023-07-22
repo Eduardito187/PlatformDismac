@@ -1,5 +1,5 @@
 export const Text_LandingHome = "Inicio";
-export const Text_Catalog = "Categorías";
+export const Text_Catalog = "Catalogos";
 export const Text_Products = "Productos";
 export const Text_SupportTechnical = "Sopórte tecnico";
 export const Text_ScannerQR = "Scanner QR";
