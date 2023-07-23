@@ -15,7 +15,7 @@ import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import LoadItem from '../../../Components/LoadItem';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
 import { IconButton } from 'react-native-paper';
-import { column, displayFlex } from '../../Catalog/Style/Two';
+import { column, contentOneSection, displayFlex } from '../../Catalog/Style/Two';
 
 const Partner = (props) => {
     const [Socket, SetSocket] = React.useState(props.socket);
@@ -51,8 +51,8 @@ const Partner = (props) => {
             <View style={SCREEN_RELATIVE}>
                 <View style={SCREEN_ABSOLUTE_HEADER}>
                     <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(
-                        <View style={[{width: 40},displayFlex]}>
-                            <View style={[{width: 40},column]}>
+                        <View style={[contentOneSection,displayFlex]}>
+                            <View style={[contentOneSections,column]}>
                                 <IconButton icon={"qrcode"} onPress={() => showModal()} iconColor={RED_DIS} size={24} />
                             </View>
                         </View>)} 

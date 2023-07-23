@@ -35,6 +35,7 @@ import ShowSocial from './App/Modules/Account/Views/ShowSocial';
 import ShowCampaign from './App/Modules/Account/Views/ShowCampaign';
 import ProductCategory from './App/Modules/Catalog/Views/ProductCategory';
 import Invitado from './App/Modules/Partner/Views/Invitado';
+import EditCatalog from './App/Modules/Catalog/Views/EditCatalog';
 /** */
 
 const Stack = createStackNavigator();
@@ -75,6 +76,7 @@ export default function App() {
         <Stack.Screen name="ShowSocial" component={ShowSocial} options={{headerShown: false,title: ""}} />
         <Stack.Screen name="ShowCampaign" component={ShowCampaign} options={{headerShown: false,title: ""}} />
         <Stack.Screen name="ProductCategory" component={ProductCategory} options={{headerShown: false,title: ""}} />
+        <Stack.Screen name="EditCatalog" component={EditCatalog} options={{headerShown: true,title: "Editar catálogo"}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

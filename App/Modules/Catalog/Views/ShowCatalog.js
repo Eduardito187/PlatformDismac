@@ -4,7 +4,7 @@ import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Badge, Chip, DataTable, IconButton } from 'react-native-paper';
-import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, URL_API_SHOW, GET_HEADER_TOKEN } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, URL_API_SHOW, GET_HEADER_TOKEN, existPermission } from '../../../Helpers/API';
 
 /** Components */
 import Searching from '../../Account/Helper/Searching';
@@ -15,6 +15,7 @@ import TwoColumn from './Components/TwoColumn';
 import TwoActionColumn from './Components/TwoActionColumn';
 import ModalQR from './Components/ModalQR';
 import { StatusBar } from 'expo-status-bar';
+import { column, contentOneSection, contentOneSectionRight, contentSection, displayFlex, sectionQr } from '../Style/Two';
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -24,7 +25,7 @@ const ShowCatalog = ({route, navigation }) => {
     const widthView = windowWidth-20;
     const [TOKEN, SetTOKEN] = React.useState(route.params.TOKEN);
     const [Catalog, SetCatalog] = React.useState(route.params.Catalog);
-    const [CatalogAPI, SetCatalogAPI] = React.useState([]);
+    const [CatalogAPI, SetCatalogAPI] = React.useState(null);
     const [Message, SetMessage] = React.useState("");
     const [ShowMessage, SetShowMessage] = React.useState(false);
     const [Status, SetStatus] = React.useState(false);
@@ -69,10 +70,22 @@ const ShowCatalog = ({route, navigation }) => {
             SetShowMessage(true);
         }else{
             SetCatalogAPI(response);
+            let rolEdit = existPermission(route.params.roles, "cod_00007");
             navigation.setOptions({
-                headerRight: () => (<IconButton icon={"qrcode"} iconColor={RED_DIS} onPress={() => showModalQR()} />)
+                headerRight: () => (
+                    <View style={[rolEdit == true ? contentSection : contentOneSectionRight,displayFlex]}>
+                        <View style={[sectionQr,column]}>
+                            <IconButton icon="qrcode" iconColor={RED_DIS} size={30} onPress={() => showModalQR()} />
+                        </View>
+                        {rolEdit && (<View style={[contentOneSection,column]}><IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => editCatalog()} /></View>)}
+                    </View>
+                )
             });
         }
+    }
+
+    function editCatalog(){
+        navigation.navigate("EditCatalog", {"id_catalog":Catalog.id,"TOKEN":TOKEN,"onGoBack": onGoBackAction,"inheritance": null});
     }
 
     function getCatalog(){
@@ -102,7 +115,9 @@ const ShowCatalog = ({route, navigation }) => {
                         <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Nombre del catálogo'} label2={CatalogAPI.name} />
                         <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Código del producto'} label2={CatalogAPI.code} />
                         <TwoColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Cantidad de Productos'} label2={CatalogAPI.products} />
-                        <TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Categorías'} label2={'Crear'} Action={() => NewCategory()} />
+                        {
+                            existPermission(route.params.roles, "cod_00029") && (<TwoActionColumn width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Categorías'} label2={'Crear'} Action={() => NewCategory()} />)
+                        }
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title>Nombre de categorías</DataTable.Title>
@@ -121,7 +136,7 @@ const ShowCatalog = ({route, navigation }) => {
                         </DataTable>
                     </View>
                     <ModalQR closeModal={() => closeModalQR()} isModalVisible={isModalVisibleQR} key={"catalog"} type={"catalog"} value={CatalogAPI != null ? CatalogAPI.id : 0} />
-                    <CategoryModal closeModal={() => closeModal()} isModalVisible={isModalVisible} navigation={navigation} TOKEN={TOKEN} category={category} idCatalog={CatalogAPI.id} />
+                    <CategoryModal closeModal={() => closeModal()} roles={route.params.roles} isModalVisible={isModalVisible} navigation={navigation} TOKEN={TOKEN} category={category} idCatalog={CatalogAPI.id} />
                     <StatusBar backgroundColor={RED_DIS} style="light" />
                 </ScrollView>
             );

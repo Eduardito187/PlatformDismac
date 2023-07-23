@@ -2,6 +2,21 @@ export const displayFlex = {
     flexDirection: 'row',
     flexWrap: 'wrap'
 };
+export const contentOneSection = {
+    width: 40
+};
+export const contentOneSectionRight = {
+    width: 40,
+    marginRight: 15
+};
+export const contentSection = {
+    width: 90,
+    marginRight: 15
+};
+export const sectionQr = {
+    width: 40,
+    paddingRight:10
+};
 export const alingContentStatus = {
     flexDirection: "row",
     flexWrap: "wrap",

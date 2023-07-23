@@ -77,7 +77,7 @@ const Catalog = (props) => {
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}
                     {searching == true && (<Searching />)}
-                    {searching == false && search.length > 0 && (<ListCatalog TOKEN={TOKEN} Catalog={catalogs} />)}
+                    {searching == false && search.length > 0 && (<ListCatalog TOKEN={TOKEN} Catalog={catalogs} roles={props.roles} />)}
                     <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
                 </ScrollView>
             </View>

@@ -10,17 +10,21 @@ const Catalog = (props) => {
     const [catalog, SetCatalog] = React.useState(null);
     const [key, SetKey] = React.useState(Math.random()+'_Catalog_'+Math.random());
     const [load, SetKeyLoad] = React.useState(Math.random()+'_Load_'+Math.random());
+
     React.useEffect(() => {
         setLoader(null);
     }, []);
+
     function setLoader(val = null) {
         setTimeout(() => {
             SetCatalog(val == null ? props.Catalog : val);
         }, 500)
     }
+
     function selectCatalog(catalog) {
-        navigation.navigate("ShowCatalog", {"Catalog":catalog, "TOKEN":props.TOKEN});
+        navigation.navigate("ShowCatalog", {"Catalog":catalog, "TOKEN":props.TOKEN, "roles":props.roles});
     }
+    
     if (catalog == null) {
         return(<ActivityIndicator key={load} size="large" color="#EC2427" />);
     }else{

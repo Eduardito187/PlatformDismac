@@ -5,7 +5,7 @@ import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, Button, IconButton } from 'react-native-paper';
 import { Margin_Bottom_50, Margin_Top_5, RED_DIS, ROW_SECTION, Section_Content_Custom } from '../../Login/Style/css';
-import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, URL_API_SHOW } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, URL_API_SHOW, existPermission } from '../../../Helpers/API';
 import { style } from '../../Login/Style/style';
 import TwoSelectSku from './Components/TwoSelectSku';
 
@@ -15,7 +15,7 @@ import TwoSwitch from './Components/TwoSwitch';
 import ListProducts from './Components/ListProducts';
 import ModalQR from './Components/ModalQR';
 import { Navigation } from '../../../Helpers/Nav';
-import { column, displayFlex } from '../Style/Two';
+import { column, contentOneSection, contentOneSectionRight, contentSection, displayFlex, sectionQr } from '../Style/Two';
 import { StatusBar } from 'expo-status-bar';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 
@@ -126,16 +126,15 @@ const ShowCategory = ({route, navigation }) => {
                 let Response = res.data.response;
                 let ResponseText = res.data.responseText;
                 SetCategory(Response);
+                let rolEdit = existPermission(route.params.roles, "cod_00030");
                 navigation.setOptions({
                     title: Response.name,
                     headerRight: () => (
-                    <View style={[{width: 90,marginRight: 15},displayFlex]}>
-                        <View style={[{width: 40,paddingRight:10},column]}>
+                    <View style={[rolEdit == true ? contentSection : contentOneSectionRight,displayFlex]}>
+                        <View style={[sectionQr,column]}>
                             <IconButton icon="qrcode" iconColor={RED_DIS} size={30} onPress={() => showModalQR()} />
                         </View>
-                        <View style={[{width: 40},column]}>
-                            <IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigate()} />
-                        </View>
+                        {rolEdit && (<View style={[contentOneSection,column]}><IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigate()} /></View>)}
                     </View>)
                 });
                 setData(Response);

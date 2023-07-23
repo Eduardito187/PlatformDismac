@@ -13,7 +13,7 @@ const CategoryModal = (props) => {
 
     function ShowCategory(id){
         props.closeModal();
-        props.navigation.push("ShowCategory", {"id_catalog":props.idCatalog,"id_category":id,"TOKEN":props.TOKEN,"onGoBack": onGoBackAction,"inheritance": null});
+        props.navigation.push("ShowCategory", {"id_catalog":props.idCatalog,"id_category":id,"TOKEN":props.TOKEN,"onGoBack": onGoBackAction,"inheritance": null, "roles":props.roles});
     }
 
     function onGoBackAction(){

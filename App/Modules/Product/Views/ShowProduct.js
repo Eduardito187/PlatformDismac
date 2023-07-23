@@ -11,7 +11,7 @@ import Tarea from '../../Catalog/Views/Components/Tarea';
 import CustomTable from '../../Catalog/Views/Components/CustomTable';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
 import { StatusBar } from 'expo-status-bar';
-import { alingContentCenter, alingContentStatus, column, displayFlex } from '../../Catalog/Style/Two';
+import { alingContentCenter, alingContentStatus, column, contentOneSection, displayFlex, sectionQr } from '../../Catalog/Style/Two';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import Price from '../../Catalog/Views/Components/Price';
 import Space from '../../../Components/Space';
@@ -217,16 +217,16 @@ const ShowProduct = ({route, navigation }) => {
                 navigation.setOptions({
                     headerRight: () => (
                         <View style={[{width: 190,marginRight: 15},displayFlex]}>
-                            <View style={[{width: 40,paddingRight:10},column]}>
+                            <View style={[sectionQr,column]}>
                                 <IconButton icon="upload" iconColor={RED_DIS} size={30} onPress={() => showModalpicture()} />
                             </View>
-                            <View style={[{width: 40,paddingRight:10},column]}>
+                            <View style={[sectionQr,column]}>
                                 <IconButton icon="qrcode" iconColor={RED_DIS} size={30} onPress={() => showModal()} />
                             </View>
-                            <View style={[{width: 40,paddingRight:10},column]}>
+                            <View style={[sectionQr,column]}>
                                 <IconButton icon="eye" iconColor={RED_DIS} size={30} onPress={() => viewProduct()} />
                             </View>
-                            <View style={[{width: 40},column]}>
+                            <View style={[contentOneSection,column]}>
                                 <IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigate()} />
                             </View>
                         </View>)
