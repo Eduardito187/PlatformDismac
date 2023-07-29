@@ -282,6 +282,9 @@ export const RowForm = {
     padding: 5,
     width: (windowWidth - 30)
 };
+export const RowFormNoPadding = {
+    width: (windowWidth - 30)
+};
 export const RowFormFlex = {
     padding: 5,
     width: "100%"
