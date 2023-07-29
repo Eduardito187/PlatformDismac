@@ -18,6 +18,7 @@ import Space from '../../../Components/Space';
 import ModalAddImage from '../../Catalog/Views/Components/ModalAddImage';
 import Attribute from './Components/Attributes';
 import ModalPicture from '../../Catalog/Views/Components/ModalPicture';
+import ModalEdit from '../../Catalog/Views/Components/ModalEdit';
 /** Components */
 
 const ShowProduct = ({route, navigation }) => {
@@ -58,6 +59,7 @@ const ShowProduct = ({route, navigation }) => {
     const [Attributos, SetAttributos] = React.useState(null);
     const [File_Picture, SetFile_Picture] = React.useState("");
     const [PopPicture, SetPopPicture] = React.useState(false);
+    const [modalEdit, SetModalEdit] = React.useState(false);
     
     const ToogleAttributes = () => SetShowAttributes(!ShowAttributes);
     const TooglePictures = () => setShowPictures(!ShowPictures);
@@ -69,6 +71,14 @@ const ShowProduct = ({route, navigation }) => {
     const ToogleMedidas = () => SetMedidas(!medidas);
     const ToogleMini = () => SetMini(!mini);
     const ToogleWhs = () => SetWhs(!whs);
+    
+    function showModalEdit() {
+        SetModalEdit(true);
+    }
+
+    function closeModalEdit() {
+        SetModalEdit(false);
+    }
 
     function showPopPicture() {
         SetPopPicture(true);
@@ -185,10 +195,6 @@ const ShowProduct = ({route, navigation }) => {
         }
     }
 
-    function Navigate(){
-        navigation.push("EditProduct", {"id_product":id_product,"TOKEN":TOKEN,"onGoBack": onGoBackAction});
-    }
-
     function onGoBackAction(a){
         if (a) {
             SetFile_Picture("");
@@ -199,7 +205,8 @@ const ShowProduct = ({route, navigation }) => {
     }
 
     function viewProduct() {
-        navigation.push("ViewProduct", {"id_product":id_product,"TOKEN":TOKEN});
+        closeModalEdit();
+        navigation.push("ViewProduct", {"id_product":id_product,"TOKEN":TOKEN,"onGoBack":onGoBackAction});
     }
 
     function saveFiles(files){
@@ -227,7 +234,7 @@ const ShowProduct = ({route, navigation }) => {
                                 <IconButton icon="eye" iconColor={RED_DIS} size={30} onPress={() => viewProduct()} />
                             </View>
                             <View style={[contentOneSection,column]}>
-                                <IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => Navigate()} />
+                                <IconButton icon="pencil" iconColor={RED_DIS} size={30} onPress={() => showModalEdit()} />
                             </View>
                         </View>)
                 });
@@ -257,6 +264,10 @@ const ShowProduct = ({route, navigation }) => {
         }).catch(err => {
             //
         });
+    }
+
+    function actionNavEdit(a) {
+        navigation.push(a, {"id_product":id_product,"TOKEN":TOKEN});
     }
     
     if (loading === false) {
@@ -452,6 +463,7 @@ const ShowProduct = ({route, navigation }) => {
                         </List.Accordion>
                     </View>
                 ) }
+                <ModalEdit actionEdit={(a) => actionNavEdit(a)} closeModal={() => closeModalEdit()} isModalVisible={modalEdit} key={"edit_product"} />
                 <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"product"} type={"product"} value={ProdId} />
                 <ModalAddImage TOKEN={TOKEN} reloadProduct={(a) => onGoBackAction(a)} closeModal={() => closeModalpicture()} isModalVisible={isModalVisiblePicture} sendFile={(a) => saveFiles(a)} Files={Files} key={"picture"} value={Sku} />
                 <ModalPicture TOKEN={TOKEN} closeModal={() => closePopPicture()} isModalVisible={PopPicture} key={"picture_modal"} file={File_Picture} />

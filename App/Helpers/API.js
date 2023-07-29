@@ -229,6 +229,29 @@ export async function GET_STORES() {
         return [];
     }
 }
+export async function SAVE_STORES_PARTNER(STORES) {
+    try {
+        await AsyncStorage.setItem(
+          '@STORES_PARTNER',
+          JSON.stringify(STORES)
+        );
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GET_STORES_PARTNER() {
+    try {
+        const value = await AsyncStorage.getItem('@STORES_PARTNER');
+        if (value !== null) {
+            return JSON.parse(value);
+        }else{
+            return [];
+        }
+    } catch (error) {
+        return [];
+    }
+}
 export async function SAVE_STORES_CHECK(STORES) {
     try {
         await AsyncStorage.setItem(

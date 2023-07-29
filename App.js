@@ -36,6 +36,10 @@ import ShowCampaign from './App/Modules/Account/Views/ShowCampaign';
 import ProductCategory from './App/Modules/Catalog/Views/ProductCategory';
 import Invitado from './App/Modules/Partner/Views/Invitado';
 import EditCatalog from './App/Modules/Catalog/Views/EditCatalog';
+import ProductStatus from './App/Modules/Home/Views/ProductStatus';
+import ProductPrices from './App/Modules/Home/Views/ProductPrices';
+import ProductPos from './App/Modules/Home/Views/ProductPos';
+import ProductAttributes from './App/Modules/Home/Views/ProductAttributes';
 /** */
 
 const Stack = createStackNavigator();
@@ -77,6 +81,10 @@ export default function App() {
         <Stack.Screen name="ShowCampaign" component={ShowCampaign} options={{headerShown: false,title: ""}} />
         <Stack.Screen name="ProductCategory" component={ProductCategory} options={{headerShown: false,title: ""}} />
         <Stack.Screen name="EditCatalog" component={EditCatalog} options={{headerShown: true,title: "Editar catálogo"}} />
+        <Stack.Screen name="ProductStatus" component={ProductStatus} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="ProductPrices" component={ProductPrices} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="ProductPos" component={ProductPos} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="ProductAttributes" component={ProductAttributes} options={{headerShown: true,title: ""}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

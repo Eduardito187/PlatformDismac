@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View} from 'react-native';
 import { PageLoading } from '../../../Themes/Dismac/ThemeDismac';
 import Constants from "expo-constants";
-import { GET_TOKEN_SESSION, URL_API_GET, GET_HEADER_TOKEN, SAVE_STORES, SAVE_TOKEN_INVITADO, GET_TOKEN_INVITADO, GET_TOKEN } from '../../../Helpers/API';
+import { GET_TOKEN_SESSION, URL_API_GET, GET_HEADER_TOKEN, SAVE_STORES, SAVE_TOKEN_INVITADO, GET_TOKEN_INVITADO, GET_TOKEN, SAVE_STORES_PARTNER } from '../../../Helpers/API';
 import { ResetNavigation } from '../../../Helpers/Nav';
 import axios from 'axios';
 
@@ -38,12 +38,13 @@ const Loading = ({route, navigation }) => {
         getStores(token);
       }
     }
-    SetLoarder(true);
   }
 
   function getStores(token){
-    axios.get(URL_API_GET("store"),GET_HEADER_TOKEN(token)).then(res => {
-      SAVE_STORES(res.data);
+    axios.get(URL_API_GET("getStores"),GET_HEADER_TOKEN(token)).then(res => {
+      SAVE_STORES(res.data.response.store);
+      SAVE_STORES_PARTNER(res.data.response.partner);
+      SetLoarder(true);
     }).catch(err => {
       console.warn(err, "ERROR AL OBTENER LAS STORES");
     });
