@@ -20,7 +20,7 @@ import { StatusBar } from 'expo-status-bar';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 
 const ShowCategory = ({route, navigation }) => {
-    const { TOKEN, id_catalog, id_category, inheritance} = route.params;
+    const { TOKEN, id_catalog, id_category, inheritance, roles } = route.params;
     const widthView = windowWidth-20;
     const [Catalog, SetCatalog] = React.useState({});
     const [Category, SetCategory] = React.useState({});

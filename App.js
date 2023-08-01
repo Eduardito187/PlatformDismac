@@ -27,7 +27,7 @@ import ShowProduct from './App/Modules/Product/Views/ShowProduct';
 import NewST from './App/Modules/Home/Views/NewST';
 import NewIM from './App/Modules/Home/Views/NewIM';
 import ViewProduct from './App/Modules/Product/Views/ViewProduct';
-import Reportes from './App/Modules/Account/Views/Resportes';
+import Reportes from './App/Modules/Account/Views/Reportes';
 import ShowSale from './App/Modules/Sales/Views/ShowSale';
 import ViewAccount from './App/Modules/Account/Views/ViewAccount';
 import EditAccount from './App/Modules/Account/Views/EditAccount';

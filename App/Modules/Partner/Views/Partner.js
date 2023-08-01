@@ -52,7 +52,7 @@ const Partner = (props) => {
                 <View style={SCREEN_ABSOLUTE_HEADER}>
                     <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(
                         <View style={[contentOneSection,displayFlex]}>
-                            <View style={[contentOneSections,column]}>
+                            <View style={[contentOneSection,column]}>
                                 <IconButton icon={"qrcode"} onPress={() => showModal()} iconColor={RED_DIS} size={24} />
                             </View>
                         </View>)} 

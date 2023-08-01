@@ -323,6 +323,9 @@ export const Flex_Row = {
     flexDirection: 'row',
     flexWrap: 'wrap'
 };
+export const PADDING_BOTTOM_20 = {
+    paddingBottom: 20
+};
 export const Size_24_Bold = {
     fontWeight: "bold",
     fontSize: 24,
@@ -357,6 +360,13 @@ export const Section_One = {
 export const Section_Two = {
     paddingLeft: 13,
     paddingRight: 35,
+    borderRadius: 8,
+    marginTop: 15
+};
+export const Section_Two_Footer = {
+    paddingLeft: 13,
+    paddingRight: 13,
+    marginRight: 5,
     borderRadius: 8,
     marginTop: 15
 };

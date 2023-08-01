@@ -32,7 +32,7 @@ const ModalEdit = (props) => {
                             Precios
                         </Button>
                         <Button mode="contained" style={[Top_15_Red]} onPress={() => selectecAction("ProductPos")}>
-                            Valores POS
+                            Valores no editables
                         </Button>
                         <Button mode="contained" style={[Top_15_Red]} onPress={() => selectecAction("ProductAttributes")}>
                             Atributos

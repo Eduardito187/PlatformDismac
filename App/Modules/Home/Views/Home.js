@@ -8,7 +8,7 @@ import { io } from 'socket.io-client';
 import { ResetNavigation } from '../../../Helpers/Nav';
 import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION } from '../../../Helpers/API';
 import { RED_DIS, containerScreen, DRAWER_CONTENT, SOLID_BG, UPLOAD_BTN } from '../../Login/Style/css';
-import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas, Upload } from '../../../Router/Route';
+import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas, Upload, Text_Category, Text_Ahorros } from '../../../Router/Route';
 const Drawer = createDrawerNavigator();
 /** Components */
 import LandingHome from './LandingHome';
@@ -36,6 +36,10 @@ import IconUpload from '../Helper/IconUpload';
 import UploadMassive from '../../Account/Views/UploadMassive';
 import TabAccount from './Components/TabAccount';
 import { Grow_20, Top_Custom } from '../../Login/Style/style';
+import IconCategory from '../../Catalog/Helper/IconCategory';
+import IconCoupon from '../../Catalog/Helper/IconCoupon';
+import CategorySearch from '../../Catalog/Views/CategorySearch';
+import CouponSearch from '../../Catalog/Views/CouponSearch';
 
 const Home = ({route, navigation }) => {
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
@@ -141,11 +145,17 @@ const Home = ({route, navigation }) => {
       case Text_Catalog:
         setCurrentScreen(() => <Catalog navigation={navigation} roles={currentAccount.roles} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
+      case Text_Category:
+        setCurrentScreen(() => <CategorySearch navigation={navigation} roles={currentAccount.roles} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
       case Text_Products:
         setCurrentScreen(() => <Product navigation={navigation} roles={currentAccount.roles} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_Ventas:
         setCurrentScreen(() => <Sales navigation={navigation} roles={currentAccount.roles} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
+        break;
+      case Text_Ahorros:
+        setCurrentScreen(() => <CouponSearch navigation={navigation} roles={currentAccount.roles} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
         break;
       case Text_SupportTechnical:
         setCurrentScreen(() => <SupportTechnical navigation={navigation} roles={currentAccount.roles} socket={SOCKET} TOKEN={TOKEN} DrawerAction={(a) => animatedScreen(a)} showMenu={newState} />);
@@ -192,10 +202,11 @@ const Home = ({route, navigation }) => {
           <View style={Grow_20}>
             {TabButton(currentTab, changeScreen, Text_LandingHome, <IconHome focus={currentTab == Text_LandingHome ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Catalog, <IconCatalog focus={currentTab == Text_Catalog ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_Category, <IconCategory focus={currentTab == Text_Category ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Products, <IconProduct focus={currentTab == Text_Products ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Ventas, <SaleIcon focus={currentTab == Text_Ventas ? true : false} size={25} />)}
+            {TabButton(currentTab, changeScreen, Text_Ahorros, <IconCoupon focus={currentTab == Text_Ahorros ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Upload, <IconUpload focus={currentTab == Upload ? true : false} size={25} />)}
-            {TabButton(currentTab, changeScreen, Text_ScannerQR, <IconScanner focus={currentTab == Text_ScannerQR ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_SupportTechnical, <IconSupport focus={currentTab == Text_SupportTechnical ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Improvements, <IconImprovements focus={currentTab == Text_Improvements ? true : false} size={25} />)}
             {TabButton(currentTab, changeScreen, Text_Cuentas, <IconAccount focus={currentTab == Text_Cuentas ? true : false} size={25} />)}
@@ -209,7 +220,11 @@ const Home = ({route, navigation }) => {
             {CurrentScreen}
           </Animated.View>
         </Animated.View>
-        {showMenu && (<View style={UPLOAD_BTN}></View>)}
+        {showMenu && (
+          <View style={UPLOAD_BTN}>
+            {TabButton(currentTab, changeScreen, Text_ScannerQR, <IconScanner focus={currentTab == Text_ScannerQR ? true : false} size={25} />, true)}
+          </View>)
+        }
         <StatusBar backgroundColor={RED_DIS} style="light" />
       </SafeAreaView>
     );

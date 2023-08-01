@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 /** */
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { NavBars } from '../../../Themes/Dismac/ThemeDismac';
 
 const IconExit = (props) => {
@@ -8,9 +8,9 @@ const IconExit = (props) => {
         //
     }, []);
     if (props.focus) {
-        return (<Ionicons name="exit-outline" size={props.size} color={NavBars.focus} />);
+        return (<MaterialCommunityIcons name="exit-to-app" size={props.size} color={NavBars.focus} />);
     }else{
-        return (<Ionicons name="exit" size={props.size} color={NavBars.nofocus} />);
+        return (<MaterialCommunityIcons name="exit-to-app" size={props.size} color={NavBars.nofocus} />);
     }
 };
 export default IconExit;

@@ -14,13 +14,13 @@ import Header from '../../Home/Views/Components/Header';
 import { RED_DIS } from '../../Login/Style/css';
 import { IconButton } from 'react-native-paper';
 
-const Catalog = (props) => {
+const CategorySearch = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
     const [Message, SetMessage] = React.useState("");
     const [ShowMessage, SetShowMessage] = React.useState(false);
     const [search, Setsearch] = React.useState("");
     const [searching, Setsearching] = React.useState(false);
-    const [catalogs, SetCatalogs] = React.useState([]);
+    const [categorys, SetCategory] = React.useState([]);
     const [Navigation, SetNavigation] = React.useState(props.navigation);
 
     React.useEffect(() => {
@@ -41,15 +41,16 @@ const Catalog = (props) => {
         if (response === false) {
             SetMessage(responseText);
             SetShowMessage(true);
+            SetCategory([]);
         }else{
             Setsearching(false);
-            SetCatalogs(response);
+            SetCategory(response);
         }
     }
 
     function sendQuery(text){
         if (text.length > 0) {
-            axios.post(URL_API("search/inventory"),CREATE_BODY_SEARCH_ACCOUNT(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
+            axios.post(URL_API("search/category"),CREATE_BODY_SEARCH_ACCOUNT(text),GET_HEADER_TOKEN(TOKEN)).then(res => {
                 if(res.data != null){
                     thenSearch(res.data.response, res.data.responseText);
                 }else{
@@ -61,28 +62,31 @@ const Catalog = (props) => {
         }
     }
 
-    function createCatalog() {
-        Navigation.push("AddCatalog", {});
+    function createCategory() {
+        Navigation.push("NewCategory", {"id_catalog":0, "TOKEN":TOKEN, "onGoBack": onGoBackAction, "inheritance": null});
+    }
+
+    function onGoBackAction(){
+        //
     }
 
     return (
         <View style={SCREEN_RELATIVE}>
             <View style={SCREEN_ABSOLUTE_HEADER}>
-                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(existPermission(props.roles, "cod_00006") ? <IconButton icon="plus" iconColor={RED_DIS} size={24} onPress={() => createCatalog()} /> : null)} />
+                <Header showMenu={props.showMenu} DrawerAction={(a) => props.DrawerAction(a)} right={(existPermission(props.roles, "cod_00029") ? <IconButton icon="plus" iconColor={RED_DIS} size={24} onPress={() => createCategory()} /> : null)} />
             </View>
             <View style={SCREEN_ABSOLUTE_BODY}>
                 <ScrollView showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
                     <View style={Section_Content_Padding}>
-                        <SearchBox Label={"Catalogos"} ChangeText={(text) => searchCatalog(text)} /> 
+                        <SearchBox Label={"Categorías"} ChangeText={(text) => searchCatalog(text)} /> 
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}
                     {searching == true && (<Searching />)}
-                    {searching == false && search.length > 0 && (<ListCatalog TOKEN={TOKEN} Catalog={catalogs} roles={props.roles} type={"catalog"} />)}
+                    {searching == false && search.length > 0 && (<ListCatalog TOKEN={TOKEN} Catalog={categorys} roles={props.roles} type={"category"} />)}
                     <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
                 </ScrollView>
             </View>
         </View>
     );
 };
-
-export default Catalog;
+export default CategorySearch;

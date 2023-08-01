@@ -26,21 +26,21 @@ const Attribute = (props) => {
             attr = (
                 <Surface key={Math.random()+'_Product_Attribute_'+Math.random()} style={[Width_Max, ROW_SECTION, Border_Radius_5, Margin_Top_5]} elevation={4}>
                     <TextInput disabled={Status} mode={OUTLINE} placeholder={Name} selectionColor={RGBA_05} underlineColor={RED_DIS}
-                    activeUnderlineColor={RED_DIS} activeOutlineColor={RED_DIS} label={Name} value={Value} onChangeText={text => changeValue(text)} />
+                    activeUnderlineColor={RED_DIS} activeOutlineColor={RED_DIS} label={Name} defaultValue={Value} onChangeText={text => changeValue(text)} />
                 </Surface>
             );
         } else if(Type == "int" || Type == "float" || Type == "decimal" || Type == "lts" || Type == "gigabyte"){
             attr = (
                 <Surface key={Math.random()+'_Product_Attribute_'+Math.random()} style={[Width_Max, ROW_SECTION, Border_Radius_5, Margin_Top_5]} elevation={4}>
                     <TextInput keyboardType='numeric' disabled={Status} mode={OUTLINE} placeholder={Name} selectionColor={RGBA_05} underlineColor={RED_DIS}
-                    activeUnderlineColor={RED_DIS} activeOutlineColor={RED_DIS} label={Name} value={Value} onChangeText={text => changeValue(text)} />
+                    activeUnderlineColor={RED_DIS} activeOutlineColor={RED_DIS} label={Name} defaultValue={Value} onChangeText={text => changeValue(text)} />
                 </Surface>
             );
         } else if (Type == "array" || Type == "object"){
             attr = (
                 <Surface key={Math.random()+'_Product_Attribute_'+Math.random()} style={[Width_Max, ROW_SECTION, Border_Radius_5, Margin_Top_5]} elevation={4}>
                     <TextInput disabled={Status} multiline numberOfLines={5} mode={OUTLINE} placeholder={Name} selectionColor={RGBA_05} underlineColor={RED_DIS}
-                    activeUnderlineColor={RED_DIS} activeOutlineColor={RED_DIS} label={Name} value={Value} onChangeText={text => changeValue(text)} />
+                    activeUnderlineColor={RED_DIS} activeOutlineColor={RED_DIS} label={Name} defaultValue={Value} onChangeText={text => changeValue(text)} />
                 </Surface>
             );
         } else if (Type == "bool"){

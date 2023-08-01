@@ -15,7 +15,7 @@ const ListCatalog = (props) => {
                 {
                     props.Catalog.map((catalog) => {
                         return (
-                            <Catalog key={Math.random()+'_Catalog_'+Math.random()} roles={props.roles} TOKEN={props.TOKEN} Catalog={catalog} />
+                            <Catalog key={Math.random()+'_Catalog_'+Math.random()} roles={props.roles} TOKEN={props.TOKEN} Catalog={catalog} type={props.type} />
                         )
                     })
                 }

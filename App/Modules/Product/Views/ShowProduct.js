@@ -71,6 +71,10 @@ const ShowProduct = ({route, navigation }) => {
     const ToogleMedidas = () => SetMedidas(!medidas);
     const ToogleMini = () => SetMini(!mini);
     const ToogleWhs = () => SetWhs(!whs);
+
+    React.useEffect(() => {
+        onGoBackAction(true);
+    }, []);
     
     function showModalEdit() {
         SetModalEdit(true);
@@ -103,13 +107,6 @@ const ShowProduct = ({route, navigation }) => {
     function closeModalpicture() {
         setModalVisiblePicture(false);
     }
-
-    React.useEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (<ActivityIndicator color={RED_DIS} />)
-        });
-        getProduct();
-    }, []);
 
     function setData(Response){
         SetName(Response.name);
@@ -267,7 +264,7 @@ const ShowProduct = ({route, navigation }) => {
     }
 
     function actionNavEdit(a) {
-        navigation.push(a, {"id_product":id_product,"TOKEN":TOKEN});
+        navigation.push(a, {"id_product":id_product,"TOKEN":TOKEN,"onGoBack":onGoBackAction});
     }
     
     if (loading === false) {
@@ -308,16 +305,18 @@ const ShowProduct = ({route, navigation }) => {
                         <View style={[Width_Max, alingContentCenter]}>
                                 {
                                     Pictures.map((state, i) => {
-                                        return (
-                                            <Surface key={Math.random()+'_Product__Image__'+Math.random()} style={[{width: windowWidth/4.5, margin: 5, height: windowWidth/4.5}, Surface_Style]} elevation={4}>
-                                                <TouchableOpacity style={{position: "relative"}} onPress={() => showPictureImage(state)}>
-                                                    <Image key={Math.random()+'_Text_'+i+'_Image_'+Math.random()} style={[Section_Max_Content]} source={{uri: state.url}} />
-                                                    <View style={Position_Icon_Delete}>
-                                                        <IconButton icon={"delete"} style={Background_White} size={16} iconColor={RED_DIS} onPress={() => deletePictureImage(state)} />
-                                                    </View>
-                                                </TouchableOpacity>
-                                            </Surface>
-                                        )
+                                        if (state.id != 3){
+                                            return (
+                                                <Surface key={Math.random()+'_Product__Image__'+Math.random()} style={[{width: windowWidth/4.5, margin: 5, height: windowWidth/4.5}, Surface_Style]} elevation={4}>
+                                                    <TouchableOpacity style={{position: "relative"}} onPress={() => showPictureImage(state)}>
+                                                        <Image key={Math.random()+'_Text_'+i+'_Image_'+Math.random()} style={[Section_Max_Content]} source={{uri: state.url}} />
+                                                        <View style={Position_Icon_Delete}>
+                                                            <IconButton icon={"delete"} style={Background_White} size={16} iconColor={RED_DIS} onPress={() => deletePictureImage(state)} />
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </Surface>
+                                            )
+                                        }
                                     })
                                 }
                         </View>

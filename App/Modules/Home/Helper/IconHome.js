@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 /** */
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { NavBars } from '../../../Themes/Dismac/ThemeDismac';
 
 const IconHome = (props) => {
@@ -8,9 +8,9 @@ const IconHome = (props) => {
         //
     }, []);
     if (props.focus) {
-        return (<Ionicons name="home-outline" size={props.size} color={NavBars.focus} />);
+        return (<MaterialCommunityIcons name="home-outline" size={props.size} color={NavBars.focus} />);
     }else{
-        return (<Ionicons name="home" size={props.size} color={NavBars.nofocus} />);
+        return (<MaterialCommunityIcons name="home" size={props.size} color={NavBars.nofocus} />);
     }
 };
 export default IconHome;
