@@ -16,7 +16,7 @@ import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Reportes = ({route, navigation }) => {
-    const [TOKEN, SetTOKEN] = React.useState(route.params.TOKEN);
+    const { TOKEN } = route.params;
     const [Analytics, SetAnalytics] = React.useState([]);
     
     React.useEffect(() => {
@@ -34,7 +34,7 @@ const Reportes = ({route, navigation }) => {
     }
 
     function selectedTypeAnalytics(type) {
-        
+        navigation.push("TypesReport", {"TOKEN":TOKEN, "TYPE":type.type});
     }
 
     return (
