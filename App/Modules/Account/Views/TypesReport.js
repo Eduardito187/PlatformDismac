@@ -6,6 +6,7 @@ import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import { v4 as uuidv4 } from 'uuid';
 import { RandomBytes } from 'react-native-get-random-values';
+import { StyleReport } from '../../Login/Style/style';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -23,6 +24,10 @@ const TypesReport = ({ route, navigation }) => {
         getListTypes();
     }, []);
 
+    function selectEvent(code) {
+        navigation.push("ReporteGraphics", {"TOKEN":TOKEN, "TYPE":TYPE, "CODE":code});
+    }
+
     const renderItem = ({ item, index }) => {
         const translateY = scrollY.interpolate({
             inputRange: [(index - 1) * 100, index * 100, (index + 1) * 100],
@@ -31,9 +36,9 @@ const TypesReport = ({ route, navigation }) => {
         });
 
         return (
-            <Animated.View style={[styles.itemContainer, { transform: [{ translateY }] }]}>
-                <TouchableOpacity style={styles.item}>
-                <Text style={styles.title}>{item.code}</Text>
+            <Animated.View style={[StyleReport.itemContainer, { transform: [{ translateY }] }]}>
+                <TouchableOpacity onPress={() => selectEvent(item.code)} style={StyleReport.item}>
+                    <Text style={StyleReport.title}>{item.code}</Text>
                 </TouchableOpacity>
             </Animated.View>
         );
@@ -62,7 +67,6 @@ const TypesReport = ({ route, navigation }) => {
                     ...item,
                     id: generateUUID()
                 }));
-                console.log(dataWithIds);
                 return dataWithIds;
             } else {
                 return [];
@@ -82,47 +86,15 @@ const TypesReport = ({ route, navigation }) => {
         return(<LoadingPage />);
     }else{
         return(
-            <View style={styles.container}>
+            <View style={StyleReport.container}>
                 <AnimatedFlatList data={List} keyExtractor={(item) => item.id} renderItem={renderItem}
                     onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }],{ useNativeDriver: true })}
-                    showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}
-                    style={styles.flatList} initialScrollIndex={0} getItemLayout={getItemLayout}
+                    showsVerticalScrollIndicator={false} contentContainerStyle={StyleReport.contentContainer}
+                    style={StyleReport.flatList} initialScrollIndex={0} getItemLayout={getItemLayout}
                 />
             </View>
         );
     }
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-  },
-  contentContainer: {
-    alignItems: 'center',
-  },
-  flatList: {
-    width: '100%',
-  },
-  itemContainer: {
-    width: '100%',
-    alignItems: 'center',
-  },
-  item: {
-    width: windowWidth-20,
-    height: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#f0f0f0',
-    elevation: 4,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8
-  },
-  title: {
-    fontSize: 18,
-  },
-});
 
 export default TypesReport;

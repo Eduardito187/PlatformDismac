@@ -1,7 +1,7 @@
-import React, {useState,useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Animated, SafeAreaView } from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import axios from 'axios';
 import { io } from 'socket.io-client';
@@ -41,7 +41,7 @@ import IconCoupon from '../../Catalog/Helper/IconCoupon';
 import CategorySearch from '../../Catalog/Views/CategorySearch';
 import CouponSearch from '../../Catalog/Views/CouponSearch';
 
-const Home = ({route, navigation }) => {
+const Home = ({ route, navigation }) => {
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
 
   const [currentTab, setCurrentTab] = React.useState(Text_LandingHome);
@@ -53,11 +53,11 @@ const Home = ({route, navigation }) => {
   const [SOCKET, SETSOCKET] = React.useState("");
   const [TOKEN, SetTOKEN] = React.useState("");
   const [Load, SetLoad] = React.useState(false);
-  const [CurrentScreen, setCurrentScreen]= React.useState(null);
+  const [CurrentScreen, setCurrentScreen] = React.useState(null);
   const [currentAccount, SetCurrentAccount] = React.useState({
-    "id" : 0,
-    "name" : "",
-    "email" : "",
+    "id": 0,
+    "name": "",
+    "email": "",
     "profile": "",
     "cover": ""
   });
@@ -65,8 +65,8 @@ const Home = ({route, navigation }) => {
   React.useEffect(() => {
     setToken();
   }, []);
-  
-  async function setSession(data, token){
+
+  async function setSession(data, token) {
     const socket = io("http://31.220.31.243:3000/", {
       autoConnect: true
     });
@@ -81,25 +81,25 @@ const Home = ({route, navigation }) => {
     SetLoad(true);
   }
 
-  function onSocket(socket){
+  function onSocket(socket) {
     socket.on('reload_profile', (value) => {
       SetLoad(false);
-      if (value){
+      if (value) {
         getAccount(TOKEN, false);
       }
     });
   }
 
-  function getAccount(token, status){
-    axios.get(URL_API("currentAccount"),GET_HEADER_TOKEN(token)).then(res => {
-      if(res.data != null){
+  function getAccount(token, status) {
+    axios.get(URL_API("currentAccount"), GET_HEADER_TOKEN(token)).then(res => {
+      if (res.data != null) {
         console.log(status, "Status");
-        if (status == true){
+        if (status == true) {
           setSession(res.data.response, token);
-        }else{
+        } else {
           SetLoad(true);
         }
-      }else{
+      } else {
         SetLoad(null);
       }
     }).catch(err => {
@@ -107,13 +107,13 @@ const Home = ({route, navigation }) => {
     });
   }
 
-  async function setToken(){
+  async function setToken() {
     let token = await GET_TOKEN_SESSION();
     SetTOKEN(token);
     getAccount(token, true);
   }
 
-  function animatedScreen(status){
+  function animatedScreen(status) {
     Animated.timing(scaleValue, {
       toValue: status ? 1 : 0.88,
       duration: 300,
@@ -184,7 +184,7 @@ const Home = ({route, navigation }) => {
 
   async function closeSession() {
     if (await DELETE_TOKEN_SESSION()) {
-      ResetNavigation("Loading",{}, navigation);
+      ResetNavigation("Loading", {}, navigation);
     }
   }
 
@@ -192,11 +192,11 @@ const Home = ({route, navigation }) => {
     return (
       <LoadingPage />
     );
-  }else{
+  } else {
     return (
       <SafeAreaView style={containerScreen}>
         <View style={DRAWER_CONTENT}>
-          <View style={[{marginTop: heightBar}]}>
+          <View style={[{ marginTop: heightBar }]}>
             <TabAccount currentTab={currentTab} roles={currentAccount.roles} setCurrentTab={(a) => changeScreen(a)} title={Text_Management} Account={currentAccount} />
           </View>
           <View style={Grow_20}>
@@ -215,8 +215,8 @@ const Home = ({route, navigation }) => {
             {TabButton(currentTab, changeScreen, CLOSE_SESSION, <IconExit focus={currentTab == CLOSE_SESSION ? true : false} size={25} />)}
           </View>
         </View>
-        <Animated.View style={[Top_Custom, {top: heightBar,transform: [{ scale: scaleValue },{ translateX: offsetValue }]}]}>
-          <Animated.View style={[{transform: [{translateY: closeButtonOffset}],backgroundColor:SOLID_BG, borderRadius: showMenu ? 10 : 0}]}>
+        <Animated.View style={[Top_Custom, { top: heightBar, transform: [{ scale: scaleValue }, { translateX: offsetValue }] }]}>
+          <Animated.View style={[{ transform: [{ translateY: closeButtonOffset }], backgroundColor: SOLID_BG, borderRadius: showMenu ? 10 : 0 }]}>
             {CurrentScreen}
           </Animated.View>
         </Animated.View>

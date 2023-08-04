@@ -1,7 +1,38 @@
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
+export const StyleReport = {
+    container: {
+        flex: 1,
+        paddingTop: 20,
+    },
+    contentContainer: {
+        alignItems: 'center',
+    },
+    flatList: {
+        width: '100%',
+    },
+    itemContainer: {
+        width: '100%',
+        alignItems: 'center',
+    },
+    item: {
+        width: windowWidth - 20,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f0f0f0',
+        elevation: 4,
+        marginBottom: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8
+    },
+    title: {
+        fontSize: 18,
+    }
+}
 export const CONTENT_SECTION = {
     backgroundColor: '#FFFFFF',
-    width: windowWidth-10,
+    width: windowWidth - 10,
     padding: 10,
     borderRadius: 10,
     marginTop: 20
@@ -18,7 +49,7 @@ export const BUTTON_CONTENT = {
 };
 export const CONTENT_SECTION_NT = {
     backgroundColor: '#FFFFFF',
-    width: windowWidth-10,
+    width: windowWidth - 10,
     padding: 10,
     borderRadius: 10,
     marginTop: 5
@@ -49,7 +80,7 @@ export const Margin_Top = {
     marginTop: 5
 };
 export const SECTION_CONTENT = {
-    width: windowWidth-30,
+    width: windowWidth - 30,
     padding: 5
 };
 export const Size_27 = {
@@ -74,110 +105,110 @@ export const marginBottom10 = {
     marginBottom: 10
 };
 export const style = {
-    container : {
+    container: {
         backgroundColor: "white",
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         position: "relative"
     },
-    ViewFixed : {
+    ViewFixed: {
         zIndex: 100,
-        position : "absolute",
+        position: "absolute",
         left: 0,
         right: 0,
         top: 0,
         bottom: 0
     },
-    containerTransparent : {
+    containerTransparent: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         position: "relative"
     },
-    circleOne : {
+    circleOne: {
         position: "absolute",
         top: -(windowWidth / 4),
         backgroundColor: "transparent",
         left: -(windowWidth / 4)
     },
-    circleTwo : {
+    circleTwo: {
         position: "absolute",
         top: -50,
         backgroundColor: "transparent",
         right: -50
     },
-    circleTree : {
+    circleTree: {
         position: "absolute",
         bottom: -50,
         backgroundColor: "transparent",
         right: -50
     },
-    FloatLogin : {
+    FloatLogin: {
         position: "absolute",
         zIndex: 100,
         top: 0,
         bottom: 0,
         padding: 10
     },
-    TitleContainer : {
-        padding: 5, 
+    TitleContainer: {
+        padding: 5,
         alignItems: "center"
     },
-    Title : {
+    Title: {
         fontWeight: "800",
         color: "#EC2427",
         backgroundColor: "white",
         padding: 5,
         borderRadius: 10
     },
-    FontButton : {
+    FontButton: {
         color: "white",
         fontWeight: "900"
     },
-    LabelButton : {
+    LabelButton: {
         fontWeight: "900",
         borderRadius: 5,
         backgroundColor: "white"
     },
-    padding5 : {
-        padding : 5
+    padding5: {
+        padding: 5
     },
-    TextPwd : {
+    TextPwd: {
         padding: 5,
         alignItems: "flex-end",
         width: (windowWidth - 30),
         marginTop: 5,
         marginBottom: 5
     },
-    containButton : {
+    containButton: {
         padding: 5,
         alignItems: "center"
     },
-    labelPwd : {
+    labelPwd: {
         fontWeight: "700",
         color: "#808080"
     },
-    fondoRojo : {
+    fondoRojo: {
         backgroundColor: "#EC2427"
     },
-    fondoPlomo : {
+    fondoPlomo: {
         backgroundColor: "#808080"
     },
-    helperText : {
+    helperText: {
         backgroundColor: "white",
         borderRadius: 5,
         fontWeight: "700",
         marginTop: 3
     },
-    FloatSnack : {
+    FloatSnack: {
         position: "absolute",
         zIndex: 100,
         bottom: 0,
         left: 0,
         right: 0
     },
-    FloatSnackScroll : {
+    FloatSnackScroll: {
         position: "absolute",
         zIndex: 100,
         bottom: 40,
@@ -186,7 +217,7 @@ export const style = {
     }
 }
 export const SUCCESS = {
-    Container : {
+    Container: {
         backgroundColor: "#FFFFFF",
         flex: 1,
         alignItems: "center",
@@ -195,14 +226,14 @@ export const SUCCESS = {
     }
 }
 export const STYLE = {
-    RegisterContainer : {
+    RegisterContainer: {
         backgroundColor: "#EC2427",
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         position: "relative"
     },
-    SECCTION_FORM : {
+    SECCTION_FORM: {
         position: "absolute",
         bottom: 0,
         left: 0,
@@ -212,7 +243,7 @@ export const STYLE = {
         borderTopLeftRadius: (windowWidth * 0.10),
         borderTopRightRadius: (windowWidth * 0.10)
     },
-    SECCTION_TITLE : {
+    SECCTION_TITLE: {
         position: "absolute",
         top: 0,
         left: 0,
@@ -300,12 +331,12 @@ export const AlingFormItem = {
 };
 export const Modale_Date_Range = {
     position: 'absolute',
-    left:0,
+    left: 0,
     right: 0,
     top: 0,
-    bottom:0
+    bottom: 0
 };
-export const Section_Flex= {
+export const Section_Flex = {
     flex: 1
 };
 export const Section_Sale = {
@@ -331,12 +362,12 @@ export const Size_24_Bold = {
     fontSize: 24,
     color: "#808080"
 };
-export const Size_14_Bold= {
+export const Size_14_Bold = {
     fontWeight: "bold",
     fontSize: 14,
     color: "#808080"
 };
-export const Size_15_Bold= {
+export const Size_15_Bold = {
     fontWeight: "bold",
     fontSize: 15,
     color: "black"
@@ -377,7 +408,7 @@ export const Column_Center = {
 };
 export const Icon_Section = {
     width: 40,
-    paddingRight:10
+    paddingRight: 10
 };
 export const Separation_Flex = {
     flex: 1,

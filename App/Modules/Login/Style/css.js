@@ -9,6 +9,10 @@ export const BLACK = "#000000";
 export const DARK = "#777777";
 export const BLUE = "#0043F9";
 export const LIGHT = "#F0F0F3";
+export const PRICE_ORDER_TEXT = {
+    fontWeight: "bold",
+    fontSize: 18
+};
 export const TEXT_HEADER = {
     fontWeight: "700",
     fontSize: 22,
@@ -139,7 +143,7 @@ export const CONTENT_PRICE = {
 export const CONTENT_BODY = {
     width: WIDTH_100,
     height: WIDTH_100,
-    backgroundColor:WHITE,
+    backgroundColor: WHITE,
     position: 'relative'
 };
 export const CONTENT_PICTURE = {
@@ -194,7 +198,7 @@ export const Section_Content_Two = {
 export const Section_Content_Back = {
     position: "absolute",
     left: 0,
-    top: 20,
+    top: 30,
     zIndex: 10
 };
 export const Section_Card = {
@@ -255,7 +259,7 @@ export const Size_Bottom = {
 };
 export const Size_Right = {
     position: 'absolute',
-    bottom: -8, 
+    bottom: -8,
     right: -10
 };
 export const Size_Absolute = {
@@ -288,10 +292,10 @@ export const Section_Background = {
 };
 export const Section_Max_Absolute = {
     position: 'absolute',
-    left:0,
+    left: 0,
     right: 0,
     top: 0,
-    bottom:0
+    bottom: 0
 };
 export const Flex_Section = {
     flex: 1,
@@ -311,7 +315,7 @@ export const P_20 = {
     paddingLeft: 5,
     paddingRight: 5
 };
-export const Border_5= {
+export const Border_5 = {
     borderWidth: 0.5,
     padding: 5,
     borderRadius: 5,
@@ -376,7 +380,7 @@ export const Border_Radius_5 = {
 export const Border_Radius_0 = {
     borderRadius: 0
 };
-export const Absolte_Left ={
+export const Absolte_Left = {
     position: 'absolute',
     left: 0
 };
@@ -549,14 +553,14 @@ export const ITEM_PRODUCT = {
     backgroundColor: WHITE,
     margin: 5,
     shadowColor: PLO_DIS,
-    shadowOffset: {width: 2, height: 6},
+    shadowOffset: { width: 2, height: 6 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 5
 }
 export const COLUMN_ONE = {
     width: 40,
-    paddingRight:10
+    paddingRight: 10
 };
 export const COLUMN_TWO = {
     width: 40
@@ -597,10 +601,10 @@ export const RADIUS_PICTURE_IMAGE = {
 };
 export const IMAGE_BG = {
     paddingLeft: 5,
-    paddingBottom:5
+    paddingBottom: 5
 };
 export const MAIL_TEXT = {
-    fontSize:12,
+    fontSize: 12,
     marginTop: 6,
     color: 'white'
 }
@@ -764,7 +768,7 @@ export const modalStyle = {
     paddingHorizontal: 30,
     paddingVertical: 20,
     shadowColor: '#808080',
-    shadowOffset: {width: 2, height: 6},
+    shadowOffset: { width: 2, height: 6 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 5,
@@ -776,7 +780,7 @@ export const modalInfo = {
     paddingHorizontal: 10,
     paddingVertical: 20,
     shadowColor: '#808080',
-    shadowOffset: {width: 2, height: 6},
+    shadowOffset: { width: 2, height: 6 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 5,
@@ -821,7 +825,7 @@ export const Margin_Bottom_25 = {
     marginBottom: 25
 };
 export const OPACITY = {
-    opacity:0.4
+    opacity: 0.4
 };
 export const SECTION_CLOSE = {
     position: 'absolute',
@@ -830,27 +834,27 @@ export const SECTION_CLOSE = {
 };
 export const NAME = {
     fontSize: 15,
-    fontWeight:"bold",
+    fontWeight: "bold",
     color: WHITE
 };
 export const MAIL = {
     color: "#808080"
 };
 export const IMAGE_PROFILE = {
-    width:70,
-    height:70,
-    borderRadius:35,
-    borderWidth:2,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    borderWidth: 2,
     borderColor: WHITE
 };
 export const SECTION_DRAWER = {
-    justifyContent:"space-between",
-    alignItems:"center",
-    padding:20,
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
     marginTop: -10,
-    marginBottom:10,
-    backgroundColor:"rgb(0,0,0)",
-    borderBottomWidth:2,
+    marginBottom: 10,
+    backgroundColor: "rgb(0,0,0)",
+    borderBottomWidth: 2,
     borderColor: "red"
 };
 export const Color_Dismac = {
@@ -915,7 +919,7 @@ export const COLOR_GREEN = {
     color: GREEN_PRICE,
     fontSize: 16,
     fontWeight: "bold"
- };
+};
 export const COLOR_DIS = {
     color: RED_DIS,
     fontSize: 16,
