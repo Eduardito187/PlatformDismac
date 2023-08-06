@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import Modal from "react-native-modal";
 import { modalContainerStyle,bordePlomo,modalInfo, Section_Max_Absolute, Flex_Section, RED_DIS, Button_Red_Dis } from '../../../Login/Style/css';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { BarCodeScanner, BarCodeType } from 'expo-barcode-scanner';
 import { windowHeight } from '../../../../Helpers/GetMobil';
 import { BUTTON_CONTENT, TEXT_QR, Width_Max } from '../../../Login/Style/style';
 import { Button, Text } from 'react-native-paper';
@@ -72,7 +72,7 @@ const PopUpQr = (props) => {
                 <View style={[modalContainerStyle]}>
                     <View style={[modalInfo,bordePlomo]}>
                         <View style={[Width_Max,{height: windowHeight*0.7}]}>
-                            {hasPermission && scanned == false && (<BarCodeScanner onBarCodeScanned={handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />)}
+                            {hasPermission && scanned == false && (<BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />)}
                             {scanned && (
                                 <View style={BUTTON_CONTENT}>
                                     <Button icon="qrcode" style={Button_Red_Dis} mode="contained" onPress={() => setScanned(false)}>

@@ -1,11 +1,11 @@
 import React from 'react';  
 import { View, StyleSheet, Button } from 'react-native';
 /** Components */
-import { BarCodeScanner } from 'expo-barcode-scanner';
 import { SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE } from '../../../Themes/Dismac/ThemeDismac';
-import Header from '../../Home/Views/Components/Header';
+import { BarCodeScanner, BarCodeType } from 'expo-barcode-scanner';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import { Column_Center } from '../../Login/Style/style';
+import Header from '../../Home/Views/Components/Header';
 
 const Scanner = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
