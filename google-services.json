@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "127322741666",
-    "project_id": "modalidad-682cf",
-    "storage_bucket": "modalidad-682cf.appspot.com"
+    "project_number": "698580107048",
+    "project_id": "notificaciones-a60ac",
+    "storage_bucket": "notificaciones-a60ac.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:127322741666:android:72429a19311f8115db30fb",
+        "mobilesdk_app_id": "1:698580107048:android:581f0866df0bdb4e2dda1d",
         "android_client_info": {
-          "package_name": "com.eduardito.PlatformDismac"
+          "package_name": "com.eduardito187.PlatformDismac"
         }
       },
       "oauth_client": [
         {
-          "client_id": "127322741666-gk0qh6cgsm538sci4j82vgpi7ssm6639.apps.googleusercontent.com",
+          "client_id": "698580107048-qd8mp48fcgti3ale9sc4ebr7dstfm6pi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDIzHID8rITOJT8SEZKxP7ld0Effl_RBOs"
+          "current_key": "AIzaSyDnRvfYyQ3DRQ5s2GEDn8aFeXMiWLZADw8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "127322741666-gk0qh6cgsm538sci4j82vgpi7ssm6639.apps.googleusercontent.com",
+              "client_id": "698580107048-qd8mp48fcgti3ale9sc4ebr7dstfm6pi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

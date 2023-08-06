@@ -19,7 +19,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.eduardito.PlatformDismac",
+      "bundleIdentifier": "com.eduardito187.PlatformDismac",
       "buildNumber": "1.0.0"
     },
     "android": {
@@ -27,7 +27,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.eduardito.PlatformDismac",
+      "package": "com.eduardito187.PlatformDismac",
       "googleServicesFile": "./google-services.json"
     },
     "web": {

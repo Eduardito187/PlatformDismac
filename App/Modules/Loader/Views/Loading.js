@@ -58,6 +58,25 @@ const Loading = ({route, navigation }) => {
       }else{
         if (await GET_TOKEN_SESSION() != null) {
           const token_expo = await getTokenNotification();
+          
+
+          await fetch('https://fcm.googleapis.com/fcm/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'key=AAAAoqaefyg:APA91bFxpj2TAd6IXz8cz6RjQx2qxlsYxTtP9uBwa4-4ij0BDuC8ayh-QJO0RKyKVTbaF_jrrCyDSUWa-2c1ybOm-mgq9L73EJdKOhzHHlHhUXieaj0jEQSbSvyAzIbvhgSR0xSuTtyG',
+            },
+            body: JSON.stringify({
+                to: token_expo,
+                priority: 'normal',
+                data: {
+                experienceId: '@eduardito187/PlatformDismac',
+                scopeKey: '@eduardito187/PlatformDismac',
+                title: "📧 You've got mail",
+                message: 'Hello world! 🌐',
+                },
+            }),
+        });
           console.log(token_expo);
           alert(token_expo);
           ResetNavigation("Inicio", {}, navigation);
