@@ -1,4 +1,4 @@
-package com.eduardito.PlatformDismac;
+package com.eduardito187.PlatformDismac;
 
 import android.os.Build;
 import android.os.Bundle;
