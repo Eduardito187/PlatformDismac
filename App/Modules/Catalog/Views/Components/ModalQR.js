@@ -11,7 +11,7 @@ const ModalQR = (props) => {
     const [Code, SetCode] = React.useState("");
     
     React.useEffect(() => {
-        SetCode(JSON.stringify({"key": props.type,"value": props.value,"version": Constants.manifest.version}));
+        SetCode(JSON.stringify({"key": props.type,"value": props.value,"version": Constants.expoConfig.version}));
     }, []);
 
     return(

@@ -95,7 +95,7 @@ const Loading = ({route, navigation }) => {
         <View style={PageLoading.posLogo}>
           <LogoDismac style={PageLoading.logo} />
         </View>
-        <Text style={PageLoading.version}>V {Constants.manifest.version}</Text>
+        <Text style={PageLoading.version}>V {Constants.expoConfig.version}</Text>
         <StatusBar style="auto" />
       </View>
     );

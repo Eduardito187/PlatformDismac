@@ -43,10 +43,10 @@ const PopUpQr = (props) => {
 
     function validateVersion(data){
         if (data.version != null){
-            if (data.version == Constants.manifest.version){
+            if (data.version == Constants.expoConfig.version){
                 return true;
             }else{
-                return isNewerVersion(data.version, Constants.manifest.version)
+                return isNewerVersion(data.version, Constants.expoConfig.version)
             }
         }else{
             return false;
