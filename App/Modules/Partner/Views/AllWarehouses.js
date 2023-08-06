@@ -10,8 +10,8 @@ import { StyleReport } from '../../Login/Style/style';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
-const TypesReport = ({ route, navigation }) => {
-    const { TOKEN, TYPE } = route.params;
+const AllWarehouses = ({ route, navigation }) => {
+    const { TOKEN } = route.params;
     const [List, SetList] = React.useState([]);
     const scrollY = new Animated.Value(0);
     const [Loading, SetLoading] = React.useState(false);
@@ -55,9 +55,8 @@ const TypesReport = ({ route, navigation }) => {
             const body = {
                 type: type
             };
-
             const response = await axios.post(
-                URL_API('partner/listAnalyticsEvent'),
+                URL_API('partner/getWarehousesList'),
                 body,
                 GET_HEADER_TOKEN(token)
             );
@@ -97,4 +96,4 @@ const TypesReport = ({ route, navigation }) => {
     }
 };
 
-export default TypesReport;
+export default AllWarehouses;

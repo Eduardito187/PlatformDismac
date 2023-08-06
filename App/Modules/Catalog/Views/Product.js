@@ -1,6 +1,6 @@
-import React from 'react';  
+import React from 'react';
 import { View, ScrollView } from 'react-native';
-import {SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
+import { SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, SCREEN_ABSOLUTE_BODY, SCROLL_STYLE, Section_Content_Padding } from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, GET_VIEW_PRODUCTS } from '../../../Helpers/API';
 
@@ -24,41 +24,41 @@ const Product = (props) => {
         getViewItems();
     }, []);
 
-    async function getViewItems(){
+    async function getViewItems() {
         SETVIEW(await GET_VIEW_PRODUCTS());
     }
 
-    function searchProduct(text){
+    function searchProduct(text) {
         Setsearch(text);
         Setsearching(text.length <= 4 ? false : true);
         sendQuery(text);
     }
 
-    function thenSearch(response){
+    function thenSearch(response) {
         if (response === false) {
             clearProducts([]);
-        }else{
+        } else {
             clearProducts(response);
         }
     }
 
-    function clearProducts(productos){
+    function clearProducts(productos) {
         Setsearching(false);
         SetProducts(productos);
     }
 
-    function sendQuery(text){
+    function sendQuery(text) {
         if (text.length >= 4) {
-            axios.post(URL_API("searchProduct"),CREATE_BODY_SEARCH_ACCOUNT(text, id_category, id_partner),GET_HEADER_TOKEN(TOKEN)).then(res => {
-                if(res.data != null){
+            axios.post(URL_API("searchProduct"), CREATE_BODY_SEARCH_ACCOUNT(text, id_category, id_partner), GET_HEADER_TOKEN(TOKEN)).then(res => {
+                if (res.data != null) {
                     thenSearch(res.data.response);
-                }else{
+                } else {
                     thenSearch(false);
                 }
             }).catch(err => {
                 thenSearch(false);
             });
-        }else{
+        } else {
             clearProducts([]);
         }
     }

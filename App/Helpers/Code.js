@@ -83,7 +83,7 @@ export async function getTokenNotification() {
         alert('Failed to get push token for push notification!');
         return;
       }
-      token = (await Notifications.getExpoPushTokenAsync()).data;
+      token = (await Notifications.getDevicePushTokenAsync() ?? await Notifications.getExpoPushTokenAsync()).data;
     }
   
     return token;

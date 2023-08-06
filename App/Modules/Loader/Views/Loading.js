@@ -58,6 +58,8 @@ const Loading = ({route, navigation }) => {
       }else{
         if (await GET_TOKEN_SESSION() != null) {
           const token_expo = await getTokenNotification();
+          console.log(token_expo);
+          alert(token_expo);
           ResetNavigation("Inicio", {}, navigation);
         }else{
           navigation.navigate('Login');

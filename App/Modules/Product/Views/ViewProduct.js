@@ -1,4 +1,4 @@
-import React from 'react';  
+import React from 'react';
 import { View, ScrollView, Text, Animated, TouchableOpacity, FlatList, Image } from 'react-native';
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
@@ -24,9 +24,9 @@ import ProductPrice from './Components/ProductPrice';
 import ProductStatus from './Components/ProductStatus';
 /** Components */
 
-const ViewProduct = ({route, navigation }) => {
+const ViewProduct = ({ route, navigation }) => {
     const { TOKEN, id_product } = route.params;
-    const widthView = windowWidth-45;
+    const widthView = windowWidth - 45;
     const [CurrentStore, SetCurrentStore] = React.useState("");
     const [Estados, SetEstados] = React.useState(null);
     const [Iniciales, SetIniciales] = React.useState(null);
@@ -36,16 +36,16 @@ const ViewProduct = ({route, navigation }) => {
     const [Product, SetProduct] = React.useState(null);
     const [ToogleStore, SetToogleStore] = React.useState(false);
     const [PopUpStore, SetPopUpStore] = React.useState(false);
-    const [StoresShow , SetStoresShow] = React.useState([]);
+    const [StoresShow, SetStoresShow] = React.useState([]);
     const width = windowWidth;
     const scrollX = new Animated.Value(0);
     let position = Animated.divide(scrollX, width);
-    const EventAnimated = Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}],{useNativeDriver: false});
+    const EventAnimated = Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], { useNativeDriver: false });
     const ToogleModalStore = () => SetToogleStore(!ToogleStore);
-    const renderProduct = ({item, index}) => {
+    const renderProduct = ({ item, index }) => {
         return (
-            <View key={Math.random()+'_Picture_'+index+'_Product_'+Math.random()} style={[{width: width}, CONTENT_PICTURE_RENDER]}>
-                <Image key={Math.random()+'_Picture_'+index+'_Image_'+Math.random()} source={{uri: item.url}} style={CONTENT_PICTURE_RENDER_ITEM} />
+            <View key={Math.random() + '_Picture_' + index + '_Product_' + Math.random()} style={[{ width: width }, CONTENT_PICTURE_RENDER]}>
+                <Image key={Math.random() + '_Picture_' + index + '_Image_' + Math.random()} source={{ uri: item.url }} style={CONTENT_PICTURE_RENDER_ITEM} />
             </View>
         );
     };
@@ -54,7 +54,7 @@ const ViewProduct = ({route, navigation }) => {
         setStores();
     }, []);
 
-    async function setStores(){
+    async function setStores() {
         let array_store = await GET_STORES();
         SetStoresShow(array_store);
         getProduct(array_store);
@@ -68,8 +68,8 @@ const ViewProduct = ({route, navigation }) => {
         SetPopUpStore(false);
     }
 
-    function getProduct(array_store){
-        axios.get(URL_API_SHOW("product", +id_product),GET_HEADER_TOKEN(TOKEN)).then(res => {
+    function getProduct(array_store) {
+        axios.get(URL_API_SHOW("product", +id_product), GET_HEADER_TOKEN(TOKEN)).then(res => {
             if (res.data != null) {
                 let store_name = array_store[0]["name"];
                 SetCurrentStore(store_name);
@@ -82,10 +82,10 @@ const ViewProduct = ({route, navigation }) => {
         });
     }
 
-    function loadHeaderPage(producto, store_name){
+    function loadHeaderPage(producto, store_name) {
         navigation.setOptions({
             headerRight: () => (
-                <View style={[{marginRight: 15}, displayFlex]}>
+                <View style={[{ marginRight: 15 }, displayFlex]}>
                     <Button style={[Button_Red_Dis]} onPress={() => showPopUpStore()}>
                         <Text style={NAME}>{store_name}</Text>
                     </Button>
@@ -95,7 +95,7 @@ const ViewProduct = ({route, navigation }) => {
     }
 
     function selectedStoreCustom(a) {
-        if (a.length >0 ){
+        if (a.length > 0) {
             let store_name = a[0];
             SetCurrentStore(store_name);
             loadHeaderPage(Product, store_name);
@@ -110,36 +110,36 @@ const ViewProduct = ({route, navigation }) => {
         SetMinicuotas(getStoreMinicuotas(producto, store_name));
     }
 
-    function getStoreEstados(producto, store_name){
+    function getStoreEstados(producto, store_name) {
         for (let index = 0; index < producto.status.length; index++) {
-            if (producto.status[index]["store_name"] == store_name){
+            if (producto.status[index]["store_name"] == store_name) {
                 return producto.status[index];
             }
         }
         return null;
     }
 
-    function getStoreIniciales(producto, store_name){
+    function getStoreIniciales(producto, store_name) {
         for (let index = 0; index < producto.cuota_inicial.length; index++) {
-            if (producto.cuota_inicial[index]["store_name"] == store_name){
+            if (producto.cuota_inicial[index]["store_name"] == store_name) {
                 return producto.cuota_inicial[index];
             }
         }
         return null;
     }
 
-    function getStorePrecios(producto, store_name){
+    function getStorePrecios(producto, store_name) {
         for (let index = 0; index < producto.prices.length; index++) {
-            if (producto.prices[index]["store_name"] == store_name){
+            if (producto.prices[index]["store_name"] == store_name) {
                 return producto.prices[index];
             }
         }
         return null;
     }
 
-    function getStoreMinicuotas(producto, store_name){
+    function getStoreMinicuotas(producto, store_name) {
         for (let index = 0; index < producto.minicuotas.length; index++) {
-            if (producto.minicuotas[index]["store_name"] == store_name){
+            if (producto.minicuotas[index]["store_name"] == store_name) {
                 return producto.minicuotas[index];
             }
         }
@@ -148,20 +148,20 @@ const ViewProduct = ({route, navigation }) => {
 
     if (loading === false) {
         return (<LoadingPage />);
-    }else{
+    } else {
         return (
-            <View key={Math.random()+'_Screen_'+Math.random()} style={CONTENT_BODY}>
+            <View key={Math.random() + '_Screen_' + Math.random()} style={CONTENT_BODY}>
                 <StatusBar backgroundColor={RED_DIS} style="light" />
-                <ScrollView key={Math.random()+'_Scroll_'+Math.random()} showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
-                    <View key={Math.random()+'_Scroll_View_'+Math.random()} style={CONTENT_PICTURE}>
-                        <FlatList key={Math.random()+'_Flatlist_'+Math.random()} data={Product.pictures} horizontal renderItem={renderProduct} keyExtractor={item => item.id} showsHorizontalScrollIndicator={false} decelerationRate={0.8} snapToInterval={width} bounces={false} onScroll={EventAnimated} />
-                        <View key={Math.random()+'_Animation_View_'+Math.random()} style={CONTENT_ANIMATION_PICTURE}>
+                <ScrollView key={Math.random() + '_Scroll_' + Math.random()} showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
+                    <View key={Math.random() + '_Scroll_View_' + Math.random()} style={CONTENT_PICTURE}>
+                        <FlatList key={Math.random() + '_Flatlist_' + Math.random()} data={Product.pictures} horizontal renderItem={renderProduct} keyExtractor={item => item.id} showsHorizontalScrollIndicator={false} decelerationRate={0.8} snapToInterval={width} bounces={false} onScroll={EventAnimated} />
+                        <View key={Math.random() + '_Animation_View_' + Math.random()} style={CONTENT_ANIMATION_PICTURE}>
                             {
                                 Product.pictures.length > 1 && (
                                     Product.pictures.map((data, index) => {
-                                        let opacity = position.interpolate({inputRange: [index - 1, index, index + 1],outputRange: [0.2, 1, 0.2],extrapolate: 'clamp'});
+                                        let opacity = position.interpolate({ inputRange: [index - 1, index, index + 1], outputRange: [0.2, 1, 0.2], extrapolate: 'clamp' });
                                         return (
-                                            <Animated.View key={Math.random()+'_Animate_'+index+'_Picture_'+Math.random()} style={[PICTURE_ANIMATION, {backgroundColor: BLACK,opacity, width: parseInt(75/Product.pictures.length)+"%"}]}></Animated.View>
+                                            <Animated.View key={Math.random() + '_Animate_' + index + '_Picture_' + Math.random()} style={[PICTURE_ANIMATION, { backgroundColor: BLACK, opacity, width: parseInt(75 / Product.pictures.length) + "%" }]}></Animated.View>
                                         );
                                     })
                                 )
@@ -179,7 +179,7 @@ const ViewProduct = ({route, navigation }) => {
                         {Precios != null && (<ProductPrice Precios={Precios} />)}
                     </View>
                     <View style={[PRODUCT_INFORMATION, SECTION_BOTTOM]}>
-                        { Product.brand != null && (<TwoColumnBg key={Math.random()+'_Brand_'+Math.random()} width={widthView} column1={widthView*0.75} column2={widthView*0.25} label1={'Marca'} label2={Product.brand.name} />) }
+                        {Product.brand != null && (<TwoColumnBg key={Math.random() + '_Brand_' + Math.random()} width={widthView} column1={widthView * 0.75} column2={widthView * 0.25} label1={'Marca'} label2={Product.brand.name} />)}
                         <CaracteristicasUnicas CaracteristicasUnicas={Product.sheets} />
                         <MedidasComerciales MedidaComercial={Product.medidas_comerciales} />
                         {

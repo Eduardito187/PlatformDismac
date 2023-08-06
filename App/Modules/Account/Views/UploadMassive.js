@@ -88,6 +88,10 @@ const UploadMassive = (props) => {
             {
                 "label" : "Fotos",
                 "value" : "Fotos"
+            },
+            {
+                "label" : "Family",
+                "value" : "Family"
             }
         ];
         SetItems(items);
@@ -119,7 +123,7 @@ const UploadMassive = (props) => {
                 formData = setDataForm(formData, 'FechaDuracion', FechaDuracion);
             }
             axios.post(URL_API("uploadFile"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
-                if (res.response) {
+                if (res.data.response) {
                     SetDisable(false);
                     SetValue("");
                 }
@@ -190,7 +194,7 @@ const UploadMassive = (props) => {
                     {
                         Value != "" && (
                             <View style={[SeparationButton, Margin_Top_20]}>
-                                <Button icon="upload" disabled={Disable} mode="contained" style={Style_Button} onPress={() => sentForm()}>
+                                <Button icon="upload" disabled={Disable} loading={Disable} mode="contained" style={Style_Button} onPress={() => sentForm()}>
                                     Subir Data
                                 </Button>
                             </View>
