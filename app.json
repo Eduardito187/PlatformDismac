@@ -11,6 +11,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "expo": {
+      "jsEngine": "hermes",
+      "ios": {
+        "jsEngine": "jsc"
+      }
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
