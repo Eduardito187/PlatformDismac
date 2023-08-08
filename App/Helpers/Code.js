@@ -89,7 +89,7 @@ export async function getTokenNotification(TOKEN) {
 }
 export async function settingToken(TOKEN, tokenMobil){
     axios.post(URL_API("currentAccount/registerToken"),{"token":tokenMobil},GET_HEADER_TOKEN(TOKEN));
-    await SAVE_TOKEN_MOBILE(TOKEN);
+    await SAVE_TOKEN_MOBILE(tokenMobil);
 }
 export async function getLocalization(){
     let { status } = await Location.requestForegroundPermissionsAsync();
