@@ -11,7 +11,7 @@ import axios from 'axios';
 import ProgressDismac from '../../../Components/ProgressDismac';
 import LogoDismac from '../../../Components/LogoDismac';
 import ImgDis from '../../../Components/ImgDis';
-import { getLocalization, getTokenNotification } from '../../../Helpers/Code';
+import { getLocalization, getTokenNotification, settingToken } from '../../../Helpers/Code';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import { RED_DIS } from '../../Login/Style/css';
 /** */
@@ -60,6 +60,7 @@ const Loading = ({route, navigation }) => {
         let TOKEN_SESSIONS = await GET_TOKEN_SESSION();
         if (TOKEN_SESSIONS != null) {
           const token_expo = await getTokenNotification(TOKEN_SESSIONS);
+          await settingToken(TOKEN_SESSIONS, token_expo);
           const localization = await getLocalization();
           ResetNavigation("Inicio", {}, navigation);
         }else{

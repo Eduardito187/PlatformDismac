@@ -84,11 +84,10 @@ export async function getTokenNotification(TOKEN) {
         return;
       }
       token = (await Notifications.getDevicePushTokenAsync() ?? await Notifications.getExpoPushTokenAsync()).data;
-      settingToken(TOKEN, token);
     }
     return token;
 }
-async function settingToken(TOKEN, tokenMobil){
+export async function settingToken(TOKEN, tokenMobil){
     axios.post(URL_API("currentAccount/registerToken"),{"token":tokenMobil},GET_HEADER_TOKEN(TOKEN));
     await SAVE_TOKEN_MOBILE(TOKEN);
 }
