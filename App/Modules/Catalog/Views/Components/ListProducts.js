@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
-import { displayFlex, column, label1, label2 } from '../../Style/Two';
-import { RED_DIS } from '../../../Login/Style/css';
 import { DataTable } from 'react-native-paper';
+import { generateCustomId } from '../../../../Helpers/API';
 /** */
 
 const ListProducts = (props) => {
@@ -18,7 +16,7 @@ const ListProducts = (props) => {
             {
                 props.Products.map((product) => {
                     return (
-                        <DataTable.Row key={Math.random()+'_PRODUCT_'+Math.random()} onPress={() => showInfoProduct(product)}>
+                        <DataTable.Row key={generateCustomId()} onPress={() => showInfoProduct(product)}>
                             <DataTable.Cell>{product.sku}</DataTable.Cell>
                             <DataTable.Cell numeric>{product.stock}</DataTable.Cell>
                         </DataTable.Row>

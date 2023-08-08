@@ -9,6 +9,7 @@ import { DELETE_REGISTER } from '../../../Helpers/SettingRegister';
 /** Components */
 import Error from './Component/Error';
 import Success from './Component/Success';
+import { RED_DIS } from '../Style/css';
 /** */
 
 const SuccessRegister = ({route, navigation }) => {
@@ -34,7 +35,7 @@ const SuccessRegister = ({route, navigation }) => {
     }
     return (
         <View style={SUCCESS.Container}>
-            <StatusBar style="light" />
+            <StatusBar backgroundColor={RED_DIS} style="light" />
             {
                 Created == null && (<ActivityIndicator size="large" color="#EC2427" />)
             }

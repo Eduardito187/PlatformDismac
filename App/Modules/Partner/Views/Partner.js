@@ -44,6 +44,12 @@ const Partner = (props) => {
         }).catch(err => {});
     }
 
+    function navigateAction(url) {
+        if (url != null){
+            props.navigation.push(url, {"roles" : props.roles, "Socket" : Socket, "TOKEN" : TOKEN});
+        }
+    }
+
     if (Load !== true) {
         return (<LoadingPage />);
     }else{
@@ -65,13 +71,13 @@ const Partner = (props) => {
                             ? <ProfilePartner TOKEN={TOKEN} Partner={Partner} Edit={true} Socket={Socket} />
                             : <LoadItem />
                         }
-                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countCampaignsPartner"} label={"Campañas"} icon={(<FontAwesome name={"calendar"} size={45} color={RED_DIS} />)} />
-                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countSocialNetworkPartner"} label={"Redes sociales"} icon={(<FontAwesome name={"share-square"} size={45} color={RED_DIS} />)} />
-                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countAccount"} label={"Cuentas"} icon={(<MaterialIcons name={"account-circle"} size={45} color={RED_DIS} />)} />
-                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countProduct"} label={"Productos"} icon={(<FontAwesome name={"archive"} size={45} color={RED_DIS} />)} />
-                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countWarehouse"} label={"Almacenes"} icon={(<FontAwesome name={"sitemap"} size={45} color={RED_DIS} />)} />
-                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/countStorePartner"} label={"Tiendas"} icon={(<MaterialIcons name={"store"} size={45} color={RED_DIS} />)} />
-                        <SectionNumber TOKEN={TOKEN} style={MT_10} api={"partner/valuePartner"} label={"Valor del inventario"} icon={(<Text style={Font_Bob}>BOB</Text>)} />
+                        <SectionNumber Action={() => navigateAction("AllCampaigns")} TOKEN={TOKEN} style={MT_10} api={"partner/countCampaignsPartner"} label={"Campañas"} icon={(<FontAwesome name={"calendar"} size={45} color={RED_DIS} />)} />
+                        <SectionNumber Action={() => navigateAction("AllSocials")} TOKEN={TOKEN} style={MT_10} api={"partner/countSocialNetworkPartner"} label={"Redes sociales"} icon={(<FontAwesome name={"share-square"} size={45} color={RED_DIS} />)} />
+                        <SectionNumber Action={() => navigateAction(null)} TOKEN={TOKEN} style={MT_10} api={"partner/countAccount"} label={"Cuentas"} icon={(<MaterialIcons name={"account-circle"} size={45} color={RED_DIS} />)} />
+                        <SectionNumber Action={() => navigateAction(null)} TOKEN={TOKEN} style={MT_10} api={"partner/countProduct"} label={"Productos"} icon={(<FontAwesome name={"archive"} size={45} color={RED_DIS} />)} />
+                        <SectionNumber Action={() => navigateAction("AllWarehouses")} TOKEN={TOKEN} style={MT_10} api={"partner/countWarehouse"} label={"Almacenes"} icon={(<FontAwesome name={"sitemap"} size={45} color={RED_DIS} />)} />
+                        <SectionNumber Action={() => navigateAction("AllSotres")} TOKEN={TOKEN} style={MT_10} api={"partner/countStorePartner"} label={"Tiendas"} icon={(<MaterialIcons name={"store"} size={45} color={RED_DIS} />)} />
+                        <SectionNumber Action={() => navigateAction("AllStorePrices")} TOKEN={TOKEN} style={MT_10} api={"partner/valuePartner"} label={"Valor del inventario"} icon={(<Text style={Font_Bob}>BOB</Text>)} />
                     </ScrollView>
                     <ModalQR closeModal={() => closeModal()} isModalVisible={isModalVisible} key={"partner"} type={"partner"} value={Partner != null ? Partner.id : 0} />
                 </View>

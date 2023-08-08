@@ -99,9 +99,10 @@ const UploadMassive = (props) => {
 
     async function selectFile() {
         let result = await DocumentPicker.getDocumentAsync({type: [Value == "Fotos" ? "application/zip" : "text/comma-separated-values"], copyToCacheDirectory: true, multiple: true});
-        if (result.type === 'success') {
-            SetFileName(result.name);
-            SetFile(result);
+        if (result.canceled === false) {
+            let file = result["assets"][0];
+            SetFileName(file.name);
+            SetFile(file);
         }else{
             SetFileName("");
             SetFile(null);

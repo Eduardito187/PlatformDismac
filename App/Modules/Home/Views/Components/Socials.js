@@ -9,6 +9,8 @@ import { P5, Width_Max } from '../../../Login/Style/style';
 import SocialPicture from '../../../../Components/SocialPicture';
 import { label_1 } from '../../../Catalog/Style/Two';
 import { Navigation } from '../../../../Helpers/Nav';
+import { generateCustomId } from '../../../../Helpers/API';
+import SocialItem from '../../../Partner/Views/Components/SocialItem';
 
 const Socials = (props) => {
     const [Width, SetWidth] = React.useState(props.width-10);
@@ -23,34 +25,11 @@ const Socials = (props) => {
         //
     }, []);
 
-    function selectSocial(item) {
-        Navigation("ShowSocial",{"social":item,"TOKEN":props.TOKEN,"socket":null},props.navigation);
-    }
-
     const _renderItem = ({item, index}) => {
         return (
-            <Card key={Math.random()+'_Social_'+Math.random()} onPress={() => selectSocial(item)} style={[{width: Width, height: props.height}, Border_Radius_0, Background_White, Content_Center]}>
-                <SocialPicture height={props.height} picture={selectedPicture(item.social.name)} social={item.social.name} />
-            </Card>
+            <SocialItem key={generateCustomId()} TOKEN={props.TOKEN} state={item} navigation={props.navigation} height={150} />
         );
     };
-
-    function selectedPicture(name) {
-        switch (name) {
-            case "Facebook":
-                return Facebook;
-            case "Instagram":
-                return Instagram;
-            case "Linkedin":
-                return Linkedin;
-            case "Twitter":
-                return Twitter;
-            case "Whatsapp":
-                return Whatsapp;
-            case "You Tube":
-                return YouTube;
-        }
-    }
 
     return(
         <View style={[Width_Max, P5]}>

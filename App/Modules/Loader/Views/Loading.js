@@ -11,8 +11,9 @@ import axios from 'axios';
 import ProgressDismac from '../../../Components/ProgressDismac';
 import LogoDismac from '../../../Components/LogoDismac';
 import ImgDis from '../../../Components/ImgDis';
-import { getTokenNotification } from '../../../Helpers/Code';
+import { getLocalization, getTokenNotification } from '../../../Helpers/Code';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
+import { RED_DIS } from '../../Login/Style/css';
 /** */
 
 const Loading = ({route, navigation }) => {
@@ -56,29 +57,10 @@ const Loading = ({route, navigation }) => {
       if (route.params != null && route.params.TOKEN != null|| TOKEN_INVITADO === true){
         ResetNavigation("Invitado", {"TOKEN":route.params != null ? route.params.TOKEN : TOKEN_INVITADO}, navigation);
       }else{
-        if (await GET_TOKEN_SESSION() != null) {
-          const token_expo = await getTokenNotification();
-          
-
-          await fetch('https://fcm.googleapis.com/fcm/send', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'key=AAAAoqaefyg:APA91bFxpj2TAd6IXz8cz6RjQx2qxlsYxTtP9uBwa4-4ij0BDuC8ayh-QJO0RKyKVTbaF_jrrCyDSUWa-2c1ybOm-mgq9L73EJdKOhzHHlHhUXieaj0jEQSbSvyAzIbvhgSR0xSuTtyG',
-            },
-            body: JSON.stringify({
-                to: token_expo,
-                priority: 'normal',
-                data: {
-                experienceId: '@eduardito187/PlatformDismac',
-                scopeKey: '@eduardito187/PlatformDismac',
-                title: "📧 You've got mail",
-                message: 'Hello world! 🌐',
-                },
-            }),
-        });
-          console.log(token_expo);
-          alert(token_expo);
+        let TOKEN_SESSIONS = await GET_TOKEN_SESSION();
+        if (TOKEN_SESSIONS != null) {
+          const token_expo = await getTokenNotification(TOKEN_SESSIONS);
+          const localization = await getLocalization();
           ResetNavigation("Inicio", {}, navigation);
         }else{
           navigation.navigate('Login');
@@ -96,7 +78,7 @@ const Loading = ({route, navigation }) => {
           <LogoDismac style={PageLoading.logo} />
         </View>
         <Text style={PageLoading.version}>V {Constants.expoConfig.version}</Text>
-        <StatusBar style="auto" />
+        <StatusBar backgroundColor={RED_DIS} style="auto" />
       </View>
     );
   }else{

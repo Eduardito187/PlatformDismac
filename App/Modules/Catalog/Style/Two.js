@@ -2,6 +2,12 @@ export const displayFlex = {
     flexDirection: 'row',
     flexWrap: 'wrap'
 };
+export const Width_30 = {
+    width: 30
+};
+export const Width_120 = {
+    width: 120
+};
 export const contentOneSection = {
     width: 40
 };
@@ -15,7 +21,7 @@ export const contentSection = {
 };
 export const sectionQr = {
     width: 40,
-    paddingRight:10
+    paddingRight: 10
 };
 export const alingContentStatus = {
     flexDirection: "row",
@@ -60,7 +66,7 @@ export const label1 = {
     fontSize: 15,
     color: "black",
     position: "absolute",
-    left:5
+    left: 5
 };
 export const label_1 = {
     fontWeight: "bold",
@@ -75,7 +81,17 @@ export const label_nb_1 = {
 export const label2 = {
     fontWeight: "bold",
     fontSize: 14,
+    color: "#808080"
+};
+export const label2Right = {
+    fontWeight: "bold",
+    fontSize: 14,
     color: "#808080",
-    position: "absolute",
-    right:5
+    position: "relative"
+};
+export const AlingRight =  {
+    flex:1,
+    justifyContent: 'center',
+    paddingVertical: 3,
+    alignItems: 'flex-end'
 };

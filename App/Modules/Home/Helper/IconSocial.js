@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 /** */
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ActivityIndicator } from 'react-native-paper';
-import { Margin_5, RED_DIS } from '../../Login/Style/css';
+import { Margin_5, RED_DIS, WHITE } from '../../Login/Style/css';
 
 const IconSocial = (props) => {
     const [Icon, SetIcon] = React.useState(null);
@@ -38,9 +38,9 @@ const IconSocial = (props) => {
     }
     
     if (Icon == null) {
-        return (<ActivityIndicator color={RED_DIS} />);
+        return (<ActivityIndicator color={WHITE} />);
     }else{
-        return (<MaterialCommunityIcons name={Icon} size={props.size} color={RED_DIS} />);
+        return (<MaterialCommunityIcons name={Icon} size={props.size} color={WHITE} />);
     }
 };
 export default IconSocial;

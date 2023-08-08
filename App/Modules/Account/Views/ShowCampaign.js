@@ -16,6 +16,7 @@ import IconSocial from '../../Home/Helper/IconSocial';
 import { displayFlex } from '../../Catalog/Style/Two';
 import TwoActionColumn from '../../Catalog/Views/Components/TwoActionColumn';
 import { Navigation } from '../../../Helpers/Nav';
+import { generateCustomId } from '../../../Helpers/API';
 /** */
 
 const ShowCampaign = ({route, navigation }) => {
@@ -104,14 +105,14 @@ const ShowCampaign = ({route, navigation }) => {
                             {
                                 campaign.social.map((item, j) => {
                                     return (
-                                        <View key={Math.random()+j+'_Campain_Social_'+Math.random()} style={Padding_10_B_5}>
+                                        <View key={generateCustomId()} style={Padding_10_B_5}>
                                             <View style={AlingFormItem}>
                                                 <View style={RowForm}>
                                                     <Subtitle style={TitleSub} text={item.social.name+"."} />
                                                 </View>
                                                 <TouchableOpacity onPress={() => showModal(item.url)} style={RowForm}>
                                                     <View style={[Width_Max, displayFlex]}>
-                                                        <IconSocial key={Math.random()+j+'_ICON_SOCIAL_'+Math.random()} icon={item.social.name} size={24} />
+                                                        <IconSocial key={generateCustomId()} icon={item.social.name} size={24} />
                                                         <Subtitle style={SubTitleText} text={item.url} />
                                                     </View>
                                                 </TouchableOpacity>

@@ -8,7 +8,7 @@ import { FAB } from 'react-native-paper';
 import Header from '../../Home/Views/Components/Header';
 import { RED_DIS, WHITE } from '../../Login/Style/css';
 import ProblemItem from '../../Catalog/Views/Components/ProblemItem';
-import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
+import { GET_HEADER_TOKEN, URL_API, generateCustomId } from '../../../Helpers/API';
 
 const Improvements = (props) => {
     const [Items, SetItems] = React.useState([]);
@@ -66,7 +66,7 @@ const Improvements = (props) => {
                 {
                     Items.map((item) => {
                         return (
-                            <ProblemItem key={Math.random()+'_PROBLEM_'+Math.random()} Screen={""} TOKEN={props.TOKEN} Item={item} />
+                            <ProblemItem key={generateCustomId()} Screen={""} TOKEN={props.TOKEN} Item={item} />
                         )
                     })
                 }

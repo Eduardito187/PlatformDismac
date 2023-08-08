@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { View, Text } from 'react-native';
-import { displayFlex, column, label1, label2 } from '../../Style/Two';
+import { displayFlex, column, label1, label2, AlingRight } from '../../Style/Two';
 import { Switch } from 'react-native-paper';
 import { RED_DIS } from '../../../Login/Style/css';
 /** */
@@ -20,7 +20,7 @@ const TwoSwitch = (props) => {
             <View style={[{width:props.column1},column]}>
                 <Text style={label1}>{props.label1}</Text>
             </View>
-            <View style={[{width:props.column2},column]}>
+            <View style={[{width:props.column2},column, AlingRight]}>
                 <Switch disabled={props.disabled} style={label2} color={RED_DIS} value={isSwitchOn} onValueChange={chnageSwitch} />
             </View>
         </View>

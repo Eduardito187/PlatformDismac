@@ -30,15 +30,15 @@ const ProfilePartner = (props) => {
 
     async function changeProfile() {
         let result = await DocumentPicker.getDocumentAsync({type: ["image/*"], copyToCacheDirectory: true, multiple: false});
-        if (result.type === 'success') {
-            sentForm(result, "profile");
+        if (result.canceled === false) {
+            sentForm(result["assets"][0], "profile");
         }
     }
 
     async function changeCover() {
         let result = await DocumentPicker.getDocumentAsync({type: ["image/*"], copyToCacheDirectory: true, multiple: false});
-        if (result.type === 'success') {
-            sentForm(result, "cover");
+        if (result.canceled === false) {
+            sentForm(result["assets"][0], "cover");
         }
     }
 
@@ -46,18 +46,8 @@ const ProfilePartner = (props) => {
         if (File != null) {
             let formData = new FormData();
             formData = setDataForm(formData, 'File', { uri: File.uri, name: File.name, type: File.mimeType });
-            axios.post(URL_API(type == "cover" ? "changeCover" : "changeProfile"),formData,GET_HEADER_TOKEN_FILE(TOKEN)).then(res => {
-                if (res.data.response) {
-                    emitSocket(Socket, "reload_profile", true);
-                }
-            }).catch(err => {
-                //
-            });
+            axios.post(URL_API(type == "cover" ? "changeCover" : "changeProfile"),formData,GET_HEADER_TOKEN_FILE(TOKEN));;
         }
-    }
-
-    function sendSocket(){
-        Socket.emit()
     }
 
     return(

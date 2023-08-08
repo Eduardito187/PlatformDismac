@@ -9,6 +9,52 @@ export const BLACK = "#000000";
 export const DARK = "#777777";
 export const BLUE = "#0043F9";
 export const LIGHT = "#F0F0F3";
+export const PADDINT_CAMPAIGN_SECTION_ONE = {position: "absolute", zIndex: 10, top: 30, left: 0, right: 90, bottom: 45, padding: 10};
+export const PADDINT_CAMPAIGN_SECTION_TWO = {position: "absolute", zIndex: 10, height: 45, left: 0, right: 90, bottom: 0};
+export const PADDINT_CAMPAIGN_SECTION_TREE = {position: "absolute", zIndex: 10, top: 40, width: 90, right: 0, bottom: 0};
+export const PADDING_LEFT = {
+    paddingLeft: 10
+};
+export const SECTION_COUNT_PRODUCT = {
+    backgroundColor: RED_DIS,
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: WHITE
+};
+export const ItemContainerScrol = {
+    padding: 5,
+    backgroundColor: RED_DIS,
+    borderRadius: 8,
+    height: 120,
+    position: "relative"
+};
+export const ItemContainerScrollItem = {
+    padding: 5,
+    backgroundColor: RED_DIS,
+    borderRadius: 8,
+    height: 160,
+    position: "relative"
+};
+export const ItemCountScrollSection = {
+    position: "absolute",
+    zIndex: 10,
+    top: 0,
+    height: 30,
+    width: 30,
+    right: 5
+};
+export const ItemCountScroll = {
+    position: "absolute",
+    zIndex: 10,
+    top: 0,
+    height: 30,
+    left: 100,
+    right: 0,
+    backgroundColor: WHITE,
+    borderTopRightRadius: 8,
+    borderBottomLeftRadius: 8
+};
 export const PRICE_ORDER_TEXT = {
     fontWeight: "bold",
     fontSize: 18
@@ -185,6 +231,43 @@ export const Button_Plomo_Dis = {
     backgroundColor: PLO_DIS,
     color: WHITE
 };
+export const Content_Coupond_One = {
+    position: "absolute",
+    zIndex: 10,
+    bottom: 50,
+    right: 0,
+    left: 0,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "flex-end",
+    padding: 5
+};
+export const Coupon_Content = {
+    position: "relative",
+    width: "100%",
+    height: 100,
+    marginBottom: 10,
+    marginTop: 10,
+    borderRadius: 10,
+    position: "relative"
+};
+export const Content_Coupond_Two = {
+    position: "absolute",
+    zIndex: 10,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    height: 45,
+    justifyContent: "center",
+    alignItems: "flex-end",
+    padding: 5
+};
+export const Text_Coupons = {
+    fontWeight: "bold",
+    color: "black",
+    marginRight: 10,
+    color: "white"
+};
 export const Background_Red_Dis = {
     backgroundColor: RED_DIS
 };
@@ -198,7 +281,7 @@ export const Section_Content_Two = {
 export const Section_Content_Back = {
     position: "absolute",
     left: 0,
-    top: 30,
+    top: 50,
     zIndex: 10
 };
 export const Section_Card = {
@@ -419,6 +502,9 @@ export const Section_Max = {
 };
 export const Size_20 = {
     fontSize: 20
+};
+export const PADDING_TOP = {
+    paddingTop: 10
 };
 export const Scroll_Section = {
     paddingTop: 10,
@@ -861,7 +947,7 @@ export const Color_Dismac = {
     color: "#EC2427"
 };
 export const Color_White = {
-    color: 'white'
+    color: WHITE
 };
 export const Background_Dismac = {
     backgroundColor: "#EC2427",

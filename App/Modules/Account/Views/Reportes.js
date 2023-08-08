@@ -9,7 +9,7 @@ import { Surface_Style, Width_Max } from '../../Login/Style/style';
 import { alingContentCenter } from '../../Catalog/Style/Two';
 import { Surface, Text } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native';
-import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
+import { GET_HEADER_TOKEN, URL_API, generateCustomId } from '../../../Helpers/API';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Reportes = ({ route, navigation }) => {
@@ -40,7 +40,7 @@ const Reportes = ({ route, navigation }) => {
                 {
                     Analytics.map((state, i) => {
                         return (
-                            <Surface key={Math.random() + '_Product__Coupon__' + Math.random()} style={[{ width: windowWidth / 4.5, margin: 5, height: windowWidth / 4.5 }, Surface_Style]} elevation={4}>
+                            <Surface key={generateCustomId()} style={[{ width: windowWidth / 4.5, margin: 5, height: windowWidth / 4.5 }, Surface_Style]} elevation={4}>
                                 <TouchableOpacity style={[Section_Content_Flex]} onPress={() => selectedTypeAnalytics(state)}>
                                     <MaterialCommunityIcons name="google-analytics" size={30} color={RED_DIS} />
                                     <Text>{state.type}</Text>

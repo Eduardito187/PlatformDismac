@@ -12,6 +12,7 @@ import { ResetNavigation,Navigation } from '../../../Helpers/Nav';
 import Circle from '../../../Components/Circle';
 import Title from '../../../Components/Title';
 import CircleRedirect from '../../../Components/CircleRedirect';
+import { RED_DIS } from '../Style/css';
 /** */
 
 const Login = ({route, navigation }) => {
@@ -158,7 +159,7 @@ const Login = ({route, navigation }) => {
                     {response}
                 </Snackbar>
             </View>
-            <StatusBar style="auto" />
+            <StatusBar backgroundColor={RED_DIS} style="auto" />
         </View>
     );
 };

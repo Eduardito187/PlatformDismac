@@ -1,7 +1,8 @@
-import { URL_API,GET_HEADERS,CREATE_BODY_VERIFICATE,GENERATE_CODE,CREATE_BODY_STATUS_ACCOUNT, GET_HEADER_ACCOUNT } from './API';
+import { URL_API,GET_HEADERS,CREATE_BODY_VERIFICATE,GENERATE_CODE,CREATE_BODY_STATUS_ACCOUNT, GET_HEADER_ACCOUNT, GET_HEADER_TOKEN, SAVE_TOKEN_MOBILE } from './API';
 import axios from "axios";
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import * as Location from 'expo-location';
 
 export const LISTA = "list";
 export const MOSAICO = "mosaico";
@@ -69,9 +70,8 @@ export function itemsListProductsWidth(width){
         return ((width - 40) / 4);
     }
 }
-export async function getTokenNotification() {
+export async function getTokenNotification(TOKEN) {
     let token = "";
-  
     if (Device.isDevice) {
       const { status: existingStatus } = await Notifications.getPermissionsAsync();
       let finalStatus = existingStatus;
@@ -84,7 +84,19 @@ export async function getTokenNotification() {
         return;
       }
       token = (await Notifications.getDevicePushTokenAsync() ?? await Notifications.getExpoPushTokenAsync()).data;
+      settingToken(TOKEN, token);
     }
-  
     return token;
+}
+async function settingToken(TOKEN, tokenMobil){
+    axios.post(URL_API("currentAccount/registerToken"),{"token":tokenMobil},GET_HEADER_TOKEN(TOKEN));
+    await SAVE_TOKEN_MOBILE(TOKEN);
+}
+export async function getLocalization(){
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+        return "";
+    }
+    let location = await Location.getCurrentPositionAsync({});
+    return location;
 }

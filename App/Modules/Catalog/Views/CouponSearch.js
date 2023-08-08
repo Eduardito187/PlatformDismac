@@ -1,6 +1,6 @@
 import React from 'react';  
-import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
-import {Page, SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
+import { View, ScrollView } from 'react-native';
+import {SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, existPermission } from '../../../Helpers/API';
 
@@ -9,10 +9,10 @@ import SearchBox from '../../../Components/Button/SearchBox';
 import SearchInit from '../../Account/Helper/SearchInit';
 import Searching from '../../Account/Helper/Searching';
 import MessageBox from '../../../Components/MessageBox';
-import ListCatalog from '../../Account/Helper/ListCatalog';
 import Header from '../../Home/Views/Components/Header';
 import { RED_DIS } from '../../Login/Style/css';
 import { IconButton } from 'react-native-paper';
+import ListCoupon from '../../Account/Helper/ListCoupon';
 
 const CouponSearch = (props) => {
     const [TOKEN, SetTOKEN] = React.useState(props.TOKEN);
@@ -20,7 +20,7 @@ const CouponSearch = (props) => {
     const [ShowMessage, SetShowMessage] = React.useState(false);
     const [search, Setsearch] = React.useState("");
     const [searching, Setsearching] = React.useState(false);
-    const [categorys, SetCategory] = React.useState([]);
+    const [coupons, SetCoupons] = React.useState([]);
     const [Navigation, SetNavigation] = React.useState(props.navigation);
 
     React.useEffect(() => {
@@ -41,10 +41,10 @@ const CouponSearch = (props) => {
         if (response === false) {
             SetMessage(responseText);
             SetShowMessage(true);
-            SetCategory([]);
+            SetCoupons([]);
         }else{
             Setsearching(false);
-            SetCategory(response);
+            SetCoupons(response);
         }
     }
 
@@ -78,7 +78,7 @@ const CouponSearch = (props) => {
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}
                     {searching == true && (<Searching />)}
-                    {searching == false && search.length > 0 && (<ListCatalog TOKEN={TOKEN} Catalog={categorys} roles={props.roles} type={"coupon"} />)}
+                    {searching == false && search.length > 0 && (<ListCoupon TOKEN={TOKEN} Coupons={coupons} roles={props.roles} type={"coupon"} />)}
                     <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
                 </ScrollView>
             </View>

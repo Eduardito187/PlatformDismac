@@ -1,5 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { URL_HOSTING,EXTEND_API,TOKEN_API,EXTEND_API_SHOW } from "../../Config";
+import { v4 as uuidv4 } from 'uuid';
+import { RandomBytes } from 'react-native-get-random-values';
+export function generateCustomId() {
+    return uuidv4(null, RandomBytes);
+}
 export function URL_API(Controller) {
     return URL_HOSTING+EXTEND_API+Controller;
 }
@@ -368,5 +373,25 @@ export async function DELETE_TOKEN_INVITADO() {
         return true;
     } catch (error) {
         return false;
+    }
+}
+export async function SAVE_TOKEN_MOBILE(TOKEN) {
+    try {
+        await AsyncStorage.setItem('@TOKEN_NOTIFY',TOKEN);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+export async function GET_TOKEN_MOBILE() {
+    try {
+        const value = await AsyncStorage.getItem('@TOKEN_NOTIFY');
+        if (value !== null) {
+            return value;
+        }else{
+            return null;
+        }
+    } catch (error) {
+        return null;
     }
 }

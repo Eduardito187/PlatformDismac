@@ -7,14 +7,15 @@ import Price from './Price';
 import LoadItem from '../../../../Components/LoadItem';
 import { ACTION_RECENT, Height_30, ITEM_PRODUCT, PRODUCT_NAME, PRODUCT_SKU } from '../../../Login/Style/css';
 import { Size_14_Bold } from '../../../Login/Style/style';
+import { generateCustomId } from '../../../../Helpers/API';
 /** */
 
 const ProductComponent = (props) => {
     const navigation = useNavigation();
     const [VIEW, SETVIEW] = React.useState(props.VIEW);
     const [product, SetProduct] = React.useState(null);
-    const [key, SetKey] = React.useState(Math.random()+'_Product_'+Math.random());
-    const [load, SetKeyLoad] = React.useState(Math.random()+'_Load_'+Math.random());
+    const [key, SetKey] = React.useState(generateCustomId());
+    const [load, SetKeyLoad] = React.useState(generateCustomId());
     const [Invitado, SetInvitado] = React.useState(props.invitado);
 
     React.useEffect(() => {

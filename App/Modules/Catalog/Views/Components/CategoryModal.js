@@ -7,6 +7,7 @@ import Modal from "react-native-modal";
 import { modalContainerStyle,Background_Dismac,bordePlomo,modalInfo,Margin_5,Margin_Top_5, Color_White, Section_Max_Absolute, Flex_Section } from '../../../Login/Style/css';
 /** */
 import TwoColumn from './TwoColumn';
+import { generateCustomId } from '../../../../Helpers/API';
 
 const CategoryModal = (props) => {
     const widthView = windowWidth-80;
@@ -40,7 +41,7 @@ const CategoryModal = (props) => {
                                 {
                                     props.category.stores.map((store) => {
                                         return (
-                                            <DataTable.Row key={Math.random()+'_Store_'+Math.random()}>
+                                            <DataTable.Row key={generateCustomId()}>
                                                 <DataTable.Cell>{store.name}</DataTable.Cell>
                                                 <DataTable.Cell numeric>{store.products}</DataTable.Cell>
                                             </DataTable.Row>

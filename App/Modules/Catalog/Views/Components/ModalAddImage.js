@@ -9,7 +9,7 @@ import { windowWidth } from '../../../../Helpers/GetMobil';
 import Carousel from 'react-native-snap-carousel';
 import { Surface_Style, Width_Max } from '../../../Login/Style/style';
 import { alingContentCenter } from '../../Style/Two';
-import { GET_HEADER_TOKEN_FILE, URL_API } from '../../../../Helpers/API';
+import { GET_HEADER_TOKEN_FILE, URL_API, generateCustomId } from '../../../../Helpers/API';
 import { setDataForm } from '../../../../Helpers/Code';
 /** */
 
@@ -25,8 +25,8 @@ const ModalAddImage = (props) => {
 
     async function selectFile() {
         let result = await DocumentPicker.getDocumentAsync({type: ["image/*"], copyToCacheDirectory: true, multiple: true});
-        if (result.type === 'success') {
-            addPicture(result);
+        if (result.canceled === false) {
+            addPicture(result["assets"][0]);
         }
     }
 
@@ -66,8 +66,8 @@ const ModalAddImage = (props) => {
                                 {
                                     Files.map((state, i) => {
                                         return (
-                                            <Surface key={Math.random()+'_Product__Picture__'+Math.random()} style={[{width: windowWidth/4.5, margin: 5, height: windowWidth/4.5}, Surface_Style]} elevation={4}>
-                                                <Image key={Math.random()+'_Text_'+i+'_Picture_'+Math.random()} style={[{width: "100%", height: "100%"}]} source={{uri: state.uri}} />
+                                            <Surface key={generateCustomId()} style={[{width: windowWidth/4.5, margin: 5, height: windowWidth/4.5}, Surface_Style]} elevation={4}>
+                                                <Image key={generateCustomId()} style={[{width: "100%", height: "100%"}]} source={{uri: state.uri}} />
                                             </Surface>
                                         )
                                     })

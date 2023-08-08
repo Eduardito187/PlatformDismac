@@ -9,6 +9,7 @@ import Subtitle from '../../../Components/Subtitle';
 import Top from './Component/Top';
 import Next from './Component/Next';
 import { Route } from '../Interfaces/Route';
+import { RED_DIS } from '../Style/css';
 /** */
 
 const AddressExtra = ({route, navigation }) => {
@@ -26,7 +27,7 @@ const AddressExtra = ({route, navigation }) => {
 
     return (
         <View style={STYLE.RegisterContainer}>
-            <StatusBar style="light" />
+            <StatusBar backgroundColor={RED_DIS} style="light" />
             <View style={STYLE.SECCTION_TITLE}>
                 <Top Step={Step} Steps={Steps} Title={Route[Step-1]["title"]} navigation={navigation} />
             </View>

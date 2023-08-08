@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import CountResult from '../../../Components/Result/CountResult';
 import Catalog from './Catalog';
 import ResultNone from './ResultNone';
+import { generateCustomId } from '../../../Helpers/API';
 
 const ListCatalog = (props) => {
     React.useEffect(() => {
@@ -15,7 +16,7 @@ const ListCatalog = (props) => {
                 {
                     props.Catalog.map((catalog) => {
                         return (
-                            <Catalog key={Math.random()+'_Catalog_'+Math.random()} roles={props.roles} TOKEN={props.TOKEN} Catalog={catalog} type={props.type} />
+                            <Catalog key={generateCustomId()} roles={props.roles} TOKEN={props.TOKEN} Catalog={catalog} type={props.type} />
                         )
                     })
                 }

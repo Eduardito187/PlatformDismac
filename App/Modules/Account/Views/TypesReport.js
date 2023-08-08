@@ -1,11 +1,8 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Animated, TouchableOpacity } from 'react-native';
-import { windowWidth } from '../../../Helpers/GetMobil';
 import axios from 'axios';
-import { GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
+import { GET_HEADER_TOKEN, URL_API, generateCustomId } from '../../../Helpers/API';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
-import { v4 as uuidv4 } from 'uuid';
-import { RandomBytes } from 'react-native-get-random-values';
 import { StyleReport } from '../../Login/Style/style';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
@@ -15,10 +12,6 @@ const TypesReport = ({ route, navigation }) => {
     const [List, SetList] = React.useState([]);
     const scrollY = new Animated.Value(0);
     const [Loading, SetLoading] = React.useState(false);
-    const generateUUID = () => {
-        const uuid = uuidv4(null, RandomBytes);
-        return uuid;
-    };
 
     React.useEffect(() => {
         getListTypes();
@@ -65,7 +58,7 @@ const TypesReport = ({ route, navigation }) => {
             if (response.data?.response) {
                 const dataWithIds = response.data.response.map((item) => ({
                     ...item,
-                    id: generateUUID()
+                    id: generateCustomId()
                 }));
                 return dataWithIds;
             } else {

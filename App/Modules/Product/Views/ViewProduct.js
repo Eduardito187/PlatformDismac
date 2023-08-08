@@ -4,7 +4,7 @@ import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { BLACK, Button_Red_Dis, CONTENT_ANIMATION_PICTURE, CONTENT_BODY, CONTENT_PICTURE, CONTENT_PICTURE_RENDER, CONTENT_PICTURE_RENDER_ITEM, CONTENT_PRICE, Height_30, ICON_LINK, JUSTIFY_CONTENT, LOCATE, Margin_5, Margin_L5, Margin_Top_5, NAME, Only_Height_40, PADDING_BOTTOM_10, PADDING_HORIZONTAL_16, PICTURE_ANIMATION, PRODUCT_CONTENT_INFORMATION, PRODUCT_DESCRIPTION, PRODUCT_INFORMATION, PRODUCT_NAME_CONTENT, RED_DIS, SECTION_BOTTOM, Section_Card_Title } from '../../Login/Style/css';
 import { StatusBar } from 'expo-status-bar';
-import { GET_HEADER_TOKEN, GET_STORES, URL_API_SHOW } from '../../../Helpers/API';
+import { GET_HEADER_TOKEN, GET_STORES, URL_API_SHOW, generateCustomId } from '../../../Helpers/API';
 import { SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import MedidasComerciales from './Components/MedidasComerciales';
@@ -12,10 +12,8 @@ import CaracteristicasUnicas from './Components/CaracteristicasUnicas';
 import PartnerLink from './Components/PartnerLink';
 import TwoColumnBg from '../../Catalog/Views/Components/TwoColumnBg';
 import ModalStore from './Components/ModalStore';
-import { alingContentStatus, displayFlex } from '../../Catalog/Style/Two';
-import { Badge, Button, Chip, Surface } from 'react-native-paper';
-import Price from '../../Catalog/Views/Components/Price';
-import { MarginBottomM9, MarginContentChip, P5, Size_15_Bold, Surface_Style, Width_Max } from '../../Login/Style/style';
+import { displayFlex } from '../../Catalog/Style/Two';
+import { Button } from 'react-native-paper';
 import Name from './Components/Name';
 import Description from './Components/Description';
 import ProductIniciales from './Components/ProductIniciales';
@@ -44,8 +42,8 @@ const ViewProduct = ({ route, navigation }) => {
     const ToogleModalStore = () => SetToogleStore(!ToogleStore);
     const renderProduct = ({ item, index }) => {
         return (
-            <View key={Math.random() + '_Picture_' + index + '_Product_' + Math.random()} style={[{ width: width }, CONTENT_PICTURE_RENDER]}>
-                <Image key={Math.random() + '_Picture_' + index + '_Image_' + Math.random()} source={{ uri: item.url }} style={CONTENT_PICTURE_RENDER_ITEM} />
+            <View key={generateCustomId()} style={[{ width: width }, CONTENT_PICTURE_RENDER]}>
+                <Image key={generateCustomId()} source={{ uri: item.url }} style={CONTENT_PICTURE_RENDER_ITEM} />
             </View>
         );
     };
@@ -150,18 +148,18 @@ const ViewProduct = ({ route, navigation }) => {
         return (<LoadingPage />);
     } else {
         return (
-            <View key={Math.random() + '_Screen_' + Math.random()} style={CONTENT_BODY}>
+            <View key={generateCustomId()} style={CONTENT_BODY}>
                 <StatusBar backgroundColor={RED_DIS} style="light" />
-                <ScrollView key={Math.random() + '_Scroll_' + Math.random()} showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
-                    <View key={Math.random() + '_Scroll_View_' + Math.random()} style={CONTENT_PICTURE}>
-                        <FlatList key={Math.random() + '_Flatlist_' + Math.random()} data={Product.pictures} horizontal renderItem={renderProduct} keyExtractor={item => item.id} showsHorizontalScrollIndicator={false} decelerationRate={0.8} snapToInterval={width} bounces={false} onScroll={EventAnimated} />
-                        <View key={Math.random() + '_Animation_View_' + Math.random()} style={CONTENT_ANIMATION_PICTURE}>
+                <ScrollView key={generateCustomId()} showsVerticalScrollIndicator={false} style={SCROLL_STYLE}>
+                    <View key={generateCustomId()} style={CONTENT_PICTURE}>
+                        <FlatList key={generateCustomId()} data={Product.pictures} horizontal renderItem={renderProduct} keyExtractor={item => item.id} showsHorizontalScrollIndicator={false} decelerationRate={0.8} snapToInterval={width} bounces={false} onScroll={EventAnimated} />
+                        <View key={generateCustomId()} style={CONTENT_ANIMATION_PICTURE}>
                             {
                                 Product.pictures.length > 1 && (
                                     Product.pictures.map((data, index) => {
                                         let opacity = position.interpolate({ inputRange: [index - 1, index, index + 1], outputRange: [0.2, 1, 0.2], extrapolate: 'clamp' });
                                         return (
-                                            <Animated.View key={Math.random() + '_Animate_' + index + '_Picture_' + Math.random()} style={[PICTURE_ANIMATION, { backgroundColor: BLACK, opacity, width: parseInt(75 / Product.pictures.length) + "%" }]}></Animated.View>
+                                            <Animated.View key={generateCustomId()} style={[PICTURE_ANIMATION, { backgroundColor: BLACK, opacity, width: parseInt(75 / Product.pictures.length) + "%" }]}></Animated.View>
                                         );
                                     })
                                 )
@@ -174,17 +172,15 @@ const ViewProduct = ({ route, navigation }) => {
                     </View>
                     <View style={[PRODUCT_INFORMATION]}>
                         {Product.descripcion != null && (<Description description={Product.descripcion.description} />)}
-                        {Minicuotas != null && (<ProductMinicuotas Minicuotas={Minicuotas} />)}
-                        {Iniciales != null && (<ProductIniciales Iniciales={Iniciales} />)}
                         {Precios != null && (<ProductPrice Precios={Precios} />)}
+                        {Iniciales != null && (<ProductIniciales Iniciales={Iniciales} />)}
+                        {Minicuotas != null && (<ProductMinicuotas Minicuotas={Minicuotas} />)}
                     </View>
                     <View style={[PRODUCT_INFORMATION, SECTION_BOTTOM]}>
-                        {Product.brand != null && (<TwoColumnBg key={Math.random() + '_Brand_' + Math.random()} width={widthView} column1={widthView * 0.75} column2={widthView * 0.25} label1={'Marca'} label2={Product.brand.name} />)}
                         <CaracteristicasUnicas CaracteristicasUnicas={Product.sheets} />
                         <MedidasComerciales MedidaComercial={Product.medidas_comerciales} />
-                        {
-                            Product.partner != null && (<PartnerLink Partner={Product.partner} TOKEN={TOKEN} Socket={null} />)
-                        }
+                        {Product.brand != null && (<TwoColumnBg key={generateCustomId()} width={widthView} column1={widthView * 0.75} column2={widthView * 0.25} label1={'Marca'} label2={Product.brand.name} />)}
+                        {Product.partner != null && (<PartnerLink Partner={Product.partner} TOKEN={TOKEN} Socket={null} />) }
                         <ModalStore closeModal={() => closePopUpStore()} selectedStore={(a) => selectedStoreCustom(a)} CurrentStore={CurrentStore} isModalVisible={PopUpStore} key={"modal_store"} type={"stores"} StoreSelect={StoresShow} />
                     </View>
                 </ScrollView>

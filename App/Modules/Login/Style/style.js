@@ -1,4 +1,36 @@
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
+export const PaddingScrollHorizontal = {
+    paddingHorizontal: 5
+};
+export const ItemNameScroll = {
+    position: "absolute",
+    zIndex: 10,
+    bottom: 0,
+    top: 30,
+    left: 0,
+    right: 0
+};
+export const ItemCodeScroll = {
+    position: "absolute",
+    zIndex: 10,
+    top: 0,
+    height: 30,
+    left: 5,
+    width: 95
+};
+export const ItemCodeScrollLeft = {
+    position: "absolute",
+    zIndex: 10,
+    top: 0,
+    height: 30,
+    left: 5,
+    right: 40
+};
+export const contentScrollItem = {
+    width: "100%",
+    marginTop: 10,
+    marginBottom: 10
+};
 export const StyleReport = {
     container: {
         flex: 1,
@@ -438,6 +470,11 @@ export const TitleSub = {
 export const SubTitleText = {
     fontWeight: "600",
     color: "black",
+    fontSize: 15
+};
+export const SubTitleTextWhite = {
+    fontWeight: "600",
+    color: "white",
     fontSize: 15
 };
 export const Label = {

@@ -4,7 +4,7 @@ import { SCROLL_STYLE, Padding_10_B_5, SCREEN_RELATIVE, SCREEN_ABSOLUTE_HEADER, 
 import { AlingFormItem, Centered, RowForm, SubTitleText, TitleSub, Top_15_Red, Width_Max } from '../../Login/Style/style';
 import { TextInput, Button, IconButton, Chip } from 'react-native-paper';
 import { windowWidth, windowHeight } from '../../../Helpers/GetMobil';
-import { CREATE_BODY_NEW_ACCOUNT, GET_HEADER_TOKEN, URL_API, URL_API_POS, URL_API_SHOW, existPermission } from '../../../Helpers/API';
+import { CREATE_BODY_NEW_ACCOUNT, GET_HEADER_TOKEN, URL_API, URL_API_POS, URL_API_SHOW, existPermission, generateCustomId } from '../../../Helpers/API';
 import axios from 'axios';
 
 /** Components */
@@ -150,7 +150,7 @@ const ViewAccount = ({route, navigation }) => {
                                                     Account.rol_account.length > 0 && (
                                                         Account.rol_account.map((state) => {
                                                             return (
-                                                                <Chip icon={"check"} key={Math.random()+'_rol_account_'+Math.random()} style={Margin_5} onPress={() => console.log('Pressed')}>{state.name}</Chip>
+                                                                <Chip icon={"check"} key={generateCustomId()} style={Margin_5} onPress={() => console.log('Pressed')}>{state.name}</Chip>
                                                             )
                                                         })
                                                     )

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 /** */
 import Category from './Category';
 import ResultNone from '../../../Account/Helper/ResultNone';
+import { generateCustomId } from '../../../../Helpers/API';
 
 const CategoryList = (props) => {
     React.useEffect(() => {
@@ -13,7 +14,7 @@ const CategoryList = (props) => {
                 {
                     props.Categorys.map((category) => {
                         return (
-                            <Category key={Math.random()+'_Category_'+Math.random()} width={props.width} TOKEN={props.TOKEN} Category={category} />
+                            <Category key={generateCustomId()} width={props.width} TOKEN={props.TOKEN} Category={category} />
                         )
                     })
                 }

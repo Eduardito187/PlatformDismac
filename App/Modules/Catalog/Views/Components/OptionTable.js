@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Column_One, Column_Two, Option_Table } from '../../../Login/Style/css';
+import { generateCustomId } from '../../../../Helpers/API';
 /** */
 
 const OptionTable = (props) => {
     return(
-        <View key={Math.random()+'_Sale_Detail_'+Math.random()} style={Option_Table}>
+        <View key={generateCustomId()} style={Option_Table}>
             <View style={Column_One}>
                 <Text variant="titleSmall">{props.left}</Text>
             </View>

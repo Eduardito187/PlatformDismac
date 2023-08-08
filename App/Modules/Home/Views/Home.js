@@ -6,7 +6,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import { ResetNavigation } from '../../../Helpers/Nav';
-import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION } from '../../../Helpers/API';
+import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION, GET_TOKEN_MOBILE, generateCustomId } from '../../../Helpers/API';
 import { RED_DIS, containerScreen, DRAWER_CONTENT, SOLID_BG, UPLOAD_BTN } from '../../Login/Style/css';
 import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas, Upload, Text_Category, Text_Ahorros } from '../../../Router/Route';
 const Drawer = createDrawerNavigator();
@@ -40,49 +40,73 @@ import IconCategory from '../../Catalog/Helper/IconCategory';
 import IconCoupon from '../../Catalog/Helper/IconCoupon';
 import CategorySearch from '../../Catalog/Views/CategorySearch';
 import CouponSearch from '../../Catalog/Views/CouponSearch';
+import ModalDisableComponen from './Components/ModalDisable';
+import ModalCloseComponen from './Components/ModalClose';
 
 const Home = ({ route, navigation }) => {
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
-
   const [currentTab, setCurrentTab] = React.useState(Text_LandingHome);
   const [showMenu, setShowMenu] = React.useState(false);
   const offsetValue = React.useRef(new Animated.Value(0)).current;
   const scaleValue = React.useRef(new Animated.Value(1)).current;
   const closeButtonOffset = React.useRef(new Animated.Value(0)).current;
-
   const [SOCKET, SETSOCKET] = React.useState("");
   const [TOKEN, SetTOKEN] = React.useState("");
   const [Load, SetLoad] = React.useState(false);
   const [CurrentScreen, setCurrentScreen] = React.useState(null);
-  const [currentAccount, SetCurrentAccount] = React.useState({
-    "id": 0,
-    "name": "",
-    "email": "",
-    "profile": "",
-    "cover": ""
-  });
+  const [currentAccount, SetCurrentAccount] = React.useState({"id": 0,"name": "","email": "","profile": "","cover": ""});
+  const [TOKEN_MOBILE, SETTOKENMOBILE] = React.useState(null);
+  const [ModalDisable, SetModalDisable] = React.useState(false);
+  const [ModalClose, SetModalClose] = React.useState(false);
 
   React.useEffect(() => {
     setToken();
   }, []);
+  
+  function showModalDisable() {
+    SetModalDisable(true);
+  }
+
+  function closeModalDisable() {
+    closeSession();
+    SetModalDisable(false);
+  }
+  
+  function showModalClose() {
+    SetModalClose(true);
+  }
+
+  function closeModalClose() {
+    closeSession();
+    SetModalClose(false);
+  }
 
   async function setSession(data, token) {
-    const socket = io("http://31.220.31.243:3000/", {
-      autoConnect: true
-    });
+    const socket = io("http://62.72.9.102:3000/", {autoConnect: true});
     //
     setCurrentTab(Text_LandingHome);
     setCurrentScreen(() => <LandingHome navigation={navigation} roles={data.roles} socket={socket} TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
     //
     SETSOCKET(socket);
     SetCurrentAccount(data);
+    SETTOKENMOBILE(await GET_TOKEN_MOBILE());
     await SAVE_CURRENT_SESSION(data);
-    onSocket(socket);
+    onSocket(socket, data.id, data.id_partner);
     SetLoad(true);
   }
 
-  function onSocket(socket) {
-    socket.on('reload_profile', (value) => {
+  async function onSocket(socket, id_account, id_partner) {
+    socket.on("CLOSE_"+id_account+"_ACCOUNT", (value) => {
+      if (value != null && value.token != TOKEN_MOBILE) {
+        showModalClose();
+      }
+    });
+    socket.on("DISABLE_"+id_account+"_ACCOUNT", (value) => {
+      if (value) {
+        showModalDisable();
+      }
+    });
+    socket.on("UPDATE_"+id_partner+"_PARTNER", (value) => {
       SetLoad(false);
       if (value) {
         getAccount(TOKEN, false);
@@ -226,6 +250,8 @@ const Home = ({ route, navigation }) => {
           </View>)
         }
         <StatusBar backgroundColor={RED_DIS} style="light" />
+        <ModalDisableComponen closeModal={() => closeModalDisable()} isModalVisible={ModalDisable} key={generateCustomId()} />
+        <ModalCloseComponen closeModal={() => closeModalClose()} isModalVisible={ModalClose} key={generateCustomId()} />
       </SafeAreaView>
     );
   }

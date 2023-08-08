@@ -26,7 +26,6 @@ const PopUpQr = (props) => {
     
     const handleBarCodeScanned = ({ type, data }) => {
         data = JSON.parse(data);
-        console.log(data);
         if (validateVersion(data)){
             redirectScanner(data);
         }else{
@@ -37,7 +36,9 @@ const PopUpQr = (props) => {
 
     function redirectScanner(data){
         if (data.key == "product"){
-            props.navigation.push("ViewProduct", {"id_product":data.value,"TOKEN":props.TOKEN});
+            props.navigation.push("ViewProduct", {"id_product" : data.value, "TOKEN" : props.TOKEN, "socket" : null});
+        } else if (data.key == "SaleOrder"){
+            props.navigation.push("ShowSale", {"id_sale" : data.value, "TOKEN" : props.TOKEN, "socket" : null});
         }
     }
 

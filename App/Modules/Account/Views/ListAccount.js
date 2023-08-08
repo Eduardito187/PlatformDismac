@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 import {Page, SCREEN_ABSOLUTE_BODY, SCREEN_ABSOLUTE_HEADER, SCREEN_RELATIVE, SCROLL_STYLE, Section_Content_Padding} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
-import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, existPermission } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, GET_HEADER_TOKEN, existPermission, generateCustomId } from '../../../Helpers/API';
 
 /** Components */
 import SearchBox from '../../../Components/Button/SearchBox';
@@ -84,7 +84,7 @@ const ListAccount = (props) => {
                     </View>
                     {searching == false && search.length == 0 && (<SearchInit />)}
                     {searching == true && (<Searching />)}
-                    {searching == false && search.length > 0 && (<ListView key={Math.random()+'_LISTVIEW_'+Math.random()} roles={props.roles} reloadAccounts={() => reloadAccounts()} TOKEN={TOKEN} navigation={props.navigation} Account={accounts} />)}
+                    {searching == false && search.length > 0 && (<ListView key={generateCustomId()} roles={props.roles} reloadAccounts={() => reloadAccounts()} TOKEN={TOKEN} navigation={props.navigation} Account={accounts} />)}
                     <MessageBox ShowMessage={ShowMessage} CloseMessage={() => HideAlertMessage()} Title={"Dismac"} Text={Message} />
                 </ScrollView>
             </View>

@@ -16,8 +16,8 @@ export const SECTION_ICON = {
 };
 export const TEXT_COUNT = {
     color: "#808080",
-    fontSize: 30,
-    fontWeight: "900",
+    fontSize: 27,
+    fontWeight: "800",
     padding: 5,
     alignSelf: "flex-end",
     textAlign: "right"
@@ -35,6 +35,10 @@ export const SECTION_NUMBER = {
 export const ALING_CENTER = {
     justifyContent: "center",
     alignItems: "center"
+};
+export const ALING_LEFT = {
+    justifyContent: "center",
+    alignItems: "flex-start"
 };
 export const MT_10 = {
     marginTop: 10

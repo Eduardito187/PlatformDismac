@@ -42,6 +42,13 @@ import ProductPos from './App/Modules/Home/Views/ProductPos';
 import ProductAttributes from './App/Modules/Home/Views/ProductAttributes';
 import TypesReport from './App/Modules/Account/Views/TypesReport';
 import ReporteGraphics from './App/Modules/Account/Views/ReporteGraphics';
+import Maps from './App/Modules/Partner/Views/Maps';
+import { RED_DIS } from './App/Modules/Login/Style/css';
+import AllSotres from './App/Modules/Partner/Views/AllStores';
+import AllWarehouses from './App/Modules/Partner/Views/AllWarehouses';
+import AllStorePrices from './App/Modules/Partner/Views/AllStorePrices';
+import AllCampaigns from './App/Modules/Partner/Views/AllCampaigns';
+import AllSocials from './App/Modules/Partner/Views/AllSocials';
 /** */
 
 const Stack = createStackNavigator();
@@ -49,7 +56,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar backgroundColor={RED_DIS} style="auto" />
       <Stack.Navigator initialRouteName="Loading" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="Inicio" component={Home} />
@@ -78,7 +85,7 @@ export default function App() {
         <Stack.Screen name="Reportes" component={Reportes} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="ReporteGraphics" component={ReporteGraphics} options={{headerShown: true,title: "",screenOrientation: 'landscape'}} />
         <Stack.Screen name="TypesReport" component={TypesReport} options={{headerShown: true,title: ""}} />
-        <Stack.Screen name="ShowSale" component={ShowSale} options={{headerShown: false,title: ""}} />
+        <Stack.Screen name="ShowSale" component={ShowSale} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="ViewAccount" component={ViewAccount} options={{headerShown: false,title: ""}} />
         <Stack.Screen name="EditAccount" component={EditAccount} options={{headerShown: false,title: ""}} />
         <Stack.Screen name="ShowSocial" component={ShowSocial} options={{headerShown: false,title: ""}} />
@@ -89,6 +96,12 @@ export default function App() {
         <Stack.Screen name="ProductPrices" component={ProductPrices} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="ProductPos" component={ProductPos} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="ProductAttributes" component={ProductAttributes} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="Maps" component={Maps} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="AllSotres" component={AllSotres} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="AllWarehouses" component={AllWarehouses} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="AllStorePrices" component={AllStorePrices} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="AllCampaigns" component={AllCampaigns} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="AllSocials" component={AllSocials} options={{headerShown: true,title: ""}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

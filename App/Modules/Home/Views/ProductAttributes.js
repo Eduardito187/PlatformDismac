@@ -3,7 +3,7 @@ import { View, ScrollView, SafeAreaView } from 'react-native';
 import axios from 'axios';
 import { Background_Red_Dis, Flex_Content, JUSTIFY_CONTENT, Margin_Top_5, RED_DIS, ROW_SECTION } from '../../Login/Style/css';
 import { StatusBar } from 'expo-status-bar';
-import { GET_HEADER_TOKEN, URL_API, URL_API_GET, URL_API_POS } from '../../../Helpers/API';
+import { GET_HEADER_TOKEN, URL_API, URL_API_GET, URL_API_POS, generateCustomId } from '../../../Helpers/API';
 import { Padding_10_B_5, SCROLL_STYLE } from '../../../Themes/Dismac/ThemeDismac';
 import LoadingPage from './Components/LoadingPage';
 import { Button } from 'react-native-paper';
@@ -77,7 +77,7 @@ const ProductAttributes = ({route, navigation }) => {
                         {
                             Attributes.map((state, j) => {
                                 return (
-                                    <Attribute key={Math.random()+'_Product_Attribute_'+Math.random()} name={state.custom.name} value={state.value} code={state.custom.code} type={state.custom.type.type} disabled={false} setValue={(code, value) => changeCustomValue(code, value)} />
+                                    <Attribute key={generateCustomId()} name={state.custom.name} value={state.value} code={state.custom.code} type={state.custom.type.type} disabled={false} setValue={(code, value) => changeCustomValue(code, value)} />
                                 )
                             })
                         }

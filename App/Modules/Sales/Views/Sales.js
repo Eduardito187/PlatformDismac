@@ -9,7 +9,7 @@ import Header from '../../Home/Views/Components/Header';
 import { RED_DIS, WHITE } from '../../Login/Style/css';
 import DateRange from './Components/DateRange';
 import Venta from './Components/Venta';
-import { CREATE_BODY_SALE_QUERY, GET_HEADER_TOKEN, URL_API } from '../../../Helpers/API';
+import { CREATE_BODY_SALE_QUERY, GET_HEADER_TOKEN, URL_API, generateCustomId } from '../../../Helpers/API';
 import ResultNone from '../../Account/Helper/ResultNone';
 import { Icon_Section } from '../../Login/Style/style';
 
@@ -76,7 +76,7 @@ const Sales = (props) => {
                     {
                         Items.map((item) => {
                             return (
-                                <Venta key={Math.random()+'_Sale_'+Math.random()+item.id} navigation={props.navigation} socket={socket} TOKEN={TOKEN} venta={item} />
+                                <Venta key={generateCustomId()} navigation={props.navigation} socket={socket} TOKEN={TOKEN} venta={item} />
                             )
                         })
                     }

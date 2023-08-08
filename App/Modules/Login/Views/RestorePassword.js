@@ -12,6 +12,7 @@ import Next from './Component/Next';
 import { Route } from '../Interfaces/Route';
 import Verify from './Component/Verifiy';
 import MessageBox from '../../../Components/MessageBox';
+import { RED_DIS } from '../Style/css';
 /** */
 
 const RestorePassword = ({route, navigation }) => {
@@ -54,7 +55,7 @@ const RestorePassword = ({route, navigation }) => {
     }
     return (
         <View style={STYLE.RegisterContainer}>
-            <StatusBar style="light" />
+            <StatusBar backgroundColor={RED_DIS} style="light" />
             <View style={STYLE.SECCTION_TITLE}>
                 <TopNoSteep Title={"Restauracion de cuentas"} navigation={navigation} />
             </View>

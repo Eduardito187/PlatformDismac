@@ -3,13 +3,14 @@ import { useNavigation } from '@react-navigation/native';
 import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { Size_14, Size_27, Top_Custom_Css } from '../../Login/Style/style';
+import { generateCustomId } from '../../../Helpers/API';
 /** */
 
 const Catalog = (props) => {
     const navigation = useNavigation();
     const [catalog, SetCatalog] = React.useState(null);
-    const [key, SetKey] = React.useState(Math.random()+'_Catalog_'+Math.random());
-    const [load, SetKeyLoad] = React.useState(Math.random()+'_Load_'+Math.random());
+    const [key, SetKey] = React.useState(generateCustomId());
+    const [load, SetKeyLoad] = React.useState(generateCustomId());
 
     React.useEffect(() => {
         setLoader(null);

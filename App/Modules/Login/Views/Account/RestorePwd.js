@@ -11,6 +11,7 @@ import Next from './../Component/Next';
 import { Route } from '../../Interfaces/Route';
 import { GET_CODE_GENERATE_EMAIL } from '../../../../Helpers/API';
 import TopNoSteep from '../Component/TopNoSteep';
+import { RED_DIS } from '../../Style/css';
 /** */
 
 const RestorePwd = ({route, navigation }) => {
@@ -45,7 +46,7 @@ const RestorePwd = ({route, navigation }) => {
 
     return (
         <View style={STYLE.RegisterContainer}>
-            <StatusBar style="light" />
+            <StatusBar backgroundColor={RED_DIS} style="light" />
             <View style={STYLE.SECCTION_TITLE}>
                 <TopNoSteep Title={"Nueva contraseña"} navigation={navigation} />
             </View>

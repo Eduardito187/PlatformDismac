@@ -7,6 +7,7 @@ import { Surface } from 'react-native-paper';
 import { windowWidth } from '../../../../Helpers/GetMobil';
 import { Surface_Style, Width_Max } from '../../../Login/Style/style';
 import { alingContentCenter } from '../../Style/Two';
+import { generateCustomId } from '../../../../Helpers/API';
 /** */
 
 const ModalPicture = (props) => {
@@ -23,7 +24,7 @@ const ModalPicture = (props) => {
                 <View style={[modalContainerStyle]}>
                     <View style={[modalInfo,bordePlomo]}>
                         <View style={[Width_Max, alingContentCenter]}>
-                            <Image key={Math.random()+'_Picture_Modal_'+Math.random()} style={[{width: windowWidth*0.7, height: windowWidth*0.7}]} source={{uri: props.file}} />
+                            <Image key={generateCustomId()} style={[{width: windowWidth*0.7, height: windowWidth*0.7}]} source={{uri: props.file}} />
                         </View>
                     </View>
                 </View>

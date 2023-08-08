@@ -9,6 +9,7 @@ import { windowWidth } from '../../../../Helpers/GetMobil';
 import { LISTA, itemsListProductsWidth } from '../../../../Helpers/Code';
 import { displayFlex } from '../../Style/Two';
 import LoadItem from '../../../../Components/LoadItem';
+import { generateCustomId } from '../../../../Helpers/API';
 
 const ListProduct = (props) => {
     const [VIEW, SETVIEW] = React.useState(props.VIEW);
@@ -63,7 +64,7 @@ const ListProduct = (props) => {
                             {
                                 props.Product.map((product) => {
                                     return (
-                                        <ProductComponent key={Math.random()+'_Product_'+Math.random()} invitado={Invitado} IMAGE={Dimension.IMAGE} SCREEN_WIDTH={Dimension.SCREEN_WIDTH} COLUMN_ONE={Dimension.COLUMN_ONE} COLUMN_TWO={Dimension.COLUMN_TWO} TOKEN={props.TOKEN} VIEW={VIEW} Product={product} />
+                                        <ProductComponent key={generateCustomId()} invitado={Invitado} IMAGE={Dimension.IMAGE} SCREEN_WIDTH={Dimension.SCREEN_WIDTH} COLUMN_ONE={Dimension.COLUMN_ONE} COLUMN_TWO={Dimension.COLUMN_TWO} TOKEN={props.TOKEN} VIEW={VIEW} Product={product} />
                                     )
                                 })
                             }

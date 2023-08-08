@@ -3,7 +3,7 @@ import { View, Text, ActivityIndicator, Alert } from 'react-native';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { IconButton, Card, Chip } from 'react-native-paper';
 import axios from 'axios';
-import { URL_API,CREATE_BODY_STATUS_ACCOUNT,GET_HEADER_TOKEN,GET_TOKEN_SESSION, existPermission } from '../../../Helpers/API';
+import { URL_API,CREATE_BODY_STATUS_ACCOUNT,GET_HEADER_TOKEN,GET_TOKEN_SESSION, existPermission, generateCustomId } from '../../../Helpers/API';
 import { RED_DIS, GREEN_PRICE, Section_Card, Section_Card_Title, Margin_5 } from '../../Login/Style/css';
 import LoadItem from '../../../Components/LoadItem';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
@@ -95,7 +95,7 @@ const Account = (props) => {
                             account.rol_account.length > 0 && (
                                 account.rol_account.map((state) => {
                                     return (
-                                        <Chip icon={"check"} key={Math.random()+'_Product_Status_'+Math.random()} style={Margin_5} onPress={() => console.log('Pressed')}>{state.name}</Chip>
+                                        <Chip icon={"check"} key={generateCustomId()} style={Margin_5} onPress={() => console.log('Pressed')}>{state.name}</Chip>
                                     )
                                 })
                             )

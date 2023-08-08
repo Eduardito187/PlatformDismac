@@ -12,6 +12,7 @@ import Next from './Component/Next';
 import { Route } from '../Interfaces/Route';
 import Verify from './Component/Verifiy';
 import MessageBox from '../../../Components/MessageBox';
+import { RED_DIS } from '../Style/css';
 /** */
 
 const Register = ({route, navigation }) => {
@@ -55,7 +56,7 @@ const Register = ({route, navigation }) => {
     }
     return (
         <View style={STYLE.RegisterContainer}>
-            <StatusBar style="light" />
+            <StatusBar backgroundColor={RED_DIS} style="light" />
             <View style={STYLE.SECCTION_TITLE}>
                 <Top Step={Step} Steps={Steps} Title={Route[Step-1]["title"]} navigation={navigation} />
             </View>

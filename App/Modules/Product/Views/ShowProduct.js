@@ -4,7 +4,7 @@ import axios from 'axios';
 import { windowWidth } from '../../../Helpers/GetMobil';
 import { Snackbar, List, TextInput, IconButton, Chip, Badge, Surface } from 'react-native-paper';
 import { Background_White, Height_30, Margin_5, Margin_Bottom_5, Margin_L5, Margin_Top_5, Only_Height_40, Position_Icon_Delete, RED_DIS, ROW_SECTION, Section_Card_Title, Section_Max_Content, WHITE } from '../../Login/Style/css';
-import { CREATE_BODY_DELETE_PICTURE, GET_HEADER_TOKEN, URL_API, URL_API_SHOW } from '../../../Helpers/API';
+import { CREATE_BODY_DELETE_PICTURE, GET_HEADER_TOKEN, URL_API, URL_API_SHOW, generateCustomId } from '../../../Helpers/API';
 import { MarginBottomM7, MarginBottomM9, MarginContentChip, P5, Section_Scroll, Size_15_Bold, Surface_Style, Width_Max, style } from '../../Login/Style/style';
 import TwoColumnBg from '../../Catalog/Views/Components/TwoColumnBg';
 import Tarea from '../../Catalog/Views/Components/Tarea';
@@ -292,7 +292,7 @@ const ShowProduct = ({route, navigation }) => {
                                 {
                                     Status.map((state) => {
                                         return (
-                                            <Chip icon={state.status ? "check" : "close"} key={Math.random()+'_Product_Status_'+Math.random()} style={Margin_5} onPress={() => console.log('Pressed')}>{state.store_name}</Chip>
+                                            <Chip icon={state.status ? "check" : "close"} key={generateCustomId()} style={Margin_5} onPress={() => console.log('Pressed')}>{state.store_name}</Chip>
                                         )
                                     })
                                 }
@@ -307,9 +307,9 @@ const ShowProduct = ({route, navigation }) => {
                                     Pictures.map((state, i) => {
                                         if (state.id != 3){
                                             return (
-                                                <Surface key={Math.random()+'_Product__Image__'+Math.random()} style={[{width: windowWidth/4.5, margin: 5, height: windowWidth/4.5}, Surface_Style]} elevation={4}>
+                                                <Surface key={generateCustomId()} style={[{width: windowWidth/4.5, margin: 5, height: windowWidth/4.5}, Surface_Style]} elevation={4}>
                                                     <TouchableOpacity style={{position: "relative"}} onPress={() => showPictureImage(state)}>
-                                                        <Image key={Math.random()+'_Text_'+i+'_Image_'+Math.random()} style={[Section_Max_Content]} source={{uri: state.url}} />
+                                                        <Image key={generateCustomId()} style={[Section_Max_Content]} source={{uri: state.url}} />
                                                         <View style={Position_Icon_Delete}>
                                                             <IconButton icon={"delete"} style={Background_White} size={16} iconColor={RED_DIS} onPress={() => deletePictureImage(state)} />
                                                         </View>
@@ -329,7 +329,7 @@ const ShowProduct = ({route, navigation }) => {
                                 {
                                     Prices.map((state) => {
                                         return (
-                                            <Chip key={Math.random()+'_Product_Prices_'+Math.random()} style={[Margin_5, Only_Height_40]} onPress={() => console.log('Pressed')}>
+                                            <Chip key={generateCustomId()} style={[Margin_5, Only_Height_40]} onPress={() => console.log('Pressed')}>
                                                 <View style={[Width_Max, alingContentStatus]}>
                                                     <View style={[Height_30, MarginContentChip]}>
                                                         <Text style={Size_15_Bold}>{state.store_name}</Text>
@@ -353,7 +353,7 @@ const ShowProduct = ({route, navigation }) => {
                                 {
                                     CuotaInicial.map((state) => {
                                         return (
-                                            <Chip key={Math.random()+'_Product_CuotaInicial_'+Math.random()} style={[Margin_5, Only_Height_40]} onPress={() => console.log('Pressed')}>
+                                            <Chip key={generateCustomId()} style={[Margin_5, Only_Height_40]} onPress={() => console.log('Pressed')}>
                                                 <View style={[Width_Max, alingContentStatus]}>
                                                     <View style={[Height_30, MarginContentChip]}>
                                                         <Text style={Size_15_Bold}>{state.store_name}</Text>
@@ -373,7 +373,7 @@ const ShowProduct = ({route, navigation }) => {
                 { Categorys!=null && (
                     <View style={[ROW_SECTION, Margin_Top_5]}>
                         <List.Accordion title="Categorías del producto" expanded={category} left={props => <List.Icon {...props} icon="information" />} onPress={ToogleCategory}>
-                            <CustomTable key={Math.random()+"Categorys"+Math.random()} body={Categorys.Body} header={Categorys.Header} />
+                            <CustomTable key={generateCustomId()} body={Categorys.Body} header={Categorys.Header} />
                         </List.Accordion>
                     </View>
                 ) }
@@ -398,13 +398,13 @@ const ShowProduct = ({route, navigation }) => {
                                 {
                                     Minicuotas.map((state, j) => {
                                         return (
-                                            <Surface key={Math.random()+'_Product_Minicuotas_'+Math.random()} style={[{width: (widthView-20)/2, marginRight: j % 2 == 0 ? 5 : 0, marginLeft: j % 2 == 0 ? 0 : 5}, Surface_Style]} elevation={4}>
+                                            <Surface key={generateCustomId()} style={[{width: (widthView-20)/2, marginRight: j % 2 == 0 ? 5 : 0, marginLeft: j % 2 == 0 ? 0 : 5}, Surface_Style]} elevation={4}>
                                                 <Text style={[Section_Card_Title, Margin_L5]}>{state.store_name}</Text>
                                                 <View style={[Width_Max, P5]}>
                                                     {
                                                         state.minicuotas.map((minicuota, i) => {
                                                             return (
-                                                                <Text key={Math.random()+'_Text_'+i+'_Minicuota_'+Math.random()}>{"Bs "+minicuota.monto+" x "+minicuota.meses+" meses"}</Text>
+                                                                <Text key={generateCustomId()}>{"Bs "+minicuota.monto+" x "+minicuota.meses+" meses"}</Text>
                                                             )
                                                         })
                                                     }
@@ -424,16 +424,16 @@ const ShowProduct = ({route, navigation }) => {
                                 {
                                     Warehouse.map((state, j) => {
                                         return (
-                                            <Surface key={Math.random()+'_Product_Warehouse_'+Math.random()} style={[{width: widthView-10}, Surface_Style]} elevation={4}>
+                                            <Surface key={generateCustomId()} style={[{width: widthView-10}, Surface_Style]} elevation={4}>
                                                 <Text style={[Section_Card_Title, Margin_L5]}>{state.store_name}</Text>
                                                 <View style={[Width_Max, P5]}>
                                                     {
                                                         state.warehouse.map((warehouse, i) => {
                                                             return (
-                                                                <View key={Math.random()+'_Text_'+i+'_Warehouse_Content_'+Math.random()} style={Margin_Bottom_5}>
-                                                                    <Text key={Math.random()+'_Text_'+i+'_Warehouse_'+Math.random()}>{"Almacen: "+warehouse.name}</Text>
-                                                                    <Text key={Math.random()+'_Text_'+i+'_Warehouse_'+Math.random()}>{"Código: "+warehouse.almacen}</Text>
-                                                                    <Text key={Math.random()+'_Text_'+i+'_Warehouse_'+Math.random()}>{"Stock: "+warehouse.stock}</Text>
+                                                                <View key={generateCustomId()} style={Margin_Bottom_5}>
+                                                                    <Text key={generateCustomId()}>{"Almacen: "+warehouse.name}</Text>
+                                                                    <Text key={generateCustomId()}>{"Código: "+warehouse.almacen}</Text>
+                                                                    <Text key={generateCustomId()}>{"Stock: "+warehouse.stock}</Text>
                                                                 </View>
                                                             )
                                                         })
@@ -454,7 +454,7 @@ const ShowProduct = ({route, navigation }) => {
                                 {
                                     Attributos.map((state, j) => {
                                         return (
-                                            <Attribute key={Math.random()+'_Product_Warehouse_'+Math.random()} name={state.custom.name} value={state.value} code={state.custom.code} type={state.custom.type.type} disabled={true} setValue={(code, value) => changeCustomValue(code, value)} />
+                                            <Attribute key={generateCustomId()} name={state.custom.name} value={state.value} code={state.custom.code} type={state.custom.type.type} disabled={true} setValue={(code, value) => changeCustomValue(code, value)} />
                                         )
                                     })
                                 }

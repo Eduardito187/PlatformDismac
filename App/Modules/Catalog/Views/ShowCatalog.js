@@ -4,7 +4,7 @@ import {Page} from "./../../../Themes/Dismac/ThemeDismac";
 import axios from 'axios';
 import { windowHeight, windowWidth } from '../../../Helpers/GetMobil';
 import { Badge, Chip, DataTable, IconButton } from 'react-native-paper';
-import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, URL_API_SHOW, GET_HEADER_TOKEN, existPermission } from '../../../Helpers/API';
+import { CREATE_BODY_SEARCH_ACCOUNT, URL_API, URL_API_SHOW, GET_HEADER_TOKEN, existPermission, generateCustomId } from '../../../Helpers/API';
 
 /** Components */
 import Searching from '../../Account/Helper/Searching';
@@ -126,7 +126,7 @@ const ShowCatalog = ({route, navigation }) => {
                             {
                                 CatalogAPI.categorias.map((category) => {
                                     return (
-                                        <DataTable.Row key={Math.random()+'_Store_'+Math.random()} onPress={() =>selectCategory(category)}>
+                                        <DataTable.Row key={generateCustomId()} onPress={() =>selectCategory(category)}>
                                             <DataTable.Cell>{category.name}</DataTable.Cell>
                                             <DataTable.Cell numeric>{category.code}</DataTable.Cell>
                                         </DataTable.Row>

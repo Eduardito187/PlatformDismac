@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { Margin_Top_5, ROW_SECTION } from '../../../Login/Style/css';
+import { generateCustomId } from '../../../../Helpers/API';
 
 const CustomTable = (props) => {
     React.useEffect(() => {
@@ -19,7 +20,7 @@ const CustomTable = (props) => {
                     {
                         props.header.map((row) => {
                             return (
-                                <DataTable.Title key={Math.random()+'_ROW_'+props.key+'_ROW_'+Math.random()}>{row}</DataTable.Title>
+                                <DataTable.Title key={generateCustomId()}>{row}</DataTable.Title>
                             )
                         })
                     }
@@ -27,10 +28,10 @@ const CustomTable = (props) => {
                 {
                     props.body.map((row) => {
                         return (
-                            <DataTable.Row key={Math.random()+'_COLUMN_'+props.key+'_ROW_'+Math.random()} onPress={() => selectedRow(row)}>
+                            <DataTable.Row key={generateCustomId()} onPress={() => selectedRow(row)}>
                                 {
                                     row.map((item) => {
-                                        return (<DataTable.Cell key={Math.random()+'_COLUMN_'+props.key+'_COLUMN_'+Math.random()}>{item}</DataTable.Cell>);
+                                        return (<DataTable.Cell key={generateCustomId()}>{item}</DataTable.Cell>);
                                     })
                                 }
                             </DataTable.Row>

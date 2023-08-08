@@ -6,14 +6,15 @@ import { Chip,DataTable,Button, Badge } from 'react-native-paper';
 import Modal from "react-native-modal";
 import { modalContainerStyle,Background_Dismac,bordePlomo,modalInfo,Margin_5,Margin_Top_5, Color_White, Section_Max_Absolute, Flex_Section } from '../../../Login/Style/css';
 import { Flex_Row, Height_50_Centered, Height_50_Centered_N_Flex, Size_14_Bold, Size_20_Bold, Size_24_Bold, Top_Radius_5 } from '../../../Login/Style/style';
+import { generateCustomId } from '../../../../Helpers/API';
 /** */
 
 const Category = (props) => {
     const navigation = useNavigation();
     const [category, SetCategory] = React.useState(null);
     const [isModalVisible, setModalVisible] = React.useState(false);
-    const [key, SetKey] = React.useState(Math.random()+'_Category_'+Math.random());
-    const [load, SetKeyLoad] = React.useState(Math.random()+'_LoadCat_'+Math.random());
+    const [key, SetKey] = React.useState(generateCustomId());
+    const [load, SetKeyLoad] = React.useState(generateCustomId());
     React.useEffect(() => {
         setLoader(null);
     }, []);
@@ -59,7 +60,7 @@ const Category = (props) => {
                                     <Text style={Size_20_Bold}>Estado</Text>
                                 </View>
                                 <View style={[{width:(windowWidth-80)*0.40}, Height_50_Centered_N_Flex]}>
-                                    <Chip key={Math.random()+'_Status_'+Math.random()} style={[Margin_5,Background_Dismac]} onPress={() => console.log('Pressed')}>
+                                    <Chip key={generateCustomId()} style={[Margin_5,Background_Dismac]} onPress={() => console.log('Pressed')}>
                                         <Text style={Color_White}>{category.status == 1 ? "Activado" : "Desactivado"}</Text>
                                     </Chip>
                                 </View>
@@ -80,7 +81,7 @@ const Category = (props) => {
                                 {
                                     category.stores.map((store) => {
                                         return (
-                                            <DataTable.Row key={Math.random()+'_Store_'+Math.random()}>
+                                            <DataTable.Row key={generateCustomId()}>
                                                 <DataTable.Cell>{store.name}</DataTable.Cell>
                                                 <DataTable.Cell numeric>{store.products}</DataTable.Cell>
                                             </DataTable.Row>

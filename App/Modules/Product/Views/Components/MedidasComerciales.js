@@ -3,6 +3,7 @@ import { BTNText, Margin_Bottom_18, PADDING_HORIZONTAL_16, RED_DIS, Section_Cont
 import { View, Text } from 'react-native';
 import { Width_Max } from '../../../Login/Style/style';
 import { displayFlex } from '../../../Catalog/Style/Two';
+import { generateCustomId } from '../../../../Helpers/API';
 /** */
 
 const MedidasComerciales = (props) => {
@@ -14,7 +15,7 @@ const MedidasComerciales = (props) => {
 
     if (MedidaComercial != null) {
         return(
-            <View key={Math.random()+'_MedidaComercial_'+Math.random()} style={Margin_Bottom_18}>
+            <View key={generateCustomId()} style={Margin_Bottom_18}>
                 <View style={[Width_Max, {borderWidth: 2, borderColor: RED_DIS, borderRadius: 10}]}>
                     <View style={[{backgroundColor: RED_DIS, borderTopLeftRadius: 8, borderTopRightRadius: 8}, Section_Content_Center]}>
                         <Text style={[BTNText]}>Medidas comerciales</Text>

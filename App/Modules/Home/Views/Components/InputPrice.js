@@ -5,6 +5,7 @@ import { AlingFormItem, Margin_Top, RowFormNoPadding, TitleSub } from '../../../
 import { Padding_10_B_5 } from '../../../../Themes/Dismac/ThemeDismac';
 import Subtitle from '../../../../Components/Subtitle';
 import { TextInput } from 'react-native-paper';
+import { generateCustomId } from '../../../../Helpers/API';
 
 const InputPrice = (props) => {
     const [Store, SetStore] = React.useState("");
@@ -30,7 +31,7 @@ const InputPrice = (props) => {
     }
 
     return(
-        <View key={Math.random()+'_Prices_'+Math.random()} style={Padding_10_B_5}>
+        <View key={generateCustomId()} style={Padding_10_B_5}>
             <View style={AlingFormItem}>
                 <View style={RowFormNoPadding}>
                     <Subtitle style={TitleSub} text={props.name} />

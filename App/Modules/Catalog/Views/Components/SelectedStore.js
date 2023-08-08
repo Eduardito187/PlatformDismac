@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { View } from 'react-native';
 import { Chip, Checkbox } from 'react-native-paper';
 import { RED_DIS } from '../../../Login/Style/css';
-import { GET_STORES_CHECK } from '../../../../Helpers/API';
+import { GET_STORES_CHECK, generateCustomId } from '../../../../Helpers/API';
 /** */
 
 const SelectedStore = (props) => {
@@ -86,7 +86,7 @@ const SelectedStore = (props) => {
                 STORES.map((item) => {
                     return (
                         <Checkbox.Item 
-                            key={Math.random()+'_STORE_'+Math.random()} label={item.name} color={RED_DIS} 
+                            key={generateCustomId()} label={item.name} color={RED_DIS} 
                             status={item.check ? 'checked' : 'unchecked'} disabled={props.disabled} onPress={() => gestionStore(item.id)} 
                         />
                     )
