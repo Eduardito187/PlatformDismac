@@ -8,8 +8,6 @@ import { ResetNavigation } from '../../../Helpers/Nav';
 import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION, GET_TOKEN_MOBILE, generateCustomId } from '../../../Helpers/API';
 import { RED_DIS, containerScreen, DRAWER_CONTENT, SOLID_BG, UPLOAD_BTN } from '../../Login/Style/css';
 import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas, Upload, Text_Category, Text_Ahorros } from '../../../Router/Route';
-import * as BackgroundFetch from 'expo-background-fetch';
-import * as TaskManager from 'expo-task-manager';
 /** Components */
 import LandingHome from './LandingHome';
 import Catalog from '../../Catalog/Views/Catalog';
