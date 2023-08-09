@@ -102,6 +102,9 @@ const Home = ({ route, navigation }) => {
 
   async function setSession(data, token) {
     const socket = io("http://62.72.9.102:3000", {autoConnect: true});
+    socket.on("connect", () => {
+      console.log(socket.connected);
+    });
     //
     setCurrentTab(Text_LandingHome);
     setCurrentScreen(() => <LandingHome navigation={navigation} roles={data.roles} socket={socket} TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
