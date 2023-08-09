@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Animated, SafeAreaView } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import axios from 'axios';
 import { io } from 'socket.io-client';
@@ -9,7 +8,8 @@ import { ResetNavigation } from '../../../Helpers/Nav';
 import { GET_TOKEN_SESSION, URL_API, GET_HEADER_TOKEN, SAVE_CURRENT_SESSION, DELETE_TOKEN_SESSION, GET_TOKEN_MOBILE, generateCustomId } from '../../../Helpers/API';
 import { RED_DIS, containerScreen, DRAWER_CONTENT, SOLID_BG, UPLOAD_BTN } from '../../Login/Style/css';
 import { Text_LandingHome, Text_Catalog, Text_SupportTechnical, Text_ScannerQR, Text_Improvements, Text_Management, Text_Cuentas, Text_Products, CLOSE_SESSION, Text_Ventas, Upload, Text_Category, Text_Ahorros } from '../../../Router/Route';
-const Drawer = createDrawerNavigator();
+import * as BackgroundFetch from 'expo-background-fetch';
+import * as TaskManager from 'expo-task-manager';
 /** Components */
 import LandingHome from './LandingHome';
 import Catalog from '../../Catalog/Views/Catalog';
@@ -42,6 +42,8 @@ import CategorySearch from '../../Catalog/Views/CategorySearch';
 import CouponSearch from '../../Catalog/Views/CouponSearch';
 import ModalDisableComponen from './Components/ModalDisable';
 import ModalCloseComponen from './Components/ModalClose';
+import ModalVersionComponen from './Components/ModalVersion';
+import { getTokenNotification, settingToken } from '../../../Helpers/Code';
 
 const Home = ({ route, navigation }) => {
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
@@ -58,11 +60,30 @@ const Home = ({ route, navigation }) => {
   const [TOKEN_MOBILE, SETTOKENMOBILE] = React.useState(null);
   const [ModalDisable, SetModalDisable] = React.useState(false);
   const [ModalClose, SetModalClose] = React.useState(false);
+  const [ModalVersion, SetModalVersion] = React.useState(false);
 
   React.useEffect(() => {
     setToken();
   }, []);
+
+  async function backgroundFetchTask(TOKEN_SESSIONS){
+    try {
+      const token_expo = await getTokenNotification(TOKEN_SESSIONS);
+      await settingToken(TOKEN_SESSIONS, token_expo);
+    } catch (error) {
+      //
+    }
+};
   
+  function showModalVersion() {
+    SetModalVersion(true);
+  }
+
+  function closeModalVersion() {
+    closeSession();
+    SetModalVersion(false);
+  }
+
   function showModalDisable() {
     SetModalDisable(true);
   }
@@ -82,7 +103,7 @@ const Home = ({ route, navigation }) => {
   }
 
   async function setSession(data, token) {
-    const socket = io("http://62.72.9.102:3000/", {autoConnect: true});
+    const socket = io("http://62.72.9.102:3000", {autoConnect: true});
     //
     setCurrentTab(Text_LandingHome);
     setCurrentScreen(() => <LandingHome navigation={navigation} roles={data.roles} socket={socket} TOKEN={token} DrawerAction={(a) => animatedScreen(a)} showMenu={showMenu} />);
@@ -93,6 +114,7 @@ const Home = ({ route, navigation }) => {
     await SAVE_CURRENT_SESSION(data);
     onSocket(socket, data.id, data.id_partner);
     SetLoad(true);
+    backgroundFetchTask(token);
   }
 
   async function onSocket(socket, id_account, id_partner) {
@@ -104,6 +126,11 @@ const Home = ({ route, navigation }) => {
     socket.on("DISABLE_"+id_account+"_ACCOUNT", (value) => {
       if (value) {
         showModalDisable();
+      }
+    });
+    socket.on("VERSION_"+id_account+"_APP", (value) => {
+      if (value == false) {
+        showModalVersion();
       }
     });
     socket.on("UPDATE_"+id_partner+"_PARTNER", (value) => {
@@ -252,6 +279,7 @@ const Home = ({ route, navigation }) => {
         <StatusBar backgroundColor={RED_DIS} style="light" />
         <ModalDisableComponen closeModal={() => closeModalDisable()} isModalVisible={ModalDisable} key={generateCustomId()} />
         <ModalCloseComponen closeModal={() => closeModalClose()} isModalVisible={ModalClose} key={generateCustomId()} />
+        <ModalVersionComponen closeModal={() => closeModalVersion()} isModalVisible={ModalVersion} key={generateCustomId()} />
       </SafeAreaView>
     );
   }

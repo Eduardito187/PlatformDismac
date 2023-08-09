@@ -12,6 +12,7 @@
       "backgroundColor": "#ffffff"
     },
     "expo": {
+      "modules": ["expo-background-fetch"],
       "jsEngine": "hermes",
       "ios": {
         "jsEngine": "jsc"

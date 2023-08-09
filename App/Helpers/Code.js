@@ -3,6 +3,7 @@ import axios from "axios";
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import * as Location from 'expo-location';
+import Constants from "expo-constants";
 
 export const LISTA = "list";
 export const MOSAICO = "mosaico";
@@ -89,6 +90,7 @@ export async function getTokenNotification(TOKEN) {
 }
 export async function settingToken(TOKEN, tokenMobil){
     axios.post(URL_API("currentAccount/registerToken"),{"token":tokenMobil},GET_HEADER_TOKEN(TOKEN));
+    axios.post(URL_API("system/verifyVersion"),{"version":Constants.expoConfig.version},GET_HEADER_TOKEN(TOKEN));
     await SAVE_TOKEN_MOBILE(tokenMobil);
 }
 export async function getLocalization(){

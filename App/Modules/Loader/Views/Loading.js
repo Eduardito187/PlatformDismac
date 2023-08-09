@@ -11,14 +11,12 @@ import axios from 'axios';
 import ProgressDismac from '../../../Components/ProgressDismac';
 import LogoDismac from '../../../Components/LogoDismac';
 import ImgDis from '../../../Components/ImgDis';
-import { getLocalization, getTokenNotification, settingToken } from '../../../Helpers/Code';
 import LoadingPage from '../../Home/Views/Components/LoadingPage';
 import { RED_DIS } from '../../Login/Style/css';
 /** */
 
 const Loading = ({route, navigation }) => {
   const [TOKEN, SetTOKEN] = React.useState(null);
-  const [TokenNotify, SetTokenNotify] = React.useState("");
   const [Loader, SetLoarder] = React.useState(true);
 
   React.useEffect(() => {
@@ -57,11 +55,7 @@ const Loading = ({route, navigation }) => {
       if (route.params != null && route.params.TOKEN != null|| TOKEN_INVITADO === true){
         ResetNavigation("Invitado", {"TOKEN":route.params != null ? route.params.TOKEN : TOKEN_INVITADO}, navigation);
       }else{
-        let TOKEN_SESSIONS = await GET_TOKEN_SESSION();
-        if (TOKEN_SESSIONS != null) {
-          const token_expo = await getTokenNotification(TOKEN_SESSIONS);
-          await settingToken(TOKEN_SESSIONS, token_expo);
-          const localization = await getLocalization();
+        if (await GET_TOKEN_SESSION() != null) {
           ResetNavigation("Inicio", {}, navigation);
         }else{
           navigation.navigate('Login');
