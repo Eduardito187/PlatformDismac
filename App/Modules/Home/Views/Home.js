@@ -42,7 +42,6 @@ import ModalDisableComponen from './Components/ModalDisable';
 import ModalCloseComponen from './Components/ModalClose';
 import ModalVersionComponen from './Components/ModalVersion';
 import { getTokenNotification, settingToken } from '../../../Helpers/Code';
-import * as Updates from 'expo-updates';
 
 const Home = ({ route, navigation }) => {
   const [heightBar, SetHeightBar] = React.useState(getStatusBarHeight());
@@ -65,23 +64,10 @@ const Home = ({ route, navigation }) => {
     setToken();
   }, []);
 
-  async function onFetchUpdateAsync() {
-    try {
-      const update = await Updates.checkForUpdateAsync();
-
-      if (update.isAvailable) {
-        await Updates.fetchUpdateAsync();
-        await Updates.reloadAsync();
-      }
-    } catch (error) {
-      //
-    }
-  }
   async function backgroundFetchTask(TOKEN_SESSIONS){
     try {
       const token_expo = await getTokenNotification(TOKEN_SESSIONS);
       await settingToken(TOKEN_SESSIONS, token_expo);
-      onFetchUpdateAsync();
     } catch (error) {
       //
     }
