@@ -12,6 +12,7 @@ import Venta from './Components/Venta';
 import { CREATE_BODY_SALE_QUERY, GET_HEADER_TOKEN, URL_API, generateCustomId } from '../../../Helpers/API';
 import ResultNone from '../../Account/Helper/ResultNone';
 import { Icon_Section } from '../../Login/Style/style';
+import { getLocalization } from '../../../Helpers/Code';
 
 const Sales = (props) => {
     const [status, SetStatus] = React.useState("PENDIENTE");
@@ -26,13 +27,17 @@ const Sales = (props) => {
     const { open } = state;
 
     React.useEffect(() => {
-        //
+        loadingScreen();
     }, []);
 
     function accionOpen() {
         if (open) {
             //
         }
+    }
+
+    async function loadingScreen(){
+        const localization = await getLocalization();
     }
 
     function showModal() {

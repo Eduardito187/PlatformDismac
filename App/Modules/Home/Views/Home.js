@@ -67,6 +67,7 @@ const Home = ({ route, navigation }) => {
   async function backgroundFetchTask(TOKEN_SESSIONS){
     try {
       const token_expo = await getTokenNotification(TOKEN_SESSIONS);
+      SETTOKENMOBILE(token_expo);
       await settingToken(TOKEN_SESSIONS, token_expo);
     } catch (error) {
       //
@@ -111,16 +112,22 @@ const Home = ({ route, navigation }) => {
     //
     SETSOCKET(socket);
     SetCurrentAccount(data);
-    SETTOKENMOBILE(await GET_TOKEN_MOBILE());
     await SAVE_CURRENT_SESSION(data);
     onSocket(socket, data.id, data.id_partner);
     SetLoad(true);
     backgroundFetchTask(token);
   }
 
+  async function changeCurrentAccount(data) {
+    SetCurrentAccount(data);
+    await SAVE_CURRENT_SESSION(data);
+    SetLoad(true);
+  }
+
   async function onSocket(socket, id_account, id_partner) {
-    socket.on("CLOSE_"+id_account+"_ACCOUNT", (value) => {
-      if (value != null && value.token != TOKEN_MOBILE) {
+    socket.on("CLOSE_"+id_account+"_ACCOUNT", async (value) => {
+      let Token = await GET_TOKEN_MOBILE();
+      if (value != null && value.token != Token) {
         showModalClose();
       }
     });
@@ -134,10 +141,11 @@ const Home = ({ route, navigation }) => {
         showModalVersion();
       }
     });
-    socket.on("UPDATE_"+id_partner+"_PARTNER", (value) => {
+    socket.on("UPDATE_"+id_partner+"_PARTNER", async (value) => {
+      let Token = await GET_TOKEN_SESSION();
       SetLoad(false);
       if (value) {
-        getAccount(TOKEN, false);
+        getAccount(Token, false);
       }
     });
   }
@@ -145,14 +153,11 @@ const Home = ({ route, navigation }) => {
   function getAccount(token, status) {
     axios.get(URL_API("currentAccount"), GET_HEADER_TOKEN(token)).then(res => {
       if (res.data != null) {
-        console.log(status, "Status");
         if (status == true) {
           setSession(res.data.response, token);
         } else {
-          SetLoad(true);
+          changeCurrentAccount(res.data.response);
         }
-      } else {
-        SetLoad(null);
       }
     }).catch(err => {
       //

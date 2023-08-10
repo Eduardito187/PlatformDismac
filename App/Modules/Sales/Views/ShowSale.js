@@ -14,7 +14,6 @@ import Maps from '../../Partner/Views/Maps';
 import { column, displayFlex, sectionQr } from '../../Catalog/Style/Two';
 import { IconButton } from 'react-native-paper';
 import ModalQR from '../../Catalog/Views/Components/ModalQR';
-import { getLocalization } from '../../../Helpers/Code';
 
 const Tabs = AnimatedTabBarNavigator();
 
@@ -29,7 +28,17 @@ const ShowSale = ({route, navigation }) => {
     
     React.useEffect(() => {
         getDataApi();
+        loadSocket();
     }, []);
+
+    function loadSocket(){
+        socket.on("RELOAD_"+id_sale+"_SALE", async (value) => {
+            if (value) {
+                setLoading(false);
+                getDataApi();
+            }
+        });
+    }
 
     function showModal() {
         setModalVisible(true);
@@ -40,7 +49,6 @@ const ShowSale = ({route, navigation }) => {
     }
 
     async function getDataApi(){
-        const localization = await getLocalization();
         axios.get(URL_API_SHOW("order", id_sale),GET_HEADER_TOKEN(TOKEN)).then(res => {
             if(res.data != null){
                 SetVenta(res.data.response);
