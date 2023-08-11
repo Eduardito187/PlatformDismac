@@ -17,6 +17,7 @@ import ModalQR from '../../Catalog/Views/Components/ModalQR';
 import { IconButton,Text } from 'react-native-paper';
 import { column, contentOneSection, displayFlex } from '../../Catalog/Style/Two';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { getLocalization } from '../../../Helpers/Code';
 
 const Partner = (props) => {
     const [Socket, SetSocket] = React.useState(props.socket);
@@ -24,10 +25,12 @@ const Partner = (props) => {
     const [Load, SetLoad] = React.useState(false);
     const [Partner, SetPartner] = React.useState(null);
     const [isModalVisible, setModalVisible] = React.useState(false);
+    const [MiUbi, SetMiUbi] = React.useState({"latitude": "","longitude": "","latitudeDelta": 0.0922,"longitudeDelta": 0.0421});
 
     React.useEffect(() => {
         SetLoad(true);
         getInfoPartner();
+        loadingScreen();
     }, []);
 
     function showModal() {
@@ -51,6 +54,18 @@ const Partner = (props) => {
         }
     }
 
+    async function loadingScreen(){
+        const localization = await getLocalization();
+        let ubi = MiUbi;
+        ubi.latitude = localization.coords.latitude;
+        ubi.longitude = localization.coords.longitude;
+        SetMiUbi(ubi);
+    }
+
+    function redirectScreen(url) {
+        props.navigation.push(url, {"MiUbi" : MiUbi, "TOKEN" : TOKEN});
+    }
+
     if (Load !== true) {
         return (<LoadingPage />);
     }else{
@@ -72,7 +87,7 @@ const Partner = (props) => {
                             ? <ProfilePartner TOKEN={TOKEN} Partner={Partner} Edit={true} Socket={Socket} />
                             : <LoadItem />
                         }
-                        <TouchableOpacity style={{width: "100%", height: 150, borderRadius: 10, backgroundColor: RED_DIS, marginBottom: 0, marginTop: 10, position: "relative"}}>
+                        <TouchableOpacity onPress={() => redirectScreen("Delimitations")} style={{width: "100%", height: 150, borderRadius: 10, backgroundColor: RED_DIS, marginBottom: 0, marginTop: 10, position: "relative"}}>
                             <View style={{position: "absolute", zIndex: 10, left: 0, top: 0, bottom: 0, width: 90, justifyContent: "center", alignItems: "center", alignContent: "center"}}>
                                 <MaterialCommunityIcons name="map" color={WHITE} size={70} />
                             </View>

@@ -25,7 +25,8 @@ const ProgressIcon = (props) => {
         const diferenciaEnMilisegundosCurrent = fecha1 - fechaCurrent;
         const diferenciaEnMinutosCurrent = parseInt(diferenciaEnMilisegundosCurrent / 60000);
 
-        SetPorcentaje(parseInt((diferenciaEnMinutosCurrent / diferenciaEnMinutos) * 100));
+        let porcentajeCalc = parseInt((diferenciaEnMinutosCurrent / diferenciaEnMinutos) * 100);
+        SetPorcentaje(porcentajeCalc > 100 ? 100 : porcentajeCalc);
     }
 
     return(

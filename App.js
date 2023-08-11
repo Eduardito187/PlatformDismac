@@ -49,6 +49,11 @@ import AllWarehouses from './App/Modules/Partner/Views/AllWarehouses';
 import AllStorePrices from './App/Modules/Partner/Views/AllStorePrices';
 import AllCampaigns from './App/Modules/Partner/Views/AllCampaigns';
 import AllSocials from './App/Modules/Partner/Views/AllSocials';
+import Delimitations from './App/Modules/Partner/Views/Delimitations';
+import AddCampaign from './App/Modules/Partner/Views/AddCampaign';
+import SelectedCategory from './App/Modules/Partner/Views/SelectedCategory';
+import AddSocialPartner from './App/Modules/Partner/Views/AddSocialPartner';
+import Socials from './App/Modules/Partner/Views/Socials';
 /** */
 
 const Stack = createStackNavigator();
@@ -97,11 +102,16 @@ export default function App() {
         <Stack.Screen name="ProductPos" component={ProductPos} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="ProductAttributes" component={ProductAttributes} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="Maps" component={Maps} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="Delimitations" component={Delimitations} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="AllSotres" component={AllSotres} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="AllWarehouses" component={AllWarehouses} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="AllStorePrices" component={AllStorePrices} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="AllCampaigns" component={AllCampaigns} options={{headerShown: true,title: ""}} />
         <Stack.Screen name="AllSocials" component={AllSocials} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="AddCampaign" component={AddCampaign} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="AddSocialPartner" component={AddSocialPartner} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="SelectedCategory" component={SelectedCategory} options={{headerShown: true,title: ""}} />
+        <Stack.Screen name="Socials" component={Socials} options={{headerShown: true,title: ""}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

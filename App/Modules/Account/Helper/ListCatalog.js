@@ -16,7 +16,7 @@ const ListCatalog = (props) => {
                 {
                     props.Catalog.map((catalog) => {
                         return (
-                            <Catalog key={generateCustomId()} roles={props.roles} TOKEN={props.TOKEN} Catalog={catalog} type={props.type} />
+                            <Catalog key={generateCustomId()} route={props.route ?? null} navigation={props.navigation ?? null} roles={props.roles} TOKEN={props.TOKEN} Catalog={catalog} type={props.type} />
                         )
                     })
                 }

@@ -23,6 +23,10 @@ const Catalog = (props) => {
     }
 
     function selectCatalog(catalog) {
+        if (props.type == "SelectedCategory"){
+            props.route.params.onGoBack(true, catalog.id);
+            props.navigation.goBack();
+        }
         if (props.type == "catalog"){
             navigation.navigate("ShowCatalog", {"Catalog":catalog, "TOKEN":props.TOKEN, "roles":props.roles});
         }
